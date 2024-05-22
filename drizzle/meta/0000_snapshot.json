@@ -1,0 +1,57 @@
+{
+  "id": "5d5c1d72-fb39-413e-bb7d-afcc4d2a378e",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "otc.users": {
+      "name": "users",
+      "schema": "otc",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "color": {
+          "name": "color",
+          "type": "colors",
+          "typeSchema": "otc",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'red'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "otc.colors": {
+      "name": "colors",
+      "schema": "otc",
+      "values": [
+        "red",
+        "green",
+        "blue"
+      ]
+    }
+  },
+  "schemas": {
+    "otc": "otc"
+  },
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
