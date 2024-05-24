@@ -1,10 +1,16 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import s from './Button.module.scss';
 
-interface ButtonProps {}
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
 
-const Button: React.FC<ButtonProps> = () => {
-  return <div className={s.container}>Hello</div>;
+const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+  return (
+    <button {...props} className={s.button}>
+      {children}
+    </button>
+  );
 };
 
-export default memo(Button)
+export default memo(Button);
