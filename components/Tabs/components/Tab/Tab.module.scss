@@ -1,0 +1,22 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+.container {
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: 2px solid $base-black;
+  }
+}
+
+.active {
+  font-weight: bold;
+  color: $base-black;
+  border-bottom: 2px solid $base-black;
+}
+
+.label {
+  @include font-m-flat;
+}
