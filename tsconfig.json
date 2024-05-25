@@ -43,6 +43,9 @@
       "@components/*": [
         "./components/*"
       ],
+      "@styles/*": [
+        "./styles/*"
+      ],
       "@containers/*": [
         "./containers/*"
       ],

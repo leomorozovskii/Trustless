@@ -1,0 +1,10 @@
+{
+    "sidebar.newOffer": "New offer",
+    "sidebar.myOffers": "My offers",
+    "sidebar.history": "History",
+    "offers.tabs.all": "All",
+    "offers.tabs.open": "Open",
+    "offers.tabs.pending": "Pending",
+    "offers.tabs.accepted": "Accepted",
+    "offers.tabs.cancelled": "Cancelled"
+}

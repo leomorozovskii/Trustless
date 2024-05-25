@@ -3,18 +3,18 @@ import s from './Button.module.scss';
 import cn from 'classnames';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  variant: 'primary' | 'ghost';
-  type: 'button' | 'submit' | 'reset';
+  children?: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'ghost';
   classWrapper?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  variant,
-  type,
+  variant = 'primary',
+  type = 'button',
   onClick,
   disabled,
   classWrapper,
