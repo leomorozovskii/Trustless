@@ -2,12 +2,56 @@
 @import '@common/colors.scss';
 
 .button {
-  cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  border-radius: 10px;
-  background-color: $base-black;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  padding: 10px $m;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
   color: $base-white;
+  font-style: normal;
+  border: none;
+  border-radius: $xxs;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  &.primary {
+    background-color: $base-gray;
+
+    &:disabled {
+      background-color: $additional-gray-pre-middle;
+    }
+
+    &:not(:disabled):hover {
+      background-color: $base-black;
+    }
+  }
+
+  &.ghost {
+    color: $base-gray;
+    background-color: transparent;
+    border: 1px solid $base-gray;
+  }
+}
+
+[data-theme='dark'] {
+  .button {
+    color: $base-black;
+
+    &.primary {
+      background-color: $bg-gray;
+
+      &:disabled {
+        color: $base-white;
+        background-color: $additional-black-almost;
+      }
+
+      &:not(:disabled):hover {
+        background-color: $base-white;
+      }
+    }
+  }
 }

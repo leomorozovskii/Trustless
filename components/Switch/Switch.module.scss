@@ -1,0 +1,45 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $xxs;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: normal;
+  color: $base-black;
+  font-style: normal;
+}
+
+.root {
+  position: relative;
+  width: $xl;
+  height: $m;
+  background-color: $additional-gray-middle;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  .thumb {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    background-color: $additional-gray-pre-middle;
+    border-radius: 999px;
+    transform: translate(0, -50%);
+    transition: transform 0.2s;
+  }
+
+  &[data-state='checked'] .thumb {
+    background-color: $additional-gray-dark;
+    transform: translate(15px, -50%);
+  }
+}

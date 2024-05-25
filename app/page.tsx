@@ -1,4 +1,7 @@
 'use client';
+
 export default function Home() {
-  return <main>Hello</main>;
+  return (
+    <main>hello</main>
+  );
 }
