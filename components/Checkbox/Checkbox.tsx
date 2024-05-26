@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import s from './Checkbox.module.scss';
-import Image from 'next/image';
+import { CheckboxCheck } from '@assets/icons';
 
 export interface ICheckbox extends React.HTMLAttributes<HTMLInputElement> {
   label: string;
@@ -28,13 +28,7 @@ const Checkbox: React.FC<ICheckbox> = ({
         id={props.id}
       >
         <RadixCheckbox.Indicator>
-          <Image
-            src={'/assets/checkbox/check.svg'}
-            alt={'check asset'}
-            width={13}
-            height={10}
-            quality={100}
-          />
+          <CheckboxCheck className={s.check} />
         </RadixCheckbox.Indicator>
       </RadixCheckbox.Root>
       <label className={s.label} htmlFor={props.id}>
