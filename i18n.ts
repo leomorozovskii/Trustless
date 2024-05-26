@@ -1,6 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from './public/locales/en.json';
+import { format as formatDate } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
 export const defaultNS = 'translation';
 
@@ -17,10 +19,17 @@ export enum CountryCode {
   EN = 'en',
 }
 
+const DATE_FORMAT = 'datetime';
+
 export const SUPPORTED_LANGUAGES: string[] = [Language.EN];
 export const resources = {
   en: {
-    translation: en,
+    translation: {
+      ...en,
+      dateFormats: {
+        custom: `{{date, ${DATE_FORMAT}}}`,
+      },
+    },
   },
 } as const;
 
@@ -33,6 +42,13 @@ i18n.use(initReactI18next).init({
   debug: false,
   interpolation: {
     escapeValue: false,
+    format: (value, format, lng) => {
+      console.log(format, lng);
+      if (value instanceof Date && format === DATE_FORMAT) {
+        return formatDate(value, 'dd MMM yyyy HH:mm', { locale: enUS });
+      }
+      return value;
+    },
   },
   defaultNS,
   resources,
