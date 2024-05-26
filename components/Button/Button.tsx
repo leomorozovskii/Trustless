@@ -18,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   disabled,
   classWrapper,
+  className,
   ...props
 }) => {
   const isIcon = useMemo(() => {

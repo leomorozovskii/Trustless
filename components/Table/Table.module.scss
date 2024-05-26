@@ -1,0 +1,72 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+.tableContainer {
+  min-width: 1200px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.tableHeader {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.tableHeaderCell {
+  font-weight: 700;
+  text-transform: uppercase;
+
+  @include font-s-flat;
+
+  &_active {
+    color: #1890ff;
+  }
+}
+
+.tableBody {
+  background: $base-white;
+
+  @include font-m-flat;
+}
+
+.cancelButton {
+  max-width: 115px;
+}
+
+.searchInput {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.cancelled {
+  color: #d9d9d9;
+}
+
+.shareWidget {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.shareButton {
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $additional-gray-middle;
+  }
+}

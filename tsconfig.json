@@ -3,11 +3,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "target": "es2015",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
@@ -25,45 +21,23 @@
     "importHelpers": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@assets/*": [
-        "./assets/*"
-      ],
-      "@common/*": [
-        "./styles/common/*"
-      ],
-      "@components/*": [
-        "./components/*"
-      ],
-      "@styles/*": [
-        "./styles/*"
-      ],
-      "@containers/*": [
-        "./containers/*"
-      ],
-      "@lib/*": [
-        "./lib/*"
-      ],
-      "@modules/*": [
-        "./styles/modules/*"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ],
-      "@src/*": [
-        "./*"
-      ],
-      "@~/*": [
-        "./"
-      ]
+      "@assets/*": ["./assets/*"],
+      "@common/*": ["./styles/common/*"],
+      "@components/*": ["./components/*"],
+      "@styles/*": ["./styles/*"],
+      "@containers/*": ["./containers/*"],
+      "@lib/*": ["./lib/*"],
+      "@modules/*": ["./styles/modules/*"],
+      "@pages/*": ["./pages/*"],
+      "@src/*": ["./*"],
+      "@~/*": ["./"]
     },
     "moduleResolution": "node"
   },
@@ -86,9 +60,6 @@
     "./node_modules",
     "./node_modules/*",
     "./node_modules/@types/node/index.d.ts",
-    "./node_modules/@tanstack",
-    "node_modules/@tanstack/query-core/src/*",
-    "./node_modules/@tanstack/query-core/src/*",
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
     "**/*.stories.ts",

@@ -1,0 +1,17 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+
+.statusContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.viewOfferButton {
+  width: 20px;
+  height: 20px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $additional-gray-middle;
+  }
+}
