@@ -43,9 +43,7 @@
 .label {
   font-weight: 400;
   font-size: 14px;
-  line-height: normal;
   color: $base-black;
-  font-style: normal;
 }
 
 [data-theme='dark'] {
@@ -56,6 +54,10 @@
     &[data-state='checked'] {
       background-color: $base-white;
       border: 2px solid $additional-gray-dark;
+
+      .check path {
+        stroke: $additional-gray-dark;
+      }
     }
 
     &:not(:disabled):hover {
@@ -70,10 +72,10 @@
     &:disabled[data-state='checked'] {
       background-color: $additional-gray-pre-middle;
       border: 2px solid $additional-gray-pre-middle;
+
+      .check path {
+        stroke: $base-white;
+      }
     }
   }
-
-  //.label {
-  //  color: $base-white;
-  //}
 }

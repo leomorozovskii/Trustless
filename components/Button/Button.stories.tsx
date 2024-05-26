@@ -1,4 +1,5 @@
 import Button, { ButtonProps } from './Button';
+import { ButtonPlus } from '../../assets/icons';
 
 export default {
   title: 'Components/Button',
@@ -9,9 +10,23 @@ const Template = (args: ButtonProps) => (
   <Button {...args}>{args.children}</Button>
 );
 
+const IconTemplate = (args: ButtonProps) => (
+  <Button {...args}>
+    <ButtonPlus />
+  </Button>
+);
+
 const DarkTemplate = (args: ButtonProps) => (
-  <div data-theme={"dark"}>
+  <div data-theme={'dark'}>
     <Button {...args}>{args.children}</Button>
+  </div>
+);
+
+const DarkIconTemplate = (args: ButtonProps) => (
+  <div data-theme={'dark'}>
+    <Button {...args}>
+      <ButtonPlus />
+    </Button>
   </div>
 );
 
@@ -53,4 +68,20 @@ DefaultDarkDisabled.args = {
   variant: 'primary',
   type: 'button',
   disabled: true,
+};
+
+export const DefaultIconButton = IconTemplate.bind({});
+DefaultIconButton.args = {
+  children: '',
+  variant: 'primary',
+  type: 'button',
+  disabled: false,
+};
+
+export const DefaultDarkIconButton = DarkIconTemplate.bind({});
+DefaultDarkIconButton.args = {
+  children: '',
+  variant: 'primary',
+  type: 'button',
+  disabled: false,
 };

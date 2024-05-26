@@ -1,0 +1,59 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+
+.wrapper {
+  width: 100%;
+}
+
+.trigger {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: $xxl;
+  padding: 0 $m;
+  font-weight: 400;
+  font-size: 16px;
+  background: $base-white;
+  border: 1px solid $base-black;
+  border-radius: $s;
+}
+
+.content {
+  position: absolute;
+  top: $xxl;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  max-height: 96px;
+  overflow-y: auto;
+  background: $base-white;
+  border-radius: $s;
+}
+
+@mixin item-base {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $xxs;
+  width: 100%;
+  padding: $xs $m;
+}
+
+.item {
+  @include item-base;
+}
+
+.selectedItem {
+  padding: 0;
+
+  @include item-base;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: normal;
+  color: $base-black;
+}

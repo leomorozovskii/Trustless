@@ -1,0 +1,55 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+
+.wrapper {
+  max-width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: $xxl;
+  padding-left: $s;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: $xxl;
+  color: $base-black;
+  font-style: normal;
+  border: 1px solid $base-gray;
+  border-radius: $xxs;
+  outline: none;
+  transition: all 200ms ease-in-out;
+
+  &::placeholder {
+    color: $additional-gray-dark;
+  }
+
+  &:focus-within {
+    color: $base-black;
+    border: 2px solid $base-black;
+  }
+
+  &:disabled {
+    color: $additional-gray-pre-middle;
+    border: 1px solid $additional-gray-pre-middle;
+  }
+
+  &:not(.errorInput, :focus-within, :disabled):hover {
+    color: $base-black;
+    border: 1px solid $base-black;
+  }
+
+  &.errorInput {
+    color: $additional-error;
+    border: 2px solid $additional-error;
+  }
+}
+
+[data-theme='dark'] {
+  .input {
+    color: $base-white;
+
+    &::placeholder {
+      color: $additional-gray-middle;
+    }
+  }
+}

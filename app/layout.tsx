@@ -5,6 +5,7 @@ import i18n from '@src/i18n';
 import { Inter } from 'next/font/google';
 import { I18nextProvider } from 'react-i18next';
 import '../styles/globals.scss';
+import '@radix-ui/themes/styles.css';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700'],
