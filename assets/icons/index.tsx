@@ -54,3 +54,382 @@ export const HistoryIcon: React.FC<IconProps> = (props) => {
     </svg>
   );
 };
+
+export const CopyIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M6 12C5.63333 12 5.31944 11.8694 5.05833 11.6083C4.79722 11.3472 4.66667 11.0333 4.66667 10.6667V2.66666C4.66667 2.29999 4.79722 1.98611 5.05833 1.72499C5.31944 1.46388 5.63333 1.33333 6 1.33333H12C12.3667 1.33333 12.6806 1.46388 12.9417 1.72499C13.2028 1.98611 13.3333 2.29999 13.3333 2.66666V10.6667C13.3333 11.0333 13.2028 11.3472 12.9417 11.6083C12.6806 11.8694 12.3667 12 12 12H6ZM6 10.6667H12V2.66666H6V10.6667ZM3.33333 14.6667C2.96667 14.6667 2.65278 14.5361 2.39167 14.275C2.13056 14.0139 2 13.7 2 13.3333V3.99999H3.33333V13.3333H10.6667V14.6667H3.33333Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
+export const NewWindowIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect opacity="0.01" width="16" height="16" fill="black" />
+      <path
+        d="M8.38434 8L12.3342 3.97745V5.20625V6.62187L13.4731 6.60313V2.45C13.4731 2.18281 13.2996 2 13.0231 2L8.86526 2.00938L8.85119 3.19404H10.1778H11.4328L7.49872 7.11914L8.38434 8Z"
+        fill="black"
+      />
+      <path
+        d="M5.61632 2.60001H3C2.44772 2.60001 2 3.04772 2 3.60001V12.454C2 13.0063 2.44772 13.454 3 13.454H11.9974C12.5497 13.454 12.9974 13.0063 12.9974 12.454V9.76002V9.76002"
+        stroke="black"
+        stroke-width="1.2"
+        stroke-linecap="square"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ShareIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <rect opacity="0.01" width="16" height="16" fill="white" />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M8.68852 10.2862C8.57746 10.3949 8.44632 10.4493 8.29508 10.4493C8.13912 10.4493 8.00561 10.3949 7.89455 10.2862C7.78349 10.1775 7.72796 10.0476 7.72796 9.89632V2.61586L7.77049 1.5525L7.29553 2.05583L6.21799 3.20425C6.11874 3.31768 5.98878 3.37439 5.82809 3.37439C5.68158 3.37439 5.55989 3.32713 5.463 3.23261C5.36612 3.13809 5.31768 3.01758 5.31768 2.87107C5.31768 2.79545 5.33186 2.72811 5.36021 2.66903C5.38857 2.60995 5.4311 2.55442 5.48782 2.50244L7.88392 0.191405C7.95481 0.120514 8.02215 0.0708906 8.08595 0.0425343C8.14976 0.0141781 8.21947 0 8.29508 0C8.36597 0 8.43332 0.0141781 8.49712 0.0425343C8.56092 0.0708906 8.62827 0.120514 8.69916 0.191405L11.0953 2.50244C11.152 2.55442 11.1945 2.60995 11.2229 2.66903C11.2512 2.72811 11.2654 2.79545 11.2654 2.87107C11.2654 3.01758 11.2158 3.13809 11.1165 3.23261C11.0173 3.32713 10.8944 3.37439 10.7479 3.37439C10.5919 3.37439 10.4643 3.31768 10.3651 3.20425L9.28755 2.05583L8.81258 1.5525L8.85512 2.61586V9.89632C8.85512 10.0476 8.79959 10.1775 8.68852 10.2862ZM12.3571 16H4.22596C3.48398 16 2.92748 15.8169 2.55649 15.4506C2.1855 15.0843 2 14.5349 2 13.8024V6.72751C2 5.99498 2.1855 5.44558 2.55649 5.07931C2.92748 4.71304 3.48398 4.52991 4.22596 4.52991H6.20381V5.67124H4.24014C3.88569 5.67124 3.61394 5.76577 3.4249 5.95481C3.23586 6.14385 3.14134 6.42268 3.14134 6.79132V13.7386C3.14134 14.1072 3.23586 14.3861 3.4249 14.5751C3.61394 14.7641 3.88569 14.8587 4.24014 14.8587H12.3358C12.6856 14.8587 12.9573 14.7641 13.1511 14.5751C13.3449 14.3861 13.4417 14.1072 13.4417 13.7386V6.79132C13.4417 6.42268 13.3449 6.14385 13.1511 5.95481C12.9573 5.76577 12.6856 5.67124 12.3358 5.67124H10.3793V4.52991H12.3571C13.0991 4.52991 13.6556 4.71422 14.0266 5.08285C14.3976 5.45148 14.5831 5.9997 14.5831 6.72751V13.8024C14.5831 14.5302 14.3976 15.0784 14.0266 15.4471C13.6556 15.8157 13.0991 16 12.3571 16Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
+export const SortingIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M5.33329 8.66666V3.88333L3.61663 5.59999L2.66663 4.66666L5.99996 1.33333L9.33329 4.66666L8.38329 5.59999L6.66663 3.88333V8.66666H5.33329ZM9.99996 14.6667L6.66663 11.3333L7.61663 10.4L9.33329 12.1167V7.33333H10.6666V12.1167L12.3833 10.4L13.3333 11.3333L9.99996 14.6667Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
+export const SearchIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <circle cx="7" cy="7" r="4.25" stroke="black" stroke-width="1.5" />
+      <path
+        d="M14 14L10.3403 10.3403"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const CloseIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M4 4L12 12"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12 4L4 12"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ArrowRightIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M2 8H13.5"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8.5 3L13.5 8L8.5 13"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ArrowDownIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M3 5L8.22727 10.2273L13 5"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ArrowUpIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M3 10.2273L8.22727 5.00001L13 10.2273"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const ArrowRightBoldIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M2 8H13.5"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8.5 3L13.5 8L8.5 13"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const GasIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M1 14.6904C1 14.3896 1.24609 14.1504 1.54004 14.1504H2.08008V1.73633C2.08008 0.615234 2.6748 0 3.80273 0H9.3125C10.4268 0 11.042 0.615234 11.042 1.73633V8.03906H11.1104C12.0264 8.03906 12.5869 8.5791 12.5869 9.52246V11.7852C12.5869 12.1543 12.8057 12.3799 13.1816 12.3799C13.5439 12.3799 13.7627 12.1543 13.7627 11.7852V6.78125L12.6143 5.44824C12.3066 5.08594 12.2656 4.70312 12.5596 4.2998L13.4551 3.04883C13.5371 2.92578 13.5439 2.78223 13.4688 2.65918L12.6689 1.36035C12.3203 0.799805 13.1338 0.300781 13.4824 0.854492L14.4189 2.37207C14.6172 2.68652 14.7266 3.00098 14.7266 3.41113V11.7852C14.7266 12.7559 14.1455 13.3438 13.1816 13.3438C12.2109 13.3438 11.623 12.7559 11.623 11.7852V9.52246C11.623 9.18066 11.4248 9.00293 11.1104 9.00293H11.042V14.1504H11.5684C11.8691 14.1504 12.1221 14.3965 12.1221 14.6904C12.1221 14.998 11.8691 15.251 11.5684 15.251H1.54004C1.23926 15.251 1 14.998 1 14.6904ZM4.02832 7.13672H9.08691C9.58594 7.13672 9.89355 6.86328 9.89355 6.40527V1.89355C9.89355 1.43555 9.58594 1.15527 9.08691 1.15527H4.02832C3.5293 1.15527 3.22852 1.43555 3.22852 1.89355V6.40527C3.22852 6.86328 3.5293 7.13672 4.02832 7.13672Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
+export const CheckIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M4 8.32566L7.09562 12.1594L12.264 4"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const PlusIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M8 3.5V12.5"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M3.5 8H12.5"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};
+
+export const ErrorIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M8.00004 1.33333C4.32004 1.33333 1.33337 4.31999 1.33337 8C1.33337 11.68 4.32004 14.6667 8.00004 14.6667C11.68 14.6667 14.6667 11.68 14.6667 8C14.6667 4.31999 11.68 1.33333 8.00004 1.33333ZM7.33337 11.3333V10H8.66671V11.3333H7.33337ZM7.33337 4.66666V8.66666H8.66671V4.66666H7.33337Z"
+        fill="#C10015"
+      />
+    </svg>
+  );
+};
+
+export const WarningIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M3.56298 13.8779C2.58969 13.8779 2 13.2023 2 12.3263C2 12.0573 2.0687 11.7824 2.22328 11.5248L6.66603 3.78435C6.95802 3.26336 7.47328 3 8 3C8.52672 3 9.03626 3.26336 9.33397 3.78435L13.7767 11.5248C13.9198 11.7767 14 12.0573 14 12.3263C14 13.2023 13.4103 13.8779 12.437 13.8779H3.56298ZM8.00573 10.0534C8.28626 10.0534 8.45229 9.8874 8.45802 9.57824L8.54389 6.46947C8.54962 6.16603 8.30916 5.94275 8 5.94275C7.67939 5.94275 7.45611 6.16031 7.46183 6.46374L7.53626 9.57824C7.54198 9.88168 7.70802 10.0534 8.00573 10.0534ZM8.00573 11.9714C8.34351 11.9714 8.64122 11.7023 8.64122 11.3588C8.64122 11.0095 8.34924 10.7405 8.00573 10.7405C7.65649 10.7405 7.3645 11.0153 7.3645 11.3588C7.3645 11.6966 7.66221 11.9714 8.00573 11.9714Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
+export const QrUknownTokenIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      xlinkHref="http://www.w3.org/1999/xlink"
+      {...props}
+    >
+      <circle cx="8" cy="8" r="7.5" fill="#D8D8D8" stroke="#979797" />
+      <mask
+        id="mask0_135_6353"
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="16"
+        height="16"
+      >
+        <circle cx="8" cy="8" r="7.5" fill="white" stroke="white" />
+      </mask>
+      <g mask="url(#mask0_135_6353)">
+        <rect width="16" height="16" fill="url(#pattern0_135_6353)" />
+      </g>
+      <defs>
+        <pattern
+          id="pattern0_135_6353"
+          patternContentUnits="objectBoundingBox"
+          width="1"
+          height="1"
+        >
+          <use xlinkHref="#image0_135_6353" transform="scale(0.03125)" />
+        </pattern>
+        <image
+          id="image0_135_6353"
+          width="32"
+          height="32"
+          xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABdWlDQ1BrQ0dDb2xvclNwYWNlRGlzcGxheVAzAAAokXWQvUvDUBTFT6tS0DqIDh0cMolD1NIKdnFoKxRFMFQFq1OafgltfCQpUnETVyn4H1jBWXCwiFRwcXAQRAcR3Zw6KbhoeN6XVNoi3sfl/Ticc7lcwBtQGSv2AijplpFMxKS11Lrke4OHnlOqZrKooiwK/v276/PR9d5PiFlNu3YQ2U9cl84ul3aeAlN//V3Vn8maGv3f1EGNGRbgkYmVbYsJ3iUeMWgp4qrgvMvHgtMunzuelWSc+JZY0gpqhrhJLKc79HwHl4plrbWD2N6f1VeXxRzqUcxhEyYYilBRgQQF4X/8044/ji1yV2BQLo8CLMpESRETssTz0KFhEjJxCEHqkLhz634PrfvJbW3vFZhtcM4v2tpCAzidoZPV29p4BBgaAG7qTDVUR+qh9uZywPsJMJgChu8os2HmwiF3e38M6Hvh/GMM8B0CdpXzryPO7RqFn4Er/QcXKWq8UwZBywAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACPTkDJAAAAy0lEQVRIDWOcHHaDARs4N98KmzBOMaPEY1jlmLCKUlFw6FvAmPhVCB4gnw2Xwdn2Bgpw9sELD+BsZAYuNbzno+DKhn4Q0dwHLPDAAjKQwxRZnBg2st5zSBpo7oOhbwFKHCAFHQNyWcSLLIHERg7r0bIIKWBIY7LgCjvSjEFVjWzm0E+mNPcBSj5ATvu46gbk0EauJ86dR9Tho3GAHEoE2Sh1MnLYIccHQVOACnDppXkqGvoWoOQDXGGNnCeQ1SC3f5DFkdlDP4ho7gMA8uwr82ay+fcAAAAASUVORK5CYII="
+        />
+      </defs>
+    </svg>
+  );
+};
