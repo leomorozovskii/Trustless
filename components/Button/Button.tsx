@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import s from './Button.module.scss';
 import cn from 'classnames';
 
@@ -21,6 +21,10 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
+  const isIcon = useMemo(() => {
+    return React.isValidElement(children) && children.type === 'svg';
+  }, [children]);
+
   return (
     <button
       {...props}
@@ -28,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cn(s.button, classWrapper, className, s[variant])}
+      className={cn(s.button, classWrapper, s[variant], { [s.icon]: isIcon })}
     >
       {children}
     </button>

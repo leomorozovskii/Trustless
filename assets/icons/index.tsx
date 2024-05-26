@@ -26,9 +26,9 @@ export const OfferIcon: React.FC<IconProps> = (props) => {
       <path
         d="M11.8807 4.56999C10.9853 4.19011 10.0005 3.97998 8.96667 3.97998C4.84294 3.97998 1.5 7.32292 1.5 11.4466C1.5 15.5704 4.84294 18.9133 8.96667 18.9133C10.0467 18.9133 11.0731 18.684 12 18.2714"
         stroke="black"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
-      <circle cx="15.6" cy="11.4" r="7.65" stroke="black" stroke-width="1.5" />
+      <circle cx="15.6" cy="11.4" r="7.65" stroke="black" strokeWidth="1.5" />
     </svg>
   );
 };
@@ -46,11 +46,126 @@ export const HistoryIcon: React.FC<IconProps> = (props) => {
       <path
         d="M12.6923 7.84619V13.3847H8.53846"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <circle cx="12" cy="12" r="8.25" stroke="black" stroke-width="1.5" />
+      <circle cx="12" cy="12" r="8.25" stroke="black" strokeWidth="1.5" />
+    </svg>
+  );
+};
+
+export const InputCross: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M4 4L12 12"
+        stroke="#828282"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 4L4 12"
+        stroke="#828282"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const InputError: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      className={props.className}
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8 1.33333C4.32 1.33333 1.33333 4.31999 1.33333 8C1.33333 11.68 4.32 14.6667 8 14.6667C11.68 14.6667 14.6667 11.68 14.6667 8C14.6667 4.31999 11.68 1.33333 8 1.33333ZM7.33333 11.3333V10H8.66667V11.3333H7.33333ZM7.33333 4.66666V8.66666H8.66667V4.66666H7.33333Z"
+        fill="#C10015"
+      />
+    </svg>
+  );
+};
+
+export const InputSearch: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13"
+      height="13"
+      viewBox="0 0 13 13"
+      className={props.className}
+      fill="none"
+      {...props}
+    >
+      <circle cx="5" cy="5" r="4.25" stroke="black" strokeWidth="1.5" />
+      <path
+        d="M12 12L8.34027 8.3403"
+        stroke="black"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const CheckboxCheck: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="13"
+      height="10"
+      viewBox="0 0 13 10"
+      className={props.className}
+      fill="none"
+      {...props}
+    >
+      <path d="M1 5.4L4.2 8.6L12.2 1" stroke="white" strokeWidth="1.5" />
+    </svg>
+  );
+};
+
+export const ButtonPlus: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      className={props.className}
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M12 5.25V18.75"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5.25 12H18.75"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 };

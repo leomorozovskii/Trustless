@@ -1,0 +1,92 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+
+.asset {
+  display: flex;
+}
+
+.cross {
+  cursor: pointer;
+}
+
+[data-theme='dark'] .searchAsset path,
+[data-theme='dark'] .searchAsset circle {
+  stroke: $base-white;
+}
+
+[data-theme='dark'] .errorAsset path {
+  fill: $base-white;
+}
+
+.errorInput {
+  color: $additional-error !important;
+  border: 2px solid $additional-error !important;
+}
+
+[data-theme='dark'] .errorInput {
+  color: $base-white !important;
+}
+
+.input {
+  width: 100%;
+  height: 36px;
+  padding: 0 $s;
+  font-weight: 400;
+  gap: $xxs;
+  font-size: 14px;
+  color: $base-black;
+  border: 1px solid $base-gray;
+  border-radius: $xxs;
+  transition: all 200ms ease-in-out;
+
+  &:focus-within {
+    border: 2px solid $base-black;
+  }
+
+  &:disabled {
+    color: $additional-gray-middle;
+    background-color: $additional-gray-pre-middle;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: $additional-gray-dark;
+  }
+
+  &:not(.errorInput, :disabled, :focus-within):hover {
+    color: $base-black;
+    border: 1px solid $base-black;
+  }
+}
+
+[data-theme='dark'] {
+  .input {
+    color: $base-white !important;
+
+    &:focus-within {
+      border: 2px solid $base-white;
+    }
+
+    &::placeholder {
+      color: $additional-gray-middle !important;
+    }
+
+    &.errorInput {
+      background-color: $additional-black-almost;
+    }
+
+    &:not(.errorInput, :focus-within):hover {
+      color: $additional-gray-middle !important;
+    }
+  }
+}
+
+.input[type='number']::-webkit-outer-spin-button,
+.input[type='number']::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.input[type='number'] {
+  -moz-appearance: textfield;
+}
