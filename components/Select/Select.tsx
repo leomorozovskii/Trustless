@@ -2,7 +2,7 @@ import React, { memo, useMemo, useState } from 'react';
 import * as RadixSelect from '@radix-ui/react-select';
 import s from './Select.module.scss';
 import { ChevronDownIcon } from '@radix-ui/themes';
-import { EthAsset, UsdtAsset, WethAsset } from '@assets/tokens';
+import { TOKEN_MAP } from '@lib/constants';
 
 export interface ISelect {
   value: string;
@@ -24,24 +24,9 @@ const Select: React.FC<ISelect> = ({
     setOpened(false);
   };
 
-  const arr = [
-    {
-      token: 'ETH',
-      icon: <EthAsset />,
-    },
-    {
-      token: 'USDT',
-      icon: <UsdtAsset />,
-    },
-    {
-      token: 'WETH',
-      icon: <WethAsset />,
-    },
-  ];
-
-  const valueIcon = useMemo(() => {
+  const IconComponent = useMemo(() => {
     if (!value) return;
-    return arr.find((el) => el.token === value).icon;
+    return Object.values(TOKEN_MAP).find((el) => el.name === value).logo;
   }, [value]);
 
   return (
@@ -55,7 +40,7 @@ const Select: React.FC<ISelect> = ({
             placeholder={
               value ? (
                 <div className={s.selectedItem}>
-                  {valueIcon}
+                  <IconComponent />
                   {value}
                 </div>
               ) : (
@@ -68,14 +53,14 @@ const Select: React.FC<ISelect> = ({
           </RadixSelect.Icon>
           {opened && (
             <div className={s.content}>
-              {arr.map((el) => (
+              {Object.values(TOKEN_MAP).map((el) => (
                 <div
-                  onClick={() => handle(el.token)}
-                  key={el.token}
+                  onClick={() => handle(el.name)}
+                  key={el.name}
                   className={s.item}
                 >
-                  {el.icon}
-                  <p className={s.label}>{el.token}</p>
+                  <el.logo />
+                  <p className={s.label}>{el.name}</p>
                 </div>
               ))}
             </div>

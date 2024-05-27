@@ -26,7 +26,7 @@
   left: 0;
   z-index: 3;
   width: 100%;
-  max-height: 96px;
+  max-height: 192px;
   overflow-y: auto;
   background: $base-white;
   border-radius: $s;
@@ -46,9 +46,8 @@
 }
 
 .selectedItem {
-  padding: 0;
-
   @include item-base;
+  padding: 0;
 }
 
 .label {
