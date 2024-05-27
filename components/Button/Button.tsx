@@ -17,7 +17,6 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
   onClick,
   disabled,
-  classWrapper,
   className,
   ...props
 }) => {
@@ -32,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cn(s.button, classWrapper, s[variant], { [s.icon]: isIcon })}
+      className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
     >
       {children}
     </button>
