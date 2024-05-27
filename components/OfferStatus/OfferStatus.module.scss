@@ -3,7 +3,9 @@
 
 .statusContainer {
   display: flex;
+  justify-content: space-between;
   gap: 32px;
+  max-width: 120px;
 }
 
 .viewOfferButton {

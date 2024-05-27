@@ -6,7 +6,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'ghost';
-  classWrapper?: string;
   onClick?: () => void;
   disabled?: boolean;
 }

@@ -5,9 +5,15 @@ import s from './Tab.module.scss';
 interface TabProps extends React.PropsWithChildren {
   active?: boolean;
   onClick: () => void;
+  tabBage?: number;
 }
 
-const Tab: React.FC<TabProps> = ({ children, active = false, onClick }) => {
+const Tab: React.FC<TabProps> = ({
+  children,
+  active = false,
+  onClick,
+  tabBage,
+}) => {
   const className = classNames(s.container, {
     [s.active]: active,
   });
@@ -15,6 +21,7 @@ const Tab: React.FC<TabProps> = ({ children, active = false, onClick }) => {
   return (
     <button className={className} onClick={onClick}>
       <span className={s.label}>{children}</span>
+      {tabBage && <span className={s.bage}>{tabBage}</span>}
     </button>
   );
 };

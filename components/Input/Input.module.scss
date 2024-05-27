@@ -1,5 +1,6 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   max-width: 100%;
@@ -12,12 +13,16 @@
   font-weight: 400;
   font-size: 24px;
   line-height: $xxl;
-  color: $base-black;
+  color: $additional-gray-dark;
   font-style: normal;
   border: 1px solid $base-gray;
   border-radius: $xxs;
   outline: none;
   transition: all 200ms ease-in-out;
+
+  & svg {
+    margin-right: 6px;
+  }
 
   &::placeholder {
     color: $additional-gray-dark;
@@ -52,4 +57,31 @@
       color: $additional-gray-middle;
     }
   }
+}
+
+.icon {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.sm {
+  height: 24px;
+
+  @include font-s-flat;
+}
+
+.md {
+  height: 36px;
+
+  @include font-m-flat;
+}
+
+.lg {
+  height: 48px;
+
+  @include font-3xl;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
 import s from './Tabs.module.scss';
 import { Tab } from '@components/Tabs/components/Tab';
-import { useTabs } from '@lib/hooks/useTabs';
 
 interface TabItem {
   label: string;
@@ -11,11 +10,17 @@ interface TabItem {
 
 interface TabsProps {
   tabs: TabItem[];
+  activeTab: string;
+  tabBages: Record<string, number>;
+  handleTabClick: (tab: string) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({ tabs = [] }) => {
-  const { activeTab, handleTabClick } = useTabs(tabs);
-
+const Tabs: React.FC<TabsProps> = ({
+  tabs = [],
+  activeTab,
+  tabBages,
+  handleTabClick,
+}) => {
   return (
     <RadixTabs.Root className={s.container} value={activeTab}>
       <RadixTabs.List className={s.tabList}>
@@ -24,6 +29,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs = [] }) => {
             <Tab
               active={activeTab === tab.query}
               onClick={() => handleTabClick(tab.query)}
+              tabBage={tabBages[tab.query]}
             >
               {tab.label}
             </Tab>

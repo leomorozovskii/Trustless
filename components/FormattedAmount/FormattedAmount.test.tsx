@@ -137,7 +137,6 @@ describe('FormattedAmount Component', () => {
       </I18nextProvider>,
     );
     const end = performance.now();
-    console.log('Render time:', end - start);
   });
 
   // 7. Error handling testing
