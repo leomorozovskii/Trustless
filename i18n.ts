@@ -43,7 +43,6 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
     format: (value, format, lng) => {
-      console.log(format, lng);
       if (value instanceof Date && format === DATE_FORMAT) {
         return formatDate(value, 'dd MMM yyyy HH:mm', { locale: enUS });
       }

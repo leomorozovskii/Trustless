@@ -78,7 +78,7 @@ export const TOKEN_MAP: { [address: string]: TokenData } = {
   [TokenAddress.DAO]: { name: 'DAO', logo: Dao_tokenIcon },
 };
 
-export enum OfferStatus {
+export enum OfferState {
   All = 'all',
   Open = 'open',
   Pending = 'pending',

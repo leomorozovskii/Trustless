@@ -53,3 +53,13 @@ table {
   flex-shrink: 0;
   border-bottom: 1px solid $base-gray;
 }
+
+.TooltipContent {
+  padding: 10px;
+  font-weight: 400;
+  color: $base-white;
+  background: $base-black;
+  border-radius: 8px;
+
+  @include font-m-flat;
+}

@@ -10,18 +10,29 @@
 
 .tableHeader {
   display: flex;
-  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
+  gap: 24px;
+}
+
+.searchContainer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  height: 36px;
 }
 
 .tableHeaderCell {
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 500;
+  text-transform: capitalize;
+  user-select: none;
 
   @include font-s-flat;
 
   &_active {
-    color: #1890ff;
+    color: $base-black;
+    font-weight: 700;
   }
 }
 
@@ -49,8 +60,13 @@
 
 .table th,
 .table td {
-  padding: 10px;
-  text-align: left;
+  padding: 9px;
+  text-align: center; // Центрируем текст по горизонтали
+  vertical-align: middle; // Центрируем текст по вертикали
+}
+
+.row {
+  max-height: $xxl;
 }
 
 .cancelled {
@@ -68,5 +84,23 @@
 
   &:hover {
     background-color: $additional-gray-middle;
+  }
+}
+
+.sortIconContainer {
+  height: 12px;
+  width: 12px;
+}
+
+.sortIcon {
+  position: relative;
+  top: 2px;
+  left: 8px;
+  height: 12px;
+  width: 12px;
+  opacity: 1;
+
+  &_hidden {
+    opacity: 0;
   }
 }
