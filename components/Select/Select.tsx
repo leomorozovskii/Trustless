@@ -1,8 +1,9 @@
 import React, { memo, useMemo, useState } from 'react';
-import * as RadixSelect from '@radix-ui/react-select';
 import s from './Select.module.scss';
-import { ChevronDownIcon } from '@radix-ui/themes';
 import { TOKEN_MAP } from '@lib/constants';
+import { SelectTokenPopup } from '@components/SelectTokenPopup';
+import { SelectIcon } from '@assets/icons';
+import cn from 'classnames';
 
 export interface ISelect {
   value: string;
@@ -20,6 +21,7 @@ const Select: React.FC<ISelect> = ({
   const [opened, setOpened] = useState<boolean>(false);
 
   const handle = (token: string) => {
+    console.log(token);
     onChange(token);
     setOpened(false);
   };
@@ -31,42 +33,23 @@ const Select: React.FC<ISelect> = ({
 
   return (
     <div className={s.wrapper}>
-      <RadixSelect.Root open={opened} disabled={disabled}>
-        <RadixSelect.Trigger
-          onClick={() => setOpened(!opened)}
-          className={s.trigger}
-        >
-          <RadixSelect.Value
-            placeholder={
-              value ? (
-                <div className={s.selectedItem}>
-                  <IconComponent />
-                  {value}
-                </div>
-              ) : (
-                placeholder
-              )
-            }
-          ></RadixSelect.Value>
-          <RadixSelect.Icon>
-            <ChevronDownIcon />
-          </RadixSelect.Icon>
-          {opened && (
-            <div className={s.content}>
-              {Object.values(TOKEN_MAP).map((el) => (
-                <div
-                  onClick={() => handle(el.name)}
-                  key={el.name}
-                  className={s.item}
-                >
-                  <el.logo />
-                  <p className={s.label}>{el.name}</p>
-                </div>
-              ))}
+      <div
+        className={cn(s.trigger, disabled && s.disabled)}
+        onClick={() => setOpened(true)}
+      >
+        <div>
+          {value ? (
+            <div className={s.selectedItem}>
+              <IconComponent />
+              {value}
             </div>
+          ) : (
+            placeholder
           )}
-        </RadixSelect.Trigger>
-      </RadixSelect.Root>
+        </div>
+        <SelectIcon />
+      </div>
+      {opened && <SelectTokenPopup setOpened={setOpened} handle={handle} />}
     </div>
   );
 };

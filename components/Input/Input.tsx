@@ -9,10 +9,12 @@ export interface IInput extends HTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: 'number' | 'text';
   classWrapper?: string;
+  classInput?: string;
   error?: string;
   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  icon?: React.ReactNode; // Новый пропс для иконки
+  icon?: React.ReactNode;
+  label?: string;
 }
 
 const Input: React.FC<IInput> = ({
@@ -22,15 +24,22 @@ const Input: React.FC<IInput> = ({
   value,
   onChange,
   classWrapper = '',
+  classInput = '',
   error = '',
   disabled = false,
   icon,
+  label = '',
   ...props
 }) => {
   return (
     <div className={cn(s.wrapper, classWrapper)}>
+      {label && (
+        <label className={s.label} htmlFor={props.id}>
+          {label}
+        </label>
+      )}
       <TextField.Root
-        className={cn(s.input, {
+        className={cn(s.input, classInput, {
           [s.sm]: size === 'sm',
           [s.md]: size === 'md',
           [s.lg]: size === 'lg',
@@ -45,6 +54,7 @@ const Input: React.FC<IInput> = ({
       >
         {icon && <TextField.Slot>{icon}</TextField.Slot>}
       </TextField.Root>
+      {error && <p className={s.errorLabel}>{error}</p>}
     </div>
   );
 };

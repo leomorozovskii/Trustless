@@ -33,6 +33,28 @@ export const OfferIcon: React.FC<IconProps> = (props) => {
   );
 };
 
+export const SelectIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      className={props.className}
+      {...props}
+    >
+      <path
+        d="M3 5L8.22727 10.2273L13 5"
+        stroke="black"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
 export const HistoryIcon: React.FC<IconProps> = (props) => {
   return (
     <svg
@@ -61,6 +83,7 @@ export const InputCross: React.FC<IconProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
+      className={props.className}
       viewBox="0 0 16 16"
       fill="none"
       {...props}
@@ -248,9 +271,9 @@ export const NewWindowIcon: React.FC<IconProps> = (props) => {
       <path
         d="M5.61632 2.60001H3C2.44772 2.60001 2 3.04772 2 3.60001V12.454C2 13.0063 2.44772 13.454 3 13.454H11.9974C12.5497 13.454 12.9974 13.0063 12.9974 12.454V9.76002V9.76002"
         stroke="black"
-        stroke-width="1.2"
-        stroke-linecap="square"
-        stroke-linejoin="round"
+        strokeWidth="1.2"
+        strokeLinecap="square"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -268,8 +291,8 @@ export const ShareIcon: React.FC<IconProps> = (props) => {
     >
       <rect opacity="0.01" width="16" height="16" fill="white" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M8.68852 10.2862C8.57746 10.3949 8.44632 10.4493 8.29508 10.4493C8.13912 10.4493 8.00561 10.3949 7.89455 10.2862C7.78349 10.1775 7.72796 10.0476 7.72796 9.89632V2.61586L7.77049 1.5525L7.29553 2.05583L6.21799 3.20425C6.11874 3.31768 5.98878 3.37439 5.82809 3.37439C5.68158 3.37439 5.55989 3.32713 5.463 3.23261C5.36612 3.13809 5.31768 3.01758 5.31768 2.87107C5.31768 2.79545 5.33186 2.72811 5.36021 2.66903C5.38857 2.60995 5.4311 2.55442 5.48782 2.50244L7.88392 0.191405C7.95481 0.120514 8.02215 0.0708906 8.08595 0.0425343C8.14976 0.0141781 8.21947 0 8.29508 0C8.36597 0 8.43332 0.0141781 8.49712 0.0425343C8.56092 0.0708906 8.62827 0.120514 8.69916 0.191405L11.0953 2.50244C11.152 2.55442 11.1945 2.60995 11.2229 2.66903C11.2512 2.72811 11.2654 2.79545 11.2654 2.87107C11.2654 3.01758 11.2158 3.13809 11.1165 3.23261C11.0173 3.32713 10.8944 3.37439 10.7479 3.37439C10.5919 3.37439 10.4643 3.31768 10.3651 3.20425L9.28755 2.05583L8.81258 1.5525L8.85512 2.61586V9.89632C8.85512 10.0476 8.79959 10.1775 8.68852 10.2862ZM12.3571 16H4.22596C3.48398 16 2.92748 15.8169 2.55649 15.4506C2.1855 15.0843 2 14.5349 2 13.8024V6.72751C2 5.99498 2.1855 5.44558 2.55649 5.07931C2.92748 4.71304 3.48398 4.52991 4.22596 4.52991H6.20381V5.67124H4.24014C3.88569 5.67124 3.61394 5.76577 3.4249 5.95481C3.23586 6.14385 3.14134 6.42268 3.14134 6.79132V13.7386C3.14134 14.1072 3.23586 14.3861 3.4249 14.5751C3.61394 14.7641 3.88569 14.8587 4.24014 14.8587H12.3358C12.6856 14.8587 12.9573 14.7641 13.1511 14.5751C13.3449 14.3861 13.4417 14.1072 13.4417 13.7386V6.79132C13.4417 6.42268 13.3449 6.14385 13.1511 5.95481C12.9573 5.76577 12.6856 5.67124 12.3358 5.67124H10.3793V4.52991H12.3571C13.0991 4.52991 13.6556 4.71422 14.0266 5.08285C14.3976 5.45148 14.5831 5.9997 14.5831 6.72751V13.8024C14.5831 14.5302 14.3976 15.0784 14.0266 15.4471C13.6556 15.8157 13.0991 16 12.3571 16Z"
         fill="black"
       />
@@ -305,13 +328,35 @@ export const SearchIcon: React.FC<IconProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <circle cx="7" cy="7" r="4.25" stroke="black" stroke-width="1.5" />
+      <circle cx="7" cy="7" r="4.25" stroke="black" strokeWidth="1.5" />
       <path
         d="M14 14L10.3403 10.3403"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const CheckmarkIcon: React.FC<IconProps> = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      className={props.className}
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M4 8.32566L7.09562 12.1594L12.264 4"
+        stroke="white"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -330,16 +375,16 @@ export const CloseIcon: React.FC<IconProps> = (props) => {
       <path
         d="M4 4L12 12"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 4L4 12"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -358,16 +403,16 @@ export const ArrowRightIcon: React.FC<IconProps> = (props) => {
       <path
         d="M2 8H13.5"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.5 3L13.5 8L8.5 13"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -386,9 +431,9 @@ export const ArrowDownIcon: React.FC<IconProps> = (props) => {
       <path
         d="M3 5L8.22727 10.2273L13 5"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -407,9 +452,9 @@ export const ArrowUpIcon: React.FC<IconProps> = (props) => {
       <path
         d="M3 10.2273L8.22727 5.00001L13 10.2273"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -428,16 +473,16 @@ export const ArrowRightBoldIcon: React.FC<IconProps> = (props) => {
       <path
         d="M2 8H13.5"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.5 3L13.5 8L8.5 13"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -474,9 +519,9 @@ export const CheckIcon: React.FC<IconProps> = (props) => {
       <path
         d="M4 8.32566L7.09562 12.1594L12.264 4"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -495,14 +540,14 @@ export const PlusIcon: React.FC<IconProps> = (props) => {
       <path
         d="M8 3.5V12.5"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M3.5 8H12.5"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -519,8 +564,8 @@ export const ErrorIcon: React.FC<IconProps> = (props) => {
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M8.00004 1.33333C4.32004 1.33333 1.33337 4.31999 1.33337 8C1.33337 11.68 4.32004 14.6667 8.00004 14.6667C11.68 14.6667 14.6667 11.68 14.6667 8C14.6667 4.31999 11.68 1.33333 8.00004 1.33333ZM7.33337 11.3333V10H8.66671V11.3333H7.33337ZM7.33337 4.66666V8.66666H8.66671V4.66666H7.33337Z"
         fill="#C10015"
       />
@@ -531,8 +576,8 @@ export const ErrorIcon: React.FC<IconProps> = (props) => {
 export const WarningIcon: React.FC<IconProps> = (props) => {
   return (
     <svg
-      width="16"
-      height="16"
+      width={props.width}
+      height={props.width}
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
