@@ -1,32 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import s from './ThemeSwitcher.module.scss';
 import { DayIcon, NightIcon } from '@assets/icons';
 import cn from 'classnames';
+import { useTheme } from '@src/context/theme/ThemeProvider';
 
 const ThemeSwitcher: React.FC = () => {
-  const [isSwitched, setIsSwitched] = useState<boolean>(false);
+  const { toggleTheme } = useTheme();
 
   return (
-    <div
-      className={cn(s.wrapper, isSwitched && s.wrapperDark)}>
+    <div className={cn(s.wrapper)}>
       <div
-        onClick={() => setIsSwitched(false)}
-        className={cn(s.item, isSwitched && s.itemDark)}
+        onClick={() => toggleTheme('light')}
+        className={cn(s.item, s.lightItem)}
       >
-        <DayIcon
-          className={cn(!isSwitched ? s.dayActive : s.day)}
-        />
+        <DayIcon className={s.icon} />
       </div>
       <div
-        onClick={() => setIsSwitched(true)}
-        className={cn(s.item, isSwitched ? s.darkItem : s.itemNotActive)}
+        onClick={() => toggleTheme('dark')}
+        className={cn(s.item, s.darkItem)}
       >
-        <NightIcon
-          className={cn(isSwitched ? s.nightActive : s.night)}
-        />
+        <NightIcon className={s.icon} />
       </div>
     </div>
   );
-}
+};
 
 export default ThemeSwitcher;

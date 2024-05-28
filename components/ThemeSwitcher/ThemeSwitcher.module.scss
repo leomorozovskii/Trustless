@@ -1,58 +1,61 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
 .wrapper {
   display: flex;
   flex-direction: row;
   width: 80px;
   height: 36px;
-
-  background: $bg-gray;
-  border: 1px solid $bg-gray;
+  overflow: hidden;
   border-radius: $xxs;
-}
-
-.wrapperDark {
-  background: $additional-black-almost;
-  border: 1px solid $base-gray;
-}
-
-.item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 40px;
-
-  border-radius: $xxs;
-  background: $base-white;
-  padding: $s;
   cursor: pointer;
-}
 
-.itemDark {
-  background: $additional-black-almost;
-}
+  [data-theme='light'] & {
+    background: $base-white;
+    border: 1px solid $bg-gray;
 
-.darkItem {
-  background: $base-gray;
-}
+    .item {
+      background: $base-white;
+    }
 
-.itemNotActive {
-  background: $bg-gray;
-}
+    .darkItem {
+      background: $bg-gray;
+    }
 
-.dayActive path {
-  fill: $base-black;
-}
+    .icon path {
+      fill: $additional-gray-medium;
+    }
 
-.day path {
-  fill: $additional-gray-medium;
-}
+    .lightItem .icon path {
+      fill: $base-black;
+    }
+  }
 
-.nightActive path {
-  fill: $base-white;
-}
+  [data-theme='dark'] & {
+    background: $additional-black-almost;
+    border: 1px solid $base-gray;
 
-.night path {
-  fill: $additional-gray-pre-middle;
+    .item {
+      background: $base-gray;
+    }
+
+    .darkItem {
+      background: $additional-black-almost;
+    }
+
+    .icon path {
+      fill: $additional-gray-pre-middle;
+    }
+
+    .darkItem .icon path {
+      fill: $base-white;
+    }
+  }
 }
