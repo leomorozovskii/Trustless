@@ -1,0 +1,73 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+@import '@common/typo.scss';
+@import '@common/mixins.scss';
+
+.wrapper {
+  @include popup-wrapper;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 540px;
+  padding: $m $lg;
+  background: $base-white;
+  border: none;
+  border-radius: $s;
+  gap: $lg;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cross {
+  cursor: pointer;
+}
+
+.cross path {
+  stroke: $base-black;
+}
+
+.title {
+  color: $base-black;
+
+  @include font-3xl;
+}
+
+.warning {
+  width: $xl;
+}
+
+.warnContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: $m $s;
+  background: $additional-warn;
+  border-radius: $s;
+  gap: $s;
+}
+
+.decimalWrapper {
+  max-width: 124px;
+}
+
+.warnText {
+  color: $base-black;
+
+  @include font-m-flat;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $lg;
+}

@@ -1,0 +1,32 @@
+@import '@common/colors.scss';
+@import '@common/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 724px;
+  margin: 0 auto;
+  gap: $lg;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.fromWrapper {
+  min-width: 200px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $xxs;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: $xxs;
+}
