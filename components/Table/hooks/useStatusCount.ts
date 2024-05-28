@@ -1,28 +1,32 @@
 import { useMemo } from 'react';
 
-interface StatusCountProps {
-  data: any[];
+interface StatusCountProps<T> {
+  data: T[];
+  keyExtractor: (item: T) => string;
 }
 
-interface UseStatusCountsResult {
-  statusCounts: Record<string, number>;
+interface UseStatusCountsResult<K extends string | number | symbol> {
+  statusCounts: Record<K, number>;
 }
 
-export const useStatusCount = ({
+export const useStatusCount = <T, K extends string | number | symbol>({
   data,
-}: StatusCountProps): UseStatusCountsResult => {
+  keyExtractor,
+}: StatusCountProps<T>): UseStatusCountsResult<K> => {
   const statusCounts = useMemo(() => {
-    return data.reduce((acc: Record<string, number>, item) => {
-      const { status } = item;
-      const toLowerCaseStatus = status.toLowerCase();
-      if (acc[toLowerCaseStatus]) {
-        acc[toLowerCaseStatus] += 1;
-      } else {
-        acc[toLowerCaseStatus] = 1;
-      }
-      return acc;
-    }, {});
-  }, [data]);
+    return data.reduce(
+      (acc: Record<K, number>, item) => {
+        const key = keyExtractor(item).toLowerCase() as K;
+        if (acc[key]) {
+          acc[key] += 1;
+        } else {
+          acc[key] = 1;
+        }
+        return acc;
+      },
+      {} as Record<K, number>,
+    );
+  }, [data, keyExtractor]);
 
   return { statusCounts };
 };
