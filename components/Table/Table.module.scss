@@ -31,8 +31,8 @@
   @include font-s-flat;
 
   &_active {
-    color: $base-black;
     font-weight: 700;
+    color: $base-black;
   }
 }
 
@@ -61,8 +61,8 @@
 .table th,
 .table td {
   padding: 9px;
-  text-align: center; // Центрируем текст по горизонтали
   vertical-align: middle; // Центрируем текст по вертикали
+  text-align: center; // Центрируем текст по горизонтали
 }
 
 .row {
@@ -88,16 +88,16 @@
 }
 
 .sortIconContainer {
-  height: 12px;
   width: 12px;
+  height: 12px;
 }
 
 .sortIcon {
   position: relative;
   top: 2px;
   left: 8px;
-  height: 12px;
   width: 12px;
+  height: 12px;
   opacity: 1;
 
   &_hidden {
