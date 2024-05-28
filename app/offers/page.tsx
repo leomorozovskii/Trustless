@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Tabs } from '@components/Tabs';
-import s from '@styles/pages/Offers.module.scss';
+import s from './Offers.module.scss';
 import { Table } from '@components/Table';
 import { OfferState } from '@lib/constants';
 import { mockTableData } from '@components/Table/mocks';

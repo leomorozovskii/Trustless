@@ -34,9 +34,7 @@
       "@styles/*": ["./styles/*"],
       "@containers/*": ["./containers/*"],
       "@lib/*": ["./lib/*"],
-      "@modules/*": ["./styles/modules/*"],
       "@pages/*": ["./pages/*"],
-      "@src/*": ["./*"],
       "@~/*": ["./"]
     },
     "moduleResolution": "node"

@@ -1,7 +1,6 @@
-// top to the file
 'use client';
 import { Sidebar } from '@components/Sidebar';
-import i18n from '@src/i18n';
+import i18n from '../i18n';
 import { Inter } from 'next/font/google';
 import { I18nextProvider } from 'react-i18next';
 import '../styles/globals.scss';
