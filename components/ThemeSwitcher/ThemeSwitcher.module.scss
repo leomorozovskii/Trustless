@@ -1,0 +1,58 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  height: 36px;
+
+  background: $bg-gray;
+  border: 1px solid $bg-gray;
+  border-radius: $xxs;
+}
+
+.wrapperDark {
+  background: $additional-black-almost;
+  border: 1px solid $base-gray;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+
+  border-radius: $xxs;
+  background: $base-white;
+  padding: $s;
+  cursor: pointer;
+}
+
+.itemDark {
+  background: $additional-black-almost;
+}
+
+.darkItem {
+  background: $base-gray;
+}
+
+.itemNotActive {
+  background: $bg-gray;
+}
+
+.dayActive path {
+  fill: $base-black;
+}
+
+.day path {
+  fill: $additional-gray-medium;
+}
+
+.nightActive path {
+  fill: $base-white;
+}
+
+.night path {
+  fill: $additional-gray-pre-middle;
+}
