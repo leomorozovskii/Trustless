@@ -35,7 +35,8 @@
       "@containers/*": ["./containers/*"],
       "@lib/*": ["./lib/*"],
       "@pages/*": ["./pages/*"],
-      "@~/*": ["./"]
+      "@~/*": ["./"],
+      "@/*": ["./*"],
     },
     "moduleResolution": "node"
   },
