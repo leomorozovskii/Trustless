@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
-import s from './ProgressOfferBar.module.scss';
+
 import { CheckmarkIcon } from '@assets/icons';
+
+import s from './ProgressOfferBar.module.scss';
 
 export interface IProgressOfferBar {
   currentStep: number;
@@ -19,7 +21,7 @@ const ProgressOfferBar: React.FC<IProgressOfferBar> = ({
     <div className={s.wrapper}>
       {steps?.map((step, i) => (
         <div
-          key={i}
+          key={step}
           className={`${s.stepItem} ${currentStep === i + 1 ? s.active : ''} ${
             i + 1 < currentStep || isComplete ? s.complete : ''
           }`}

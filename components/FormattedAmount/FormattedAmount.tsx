@@ -10,14 +10,14 @@ const FormattedNumber: React.FC<FormattedNumberProps> = ({
   value,
   decimals = 2,
 }) => {
-  const { i18n } = useTranslation(null, { useSuspense: false });
+  const { i18n } = useTranslation(undefined, { useSuspense: false });
 
   const numberValue =
-    value == null || isNaN(Number(value))
+    value == null || Number.isNaN(Number(value))
       ? BigInt(0)
       : BigInt(value.toString());
 
-  let formatter;
+  let formatter: Intl.NumberFormat;
   try {
     formatter = new Intl.NumberFormat(i18n.language, {
       minimumFractionDigits: decimals,
@@ -32,7 +32,7 @@ const FormattedNumber: React.FC<FormattedNumberProps> = ({
   }
 
   const formattedValue = formatter.format(
-    Number(numberValue) / Math.pow(10, Math.max(0, decimals)),
+    Number(numberValue) / 10 ** Math.max(0, decimals),
   );
 
   return <span>{formattedValue}</span>;

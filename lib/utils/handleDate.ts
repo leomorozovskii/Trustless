@@ -4,7 +4,7 @@ import { t } from 'i18next';
 export const formatCustomDate = (date: string | Date) => {
   const parsedDate = typeof date === 'string' ? parseISO(date) : date;
 
-  if (isNaN(parsedDate.getTime())) {
+  if (Number.isNaN(parsedDate.getTime())) {
     return 'Invalid Date';
   }
 

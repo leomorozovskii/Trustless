@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import * as RadixSwitch from '@radix-ui/react-switch';
+
 import s from './Switch.module.scss';
 
 export interface ISwitch extends React.HTMLAttributes<HTMLButtonElement> {

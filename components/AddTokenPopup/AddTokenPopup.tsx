@@ -1,10 +1,12 @@
 import React, { memo, useReducer } from 'react';
-import s from './AddTokenPopup.module.scss';
-import { InputCross, WarningIcon } from '@assets/icons';
 import { useTranslation } from 'react-i18next';
-import { Input } from '@components/Input';
-import { Button } from '@components/Button';
 import { isAddress } from 'viem';
+
+import { InputCross, WarningIcon } from '@assets/icons';
+import { Button } from '@components/Button';
+import { Input } from '@components/Input';
+
+import s from './AddTokenPopup.module.scss';
 
 export interface IAddTokenPopupState {
   address: string;
@@ -35,7 +37,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened }) => {
 
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //TODO logic here
+    //  TODO logic here
   };
 
   return (
@@ -53,8 +55,8 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened }) => {
         </div>
         <Input
           label={t('token.address')}
-          size={'lg'}
-          id={'token address input'}
+          size="lg"
+          id="token address input"
           error={
             tokenState.address && !isAddress(tokenState.address)
               ? t('token.invalid.address')
@@ -65,24 +67,24 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened }) => {
         />
         <Input
           label={t('token.name')}
-          size={'lg'}
-          id={'token name input'}
+          size="lg"
+          id="token name input"
           value={tokenState.name}
           onChange={({ target }) => setTokenState({ name: target.value })}
         />
         <Input
           label={t('token.decimal')}
-          size={'lg'}
+          size="lg"
           classWrapper={s.decimalWrapper}
-          id={'token decimal input'}
+          id="token decimal input"
           value={tokenState.decimal ? tokenState.decimal.toString() : ''}
           onChange={({ target }) => setTokenState({ decimal: +target.value })}
         />
         <div className={s.buttonContainer}>
-          <Button type={'button'} onClick={() => setOpened(false)}>
+          <Button type="button" onClick={() => setOpened(false)}>
             {t('token.add.back')}
           </Button>
-          <Button type={'submit'}>{t('token.add.import')}</Button>
+          <Button type="submit">{t('token.add.import')}</Button>
         </div>
       </div>
     </form>

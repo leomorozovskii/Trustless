@@ -1,12 +1,14 @@
-import s from './OfferBottom.module.scss';
 import React, { useEffect } from 'react';
-import { Button } from '@components/Button';
 import { useTranslation } from 'react-i18next';
-import { ProgressBar } from '@components/ProgressBar';
-import { CreateOfferState } from '@lib/constants';
-import { useOfferContext } from '@src/context/offer/offer-context';
-import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
+
 import { GasIcon, SelectIcon } from '@assets/icons';
+import { Button } from '@components/Button';
+import { ProgressBar } from '@components/ProgressBar';
+import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
+import { CreateOfferState } from '@lib/constants';
+import { useOfferContext } from '@/context/offer/offer-context';
+
+import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
@@ -16,17 +18,19 @@ const OfferBottom = () => {
   useEffect(() => {
     if (!approveButtonDisabled) {
       setActiveStep(CreateOfferState.Filled);
+    } else {
+      setActiveStep(CreateOfferState.None);
     }
   }, [approveButtonDisabled]);
 
   const approveHandler = () => {
-    console.log('approve handler');
+    //  approve handler
     setActiveStep(CreateOfferState.Approved);
     setActiveOfferStep(2);
   };
 
   const createHandler = () => {
-    console.log('create handler');
+    //  create handler
     setActiveStep(CreateOfferState.Created);
     setActiveOfferStep(3);
   };
@@ -40,7 +44,7 @@ const OfferBottom = () => {
             activeStep !== CreateOfferState.Created && (
               <Button
                 disabled={approveButtonDisabled}
-                type={'button'}
+                type="button"
                 onClick={approveHandler}
               >
                 {t('token.approve')}
@@ -48,7 +52,7 @@ const OfferBottom = () => {
             )}
           <Button
             disabled={createButtonDisabled}
-            type={'button'}
+            type="button"
             onClick={createHandler}
           >
             {t('token.create')}
@@ -61,7 +65,7 @@ const OfferBottom = () => {
           <p className={s.feeLabel}>{`${t('offer.create.fee')} 0.01%`}</p>
           <div className={s.feeContainer}>
             <GasIcon />
-            {/*TODO: calculate a real number*/}
+            {/* TODO: calculate a real number */}
             <p className={s.feeLabel}>11.43%</p>
             <SelectIcon />
           </div>

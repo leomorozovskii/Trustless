@@ -1,7 +1,9 @@
 import React from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
-import s from './Tabs.module.scss';
+
 import { Tab } from '@components/Tabs/components/Tab';
+
+import s from './Tabs.module.scss';
 
 interface TabItem {
   label: string;

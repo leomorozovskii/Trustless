@@ -5,11 +5,12 @@ import React, {
   useReducer,
   useState,
 } from 'react';
+
 import {
   IOfferFrom,
   IOfferTo,
   IOfferValues,
-} from '@src/context/offer/offer-context.interfaces';
+} from '@/context/offer/offer-context.interfaces';
 import { CreateOfferState } from '@lib/constants';
 
 const OfferContext = createContext<IOfferValues | null>(null);

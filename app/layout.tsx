@@ -1,11 +1,14 @@
 'use client';
-import { Sidebar } from '@components/Sidebar';
-import i18n from '@/i18n';
-import { Inter } from 'next/font/google';
-import { OfferProvider } from '@src/context/offer/offer-context';
+
 import { I18nextProvider } from 'react-i18next';
-import '../styles/globals.scss';
+import { Inter } from 'next/font/google';
 import '@radix-ui/themes/styles.css';
+
+import { Sidebar } from '@components/Sidebar';
+import { OfferProvider } from '@/context/offer/offer-context';
+import i18n from '@/i18n';
+
+import '@/styles/globals.scss';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700'],
@@ -13,11 +16,11 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body className={inter.variable}>
@@ -29,4 +32,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

@@ -1,13 +1,14 @@
 import React, { memo } from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
-import s from './Checkbox.module.scss';
+
 import { CheckboxCheck } from '@assets/icons';
+
+import s from './Checkbox.module.scss';
 
 export interface ICheckbox extends React.HTMLAttributes<HTMLInputElement> {
   label: string;
   checked: boolean;
   disabled?: boolean;
-  mixed?: boolean;
   onCheckedChange: (checked: boolean) => void;
 }
 
@@ -15,7 +16,7 @@ const Checkbox: React.FC<ICheckbox> = ({
   label,
   checked,
   onCheckedChange,
-  disabled,
+  disabled = false,
   ...props
 }) => {
   return (

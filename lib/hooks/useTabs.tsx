@@ -1,6 +1,7 @@
-import { OfferState } from '@lib/constants';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+import { OfferState } from '@lib/constants';
 
 interface TabItem {
   query: string;

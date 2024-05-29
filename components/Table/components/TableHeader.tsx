@@ -1,7 +1,9 @@
-import cn from 'classnames';
-import s from '../Table.module.scss';
-import { ArrowDownIcon, ArrowUpIcon } from '@assets/icons';
 import { useCallback } from 'react';
+import cn from 'classnames';
+
+import { ArrowDownIcon, ArrowUpIcon } from '@assets/icons';
+
+import s from '../Table.module.scss';
 
 // TODO: fix any
 interface TableHeaderProps {

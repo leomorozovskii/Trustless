@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+
 import s from '../Table.module.scss';
 
 interface TableBodyProps {

@@ -1,16 +1,19 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
+import { useTable, useSortBy, useFilters, usePagination } from 'react-table';
+
 import { Tabs } from '@components/Tabs';
-import s from './Offers.module.scss';
 import { Table } from '@components/Table';
-import { OfferState } from '@lib/constants';
 import { mockTableData } from '@components/Table/mocks';
-import { useOffersTabs } from '@lib/hooks/useTabs';
 import { useOffersTableData } from '@components/Table/hooks/useOffersTableData';
 import { useOffersColumns } from '@components/Table/hooks/useOffersColumns';
 import { useOffersSearchFilter } from '@components/Table/hooks/useOffersSearchFilter';
-import { useTable, useSortBy, useFilters, usePagination } from 'react-table';
 import { useStatusCount } from '@components/Table/hooks/useStatusCount';
+import { OfferState } from '@lib/constants';
+import { useOffersTabs } from '@lib/hooks/useTabs';
+
+import s from './Offers.module.scss';
 
 const tabs = [
   { label: OfferState.All, query: OfferState.All },

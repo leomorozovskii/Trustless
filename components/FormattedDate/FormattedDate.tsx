@@ -1,5 +1,6 @@
-import { formatCustomDate } from '@lib/utils/handleDate';
 import React, { memo } from 'react';
+
+import { formatCustomDate } from '@lib/utils/handleDate';
 
 interface FormattedDateProps {
   date: string | Date;
@@ -7,7 +8,7 @@ interface FormattedDateProps {
 const FormattedDate: React.FC<FormattedDateProps> = ({ date }) => {
   const parsedDate = new Date(date);
 
-  if (isNaN(parsedDate.getTime())) {
+  if (Number.isNaN(parsedDate.getTime())) {
     return '';
   }
 

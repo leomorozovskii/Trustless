@@ -2,6 +2,7 @@
 
 import React, { memo } from 'react';
 import * as RadixRadioGroup from '@radix-ui/react-radio-group';
+
 import s from './Radio.module.scss';
 
 export interface IRadioOption {

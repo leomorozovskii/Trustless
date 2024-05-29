@@ -36,7 +36,6 @@ MixedCheckbox.args = {
   label: 'Mixed Checkbox',
   checked: true,
   disabled: false,
-  mixed: true,
 };
 MixedCheckbox.parameters = {
   docs: {
@@ -78,7 +77,6 @@ MixedCheckbox.parameters = {
 export const DarkThemeMixedChecked = DarkTemplate.bind({});
 DarkThemeMixedChecked.args = {
   label: 'Dark Theme Checked Checkbox',
-  mixed: true,
   checked: true,
 };
 MixedCheckbox.parameters = {

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
-import s from './TokenItem.module.scss';
+
 import { IconProps } from '@assets/icons/tokens';
+
+import s from './TokenItem.module.scss';
 
 export interface ITokenItem {
   title: string;
@@ -10,10 +12,10 @@ export interface ITokenItem {
 
 const TokenItem: React.FC<ITokenItem> = ({ title, IconComponent, onClick }) => {
   return (
-    <div onClick={onClick} className={s.tokenItem}>
+    <button className={s.tokenItem} onClick={onClick}>
       <IconComponent />
       <p className={s.title}>{title}</p>
-    </div>
+    </button>
   );
 };
 

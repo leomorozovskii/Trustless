@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import s from './ProgressBar.module.scss';
 import cn from 'classnames';
-import { CreateOfferState } from '@lib/constants';
+
 import { CheckmarkIcon } from '@assets/icons';
+import { CreateOfferState } from '@lib/constants';
+
+import s from './ProgressBar.module.scss';
 
 export interface IProgressBar {
   currentStep: CreateOfferState;

@@ -1,12 +1,14 @@
 import React from 'react';
-import s from '../From/OfferFrom.module.scss';
-import { Select } from '@components/Select';
-import { AddCustomToken } from '@components/AddCustomToken';
-import { Input } from '@components/Input';
-import cn from 'classnames';
 import { isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
-import { useOfferContext } from '@src/context/offer/offer-context';
+import cn from 'classnames';
+
+import { AddCustomToken } from '@components/AddCustomToken';
+import { Input } from '@components/Input';
+import { Select } from '@components/Select';
+import { useOfferContext } from '@/context/offer/offer-context';
+
+import s from '../From/OfferFrom.module.scss';
 
 const OfferTo = () => {
   const { setOfferToState, offerToState } = useOfferContext();
@@ -18,27 +20,27 @@ const OfferTo = () => {
         <h2 className={s.selectLabel}>{t('token.to')}</h2>
         <Select
           value={offerToState.to}
-          placeholder={'Select token'}
+          placeholder="Select token"
           onChange={(value) => setOfferToState({ to: value })}
         />
         <AddCustomToken />
       </div>
       <Input
-        id={'to amount input'}
+        id="to amount input"
         label={t('token.amount')}
-        type={'number'}
-        size={'lg'}
-        placeholder={'0'}
+        type="number"
+        size="lg"
+        placeholder="0"
         classWrapper={s.inputWrapper}
         value={offerToState.amount ? offerToState.amount.toString() : ''}
         onChange={({ target }) => setOfferToState({ amount: +target.value })}
       />
       <Input
-        id={'to receiver input'}
+        id="to receiver input"
         label={t('token.receiver')}
-        type={'text'}
-        size={'lg'}
-        placeholder={'0x0000000000000000000000000000'}
+        type="text"
+        size="lg"
+        placeholder="0x0000000000000000000000000000"
         error={
           offerToState.receiver && !isAddress(offerToState.receiver)
             ? t('token.invalid.address')

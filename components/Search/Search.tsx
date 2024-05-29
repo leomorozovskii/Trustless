@@ -1,8 +1,10 @@
 import React, { HTMLAttributes, memo, useMemo } from 'react';
-import s from './Search.module.scss';
-import cn from 'classnames';
 import { TextField } from '@radix-ui/themes';
+import cn from 'classnames';
+
 import { InputCross, InputError, InputSearch } from '@assets/icons';
+
+import s from './Search.module.scss';
 
 export interface ISearch extends HTMLAttributes<HTMLInputElement> {
   type?: 'text' | 'number';
@@ -40,7 +42,7 @@ const Search: React.FC<ISearch> = ({
       disabled={disabled}
       value={value}
       onChange={onChange}
-      className={cn(s.input, error && s.errorInput)}
+      className={cn(s.input, error && s.errorInput, classWrapper)}
     >
       <TextField.Slot>
         {!disabled && <InputSearch className={cn(s.searchAsset, s.asset)} />}

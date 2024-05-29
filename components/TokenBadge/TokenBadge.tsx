@@ -1,5 +1,7 @@
-import { TOKEN_MAP, TokenAddress } from '@lib/constants';
 import React, { memo } from 'react';
+
+import { TOKEN_MAP, TokenAddress } from '@lib/constants';
+
 import s from './TokenBadge.module.scss';
 
 interface TokenBadgeProps {

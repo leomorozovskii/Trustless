@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import cn from 'classnames';
-import s from './CryptoAddress.module.scss';
-import { CopyIcon } from '@assets/icons';
-import { isValidCryptoAddress } from '@lib/utils/handleAddress';
 import * as Tooltip from '@radix-ui/react-tooltip';
+import { isAddress } from 'viem';
+import cn from 'classnames';
+
+import { CopyIcon } from '@assets/icons';
+
+import s from './CryptoAddress.module.scss';
 
 interface CryptoAddressProps {
   address: string;
@@ -23,7 +25,7 @@ const CryptoAddress: React.FC<CryptoAddressProps> = ({
   };
 
   const addressToShow = useMemo(() => {
-    if (!isValidCryptoAddress(address)) return '';
+    if (!isAddress(address)) return '';
 
     return showFullAddress
       ? address
@@ -33,7 +35,11 @@ const CryptoAddress: React.FC<CryptoAddressProps> = ({
   return (
     <Tooltip.Provider>
       <div className={s.cryptoAddress}>
-        <button className={cn(s.copyButton, { copied })} onClick={handleCopy}>
+        <button
+          type="button"
+          className={cn(s.copyButton, { copied })}
+          onClick={handleCopy}
+        >
           {addressToShow && (
             <>
               <span className={s.address} data-testid="crypto-address">

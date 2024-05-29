@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
-import s from './Link.module.scss';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import cn from 'classnames';
+
+import s from './Link.module.scss';
 
 export interface LinkProps
   extends NextLinkProps,
@@ -24,7 +25,7 @@ const Link: React.FC<LinkProps> = ({
         [s.container]: true,
         [s.default]: variant === 'default',
         [s.underline]: variant === 'underline',
-        [className]: true,
+        [className as string]: true,
       })}
     >
       {children}

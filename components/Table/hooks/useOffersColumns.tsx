@@ -1,14 +1,18 @@
 import { useMemo } from 'react';
+import { Column } from 'react-table';
+
+import { ShareIcon } from '@assets/icons';
+import { CryptoAddress } from '@components/CryptoAddress';
+import { FormattedDate } from '@components/FormattedDate';
 import { TokenBadge } from '@components/TokenBadge';
 import FormattedNumber from '@components/FormattedAmount/FormattedAmount';
-import { CryptoAddress } from '@components/CryptoAddress';
 import { OfferStatus } from '@components/OfferStatus';
-import { ShareIcon } from '@assets/icons';
-import { FormattedDate } from '@components/FormattedDate';
+
+import { ITableData } from '@components/Table/mocks';
 import s from '../Table.module.scss';
 
 // TODO Fix sorting
-const customSortMethod = (rowA, rowB, columnId) => {
+const customSortMethod = (rowA: any, rowB: any, columnId: string) => {
   // Пример сортировки: числа сравниваются как числа, строки - как строки
   if (
     typeof rowA.values[columnId] === 'number' &&
@@ -28,7 +32,7 @@ const customSortMethod = (rowA, rowB, columnId) => {
 };
 
 export const useOffersColumns = () => {
-  const columns = useMemo(
+  const columns: Column<ITableData>[] = useMemo(
     () => [
       { Header: 'offer id', accessor: 'id' },
       {
@@ -88,7 +92,7 @@ export const useOffersColumns = () => {
         accessor: 'share',
         Cell: () => (
           <div className={s.shareWidget}>
-            <button className={s.shareButton}>
+            <button aria-label="Share" className={s.shareButton}>
               <ShareIcon />
             </button>
           </div>

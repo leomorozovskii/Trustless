@@ -1,9 +1,11 @@
 import React from 'react';
-import { Pagination } from '@components/Pagination';
-import s from '../Table.module.scss';
+
+import { SearchIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
-import { SearchIcon } from '@assets/icons';
+import { Pagination } from '@components/Pagination';
+
+import s from '../Table.module.scss';
 
 interface TableContainerProps extends React.PropsWithChildren {
   data: any[];

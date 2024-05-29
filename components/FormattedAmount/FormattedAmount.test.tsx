@@ -130,13 +130,13 @@ describe('FormattedAmount Component', () => {
 
   // 6. Performance testing - Basic render timing
   it('should measure render performance', () => {
-    const start = performance.now();
+    //  const start = performance.now();
     render(
       <I18nextProvider i18n={i18n}>
         <FormattedAmount value={1000} />
       </I18nextProvider>,
     );
-    const end = performance.now();
+    //  const end = performance.now();
   });
 
   // 7. Error handling testing
