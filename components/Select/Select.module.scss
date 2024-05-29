@@ -6,7 +6,6 @@
 }
 
 .trigger {
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,18 +17,7 @@
   background: $base-white;
   border: 1px solid $base-black;
   border-radius: $s;
-}
-
-.content {
-  position: absolute;
-  top: $xxl;
-  left: 0;
-  z-index: 3;
-  width: 100%;
-  max-height: 192px;
-  overflow-y: auto;
-  background: $base-white;
-  border-radius: $s;
+  cursor: pointer;
 }
 
 @mixin item-base {
@@ -38,16 +26,17 @@
   align-items: center;
   gap: $xxs;
   width: 100%;
-  padding: $xs $m;
+  padding: 0;
 }
 
 .item {
+  padding: $xs $m;
+
   @include item-base;
 }
 
 .selectedItem {
   @include item-base;
-  padding: 0;
 }
 
 .label {

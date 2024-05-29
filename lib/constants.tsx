@@ -23,7 +23,7 @@ import {
   YfiIcon,
 } from '@assets/icons/tokens';
 
-interface TokenData {
+export interface TokenData {
   name: string;
   logo: React.FC<IconProps>;
 }
@@ -84,4 +84,11 @@ export enum OfferState {
   Pending = 'pending',
   Accepted = 'accepted',
   Cancelled = 'cancelled',
+}
+
+export enum CreateOfferState {
+  None = 'none',
+  Filled = 'filled',
+  Approved = 'approved',
+  Created = 'created',
 }
