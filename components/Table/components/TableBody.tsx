@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { Cell } from 'react-table';
 import cn from 'classnames';
 
 import s from '../Table.module.scss';
@@ -10,7 +11,7 @@ interface TableBodyProps {
   onSelectRow: () => void;
 }
 
-const TableBody: React.FC<TableBodyProps> = ({ rows, prepareRow, getTableBodyProps, onSelectRow }) => {
+const TableBody: React.FC<TableBodyProps> = ({ rows, prepareRow, getTableBodyProps }) => {
   return (
     <tbody {...getTableBodyProps()} className={s.tableBody}>
       {rows.map((row) => {
@@ -23,9 +24,9 @@ const TableBody: React.FC<TableBodyProps> = ({ rows, prepareRow, getTableBodyPro
               [s.cancelled]: row.original.status === 'Cancelled',
             })}
           >
-            {row.cells.map((cell) => {
+            {row.cells.map((cell: Cell) => {
               return (
-                <td {...cell.getCellProps()} key={cell.id}>
+                <td {...cell.getCellProps()} key={cell.column.id}>
                   {cell.render('Cell')}
                 </td>
               );

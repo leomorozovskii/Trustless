@@ -50,8 +50,8 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
   });
 
   const { statusCounts } = useStatusCount<IOffer, OfferState>({
-    // TODO add real data
-    data: mockTableData,
+    // TODO add real data and fix an any
+    data: mockTableData as any,
     keyExtractor: (item) => item.status,
   });
 
@@ -60,6 +60,8 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
       columns,
       data: filteredData,
       initialState: {
+        // TODO  solve the problem sorry for this
+        // @ts-ignore
         sorting: [
           {
             id: OffersColumnAccessors.ID,

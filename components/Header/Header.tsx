@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ThemeSwitcher } from '@components/ThemeSwitcher';
 import { ConnectWallet } from '@components/ConnectWallet';
+import { ThemeSwitcher } from '@components/ThemeSwitcher';
 
 import s from './Header.module.scss';
 

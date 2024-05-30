@@ -15,13 +15,7 @@ export default {
 
 const Template: StoryFn<IInput> = (args) => {
   const [value, setValue] = useState<string>(args.value || '');
-  return (
-    <Input
-      {...args}
-      value={value}
-      onChange={({ target }: any) => setValue(target.value)}
-    />
-  );
+  return <Input {...args} value={value} onChange={({ target }: any) => setValue(target.value)} />;
 };
 
 export const DefaultPlaceholder = Template.bind({});
