@@ -69,7 +69,6 @@
 
 .content {
   width: 100%;
-  min-height: calc(100vh - 48px);
-  margin-top: 48px;
+  height: 100vh;
   background: $additional-gray-background;
 }
