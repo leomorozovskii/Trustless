@@ -12,13 +12,7 @@ export interface ICheckbox extends React.HTMLAttributes<HTMLInputElement> {
   onCheckedChange: (checked: boolean) => void;
 }
 
-const Checkbox: React.FC<ICheckbox> = ({
-  label,
-  checked,
-  onCheckedChange,
-  disabled = false,
-  ...props
-}) => {
+const Checkbox: React.FC<ICheckbox> = ({ label, checked, onCheckedChange, disabled = false, ...props }) => {
   return (
     <div className={s.wrapper}>
       <RadixCheckbox.Root

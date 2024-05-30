@@ -1,9 +1,11 @@
-import { Button } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
-import s from '../Table.module.scss';
+import { Button } from '@radix-ui/themes';
+
 import { SearchIcon } from '@assets/icons';
 import { Input } from '@components/Input';
 import { Pagination } from '@components/Pagination';
+
+import s from '../Table.module.scss';
 
 interface OffersTableHeaderProps {
   searchValue: string;

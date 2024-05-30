@@ -44,9 +44,7 @@ const Search: React.FC<ISearch> = ({
       onChange={onChange}
       className={cn(s.input, error && s.errorInput, classWrapper)}
     >
-      <TextField.Slot>
-        {!disabled && <InputSearch className={cn(s.searchAsset, s.asset)} />}
-      </TextField.Slot>
+      <TextField.Slot>{!disabled && <InputSearch className={cn(s.searchAsset, s.asset)} />}</TextField.Slot>
       <TextField.Slot>
         {withCross && !error && !disabled ? (
           <InputCross onClick={handleClear} className={cn(s.cross, s.asset)} />

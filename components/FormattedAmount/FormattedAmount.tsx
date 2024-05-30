@@ -6,16 +6,10 @@ interface FormattedNumberProps {
   decimals?: number;
 }
 
-const FormattedNumber: React.FC<FormattedNumberProps> = ({
-  value,
-  decimals = 2,
-}) => {
+const FormattedNumber: React.FC<FormattedNumberProps> = ({ value, decimals = 2 }) => {
   const { i18n } = useTranslation(undefined, { useSuspense: false });
 
-  const numberValue =
-    value == null || Number.isNaN(Number(value))
-      ? BigInt(0)
-      : BigInt(value.toString());
+  const numberValue = value == null || Number.isNaN(Number(value)) ? BigInt(0) : BigInt(value.toString());
 
   let formatter: Intl.NumberFormat;
   try {
@@ -31,9 +25,7 @@ const FormattedNumber: React.FC<FormattedNumberProps> = ({
     });
   }
 
-  const formattedValue = formatter.format(
-    Number(numberValue) / 10 ** Math.max(0, decimals),
-  );
+  const formattedValue = formatter.format(Number(numberValue) / 10 ** Math.max(0, decimals));
 
   return <span>{formattedValue}</span>;
 };

@@ -27,11 +27,7 @@ const Table: React.FC<TableProps> = ({
       {children}
       <table {...getTableProps()} className={s.table}>
         <TableHeader headerGroups={headerGroups} />
-        <TableBody
-          rows={rows}
-          prepareRow={prepareRow}
-          getTableBodyProps={getTableBodyProps}
-        />
+        <TableBody rows={rows} prepareRow={prepareRow} getTableBodyProps={getTableBodyProps} />
       </table>
     </TableContainer>
   );

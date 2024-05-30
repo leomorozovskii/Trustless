@@ -14,10 +14,7 @@ interface ISelectTokenPopup {
   handle(token: string): void;
 }
 
-const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({
-  setOpened,
-  handle,
-}) => {
+const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handle }) => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { searchedData } = useSearchToken({ query: searchQuery });
@@ -49,12 +46,7 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({
             {Object.values(TOKEN_MAP)
               .slice(0, 7)
               .map((el, idx) => (
-                <TokenItem
-                  onClick={() => handle(el.name)}
-                  key={idx}
-                  title={el.name}
-                  IconComponent={el.logo}
-                />
+                <TokenItem onClick={() => handle(el.name)} key={idx} title={el.name} IconComponent={el.logo} />
               ))}
           </div>
         </div>

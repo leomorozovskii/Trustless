@@ -21,10 +21,7 @@ interface IAddTokenPopup {
 const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened }) => {
   const { t } = useTranslation();
   const [tokenState, setTokenState] = useReducer(
-    (
-      oldState: IAddTokenPopupState,
-      newState: Partial<IAddTokenPopupState>,
-    ): IAddTokenPopupState => ({
+    (oldState: IAddTokenPopupState, newState: Partial<IAddTokenPopupState>): IAddTokenPopupState => ({
       ...oldState,
       ...newState,
     }),
@@ -57,11 +54,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened }) => {
           label={t('token.address')}
           size="lg"
           id="token address input"
-          error={
-            tokenState.address && !isAddress(tokenState.address)
-              ? t('token.invalid.address')
-              : ''
-          }
+          error={tokenState.address && !isAddress(tokenState.address) ? t('token.invalid.address') : ''}
           value={tokenState.address}
           onChange={({ target }) => setTokenState({ address: target.value })}
         />

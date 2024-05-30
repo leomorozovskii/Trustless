@@ -39,15 +39,10 @@ describe('FormattedAmount Component', () => {
   it('renders with maximum valid data', () => {
     render(
       <I18nextProvider i18n={i18n}>
-        <FormattedAmount
-          value="999999999999999999999999999999999999999"
-          decimals={6}
-        />
+        <FormattedAmount value="999999999999999999999999999999999999999" decimals={6} />
       </I18nextProvider>,
     );
-    expect(
-      screen.getByText('1,000,000,000,000,000,000,000,000,000,000,000.000000'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('1,000,000,000,000,000,000,000,000,000,000,000.000000')).toBeInTheDocument();
   });
 
   it('renders with empty data', () => {
@@ -148,10 +143,7 @@ describe('FormattedAmount Component', () => {
         <FormattedAmount value={1000} />
       </I18nextProvider>,
     );
-    expect(console.warn).toHaveBeenCalledWith(
-      'Unsupported locale:',
-      'unsupported',
-    );
+    expect(console.warn).toHaveBeenCalledWith('Unsupported locale:', 'unsupported');
     expect(screen.getByText('10.00')).toBeInTheDocument();
   });
 

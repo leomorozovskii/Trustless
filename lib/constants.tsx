@@ -6,7 +6,7 @@ import {
   CVXIcon,
   CbETHIcon,
   DaiIcon,
-  Dao_tokenIcon,
+  DaoTokenIcon,
   EthIcon,
   FeiIcon,
   IconProps,
@@ -75,7 +75,7 @@ export const TOKEN_MAP: { [address: string]: TokenData } = {
   [TokenAddress.ARMOR]: { name: 'ARMOR', logo: ARMORIcon },
   [TokenAddress.FEI]: { name: 'FEI', logo: FeiIcon },
   [TokenAddress.UNKNOWN]: { name: 'Unknown', logo: UnknownIcon },
-  [TokenAddress.DAO]: { name: 'DAO', logo: Dao_tokenIcon },
+  [TokenAddress.DAO]: { name: 'DAO', logo: DaoTokenIcon },
 };
 
 export enum OfferState {

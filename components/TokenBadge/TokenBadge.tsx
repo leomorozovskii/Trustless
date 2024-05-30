@@ -9,9 +9,7 @@ interface TokenBadgeProps {
 }
 
 const TokenBadge: React.FC<TokenBadgeProps> = ({ address }) => {
-  const token = address
-    ? TOKEN_MAP[address.toLowerCase()]
-    : TOKEN_MAP[TokenAddress.UNKNOWN];
+  const token = address ? TOKEN_MAP[address.toLowerCase()] : TOKEN_MAP[TokenAddress.UNKNOWN];
 
   return (
     <div className={s.container}>

@@ -4,8 +4,8 @@
     "airbnb-typescript",
     "next/core-web-vitals",
     "next",
-    "plugin:prettier/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier"],
@@ -62,18 +62,17 @@
     ],
     "no-unsafe-optional-chaining": 0,
     "import/no-extraneous-dependencies": "off",
-    "prettier/prettier": [
-      "error", {
-        "endOfLine": "auto"
-      }
-    ],
-    "react/function-component-definition": [
+    "prettier/prettier": ["error", {
+      "endOfLine":"auto"
+    }],
+      "react/function-component-definition": [
       2,
       {
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
       }
     ],
+    "react/jsx-no-constructed-context-values": 0,
     "react/no-array-index-key": 0,
     "react/button-has-type": 0,
     "react-hooks/exhaustive-deps": 0,

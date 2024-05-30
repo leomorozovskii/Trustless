@@ -40,21 +40,12 @@ const OfferBottom = () => {
       <p className={s.label}>{t('offer.create.signText')}</p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
-          {activeStep !== CreateOfferState.Approved &&
-            activeStep !== CreateOfferState.Created && (
-              <Button
-                disabled={approveButtonDisabled}
-                type="button"
-                onClick={approveHandler}
-              >
-                {t('token.approve')}
-              </Button>
-            )}
-          <Button
-            disabled={createButtonDisabled}
-            type="button"
-            onClick={createHandler}
-          >
+          {activeStep !== CreateOfferState.Approved && activeStep !== CreateOfferState.Created && (
+            <Button disabled={approveButtonDisabled} type="button" onClick={approveHandler}>
+              {t('token.approve')}
+            </Button>
+          )}
+          <Button disabled={createButtonDisabled} type="button" onClick={createHandler}>
             {t('token.create')}
           </Button>
         </div>
@@ -72,10 +63,7 @@ const OfferBottom = () => {
         </div>
       )}
       <p className={s.terms}>
-        {t('offer.create.acceptTerms')}{' '}
-        <span className={s.conditions}>
-          {t('offer.create.termsConditions')}
-        </span>
+        {t('offer.create.acceptTerms')} <span className={s.conditions}>{t('offer.create.termsConditions')}</span>
       </p>
     </div>
   );

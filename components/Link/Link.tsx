@@ -4,20 +4,14 @@ import cn from 'classnames';
 
 import s from './Link.module.scss';
 
-export interface LinkProps
-  extends NextLinkProps,
-    React.HTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends NextLinkProps, React.HTMLAttributes<HTMLAnchorElement> {
   className?: string;
+
   children: React.ReactNode;
   variant?: 'default' | 'underline';
 }
 
-const Link: React.FC<LinkProps> = ({
-  children,
-  className,
-  variant = 'default',
-  ...rest
-}) => {
+const Link: React.FC<LinkProps> = ({ children, className, variant = 'default', ...rest }) => {
   return (
     <NextLink
       {...rest}

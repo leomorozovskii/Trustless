@@ -18,12 +18,7 @@ const OfferStatus: React.FC<OfferStatusProps> = ({ status, offerId }) => {
   return (
     <div className={s.statusContainer}>
       <span>{status}</span>
-      <button
-        aria-label="View Offer"
-        type="button"
-        className={s.viewOfferButton}
-        onClick={handleButtonClick}
-      >
+      <button aria-label="View Offer" type="button" className={s.viewOfferButton} onClick={handleButtonClick}>
         <NewWindowIcon />
       </button>
     </div>

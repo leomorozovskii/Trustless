@@ -7,8 +7,7 @@ import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { useOfferContext } from '@/context/offer/offer-context';
-
-import s from '../From/OfferFrom.module.scss';
+import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
   const { setOfferToState, offerToState } = useOfferContext();
@@ -41,11 +40,7 @@ const OfferTo = () => {
         type="text"
         size="lg"
         placeholder="0x0000000000000000000000000000"
-        error={
-          offerToState.receiver && !isAddress(offerToState.receiver)
-            ? t('token.invalid.address')
-            : ''
-        }
+        error={offerToState.receiver && !isAddress(offerToState.receiver) ? t('token.invalid.address') : ''}
         value={offerToState.receiver ? offerToState.receiver : ''}
         onChange={({ target }) => setOfferToState({ receiver: target.value })}
       />

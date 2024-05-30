@@ -50,9 +50,7 @@ describe('CryptoAddress Component', () => {
   it('handles button click', () => {
     render(<CryptoAddress address="0x1234567890abcdef" />);
     fireEvent.click(screen.getByRole('button'));
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      '0x1234567890abcdef',
-    );
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith('0x1234567890abcdef');
   });
 
   // клавиатурное взаимодействие пропустить для краткости

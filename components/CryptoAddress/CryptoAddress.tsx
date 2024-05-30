@@ -12,10 +12,7 @@ interface CryptoAddressProps {
   showFullAddress?: boolean;
 }
 
-const CryptoAddress: React.FC<CryptoAddressProps> = ({
-  address,
-  showFullAddress = false,
-}) => {
+const CryptoAddress: React.FC<CryptoAddressProps> = ({ address, showFullAddress = false }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -27,19 +24,13 @@ const CryptoAddress: React.FC<CryptoAddressProps> = ({
   const addressToShow = useMemo(() => {
     if (!isAddress(address)) return '';
 
-    return showFullAddress
-      ? address
-      : `${address.slice(0, 4)}...${address.slice(-6)}`;
+    return showFullAddress ? address : `${address.slice(0, 4)}...${address.slice(-6)}`;
   }, [address, showFullAddress]);
 
   return (
     <Tooltip.Provider>
       <div className={s.cryptoAddress}>
-        <button
-          type="button"
-          className={cn(s.copyButton, { copied })}
-          onClick={handleCopy}
-        >
+        <button type="button" className={cn(s.copyButton, { copied })} onClick={handleCopy}>
           {addressToShow && (
             <>
               <span className={s.address} data-testid="crypto-address">

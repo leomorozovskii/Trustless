@@ -15,12 +15,7 @@ export interface ISelect {
   onChange: (value: string) => void;
 }
 
-const Select: React.FC<ISelect> = ({
-  placeholder,
-  value,
-  onChange,
-  disabled,
-}) => {
+const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) => {
   const [opened, setOpened] = useState<boolean>(false);
 
   const handle = (token: string) => {
@@ -37,10 +32,7 @@ const Select: React.FC<ISelect> = ({
 
   return (
     <div className={s.wrapper}>
-      <button
-        onClick={() => setOpened(true)}
-        className={cn(s.trigger, disabled && s.disabled)}
-      >
+      <button onClick={() => setOpened(true)} className={cn(s.trigger, disabled && s.disabled)}>
         <div>
           {value ? (
             <div className={s.selectedItem}>

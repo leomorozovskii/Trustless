@@ -15,14 +15,7 @@ interface IconProps {
 
 export const OfferIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M11.8807 4.56999C10.9853 4.19011 10.0005 3.97998 8.96667 3.97998C4.84294 3.97998 1.5 7.32292 1.5 11.4466C1.5 15.5704 4.84294 18.9133 8.96667 18.9133C10.0467 18.9133 11.0731 18.684 12 18.2714"
         stroke="black"
@@ -33,7 +26,7 @@ export const OfferIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-export const SelectIcon: React.FC<IconProps> = (props) => {
+export const SelectIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +34,7 @@ export const SelectIcon: React.FC<IconProps> = (props) => {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
-      className={props.className}
+      className={className}
       {...props}
     >
       <path
@@ -57,14 +50,7 @@ export const SelectIcon: React.FC<IconProps> = (props) => {
 
 export const HistoryIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M12.6923 7.84619V13.3847H8.53846"
         stroke="black"
@@ -77,43 +63,31 @@ export const HistoryIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-export const InputCross: React.FC<IconProps> = (props) => {
+export const InputCross: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
-      className={props.className}
+      className={className}
       viewBox="0 0 16 16"
       fill="none"
       {...props}
     >
-      <path
-        d="M4 4L12 12"
-        stroke="#828282"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 4L4 12"
-        stroke="#828282"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M4 4L12 12" stroke="#828282" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4L4 12" stroke="#828282" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
-export const InputError: React.FC<IconProps> = (props) => {
+export const InputError: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       width="16"
       height="16"
       viewBox="0 0 16 16"
       fill="none"
-      className={props.className}
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
@@ -127,37 +101,31 @@ export const InputError: React.FC<IconProps> = (props) => {
   );
 };
 
-export const InputSearch: React.FC<IconProps> = (props) => {
+export const InputSearch: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="13"
       height="13"
       viewBox="0 0 13 13"
-      className={props.className}
+      className={className}
       fill="none"
       {...props}
     >
       <circle cx="5" cy="5" r="4.25" stroke="black" strokeWidth="1.5" />
-      <path
-        d="M12 12L8.34027 8.3403"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M12 12L8.34027 8.3403" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
-export const CheckboxCheck: React.FC<IconProps> = (props) => {
+export const CheckboxCheck: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="13"
       height="10"
       viewBox="0 0 13 10"
-      className={props.className}
+      className={className}
       fill="none"
       {...props}
     >
@@ -166,43 +134,26 @@ export const CheckboxCheck: React.FC<IconProps> = (props) => {
   );
 };
 
-export const ButtonPlus: React.FC<IconProps> = (props) => {
+export const ButtonPlus: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      className={props.className}
+      className={className}
       fill="none"
       {...props}
     >
-      <path
-        d="M12 5.25V18.75"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5.25 12H18.75"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
+      <path d="M12 5.25V18.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5.25 12H18.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 };
 
 export const CopyIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M6 12C5.63333 12 5.31944 11.8694 5.05833 11.6083C4.79722 11.3472 4.66667 11.0333 4.66667 10.6667V2.66666C4.66667 2.29999 4.79722 1.98611 5.05833 1.72499C5.31944 1.46388 5.63333 1.33333 6 1.33333H12C12.3667 1.33333 12.6806 1.46388 12.9417 1.72499C13.2028 1.98611 13.3333 2.29999 13.3333 2.66666V10.6667C13.3333 11.0333 13.2028 11.3472 12.9417 11.6083C12.6806 11.8694 12.3667 12 12 12H6ZM6 10.6667H12V2.66666H6V10.6667ZM3.33333 14.6667C2.96667 14.6667 2.65278 14.5361 2.39167 14.275C2.13056 14.0139 2 13.7 2 13.3333V3.99999H3.33333V13.3333H10.6667V14.6667H3.33333Z"
         fill="black"
@@ -211,7 +162,7 @@ export const CopyIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-export const DayIcon: React.FC<IconProps> = (props) => {
+export const DayIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +170,7 @@ export const DayIcon: React.FC<IconProps> = (props) => {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
-      className={props.className}
+      className={className}
       {...props}
     >
       <path
@@ -230,9 +181,9 @@ export const DayIcon: React.FC<IconProps> = (props) => {
       />
     </svg>
   );
-}
+};
 
-export const NightIcon: React.FC<IconProps> = (props) => {
+export const NightIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +191,7 @@ export const NightIcon: React.FC<IconProps> = (props) => {
       height="16"
       viewBox="0 0 17 16"
       fill="none"
-      className={props.className}
+      className={className}
       {...props}
     >
       <path
@@ -251,18 +202,11 @@ export const NightIcon: React.FC<IconProps> = (props) => {
       />
     </svg>
   );
-}
+};
 
 export const NewWindowIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect opacity="0.01" width="16" height="16" fill="black" />
       <path
         d="M8.38434 8L12.3342 3.97745V5.20625V6.62187L13.4731 6.60313V2.45C13.4731 2.18281 13.2996 2 13.0231 2L8.86526 2.00938L8.85119 3.19404H10.1778H11.4328L7.49872 7.11914L8.38434 8Z"
@@ -281,14 +225,7 @@ export const NewWindowIcon: React.FC<IconProps> = (props) => {
 
 export const ShareIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect opacity="0.01" width="16" height="16" fill="white" />
       <path
         fillRule="evenodd"
@@ -302,14 +239,7 @@ export const ShareIcon: React.FC<IconProps> = (props) => {
 
 export const SortingIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M5.33329 8.66666V3.88333L3.61663 5.59999L2.66663 4.66666L5.99996 1.33333L9.33329 4.66666L8.38329 5.59999L6.66663 3.88333V8.66666H5.33329ZM9.99996 14.6667L6.66663 11.3333L7.61663 10.4L9.33329 12.1167V7.33333H10.6666V12.1167L12.3833 10.4L13.3333 11.3333L9.99996 14.6667Z"
         fill="black"
@@ -320,34 +250,21 @@ export const SortingIcon: React.FC<IconProps> = (props) => {
 
 export const SearchIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle cx="7" cy="7" r="4.25" stroke="black" strokeWidth="1.5" />
-      <path
-        d="M14 14L10.3403 10.3403"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M14 14L10.3403 10.3403" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
-export const CheckmarkIcon: React.FC<IconProps> = (props) => {
+export const CheckmarkIcon: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
       viewBox="0 0 16 16"
-      className={props.className}
+      className={className}
       fill="none"
       {...props}
     >
@@ -364,70 +281,25 @@ export const CheckmarkIcon: React.FC<IconProps> = (props) => {
 
 export const CloseIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M4 4L12 12"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 4L4 12"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M4 4L12 12" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4L4 12" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
 export const ArrowRightIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M2 8H13.5"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.5 3L13.5 8L8.5 13"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M2 8H13.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8.5 3L13.5 8L8.5 13" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
 export const ArrowDownIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M3 5L8.22727 10.2273L13 5"
         stroke="black"
@@ -441,14 +313,7 @@ export const ArrowDownIcon: React.FC<IconProps> = (props) => {
 
 export const ArrowUpIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M3 10.2273L8.22727 5.00001L13 10.2273"
         stroke="black"
@@ -462,42 +327,16 @@ export const ArrowUpIcon: React.FC<IconProps> = (props) => {
 
 export const ArrowRightBoldIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M2 8H13.5"
-        stroke="black"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.5 3L13.5 8L8.5 13"
-        stroke="black"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M2 8H13.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8.5 3L13.5 8L8.5 13" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
 export const GasIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M1 14.6904C1 14.3896 1.24609 14.1504 1.54004 14.1504H2.08008V1.73633C2.08008 0.615234 2.6748 0 3.80273 0H9.3125C10.4268 0 11.042 0.615234 11.042 1.73633V8.03906H11.1104C12.0264 8.03906 12.5869 8.5791 12.5869 9.52246V11.7852C12.5869 12.1543 12.8057 12.3799 13.1816 12.3799C13.5439 12.3799 13.7627 12.1543 13.7627 11.7852V6.78125L12.6143 5.44824C12.3066 5.08594 12.2656 4.70312 12.5596 4.2998L13.4551 3.04883C13.5371 2.92578 13.5439 2.78223 13.4688 2.65918L12.6689 1.36035C12.3203 0.799805 13.1338 0.300781 13.4824 0.854492L14.4189 2.37207C14.6172 2.68652 14.7266 3.00098 14.7266 3.41113V11.7852C14.7266 12.7559 14.1455 13.3438 13.1816 13.3438C12.2109 13.3438 11.623 12.7559 11.623 11.7852V9.52246C11.623 9.18066 11.4248 9.00293 11.1104 9.00293H11.042V14.1504H11.5684C11.8691 14.1504 12.1221 14.3965 12.1221 14.6904C12.1221 14.998 11.8691 15.251 11.5684 15.251H1.54004C1.23926 15.251 1 14.998 1 14.6904ZM4.02832 7.13672H9.08691C9.58594 7.13672 9.89355 6.86328 9.89355 6.40527V1.89355C9.89355 1.43555 9.58594 1.15527 9.08691 1.15527H4.02832C3.5293 1.15527 3.22852 1.43555 3.22852 1.89355V6.40527C3.22852 6.86328 3.5293 7.13672 4.02832 7.13672Z"
         fill="black"
@@ -508,14 +347,7 @@ export const GasIcon: React.FC<IconProps> = (props) => {
 
 export const CheckIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M4 8.32566L7.09562 12.1594L12.264 4"
         stroke="black"
@@ -529,40 +361,16 @@ export const CheckIcon: React.FC<IconProps> = (props) => {
 
 export const PlusIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M8 3.5V12.5"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M3.5 8H12.5"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M8 3.5V12.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M3.5 8H12.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 };
 
 export const ErrorIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -573,16 +381,9 @@ export const ErrorIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-export const WarningIcon: React.FC<IconProps> = (props) => {
+export const WarningIcon: React.FC<IconProps> = ({ width, height, ...props }) => {
   return (
-    <svg
-      width={props.width}
-      height={props.width}
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M3.56298 13.8779C2.58969 13.8779 2 13.2023 2 12.3263C2 12.0573 2.0687 11.7824 2.22328 11.5248L6.66603 3.78435C6.95802 3.26336 7.47328 3 8 3C8.52672 3 9.03626 3.26336 9.33397 3.78435L13.7767 11.5248C13.9198 11.7767 14 12.0573 14 12.3263C14 13.2023 13.4103 13.8779 12.437 13.8779H3.56298ZM8.00573 10.0534C8.28626 10.0534 8.45229 9.8874 8.45802 9.57824L8.54389 6.46947C8.54962 6.16603 8.30916 5.94275 8 5.94275C7.67939 5.94275 7.45611 6.16031 7.46183 6.46374L7.53626 9.57824C7.54198 9.88168 7.70802 10.0534 8.00573 10.0534ZM8.00573 11.9714C8.34351 11.9714 8.64122 11.7023 8.64122 11.3588C8.64122 11.0095 8.34924 10.7405 8.00573 10.7405C7.65649 10.7405 7.3645 11.0153 7.3645 11.3588C7.3645 11.6966 7.66221 11.9714 8.00573 11.9714Z"
         fill="black"
@@ -603,26 +404,14 @@ export const QrUknownTokenIcon: React.FC<IconProps> = (props) => {
       {...props}
     >
       <circle cx="8" cy="8" r="7.5" fill="#D8D8D8" stroke="#979797" />
-      <mask
-        id="mask0_135_6353"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="16"
-        height="16"
-      >
+      <mask id="mask0_135_6353" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
         <circle cx="8" cy="8" r="7.5" fill="white" stroke="white" />
       </mask>
       <g mask="url(#mask0_135_6353)">
         <rect width="16" height="16" fill="url(#pattern0_135_6353)" />
       </g>
       <defs>
-        <pattern
-          id="pattern0_135_6353"
-          patternContentUnits="objectBoundingBox"
-          width="1"
-          height="1"
-        >
+        <pattern id="pattern0_135_6353" patternContentUnits="objectBoundingBox" width="1" height="1">
           <use xlinkHref="#image0_135_6353" transform="scale(0.03125)" />
         </pattern>
         <image
@@ -638,22 +427,9 @@ export const QrUknownTokenIcon: React.FC<IconProps> = (props) => {
 
 export const PaginationArrowRightIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g id="icon_right">
-        <rect
-          id="placeholder"
-          opacity="0.01"
-          width="16"
-          height="16"
-          fill="white"
-        />
+        <rect id="placeholder" opacity="0.01" width="16" height="16" fill="white" />
         <g id="right">
           <path
             id="Path"
@@ -668,22 +444,9 @@ export const PaginationArrowRightIcon: React.FC<IconProps> = (props) => {
 
 export const PaginationArrowLeftIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g id="icon_left">
-        <rect
-          id="placeholder copy"
-          opacity="0.01"
-          width="16"
-          height="16"
-          fill="#828282"
-        />
+        <rect id="placeholder copy" opacity="0.01" width="16" height="16" fill="#828282" />
         <g id="left">
           <path
             id="Path"

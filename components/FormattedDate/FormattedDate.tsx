@@ -5,6 +5,7 @@ import { formatCustomDate } from '@lib/utils/handleDate';
 interface FormattedDateProps {
   date: string | Date;
 }
+
 const FormattedDate: React.FC<FormattedDateProps> = ({ date }) => {
   const parsedDate = new Date(date);
 

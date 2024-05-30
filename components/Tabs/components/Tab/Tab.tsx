@@ -9,12 +9,7 @@ interface TabProps extends React.PropsWithChildren {
   tabBage?: number;
 }
 
-const Tab: React.FC<TabProps> = ({
-  children,
-  active = false,
-  onClick,
-  tabBage,
-}) => {
+const Tab: React.FC<TabProps> = ({ children, active = false, onClick, tabBage }) => {
   const className = cn(s.container, {
     [s.active]: active,
   });

@@ -10,12 +10,7 @@ interface TableBodyProps {
   onSelectRow: () => void;
 }
 
-const TableBody: React.FC<TableBodyProps> = ({
-  rows,
-  prepareRow,
-  getTableBodyProps,
-  onSelectRow,
-}) => {
+const TableBody: React.FC<TableBodyProps> = ({ rows, prepareRow, getTableBodyProps, onSelectRow }) => {
   return (
     <tbody {...getTableBodyProps()} className={s.tableBody}>
       {rows.map((row) => {

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextValue {
   theme: string;
@@ -26,15 +20,11 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = (theme: 'light' | 'dark') => {
-    setTheme(theme);
+  const toggleTheme = (newTheme: 'light' | 'dark') => {
+    setTheme(newTheme);
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = (): ThemeContextValue => {

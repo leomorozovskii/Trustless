@@ -21,10 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       <aside className={cn(s.sidebar)}>
         <div className={s.navigation}>
           <div className={s.buttonContainer}>
-            <Button
-              onClick={() => router.push('/offer/create')}
-              className={s.button}
-            >
+            <Button onClick={() => router.push('/offer/create')} className={s.button}>
               <ButtonPlus />
             </Button>
           </div>

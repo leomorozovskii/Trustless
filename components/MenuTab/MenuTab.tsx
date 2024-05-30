@@ -15,13 +15,7 @@ interface MenuTabProps extends React.PropsWithChildren {
   href: string;
 }
 
-const MenuTab: React.FC<MenuTabProps> = ({
-  children,
-  icon,
-  active = false,
-  disabled = false,
-  href,
-}) => {
+const MenuTab: React.FC<MenuTabProps> = ({ children, icon, active = false, disabled = false, href }) => {
   const pathname = usePathname();
   const isActive = pathname === href || active;
 

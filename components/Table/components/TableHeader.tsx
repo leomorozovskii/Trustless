@@ -13,11 +13,7 @@ interface TableHeaderProps {
 const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups }) => {
   const renderIcon = useCallback((column: any) => {
     if (column.isSorted) {
-      return column.isSortedDesc ? (
-        <ArrowDownIcon className={s.sortIcon} />
-      ) : (
-        <ArrowUpIcon className={s.sortIcon} />
-      );
+      return column.isSortedDesc ? <ArrowDownIcon className={s.sortIcon} /> : <ArrowUpIcon className={s.sortIcon} />;
     }
     return <ArrowDownIcon className={cn(s.sortIcon, s.sortIcon_hidden)} />;
   }, []);
@@ -37,9 +33,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups }) => {
               >
                 <span>{column.render('Header')}</span>
                 {/* Добавление значков сортировки */}
-                <span className={s.sortIconContainer}>
-                  {renderIcon(column)}
-                </span>
+                <span className={s.sortIconContainer}>{renderIcon(column)}</span>
               </th>
             );
           })}

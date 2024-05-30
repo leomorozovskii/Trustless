@@ -17,12 +17,7 @@ interface TabsProps {
   handleTabClick: (tab: string) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({
-  tabs = [],
-  activeTab,
-  tabBages,
-  handleTabClick,
-}) => {
+const Tabs: React.FC<TabsProps> = ({ tabs = [], activeTab, tabBages, handleTabClick }) => {
   return (
     <RadixTabs.Root className={s.container} value={activeTab}>
       <RadixTabs.List className={s.tabList}>
