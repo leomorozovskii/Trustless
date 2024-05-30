@@ -11,9 +11,7 @@ import '@radix-ui/themes/styles.css';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as React from 'react';
-import { WalletProvider } from '@context/wallet/WalletProvider';
 import { WalletOptions } from '@components/WalletOptions';
-import { ContractProvider } from '@context/contract/ContractProvider';
 import { WalletAccount } from '@components/WalletAccount';
 
 const inter = Inter({
@@ -34,18 +32,14 @@ export default function RootLayout({
       <body className={inter.variable}>
         <WagmiProvider config={wagmiConfig}>
           <QueryClientProvider client={queryClient}>
-            <WalletProvider>
-              <ContractProvider>
-                <OfferProvider>
-                  <I18nextProvider i18n={i18n}>
-                    {/* TODO: Change to Real Account */}
-                    <WalletOptions />
-                    <WalletAccount />
-                    <Sidebar>{children}</Sidebar>
-                  </I18nextProvider>
-                </OfferProvider>
-              </ContractProvider>
-            </WalletProvider>
+            <OfferProvider>
+              <I18nextProvider i18n={i18n}>
+                {/* TODO: Change to Real Account */}
+                <WalletOptions />
+                <WalletAccount />
+                <Sidebar>{children}</Sidebar>
+              </I18nextProvider>
+            </OfferProvider>
           </QueryClientProvider>
         </WagmiProvider>
       </body>
