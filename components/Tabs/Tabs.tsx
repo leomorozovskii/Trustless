@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
 
 import { Tab } from '@components/Tabs/components/Tab';
@@ -42,4 +42,4 @@ const Tabs: React.FC<TabsProps> = ({
   );
 };
 
-export default Tabs;
+export default memo(Tabs);
