@@ -1,8 +1,6 @@
 export const contractABI = [
   {
-    inputs: [
-      { internalType: 'uint256', name: '_feeBasisPoints', type: 'uint256' },
-    ],
+    inputs: [{ internalType: 'uint256', name: '_feeBasisPoints', type: 'uint256' }],
     payable: false,
     stateMutability: 'nonpayable',
     type: 'constructor',
@@ -13,6 +11,7 @@ export const contractABI = [
       {
         indexed: true,
         internalType: 'uint256',
+
         name: 'tradeID',
         type: 'uint256',
       },
@@ -85,9 +84,7 @@ export const contractABI = [
   },
   {
     constant: false,
-    inputs: [
-      { internalType: 'contract IERC20', name: '_token', type: 'address' },
-    ],
+    inputs: [{ internalType: 'contract IERC20', name: '_token', type: 'address' }],
     name: 'claimFees',
     outputs: [],
     payable: false,
@@ -193,9 +190,7 @@ export const contractABI = [
   },
   {
     constant: false,
-    inputs: [
-      { internalType: 'contract IERC20', name: '_token', type: 'address' },
-    ],
+    inputs: [{ internalType: 'contract IERC20', name: '_token', type: 'address' }],
     name: 'reclaimToken',
     outputs: [],
     payable: false,

@@ -78,6 +78,11 @@ export const TOKEN_MAP: { [address: string]: TokenData } = {
   [TokenAddress.DAO]: { name: 'DAO', logo: DaoTokenIcon },
 };
 
+export const WalletIconsMap = {
+  metaMask: '',
+  coinbaseWallet: '',
+} as const;
+
 export enum OfferState {
   All = 'all',
   Open = 'open',

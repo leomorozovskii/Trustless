@@ -1,8 +1,7 @@
 import React from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-import { Button } from '@components/Button';
 import { ThemeSwitcher } from '@components/ThemeSwitcher';
+import { ConnectWallet } from '@components/ConnectWallet';
 
 import s from './Header.module.scss';
 
@@ -11,8 +10,7 @@ const Header: React.FC = () => {
     <div className={s.wrapper}>
       <div className={s.container}>
         <ThemeSwitcher />
-        <ConnectButton />
-        {/* <Button className={s.button}>Connect Wallet</Button> */}
+        <ConnectWallet />
       </div>
     </div>
   );

@@ -1,24 +1,22 @@
-// top to the file
-
 'use client';
 
-import { Sidebar } from '@components/Sidebar';
-import i18n from '@/i18n';
+import * as React from 'react';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { I18nextProvider } from 'react-i18next';
 import { Inter } from 'next/font/google';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider } from 'wagmi';
+import '@rainbow-me/rainbowkit/styles.css';
+import '@radix-ui/themes/styles.css';
+
+import { Sidebar } from '@components/Sidebar';
+import { Header } from '@components/Header';
 import { OfferProvider } from '@/context/offer/offer-context';
 import { ThemeProvider } from '@/context/theme/ThemeProvider';
-import { I18nextProvider } from 'react-i18next';
-import '../styles/globals.scss';
-import '@radix-ui/themes/styles.css';
-import { WagmiProvider } from 'wagmi';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import * as React from 'react';
-import { WalletOptions } from '@components/WalletOptions';
-import { WalletAccount } from '@components/WalletAccount';
-import { Header } from '@components/Header';
+
+import i18n from '@/i18n';
 import { wagmiConfig } from '@/wagmiConfig';
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import '@rainbow-me/rainbowkit/styles.css';
+import '@/styles/globals.scss';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700'],
@@ -44,8 +42,6 @@ const RootLayout = ({
                   <I18nextProvider i18n={i18n}>
                     {/* TODO: Change to Real Account */}
                     <Sidebar>
-                      <WalletOptions />
-                      <WalletAccount />
                       <Header />
                       {children}
                     </Sidebar>
