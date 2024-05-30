@@ -1,13 +1,19 @@
 // top to the file
 'use client';
 import { Sidebar } from '@components/Sidebar';
-import i18n from '@src/i18n';
+import i18n from '@/i18n';
 import { Inter } from 'next/font/google';
-import { OfferProvider } from '@src/context/offer/offer-context';
-import { ThemeProvider } from '@src/context/theme/ThemeProvider';
+import { OfferProvider } from '@/context/offer/offer-context';
+import { ThemeProvider } from '@/context/theme/ThemeProvider';
 import { I18nextProvider } from 'react-i18next';
+import { wagmiConfig } from '../wagmiConfig';
 import '../styles/globals.scss';
 import '@radix-ui/themes/styles.css';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import * as React from 'react';
+import { WalletOptions } from '@components/WalletOptions';
+import { WalletAccount } from '@components/WalletAccount';
 import { Header } from '@components/Header';
 
 const inter = Inter({
@@ -15,6 +21,8 @@ const inter = Inter({
   variable: '--font-family-base',
   subsets: ['latin'],
 });
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -24,16 +32,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <ThemeProvider>
-          <OfferProvider>
-            <I18nextProvider i18n={i18n}>
-              <Sidebar>
-                <Header />
-                {children}
-              </Sidebar>
-            </I18nextProvider>
-          </OfferProvider>
-        </ThemeProvider>
+        <WagmiProvider config={wagmiConfig}>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider>
+            <OfferProvider>
+              <I18nextProvider i18n={i18n}>
+                {/* TODO: Change to Real Account */}
+                <Sidebar>
+                <WalletOptions />
+                <WalletAccount />
+                  <Header />
+                  {children}
+                </Sidebar>
+              </I18nextProvider>
+            </OfferProvider>
+            </ThemeProvider>
+          </QueryClientProvider>
+        </WagmiProvider>
       </body>
     </html>
   );

@@ -1,21 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import s from './Table.module.scss';
 import TableContainer from '@components/Table/components/TableContainer';
 import TableHeader from '@components/Table/components/TableHeader';
 import TableBody from '@components/Table/components/TableBody';
 
-interface TableProps {
-  data: any[];
-  pageSize: number;
-  pageCount: number;
-  pageIndex: number;
-  searchValue: string;
-  onSearch: (query: string) => void;
-  gotoPage: (pageIndex: number) => void;
-  previousPage: () => void;
-  nextPage: () => void;
-  canPreviousPage: boolean;
-  canNextPage: boolean;
+interface TableProps extends React.PropsWithChildren {
   getTableProps: any;
   getTableBodyProps: any;
   headerGroups: any;
@@ -24,33 +13,16 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({
-  data,
-  searchValue,
-  onSearch,
-  pageSize,
-  pageIndex,
-  previousPage,
-  nextPage,
-  canPreviousPage,
-  canNextPage,
   getTableProps,
   getTableBodyProps,
   headerGroups,
   rows,
   prepareRow,
+  children,
 }) => {
   return (
-    <TableContainer
-      data={data}
-      searchValue={searchValue}
-      pageSize={pageSize}
-      onSearch={onSearch}
-      pageIndex={pageIndex}
-      previousPage={previousPage}
-      nextPage={nextPage}
-      canPreviousPage={canPreviousPage}
-      canNextPage={canNextPage}
-    >
+    <TableContainer>
+      {children}
       <table {...getTableProps()} className={s.table}>
         <TableHeader headerGroups={headerGroups} />
         <TableBody
@@ -63,4 +35,4 @@ const Table: React.FC<TableProps> = ({
   );
 };
 
-export default Table;
+export default memo(Table);
