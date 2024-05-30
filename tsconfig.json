@@ -30,6 +30,7 @@
     "paths": {
       "@assets/*": ["./assets/*"],
       "@common/*": ["./styles/common/*"],
+      "@context/*": ["./context/*"],
       "@components/*": ["./components/*"],
       "@styles/*": ["./styles/*"],
       "@containers/*": ["./containers/*"],

@@ -67,6 +67,23 @@
 
 .row {
   max-height: $xxl;
+  transition: background-color 0.2s ease;
+
+  .idColumn:not(.isChecked) {
+    button {
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    background-color: $additional-gray-background;
+
+    .idColumn {
+      button {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .cancelled {

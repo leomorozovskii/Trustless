@@ -1,85 +1,47 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Tabs } from '@components/Tabs';
 import s from '@styles/pages/Offers.module.scss';
 import { Table } from '@components/Table';
-import { OfferState } from '@lib/constants';
-import { mockTableData } from '@components/Table/mocks';
-import { useOffersTabs } from '@lib/hooks/useTabs';
-import { useOffersTableData } from '@components/Table/hooks/useOffersTableData';
-import { useOffersColumns } from '@components/Table/hooks/useOffersColumns';
-import { useOffersSearchFilter } from '@components/Table/hooks/useOffersSearchFilter';
-import { useTable, useSortBy, useFilters, usePagination } from 'react-table';
-import { useStatusCount } from '@components/Table/hooks/useStatusCount';
-
-const tabs = [
-  { label: OfferState.All, query: OfferState.All },
-  { label: OfferState.Open, query: OfferState.Open },
-  { label: OfferState.Pending, query: OfferState.Pending },
-  { label: OfferState.Accepted, query: OfferState.Accepted },
-  { label: OfferState.Cancelled, query: OfferState.Cancelled },
-];
+import {
+  OffersProvider,
+  useOffersContext,
+} from '@src/context/offers/offers-context';
+import { useTranslation } from 'react-i18next';
+import { OffersTableHeader } from '@components/Table/components/OffersTableHeader';
 
 const OffersPage: React.FC = () => {
-  const { activeTab, handleTabClick, status } = useOffersTabs(tabs);
-
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterStatus, setFilterStatus] = useState<OfferState>(status);
-
-  // TODO add real data
-  const tableData = useOffersTableData({ data: mockTableData, filterStatus });
-  const columns = useOffersColumns();
-  const { filteredData } = useOffersSearchFilter({
-    data: tableData,
-    query: searchQuery,
-  });
-
-  const { statusCounts } = useStatusCount({
-    // TODO add real data
-    data: mockTableData,
-  });
+  const { t } = useTranslation();
+  const {
+    table,
+    statusCounts,
+    tabs,
+    activeTab,
+    handleTabClick,
+    handleSearch,
+    searchQuery,
+  } = useOffersContext();
 
   const {
+    page,
+    pageIndex,
+    pageSize,
+    pageCount,
+    gotoPage,
+    previousPage,
+    nextPage,
+    canPreviousPage,
+    canNextPage,
     getTableProps,
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page,
     rows,
-    canPreviousPage,
-    canNextPage,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    state: { pageIndex, pageSize },
-  } = useTable(
-    {
-      columns,
-      data: filteredData,
-      initialState: {
-        sorting: [
-          {
-            id: 'id',
-            desc: false,
-          },
-        ],
-        pageIndex: 0,
-        pageSize: 100,
-      },
-    },
-    useFilters,
-    useSortBy,
-    usePagination,
-  );
-
-  useEffect(() => {
-    setFilterStatus(status);
-  }, [status]);
+  } = table;
 
   return (
     <div className={s.container}>
-      <h1 className={s.title}>My offers</h1>
+      <h1 className={s.title}>{t('offers.title')}</h1>
       <Tabs
         tabs={tabs}
         activeTab={activeTab}
@@ -88,26 +50,33 @@ const OffersPage: React.FC = () => {
       />
       <div className={s.tableContainer}>
         <Table
-          data={rows}
           rows={page}
-          searchValue={searchQuery}
-          onSearch={setSearchQuery}
-          pageIndex={pageIndex}
-          pageSize={pageSize}
-          pageCount={pageCount}
-          gotoPage={gotoPage}
-          previousPage={previousPage}
-          nextPage={nextPage}
-          canPreviousPage={canPreviousPage}
-          canNextPage={canNextPage}
           getTableProps={getTableProps}
           getTableBodyProps={getTableBodyProps}
           headerGroups={headerGroups}
           prepareRow={prepareRow}
-        />
+        >
+          <OffersTableHeader
+            data={rows}
+            searchValue={searchQuery}
+            onSearch={handleSearch}
+            pageIndex={pageIndex}
+            pageSize={pageSize}
+            previousPage={previousPage}
+            nextPage={nextPage}
+            canPreviousPage={canPreviousPage}
+            canNextPage={canNextPage}
+          />
+        </Table>
       </div>
     </div>
   );
 };
 
-export default OffersPage;
+const OffersPageWithProvider: React.FC = () => (
+  <OffersProvider>
+    <OffersPage />
+  </OffersProvider>
+);
+
+export default OffersPageWithProvider;
