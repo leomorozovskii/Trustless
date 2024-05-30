@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import Image from 'next/image';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { AccountIcon } from '@assets/icons';
@@ -45,7 +46,13 @@ const ConnectWallet = () => {
                     {chain.hasIcon && (
                       <div className={s.flex}>
                         {chain.iconUrl && (
-                          <img alt={chain.name ?? 'Chain icon'} src={chain.iconUrl} className={s.infoIcon} />
+                          <Image
+                            src={chain.iconUrl}
+                            alt={chain.name ?? 'Chain icon'}
+                            width={24}
+                            height={24}
+                            quality={100}
+                          />
                         )}
                       </div>
                     )}

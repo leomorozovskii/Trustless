@@ -26,7 +26,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     {
       to: '',
       amount: 0,
-      receiver: '',
+      receiver: '0x0000000000000000000000000000000000000000',
     },
   );
 

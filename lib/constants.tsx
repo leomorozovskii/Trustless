@@ -26,16 +26,17 @@ import {
 export interface TokenData {
   name: string;
   logo: React.FC<IconProps>;
+  decimals: number;
 }
 
 export enum TokenAddress {
-  USDT = '0x0000000000000000000000000000000000000001',
+  USDT = '0x820CD06B058dcc48a61f44CE58E03C561DdfDCA9',
   ETH = '0x0000000000000000000000000000000000000002',
   CBETH = '0x0000000000000000000000000000000000000003',
   WETH = '0x0000000000000000000000000000000000000004',
   DAI = '0x0000000000000000000000000000000000000005',
   BUSD = '0x0000000000000000000000000000000000000006',
-  USDC = '0x0000000000000000000000000000000000000007',
+  USDC = '0x1F05b02B94de421820d090F6E9FAa0bdBECdb1B8',
   CVX = '0x0000000000000000000000000000000000000008',
   WSTETH = '0x0000000000000000000000000000000000000009',
   LINK = '0x000000000000000000000000000000000000000a',
@@ -54,28 +55,28 @@ export enum TokenAddress {
 }
 
 export const TOKEN_MAP: { [address: string]: TokenData } = {
-  [TokenAddress.USDT]: { name: 'USDT', logo: UsdtIcon },
-  [TokenAddress.ETH]: { name: 'ETH', logo: EthIcon },
-  [TokenAddress.CBETH]: { name: 'cbETH', logo: CbETHIcon },
-  [TokenAddress.WETH]: { name: 'WETH', logo: WethIcon },
-  [TokenAddress.DAI]: { name: 'DAI', logo: DaiIcon },
-  [TokenAddress.BUSD]: { name: 'BUSD', logo: BusdIcon },
-  [TokenAddress.USDC]: { name: 'USDC', logo: UsdcIcon },
-  [TokenAddress.CVX]: { name: 'CVX', logo: CVXIcon },
-  [TokenAddress.WSTETH]: { name: 'wstETH', logo: WstETHIcon },
-  [TokenAddress.LINK]: { name: 'LINK', logo: LinkIcon },
-  [TokenAddress.MANA]: { name: 'MANA', logo: ManaIcon },
-  [TokenAddress.STETH]: { name: 'stETH', logo: WstETHIcon },
-  [TokenAddress.YFI]: { name: 'YFI', logo: YfiIcon },
-  [TokenAddress.MKR]: { name: 'MKR', logo: MkrIcon },
-  [TokenAddress.BAT]: { name: 'BAT', logo: BatIcon },
-  [TokenAddress.UNI]: { name: 'UNI', logo: UniIcon },
-  [TokenAddress.ALCX]: { name: 'ALCX', logo: AlcxIcon },
-  [TokenAddress.WBTC]: { name: 'WBTC', logo: WbtcIcon },
-  [TokenAddress.ARMOR]: { name: 'ARMOR', logo: ARMORIcon },
-  [TokenAddress.FEI]: { name: 'FEI', logo: FeiIcon },
-  [TokenAddress.UNKNOWN]: { name: 'Unknown', logo: UnknownIcon },
-  [TokenAddress.DAO]: { name: 'DAO', logo: DaoTokenIcon },
+  [TokenAddress.USDT]: { name: 'USDT', logo: UsdtIcon, decimals: 6 },
+  [TokenAddress.ETH]: { name: 'ETH', logo: EthIcon, decimals: 18 },
+  [TokenAddress.CBETH]: { name: 'cbETH', logo: CbETHIcon, decimals: 18 },
+  [TokenAddress.WETH]: { name: 'WETH', logo: WethIcon, decimals: 18 },
+  [TokenAddress.DAI]: { name: 'DAI', logo: DaiIcon, decimals: 18 },
+  [TokenAddress.BUSD]: { name: 'BUSD', logo: BusdIcon, decimals: 18 },
+  [TokenAddress.USDC]: { name: 'USDC', logo: UsdcIcon, decimals: 6 },
+  [TokenAddress.CVX]: { name: 'CVX', logo: CVXIcon, decimals: 18 },
+  [TokenAddress.WSTETH]: { name: 'wstETH', logo: WstETHIcon, decimals: 18 },
+  [TokenAddress.LINK]: { name: 'LINK', logo: LinkIcon, decimals: 18 },
+  [TokenAddress.MANA]: { name: 'MANA', logo: ManaIcon, decimals: 18 },
+  [TokenAddress.STETH]: { name: 'stETH', logo: WstETHIcon, decimals: 18 },
+  [TokenAddress.YFI]: { name: 'YFI', logo: YfiIcon, decimals: 18 },
+  [TokenAddress.MKR]: { name: 'MKR', logo: MkrIcon, decimals: 18 },
+  [TokenAddress.BAT]: { name: 'BAT', logo: BatIcon, decimals: 18 },
+  [TokenAddress.UNI]: { name: 'UNI', logo: UniIcon, decimals: 18 },
+  [TokenAddress.ALCX]: { name: 'ALCX', logo: AlcxIcon, decimals: 18 },
+  [TokenAddress.WBTC]: { name: 'WBTC', logo: WbtcIcon, decimals: 18 },
+  [TokenAddress.ARMOR]: { name: 'ARMOR', logo: ARMORIcon, decimals: 18 },
+  [TokenAddress.FEI]: { name: 'FEI', logo: FeiIcon, decimals: 18 },
+  [TokenAddress.UNKNOWN]: { name: 'Unknown', logo: UnknownIcon, decimals: 18 },
+  [TokenAddress.DAO]: { name: 'DAO', logo: DaoTokenIcon, decimals: 18 },
 };
 
 export const WalletIconsMap = {

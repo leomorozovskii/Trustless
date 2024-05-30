@@ -1,5 +1,3 @@
-// top to the file
-
 'use client';
 
 import * as React from 'react';
@@ -42,7 +40,6 @@ const RootLayout = ({
               <ThemeProvider>
                 <OfferProvider>
                   <I18nextProvider i18n={i18n}>
-                    {/* TODO: Change to Real Account */}
                     <Sidebar>
                       <Header />
                       {children}
