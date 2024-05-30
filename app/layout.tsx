@@ -35,17 +35,17 @@ export default function RootLayout({
         <WagmiProvider config={wagmiConfig}>
           <QueryClientProvider client={queryClient}>
             <ThemeProvider>
-            <OfferProvider>
-              <I18nextProvider i18n={i18n}>
-                {/* TODO: Change to Real Account */}
-                <Sidebar>
-                <WalletOptions />
-                <WalletAccount />
-                  <Header />
-                  {children}
-                </Sidebar>
-              </I18nextProvider>
-            </OfferProvider>
+              <OfferProvider>
+                <I18nextProvider i18n={i18n}>
+                  {/* TODO: Change to Real Account */}
+                  <Sidebar>
+                    <WalletOptions />
+                    <WalletAccount />
+                    <Header />
+                    {children}
+                  </Sidebar>
+                </I18nextProvider>
+              </OfferProvider>
             </ThemeProvider>
           </QueryClientProvider>
         </WagmiProvider>
