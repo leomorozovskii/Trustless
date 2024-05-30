@@ -1,6 +1,21 @@
 import { TokenAddress } from '@lib/constants';
 
-export const mockTableData = [
+export interface ITableData {
+  id: number;
+  fromAssetName: string;
+  toAssetName: string;
+  fromAsset: TokenAddress;
+  toAsset: TokenAddress;
+  amount1: bigint;
+  amount2: bigint;
+  rate: bigint;
+  address: string;
+  status: string;
+  date: string | Date;
+  share?: string;
+}
+
+export const mockTableData: ITableData[] = [
   {
     id: 355157,
     fromAssetName: 'BUSD',

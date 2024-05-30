@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
+
 import s from './Tab.module.scss';
 
 interface TabProps extends React.PropsWithChildren {
@@ -8,13 +9,8 @@ interface TabProps extends React.PropsWithChildren {
   tabBage?: number;
 }
 
-const Tab: React.FC<TabProps> = ({
-  children,
-  active = false,
-  onClick,
-  tabBage,
-}) => {
-  const className = classNames(s.container, {
+const Tab: React.FC<TabProps> = ({ children, active = false, onClick, tabBage }) => {
+  const className = cn(s.container, {
     [s.active]: active,
   });
 

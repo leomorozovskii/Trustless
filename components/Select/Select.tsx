@@ -1,9 +1,12 @@
 import React, { memo, useMemo, useState } from 'react';
-import s from './Select.module.scss';
-import { TOKEN_MAP } from '@lib/constants';
-import { SelectTokenPopup } from '@components/SelectTokenPopup';
-import { SelectIcon } from '@assets/icons';
 import cn from 'classnames';
+
+import { SelectIcon } from '@assets/icons';
+import { IconProps } from '@assets/icons/tokens';
+import { SelectTokenPopup } from '@components/SelectTokenPopup';
+import { TOKEN_MAP } from '@lib/constants';
+
+import s from './Select.module.scss';
 
 export interface ISelect {
   value: string;
@@ -12,35 +15,28 @@ export interface ISelect {
   onChange: (value: string) => void;
 }
 
-const Select: React.FC<ISelect> = ({
-  placeholder,
-  value,
-  onChange,
-  disabled,
-}) => {
+const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) => {
   const [opened, setOpened] = useState<boolean>(false);
 
   const handle = (token: string) => {
-    console.log(token);
     onChange(token);
     setOpened(false);
   };
 
-  const IconComponent = useMemo(() => {
+  const IconComponent: React.FC<IconProps> | undefined = useMemo(() => {
     if (!value) return;
-    return Object.values(TOKEN_MAP).find((el) => el.name === value).logo;
+    const item = Object.values(TOKEN_MAP).find((el) => el.name === value);
+    if (!item) return;
+    return item.logo;
   }, [value]);
 
   return (
     <div className={s.wrapper}>
-      <div
-        className={cn(s.trigger, disabled && s.disabled)}
-        onClick={() => setOpened(true)}
-      >
+      <button onClick={() => setOpened(true)} className={cn(s.trigger, disabled && s.disabled)}>
         <div>
           {value ? (
             <div className={s.selectedItem}>
-              <IconComponent />
+              {IconComponent && <IconComponent />}
               {value}
             </div>
           ) : (
@@ -48,7 +44,7 @@ const Select: React.FC<ISelect> = ({
           )}
         </div>
         <SelectIcon />
-      </div>
+      </button>
       {opened && <SelectTokenPopup setOpened={setOpened} handle={handle} />}
     </div>
   );

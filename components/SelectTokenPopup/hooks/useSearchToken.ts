@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { TOKEN_MAP, TokenData } from '@lib/constants';
 
 interface ISearchProps {
@@ -6,9 +7,7 @@ interface ISearchProps {
 }
 
 export const useSearchToken = ({ query }: ISearchProps) => {
-  const [searchedData, setSearchedData] = useState<TokenData[]>(
-    Object.values(TOKEN_MAP),
-  );
+  const [searchedData, setSearchedData] = useState<TokenData[]>(Object.values(TOKEN_MAP));
 
   useEffect(() => {
     if (!query) setSearchedData(Object.values(TOKEN_MAP));
@@ -16,10 +15,9 @@ export const useSearchToken = ({ query }: ISearchProps) => {
     const result = Object.entries(TOKEN_MAP)
       .filter(
         ([address, tokenData]) =>
-          address.toLowerCase() === lowerCaseQuery ||
-          tokenData.name.toLowerCase().includes(lowerCaseQuery),
+          address.toLowerCase() === lowerCaseQuery || tokenData.name.toLowerCase().includes(lowerCaseQuery),
       )
-      .map(([_, tokenData]) => tokenData);
+      .map(([, tokenData]) => tokenData);
     setSearchedData(result);
   }, [query]);
 

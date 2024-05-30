@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import s from '../Table.module.scss';
 
 interface TableContainerProps extends React.PropsWithChildren {}

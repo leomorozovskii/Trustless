@@ -1,12 +1,14 @@
-import s from './Sidebar.module.scss';
-import { Button } from '@components/Button';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import cn from 'classnames';
-import { MenuTab } from '@components/MenuTab';
-import { ButtonPlus, HistoryIcon, OfferIcon } from '@assets/icons';
-import { ROUTES } from '@lib/routes';
 import { useRouter } from 'next/navigation';
+import cn from 'classnames';
+
+import { ButtonPlus, HistoryIcon, OfferIcon } from '@assets/icons';
+import { Button } from '@components/Button';
+import { MenuTab } from '@components/MenuTab';
+import { ROUTES } from '@lib/routes';
+
+import s from './Sidebar.module.scss';
 
 interface SidebarProps extends React.PropsWithChildren {}
 
@@ -19,10 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       <aside className={cn(s.sidebar)}>
         <div className={s.navigation}>
           <div className={s.buttonContainer}>
-            <Button
-              onClick={() => router.push('/offer/create')}
-              className={s.button}
-            >
+            <Button onClick={() => router.push('/offer/create')} className={s.button}>
               <ButtonPlus />
             </Button>
           </div>

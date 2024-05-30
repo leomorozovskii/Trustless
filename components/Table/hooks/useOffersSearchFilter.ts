@@ -9,10 +9,7 @@ interface UseOffersSearchFilterResult {
   filteredData: any[];
 }
 
-export const useOffersSearchFilter = ({
-  data,
-  query,
-}: SearchFilterProps): UseOffersSearchFilterResult => {
+export const useOffersSearchFilter = ({ data, query }: SearchFilterProps): UseOffersSearchFilterResult => {
   const [filteredData, setFilteredData] = useState(data);
 
   useEffect(() => {
@@ -22,30 +19,13 @@ export const useOffersSearchFilter = ({
     } else {
       const result = data.filter((item) => {
         const idMatch = String(item.id).toLowerCase().includes(lowercasedQuery);
-        const toAssetMatch = String(item.toAsset)
-          .toLowerCase()
-          .includes(lowercasedQuery);
-        const fromAssetMatch = String(item.fromAsset)
-          .toLowerCase()
-          .includes(lowercasedQuery);
-        const addressMatch = String(item.address)
-          .toLowerCase()
-          .includes(lowercasedQuery);
-        const toAssetNameMatch = String(item.toAssetName)
-          .toLowerCase()
-          .includes(lowercasedQuery);
-        const fromAssetNameMatch = String(item.fromAssetName)
-          .toLowerCase()
-          .includes(lowercasedQuery);
+        const toAssetMatch = String(item.toAsset).toLowerCase().includes(lowercasedQuery);
+        const fromAssetMatch = String(item.fromAsset).toLowerCase().includes(lowercasedQuery);
+        const addressMatch = String(item.address).toLowerCase().includes(lowercasedQuery);
+        const toAssetNameMatch = String(item.toAssetName).toLowerCase().includes(lowercasedQuery);
+        const fromAssetNameMatch = String(item.fromAssetName).toLowerCase().includes(lowercasedQuery);
 
-        return (
-          idMatch ||
-          toAssetMatch ||
-          fromAssetMatch ||
-          addressMatch ||
-          toAssetNameMatch ||
-          fromAssetNameMatch
-        );
+        return idMatch || toAssetMatch || fromAssetMatch || addressMatch || toAssetNameMatch || fromAssetNameMatch;
       });
       setFilteredData(result);
     }

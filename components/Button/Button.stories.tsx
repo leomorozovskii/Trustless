@@ -6,9 +6,7 @@ export default {
   component: Button,
 };
 
-const Template = (args: ButtonProps) => (
-  <Button {...args}>{args.children}</Button>
-);
+const Template = (args: ButtonProps) => <Button {...args}>{args.children}</Button>;
 
 const IconTemplate = (args: ButtonProps) => (
   <Button {...args}>

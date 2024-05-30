@@ -7,7 +7,7 @@
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -35,10 +35,9 @@
       "@styles/*": ["./styles/*"],
       "@containers/*": ["./containers/*"],
       "@lib/*": ["./lib/*"],
-      "@modules/*": ["./styles/modules/*"],
       "@pages/*": ["./pages/*"],
-      "@src/*": ["./*"],
-      "@~/*": ["./"]
+      "@~/*": ["./"],
+      "@/*": ["./*"],
     },
     "moduleResolution": "node"
   },

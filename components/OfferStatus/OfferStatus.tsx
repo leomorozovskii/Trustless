@@ -1,6 +1,8 @@
 import React from 'react';
-import s from './OfferStatus.module.scss';
+
 import { NewWindowIcon } from '@assets/icons';
+
+import s from './OfferStatus.module.scss';
 
 interface OfferStatusProps {
   status: string;
@@ -16,7 +18,7 @@ const OfferStatus: React.FC<OfferStatusProps> = ({ status, offerId }) => {
   return (
     <div className={s.statusContainer}>
       <span>{status}</span>
-      <button className={s.viewOfferButton} onClick={handleButtonClick}>
+      <button aria-label="View Offer" type="button" className={s.viewOfferButton} onClick={handleButtonClick}>
         <NewWindowIcon />
       </button>
     </div>

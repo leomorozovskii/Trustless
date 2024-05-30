@@ -1,15 +1,6 @@
-import React, {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useReducer,
-  useState,
-} from 'react';
-import {
-  IOfferFrom,
-  IOfferTo,
-  IOfferValues,
-} from '@src/context/offer/offer-context.interfaces';
+import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
+
+import { IOfferFrom, IOfferTo, IOfferValues } from '@/context/offer/offer-context.interfaces';
 import { CreateOfferState } from '@lib/constants';
 
 const OfferContext = createContext<IOfferValues | null>(null);
@@ -41,9 +32,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
 
-  const [activeStep, setActiveStep] = useState<CreateOfferState>(
-    CreateOfferState.None,
-  );
+  const [activeStep, setActiveStep] = useState<CreateOfferState>(CreateOfferState.None);
 
   const values: IOfferValues = {
     offerFromState,
@@ -56,14 +45,11 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setActiveStep,
   };
 
-  return (
-    <OfferContext.Provider value={values}>{children}</OfferContext.Provider>
-  );
+  return <OfferContext.Provider value={values}>{children}</OfferContext.Provider>;
 };
 
 export const useOfferContext = () => {
   const context = useContext(OfferContext);
-  if (!context)
-    throw new Error('useOfferContext must be used within an OfferProvider');
+  if (!context) throw new Error('useOfferContext must be used within an OfferProvider');
   return context;
 };

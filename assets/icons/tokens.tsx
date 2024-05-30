@@ -26,12 +26,7 @@ export const ARMORIcon: React.FC<IconProps> = (props) => {
     >
       <rect width="20" height="20" fill="url(#pattern0_62_5890)" />
       <defs>
-        <pattern
-          id="pattern0_62_5890"
-          patternContentUnits="objectBoundingBox"
-          width="1"
-          height="1"
-        >
+        <pattern id="pattern0_62_5890" patternContentUnits="objectBoundingBox" width="1" height="1">
           <use xlinkHref="#image0_62_5890" transform="scale(0.015625)" />
         </pattern>
         <image
@@ -47,103 +42,29 @@ export const ARMORIcon: React.FC<IconProps> = (props) => {
 
 export const CVXIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="21"
-      height="20"
-      viewBox="0 0 21 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10.954" cy="10" r="10" fill="white" />
       <path
         d="M16.7954 8.65252V5.9596H15.4469V4.60808H12.751V3.26061H10.055V4.60808H7.36008V5.9596H6.0116V14.0404H7.35907V15.3889H10.055V16.7364H12.75V15.3919H15.4469V14.0404H16.7954V11.3475H14.0995V12.696H12.751V14.0404H10.055V12.696H8.70756V7.30404H10.055V5.9596H12.751V7.30404H14.0995V8.65252H16.7954Z"
         fill="#3A3A3A"
       />
-      <rect
-        x="13.2004"
-        y="7.30505"
-        width="0.89899"
-        height="1.34747"
-        fill="#1682FE"
-      />
-      <rect
-        x="11.8519"
-        y="5.95657"
-        width="0.89899"
-        height="1.34747"
-        fill="#1682FE"
-      />
-      <rect
-        x="9.15698"
-        y="3.26061"
-        width="0.89899"
-        height="1.34747"
-        fill="#1682FE"
-      />
-      <rect
-        x="12.752"
-        y="11.3485"
-        width="1.34646"
-        height="1.34848"
-        fill="#FF5A5A"
-      />
-      <rect
-        x="11.853"
-        y="12.696"
-        width="0.89899"
-        height="1.34747"
-        fill="#FF5A5A"
-      />
-      <rect
-        x="9.15601"
-        y="15.3919"
-        width="0.89899"
-        height="1.34747"
-        fill="#FF5A5A"
-      />
-      <rect
-        x="6.46008"
-        y="14.0434"
-        width="0.89899"
-        height="1.34747"
-        fill="#F4BB3B"
-      />
-      <rect
-        x="5.11255"
-        y="10"
-        width="0.89899"
-        height="4.04343"
-        fill="#F4BB3B"
-      />
-      <rect
-        x="5.11255"
-        y="5.95657"
-        width="0.89899"
-        height="4.04343"
-        fill="#60D8A4"
-      />
-      <rect
-        x="6.46106"
-        y="4.60909"
-        width="0.89899"
-        height="1.34747"
-        fill="#1682FE"
-      />
+      <rect x="13.2004" y="7.30505" width="0.89899" height="1.34747" fill="#1682FE" />
+      <rect x="11.8519" y="5.95657" width="0.89899" height="1.34747" fill="#1682FE" />
+      <rect x="9.15698" y="3.26061" width="0.89899" height="1.34747" fill="#1682FE" />
+      <rect x="12.752" y="11.3485" width="1.34646" height="1.34848" fill="#FF5A5A" />
+      <rect x="11.853" y="12.696" width="0.89899" height="1.34747" fill="#FF5A5A" />
+      <rect x="9.15601" y="15.3919" width="0.89899" height="1.34747" fill="#FF5A5A" />
+      <rect x="6.46008" y="14.0434" width="0.89899" height="1.34747" fill="#F4BB3B" />
+      <rect x="5.11255" y="10" width="0.89899" height="4.04343" fill="#F4BB3B" />
+      <rect x="5.11255" y="5.95657" width="0.89899" height="4.04343" fill="#60D8A4" />
+      <rect x="6.46106" y="4.60909" width="0.89899" height="1.34747" fill="#1682FE" />
     </svg>
   );
 };
 
 export const AlcxIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="11" cy="11" r="10" fill="#252736" stroke="#F6C09A" />
       <path
         fillRule="evenodd"
@@ -152,46 +73,23 @@ export const AlcxIcon: React.FC<IconProps> = (props) => {
         stroke="#F6C09A"
         strokeLinejoin="round"
       />
-      <path
-        d="M10.8821 20.7202V18.6586L14.0279 16.2375"
-        stroke="#F6C09A"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5.51115 14.4551L4.51489 16.2375H7.89276"
-        stroke="#F6C09A"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M11.0938 16.2375H17.4364L10.9484 5.28919L7.56799 10.7946"
-        stroke="#F6C09A"
-        strokeLinejoin="round"
-      />
+      <path d="M10.8821 20.7202V18.6586L14.0279 16.2375" stroke="#F6C09A" strokeLinejoin="round" />
+      <path d="M5.51115 14.4551L4.51489 16.2375H7.89276" stroke="#F6C09A" strokeLinejoin="round" />
+      <path d="M11.0938 16.2375H17.4364L10.9484 5.28919L7.56799 10.7946" stroke="#F6C09A" strokeLinejoin="round" />
       <path d="M14.47 11.0658L17.4363 8.56647" stroke="#F6C09A" />
       <path
         d="M16.4437 14.3553L17.5476 13.4407V8.51045L10.9649 3.30084L4.3822 8.39987"
         stroke="#F6C09A"
         strokeLinejoin="round"
       />
-      <path
-        d="M10.9649 3.30084V1.25697"
-        stroke="#F6C09A"
-        strokeLinejoin="round"
-      />
+      <path d="M10.9649 3.30084V1.25697" stroke="#F6C09A" strokeLinejoin="round" />
     </svg>
   );
 };
 
 export const BatIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="#FF5000" />
       <path
         fillRule="evenodd"
@@ -205,34 +103,15 @@ export const BatIcon: React.FC<IconProps> = (props) => {
 
 export const BusdIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="21"
-      height="20"
-      viewBox="0 0 21 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M10.9414 0C16.4578 0 20.9288 4.47191 20.9288 9.98742C20.9288 15.5038 16.4578 19.9748 10.9414 19.9748C5.42589 19.9748 0.953979 15.5034 0.953979 9.98742C0.953979 4.47191 5.42589 0 10.9414 0Z"
         fill="url(#paint0_linear_62_5877)"
       />
-      <path
-        d="M11.048 3.39394L12.6958 5.10349L8.54649 9.30698L6.89868 7.63765L11.048 3.39394Z"
-        fill="black"
-      />
-      <path
-        d="M13.496 5.94466L15.1306 7.61064L8.53324 14.1765L6.89868 12.5498L13.496 5.94466Z"
-        fill="black"
-      />
-      <path
-        d="M6.02906 8.37945L7.71022 10.0806L6.02906 11.7418L4.3479 10.0806L6.02906 8.37945Z"
-        fill="black"
-      />
-      <path
-        d="M16.0467 8.49539L17.6812 10.1614L11.0839 16.7273L9.44934 15.1005L16.0467 8.49539Z"
-        fill="black"
-      />
+      <path d="M11.048 3.39394L12.6958 5.10349L8.54649 9.30698L6.89868 7.63765L11.048 3.39394Z" fill="black" />
+      <path d="M13.496 5.94466L15.1306 7.61064L8.53324 14.1765L6.89868 12.5498L13.496 5.94466Z" fill="black" />
+      <path d="M6.02906 8.37945L7.71022 10.0806L6.02906 11.7418L4.3479 10.0806L6.02906 8.37945Z" fill="black" />
+      <path d="M16.0467 8.49539L17.6812 10.1614L11.0839 16.7273L9.44934 15.1005L16.0467 8.49539Z" fill="black" />
       <defs>
         <linearGradient
           id="paint0_linear_62_5877"
@@ -252,51 +131,22 @@ export const BusdIcon: React.FC<IconProps> = (props) => {
 
 export const CbETHIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="#0052FF" />
       <circle cx="10" cy="10" r="8.75" fill="white" />
-      <path
-        d="M10.3113 2.5V8.04375L14.9969 10.1375L10.3113 2.5Z"
-        fill="#6697FF"
-      />
-      <path
-        d="M10.3113 2.5L5.625 10.1375L10.3113 8.04375V2.5Z"
-        fill="#0052FF"
-      />
+      <path d="M10.3113 2.5V8.04375L14.9969 10.1375L10.3113 2.5Z" fill="#6697FF" />
+      <path d="M10.3113 2.5L5.625 10.1375L10.3113 8.04375V2.5Z" fill="#0052FF" />
       <path d="M10.3113 13.73V17.4969L15 11.01L10.3113 13.73Z" fill="#6697FF" />
-      <path
-        d="M10.3113 17.4969V13.7294L5.625 11.01L10.3113 17.4969Z"
-        fill="#0052FF"
-      />
-      <path
-        d="M10.3113 12.8581L14.9969 10.1375L10.3113 8.045V12.8581Z"
-        fill="#CCDCFF"
-      />
-      <path
-        d="M5.625 10.1375L10.3113 12.8581V8.045L5.625 10.1375Z"
-        fill="#6697FF"
-      />
+      <path d="M10.3113 17.4969V13.7294L5.625 11.01L10.3113 17.4969Z" fill="#0052FF" />
+      <path d="M10.3113 12.8581L14.9969 10.1375L10.3113 8.045V12.8581Z" fill="#CCDCFF" />
+      <path d="M5.625 10.1375L10.3113 12.8581V8.045L5.625 10.1375Z" fill="#6697FF" />
     </svg>
   );
 };
 
 export const DaiIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="21"
-      height="20"
-      viewBox="0 0 21 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M10.9414 0C16.4578 0 20.9288 4.47191 20.9288 9.98742C20.9288 15.5038 16.4578 19.9748 10.9414 19.9748C5.42589 19.9748 0.953979 15.5034 0.953979 9.98742C0.953979 4.47191 5.42589 0 10.9414 0Z"
         fill="url(#paint0_linear_62_5892)"
@@ -324,16 +174,9 @@ export const DaiIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-export const Dao_tokenIcon: React.FC<IconProps> = (props) => {
+export const DaoTokenIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="black" />
       <circle cx="10" cy="10" r="7" fill="white" />
       <circle cx="10" cy="10" r="5" fill="black" />
@@ -343,49 +186,16 @@ export const Dao_tokenIcon: React.FC<IconProps> = (props) => {
 
 export const EthIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="url(#paint0_linear_62_5873)" />
-      <path
-        d="M10.3113 2.5V8.04375L14.9969 10.1375L10.3113 2.5Z"
-        fill="white"
-        fillOpacity="0.602"
-      />
+      <path d="M10.3113 2.5V8.04375L14.9969 10.1375L10.3113 2.5Z" fill="white" fillOpacity="0.602" />
       <path d="M10.3113 2.5L5.625 10.1375L10.3113 8.04375V2.5Z" fill="white" />
-      <path
-        d="M10.3113 13.73V17.4969L15 11.01L10.3113 13.73Z"
-        fill="white"
-        fillOpacity="0.602"
-      />
-      <path
-        d="M10.3113 17.4969V13.7294L5.625 11.01L10.3113 17.4969Z"
-        fill="white"
-      />
-      <path
-        d="M10.3113 12.8581L14.9969 10.1375L10.3113 8.045V12.8581Z"
-        fill="white"
-        fillOpacity="0.2"
-      />
-      <path
-        d="M5.625 10.1375L10.3113 12.8581V8.045L5.625 10.1375Z"
-        fill="white"
-        fillOpacity="0.602"
-      />
+      <path d="M10.3113 13.73V17.4969L15 11.01L10.3113 13.73Z" fill="white" fillOpacity="0.602" />
+      <path d="M10.3113 17.4969V13.7294L5.625 11.01L10.3113 17.4969Z" fill="white" />
+      <path d="M10.3113 12.8581L14.9969 10.1375L10.3113 8.045V12.8581Z" fill="white" fillOpacity="0.2" />
+      <path d="M5.625 10.1375L10.3113 12.8581V8.045L5.625 10.1375Z" fill="white" fillOpacity="0.602" />
       <defs>
-        <linearGradient
-          id="paint0_linear_62_5873"
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="20"
-          gradientUnits="userSpaceOnUse"
-        >
+        <linearGradient id="paint0_linear_62_5873" x1="0" y1="0" x2="0" y2="20" gradientUnits="userSpaceOnUse">
           <stop stopColor="#9BB5F6" />
           <stop offset="1" stopColor="#627EEA" />
         </linearGradient>
@@ -396,14 +206,7 @@ export const EthIcon: React.FC<IconProps> = (props) => {
 
 export const FeiIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="#22996E" />
       <path
         d="M9.99998 14.4444H4.55553C3.77776 14.4444 3.33331 13.6667 3.77776 13L6.88887 8.11111C7.11109 7.77778 7.44442 7.55556 7.88887 7.55556H12.1111C12.5555 7.55556 12.8889 7.77778 13.1111 8.11111L16.2222 13C16.6666 13.6667 16.2222 14.4444 15.4444 14.4444H9.99998Z"
@@ -419,14 +222,7 @@ export const FeiIcon: React.FC<IconProps> = (props) => {
 
 export const LinkIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -445,36 +241,14 @@ export const LinkIcon: React.FC<IconProps> = (props) => {
 
 export const ManaIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="url(#paint0_linear_62_5882)" />
-      <path
-        d="M7.08496 6.5V14H13.335L7.08496 6.5Z"
-        fill="url(#paint1_linear_62_5882)"
-      />
+      <path d="M7.08496 6.5V14H13.335L7.08496 6.5Z" fill="url(#paint1_linear_62_5882)" />
       <path d="M0.834961 14H7.08496V6.5L0.834961 14Z" fill="white" />
-      <path
-        d="M2 16C2.57 16.755 3.245 17.43 4 18H16C16.755 17.43 17.43 16.755 18 16H2Z"
-        fill="#FC9965"
-      />
-      <path
-        d="M4 18C5.67 19.255 7.75 20 10 20C12.25 20 14.33 19.255 16 18H4Z"
-        fill="#FF2D55"
-      />
-      <path
-        d="M13.415 10.5V16H18L13.415 10.5Z"
-        fill="url(#paint2_linear_62_5882)"
-      />
-      <path
-        d="M13.415 14H0.834961C1.14496 14.715 1.53996 15.385 1.99996 16H13.42V14H13.415Z"
-        fill="#FFBC5B"
-      />
+      <path d="M2 16C2.57 16.755 3.245 17.43 4 18H16C16.755 17.43 17.43 16.755 18 16H2Z" fill="#FC9965" />
+      <path d="M4 18C5.67 19.255 7.75 20 10 20C12.25 20 14.33 19.255 16 18H4Z" fill="#FF2D55" />
+      <path d="M13.415 10.5V16H18L13.415 10.5Z" fill="url(#paint2_linear_62_5882)" />
+      <path d="M13.415 14H0.834961C1.14496 14.715 1.53996 15.385 1.99996 16H13.42V14H13.415Z" fill="#FFBC5B" />
       <path d="M8.83496 16H13.415V10.5L8.83496 16Z" fill="white" />
       <circle cx="13.415" cy="6.5" r="2.5" fill="#FFC95B" />
       <circle cx="7.08496" cy="3.75" r="1.25" fill="#FFC95B" />
@@ -519,14 +293,7 @@ export const ManaIcon: React.FC<IconProps> = (props) => {
 
 export const MkrIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="#1AAB9B" />
       <path
         fillRule="evenodd"
@@ -540,14 +307,7 @@ export const MkrIcon: React.FC<IconProps> = (props) => {
 
 export const StETHIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="url(#paint0_linear_62_5883)" />
       <path
         fillRule="evenodd"
@@ -616,14 +376,7 @@ export const StETHIcon: React.FC<IconProps> = (props) => {
 
 export const UniIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -718,26 +471,14 @@ export const UnknownIcon: React.FC<IconProps> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <mask
-        id="mask0_417_8536"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="20"
-        height="20"
-      >
+      <mask id="mask0_417_8536" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
         <circle cx="10" cy="10" r="10" fill="#D9D9D9" />
       </mask>
       <g mask="url(#mask0_417_8536)">
         <rect y="-8" width="28" height="28" fill="url(#pattern0_417_8536)" />
       </g>
       <defs>
-        <pattern
-          id="pattern0_417_8536"
-          patternContentUnits="objectBoundingBox"
-          width="1"
-          height="1"
-        >
+        <pattern id="pattern0_417_8536" patternContentUnits="objectBoundingBox" width="1" height="1">
           <use xlinkHref="#image0_417_8536" transform="scale(0.03125)" />
         </pattern>
         <image
@@ -753,14 +494,7 @@ export const UnknownIcon: React.FC<IconProps> = (props) => {
 
 export const UsdcIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="21"
-      height="20"
-      viewBox="0 0 21 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M10.954 20C16.4957 20 20.954 15.5417 20.954 10C20.954 4.4583 16.4957 0 10.954 0C5.41228 0 0.953979 4.4583 0.953979 10C0.953979 15.5417 5.41228 20 10.954 20Z"
         fill="url(#paint0_linear_62_5876)"
@@ -794,14 +528,7 @@ export const UsdcIcon: React.FC<IconProps> = (props) => {
 
 export const UsdtIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M10 0C15.5222 0 20 4.47778 20 10C20 15.5222 15.5222 20 10 20C4.47778 20 0 15.525 0 10C0 4.475 4.47778 0 10 0Z"
         fill="url(#paint0_linear_62_5872)"
@@ -813,14 +540,7 @@ export const UsdtIcon: React.FC<IconProps> = (props) => {
         fill="white"
       />
       <defs>
-        <linearGradient
-          id="paint0_linear_62_5872"
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="20"
-          gradientUnits="userSpaceOnUse"
-        >
+        <linearGradient id="paint0_linear_62_5872" x1="0" y1="0" x2="0" y2="20" gradientUnits="userSpaceOnUse">
           <stop stopColor="#79F8DC" />
           <stop offset="1" stopColor="#26A17B" />
         </linearGradient>
@@ -831,14 +551,7 @@ export const UsdtIcon: React.FC<IconProps> = (props) => {
 
 export const WbtcIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="11" cy="11" r="10" fill="white" stroke="#BDBDBD" />
       <path
         fillRule="evenodd"
@@ -865,26 +578,13 @@ export const WbtcIcon: React.FC<IconProps> = (props) => {
 
 export const WethIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="9.0115" cy="9.30219" rx="9.0115" ry="9.30219" fill="black" />
       <path
         d="M9.01154 17.9403C13.6334 17.9403 17.3797 14.0732 17.3797 9.30219C17.3797 4.53187 13.6334 0.664774 9.01154 0.664774C4.39029 0.664774 0.644043 4.53187 0.644043 9.30219C0.644043 14.0732 4.39029 17.9403 9.01154 17.9403Z"
         fill="#FF0079"
       />
-      <ellipse
-        cx="10.9428"
-        cy="10.6312"
-        rx="8.36781"
-        ry="8.63774"
-        fill="white"
-      />
+      <ellipse cx="10.9428" cy="10.6312" rx="8.36781" ry="8.63774" fill="white" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -913,20 +613,9 @@ export const WstETHIcon: React.FC<IconProps> = (props) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <circle cx="10.954" cy="10" r="10" fill="#0A0A0E" />
-      <rect
-        x="4.11182"
-        y="3.1579"
-        width="13.6842"
-        height="13.6842"
-        fill="url(#pattern0_62_5880)"
-      />
+      <rect x="4.11182" y="3.1579" width="13.6842" height="13.6842" fill="url(#pattern0_62_5880)" />
       <defs>
-        <pattern
-          id="pattern0_62_5880"
-          patternContentUnits="objectBoundingBox"
-          width="1"
-          height="1"
-        >
+        <pattern id="pattern0_62_5880" patternContentUnits="objectBoundingBox" width="1" height="1">
           <use xmlnsXlink="#image0_62_5880" transform="scale(0.00746269)" />
         </pattern>
         <image
@@ -942,22 +631,9 @@ export const WstETHIcon: React.FC<IconProps> = (props) => {
 
 export const YfiIcon: React.FC<IconProps> = (props) => {
   return (
-    <svg
-      {...props}
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="#2C68DB" />
-      <rect
-        x="9.56543"
-        y="5.71758"
-        width="0.967017"
-        height="8.44772"
-        fill="white"
-      />
+      <rect x="9.56543" y="5.71758" width="0.967017" height="8.44772" fill="white" />
       <path
         d="M7.13752 11.9007C6.87767 12.3592 6.75077 12.8811 6.77106 13.4077C6.77125 15.1136 8.07973 16.5342 9.77981 16.6742C11.4799 16.8143 13.0033 15.6271 13.2827 13.9443C13.5621 12.2615 12.5042 10.6457 10.8501 10.2288V11.2071C11.9665 11.6134 12.6017 12.7914 12.3278 13.9474C12.0539 15.1035 10.9576 15.8712 9.77758 15.7333C8.59755 15.5955 7.70774 14.5958 7.70762 13.4077C7.70839 12.9596 7.84549 12.5223 8.10071 12.154L8.27087 13.7047L9.2061 13.584L8.75357 10.6275L5.81213 11.2158L5.97806 12.1963L7.13752 11.9007Z"
         fill="white"

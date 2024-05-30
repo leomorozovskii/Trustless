@@ -1,12 +1,15 @@
 'use client';
+
 import React from 'react';
-import s from '@styles/pages/CreateOffer.module.scss';
 import { useTranslation } from 'react-i18next';
+
 import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
 import { OfferBottom } from '@components/CreateOffer/Bottom';
-import { useOfferContext } from '@src/context/offer/offer-context';
+import { useOfferContext } from '@/context/offer/offer-context';
+
+import s from './CreateOffer.module.scss';
 
 const CreateOfferPage: React.FC = () => {
   const { t } = useTranslation();

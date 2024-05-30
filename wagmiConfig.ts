@@ -7,7 +7,15 @@ export const contractAddress = '0xE13aC924bB0B0260b7d7f2710c0224161b9f10Ed'; // 
 
 export const wagmiConfig = createConfig({
   chains: [sepolia],
-  connectors: [injected(), metaMask(), safe()],
+  connectors: [
+    injected(),
+    metaMask({
+      dappMetadata: {
+        name: 'Berezka DAO',
+      },
+    }),
+    safe(),
+  ],
   transports: {
     [sepolia.id]: http(),
   },

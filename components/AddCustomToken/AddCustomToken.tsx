@@ -1,7 +1,9 @@
 import React, { memo, useState } from 'react';
-import s from './AddCustomToken.module.scss';
 import { useTranslation } from 'react-i18next';
+
 import AddTokenPopup from '@components/AddTokenPopup/AddTokenPopup';
+
+import s from './AddCustomToken.module.scss';
 
 const AddCustomToken: React.FC = () => {
   const { t } = useTranslation();
@@ -9,9 +11,9 @@ const AddCustomToken: React.FC = () => {
 
   return (
     <div>
-      <p onClick={() => setOpened(true)} className={s.label}>
-        + {t('offer.create.addToken')}
-      </p>
+      <button onClick={() => setOpened(true)}>
+        <p className={s.label}>+ {t('offer.create.addToken')}</p>
+      </button>
       {opened && <AddTokenPopup setOpened={setOpened} />}
     </div>
   );

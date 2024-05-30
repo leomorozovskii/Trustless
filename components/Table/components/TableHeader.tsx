@@ -1,7 +1,9 @@
-import cn from 'classnames';
-import s from '../Table.module.scss';
-import { ArrowDownIcon, ArrowUpIcon } from '@assets/icons';
 import { useCallback } from 'react';
+import cn from 'classnames';
+
+import { ArrowDownIcon, ArrowUpIcon } from '@assets/icons';
+
+import s from '../Table.module.scss';
 
 // TODO: fix any
 interface TableHeaderProps {
@@ -11,11 +13,7 @@ interface TableHeaderProps {
 const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups }) => {
   const renderIcon = useCallback((column: any) => {
     if (column.isSorted) {
-      return column.isSortedDesc ? (
-        <ArrowDownIcon className={s.sortIcon} />
-      ) : (
-        <ArrowUpIcon className={s.sortIcon} />
-      );
+      return column.isSortedDesc ? <ArrowDownIcon className={s.sortIcon} /> : <ArrowUpIcon className={s.sortIcon} />;
     }
     return <ArrowDownIcon className={cn(s.sortIcon, s.sortIcon_hidden)} />;
   }, []);
@@ -24,7 +22,8 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups }) => {
     <thead>
       {headerGroups.map((headerGroup) => (
         <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-          {headerGroup.headers.map((column) => {
+          {/* TODO  fix any */}
+          {headerGroup.headers.map((column: any) => {
             return (
               <th
                 {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -35,9 +34,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups }) => {
               >
                 <span>{column.render('Header')}</span>
                 {/* Добавление значков сортировки */}
-                <span className={s.sortIconContainer}>
-                  {renderIcon(column)}
-                </span>
+                <span className={s.sortIconContainer}>{renderIcon(column)}</span>
               </th>
             );
           })}

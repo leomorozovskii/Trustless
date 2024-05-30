@@ -1,11 +1,12 @@
 'use client';
 
 import React, { memo } from 'react';
-import classNames from 'classnames';
-import s from './MenuTab.module.scss';
-import Link from '@components/Link/Link';
 import { usePathname } from 'next/navigation';
 import cn from 'classnames';
+
+import Link from '@components/Link/Link';
+
+import s from './MenuTab.module.scss';
 
 interface MenuTabProps extends React.PropsWithChildren {
   icon: React.ReactNode;
@@ -14,17 +15,11 @@ interface MenuTabProps extends React.PropsWithChildren {
   href: string;
 }
 
-const MenuTab: React.FC<MenuTabProps> = ({
-  children,
-  icon,
-  active = false,
-  disabled = false,
-  href,
-}) => {
+const MenuTab: React.FC<MenuTabProps> = ({ children, icon, active = false, disabled = false, href }) => {
   const pathname = usePathname();
   const isActive = pathname === href || active;
 
-  const className = classNames(s.container, {
+  const className = cn(s.container, {
     [s.active]: isActive,
     [s.disabled]: disabled,
   });

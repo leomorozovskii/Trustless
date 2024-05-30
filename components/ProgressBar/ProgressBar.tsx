@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import s from './ProgressBar.module.scss';
 import cn from 'classnames';
-import { CreateOfferState } from '@lib/constants';
+
 import { CheckmarkIcon } from '@assets/icons';
+import { CreateOfferState } from '@lib/constants';
+
+import s from './ProgressBar.module.scss';
 
 export interface IProgressBar {
   currentStep: CreateOfferState;
@@ -20,21 +22,12 @@ const ProgressBar: React.FC<IProgressBar> = ({ currentStep }) => {
           className={cn(
             s.stepItem,
             currentStep === CreateOfferState.Filled && s.active,
-            (currentStep === CreateOfferState.Filled ||
-              currentStep === CreateOfferState.Approved ||
-              isComplete) &&
+            (currentStep === CreateOfferState.Filled || currentStep === CreateOfferState.Approved || isComplete) &&
               s.complete,
           )}
         >
-          <div
-            className={cn(
-              s.step,
-              currentStep === CreateOfferState.Filled && s.activeStep,
-            )}
-          >
-            {currentStep === CreateOfferState.Filled ||
-            currentStep === CreateOfferState.Approved ||
-            isComplete ? (
+          <div className={cn(s.step, currentStep === CreateOfferState.Filled && s.activeStep)}>
+            {currentStep === CreateOfferState.Filled || currentStep === CreateOfferState.Approved || isComplete ? (
               <CheckmarkIcon />
             ) : (
               1
@@ -46,20 +39,15 @@ const ProgressBar: React.FC<IProgressBar> = ({ currentStep }) => {
             s.stepItem,
             s.reverse,
             currentStep === CreateOfferState.Approved && s.active,
-            (currentStep === CreateOfferState.Approved || isComplete) &&
-              s.complete,
-            currentStep === CreateOfferState.Approved &&
-              !isComplete &&
-              s.approvedNotComplete,
+            (currentStep === CreateOfferState.Approved || isComplete) && s.complete,
+            currentStep === CreateOfferState.Approved && !isComplete && s.approvedNotComplete,
           )}
         >
           <div
             className={cn(
               s.step,
               isComplete && s.activeStep,
-              currentStep === CreateOfferState.Approved &&
-                !isComplete &&
-                s.approvedStep,
+              currentStep === CreateOfferState.Approved && !isComplete && s.approvedStep,
             )}
           >
             {isComplete ? <CheckmarkIcon /> : 2}

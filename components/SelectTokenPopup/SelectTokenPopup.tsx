@@ -1,21 +1,20 @@
 import React, { memo, useMemo, useState } from 'react';
-import s from './SelectTokenPopup.module.scss';
+import { useTranslation } from 'react-i18next';
+
 import { InputCross } from '@assets/icons';
 import { Search } from '@components/Search';
-import TokenItem from '@components/SelectTokenPopup/components/TokenItem/TokenItem';
-import { useTranslation } from 'react-i18next';
 import { useSearchToken } from '@components/SelectTokenPopup/hooks/useSearchToken';
+import TokenItem from '@components/SelectTokenPopup/components/TokenItem/TokenItem';
 import { TOKEN_MAP } from '@lib/constants';
+
+import s from './SelectTokenPopup.module.scss';
 
 interface ISelectTokenPopup {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
   handle(token: string): void;
 }
 
-const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({
-  setOpened,
-  handle,
-}) => {
+const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handle }) => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { searchedData } = useSearchToken({ query: searchQuery });
@@ -37,35 +36,28 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({
             <InputCross onClick={() => setOpened(false)} className={s.cross} />
           </div>
           <Search
-            type={'text'}
+            type="text"
             value={searchQuery}
             placeholder={t('Search asset or paste address')}
             onChange={({ target }) => setSearchQuery(target.value)}
-            id={'token search'}
+            id="token search"
           />
           <div className={s.popularTokens}>
             {Object.values(TOKEN_MAP)
               .slice(0, 7)
               .map((el, idx) => (
-                <TokenItem
-                  onClick={() => handle(el.name)}
-                  key={idx}
-                  title={el.name}
-                  IconComponent={el.logo}
-                />
+                <TokenItem onClick={() => handle(el.name)} key={idx} title={el.name} IconComponent={el.logo} />
               ))}
           </div>
         </div>
         <div className={s.body}>
           {filteredSearchedData?.map((el) => (
-            <div
-              onClick={() => handle(el.name)}
-              key={el.name}
-              className={s.item}
-            >
-              <el.logo />
-              <p className={s.label}>{el.name}</p>
-            </div>
+            <button key={el.name} onClick={() => handle(el.name)}>
+              <div className={s.item}>
+                <el.logo />
+                <p className={s.label}>{el.name}</p>
+              </div>
+            </button>
           ))}
         </div>
       </div>

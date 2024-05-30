@@ -1,26 +1,24 @@
 import React, { memo } from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
-import s from './Tabs.module.scss';
+
 import { Tab } from '@components/Tabs/components/Tab';
+import { OfferState } from '@lib/constants';
+
+import s from './Tabs.module.scss';
 
 interface TabItem {
   label: string;
-  query: string;
+  query: OfferState;
 }
 
 interface TabsProps {
   tabs: TabItem[];
   activeTab: string;
   tabBages: Record<string, number>;
-  handleTabClick: (tab: string) => void;
+  handleTabClick: (tab: OfferState) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({
-  tabs = [],
-  activeTab,
-  tabBages,
-  handleTabClick,
-}) => {
+const Tabs: React.FC<TabsProps> = ({ tabs = [], activeTab, tabBages, handleTabClick }) => {
   return (
     <RadixTabs.Root className={s.container} value={activeTab}>
       <RadixTabs.List className={s.tabList}>

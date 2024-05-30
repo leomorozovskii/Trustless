@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, memo } from 'react';
 import { TextField } from '@radix-ui/themes';
 import cn from 'classnames';
+
 import s from './Input.module.scss';
 
 export interface IInput extends HTMLAttributes<HTMLInputElement> {

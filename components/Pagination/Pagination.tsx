@@ -1,10 +1,9 @@
-import {
-  PaginationArrowLeftIcon,
-  PaginationArrowRightIcon,
-} from '@assets/icons';
 import React from 'react';
-import s from './Pagination.module.scss';
 import cn from 'classnames';
+
+import { PaginationArrowLeftIcon, PaginationArrowRightIcon } from '@assets/icons';
+
+import s from './Pagination.module.scss';
 
 interface PaginationProps {
   startRow: number;
@@ -32,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <span className={s.pageInfo}>
         {startRow}-{adjustedEndRow} of {totalRows}
       </span>
-      <button onClick={previousPage} disabled={!canPreviousPage}>
+      <button aria-label="Previous Page" type="button" onClick={previousPage} disabled={!canPreviousPage}>
         <PaginationArrowLeftIcon
           className={cn(s.arrow, {
             [s.arrowDisabled]: !canPreviousPage,
@@ -40,7 +39,7 @@ const Pagination: React.FC<PaginationProps> = ({
         />
       </button>
 
-      <button onClick={nextPage} disabled={!canNextPage}>
+      <button aria-label="Next Page" type="button" onClick={nextPage} disabled={!canNextPage}>
         <PaginationArrowRightIcon
           className={cn(s.arrow, {
             [s.arrowDisabled]: !canNextPage,

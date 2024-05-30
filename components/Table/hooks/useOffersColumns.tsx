@@ -1,27 +1,24 @@
 import { useMemo } from 'react';
-import { TokenBadge } from '@components/TokenBadge';
-import FormattedNumber from '@components/FormattedAmount/FormattedAmount';
-import { CryptoAddress } from '@components/CryptoAddress';
-import { OfferStatus } from '@components/OfferStatus';
-import { ShareIcon } from '@assets/icons';
-import { FormattedDate } from '@components/FormattedDate';
-import s from '../Table.module.scss';
-import { Checkbox } from '@components/Checkbox';
-import { OffersColumnAccessors } from '@src/context/offers/types';
 import { useTranslation } from 'react-i18next';
+
+import { ShareIcon } from '@assets/icons';
+import { CryptoAddress } from '@components/CryptoAddress';
+import { Checkbox } from '@components/Checkbox';
+import { FormattedDate } from '@components/FormattedDate';
+import { TokenBadge } from '@components/TokenBadge';
+import { OfferStatus } from '@components/OfferStatus';
+import FormattedNumber from '@components/FormattedAmount/FormattedAmount';
 import { useOfferSelect } from '@components/Table/hooks/useOfferSelect';
+import { OffersColumnAccessors } from '@/context/offers/types';
 import cn from 'classnames';
+
+import s from '../Table.module.scss';
 
 interface UseOffersColumnsProps {
   selectedOffer: ReturnType<typeof useOfferSelect>['selectedOffer'];
-  toggleOfferSelection: ReturnType<
-    typeof useOfferSelect
-  >['toggleOfferSelection'];
+  toggleOfferSelection: ReturnType<typeof useOfferSelect>['toggleOfferSelection'];
 }
-export const useOffersColumns = ({
-  selectedOffer,
-  toggleOfferSelection,
-}: UseOffersColumnsProps) => {
+export const useOffersColumns = ({ selectedOffer, toggleOfferSelection }: UseOffersColumnsProps) => {
   const { t } = useTranslation();
 
   const columns = useMemo(
@@ -29,15 +26,14 @@ export const useOffersColumns = ({
       {
         Header: t('offers.column.id'),
         accessor: OffersColumnAccessors.ID,
-        Cell: (props) => {
-          const { cell } = props;
+        Cell: ({ cell }: any) => {
           const { row } = cell;
           const isChecked = selectedOffer?.id === row.original.id;
 
           return (
             <div className={cn(s.idColumn, { [s.isChecked]: isChecked })}>
               <Checkbox
-                label={props.cell.value}
+                label={cell.value}
                 checked={isChecked}
                 onCheckedChange={() => toggleOfferSelection(row.original)}
               />
@@ -78,9 +74,7 @@ export const useOffersColumns = ({
       {
         Header: t('offers.column.status'),
         accessor: OffersColumnAccessors.STATUS,
-        Cell: ({ cell: { value }, row }) => (
-          <OfferStatus status={value} offerId={row.original.id} />
-        ),
+        Cell: ({ cell: { value }, row }) => <OfferStatus status={value} offerId={row.original.id} />,
       },
       {
         Header: t('offers.column.date'),
@@ -100,7 +94,7 @@ export const useOffersColumns = ({
         accessor: OffersColumnAccessors.SHARE,
         Cell: () => (
           <div className={s.shareWidget}>
-            <button className={s.shareButton}>
+            <button aria-label="Share" className={s.shareButton}>
               <ShareIcon />
             </button>
           </div>

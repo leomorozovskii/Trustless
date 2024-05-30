@@ -1,6 +1,7 @@
-// top to the file
-'use client';
+import React from 'react';
 
-export default function History() {
+const History: React.FC = () => {
   return <main>History</main>;
-}
+};
+
+export default History;

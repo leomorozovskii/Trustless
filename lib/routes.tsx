@@ -1,4 +1,4 @@
-export enum OFFER_STATUS {
+export enum OfferStatus {
   ALL = '/',
   OPEN = '/open',
   PENDING = '/pending',
@@ -10,5 +10,5 @@ export const ROUTES = {
   home: '/',
   history: '/history',
   offers: '/offers',
-  offerWithStatus: (status: OFFER_STATUS) => `${ROUTES.offers}/${status}`,
+  offerWithStatus: (status: OfferStatus) => `${ROUTES.offers}/${status}`,
 };

@@ -1,33 +1,23 @@
 'use client';
+
 import React from 'react';
-import { Tabs } from '@components/Tabs';
-import s from '@styles/pages/Offers.module.scss';
-import { Table } from '@components/Table';
-import {
-  OffersProvider,
-  useOffersContext,
-} from '@src/context/offers/offers-context';
 import { useTranslation } from 'react-i18next';
+
+import { Tabs } from '@components/Tabs';
+import { Table } from '@components/Table';
 import { OffersTableHeader } from '@components/Table/components/OffersTableHeader';
+import { OffersProvider, useOffersContext } from '@/context/offers/offers-context';
+
+import s from './Offers.module.scss';
 
 const OffersPage: React.FC = () => {
   const { t } = useTranslation();
-  const {
-    table,
-    statusCounts,
-    tabs,
-    activeTab,
-    handleTabClick,
-    handleSearch,
-    searchQuery,
-  } = useOffersContext();
+  const { table, statusCounts, tabs, activeTab, handleTabClick, handleSearch, searchQuery } = useOffersContext();
 
   const {
     page,
     pageIndex,
     pageSize,
-    pageCount,
-    gotoPage,
     previousPage,
     nextPage,
     canPreviousPage,
@@ -42,12 +32,7 @@ const OffersPage: React.FC = () => {
   return (
     <div className={s.container}>
       <h1 className={s.title}>{t('offers.title')}</h1>
-      <Tabs
-        tabs={tabs}
-        activeTab={activeTab}
-        handleTabClick={handleTabClick}
-        tabBages={statusCounts}
-      />
+      <Tabs tabs={tabs} activeTab={activeTab} handleTabClick={handleTabClick} tabBages={statusCounts} />
       <div className={s.tableContainer}>
         <Table
           rows={page}

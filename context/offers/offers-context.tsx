@@ -1,22 +1,15 @@
+import React, { createContext, PropsWithChildren, useCallback, useContext, useEffect, useState } from 'react';
+import { useFilters, usePagination, useSortBy, useTable } from 'react-table';
+
+import { mockTableData } from '@components/Table/mocks';
+import { useOfferSelect } from '@components/Table/hooks/useOfferSelect';
 import { useOffersColumns } from '@components/Table/hooks/useOffersColumns';
 import { useOffersSearchFilter } from '@components/Table/hooks/useOffersSearchFilter';
 import { useOffersTableData } from '@components/Table/hooks/useOffersTableData';
 import { useStatusCount } from '@components/Table/hooks/useStatusCount';
-import { mockTableData } from '@components/Table/mocks';
 import { OfferState } from '@lib/constants';
 import { useOffersTabs } from '@lib/hooks/useTabs';
-import { IOffer, OffersColumnAccessors } from '@src/context/offers/types';
-import React, {
-  createContext,
-  PropsWithChildren,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
-import { useFilters, usePagination, useSortBy, useTable } from 'react-table';
-import { IOffersContext } from '@src/context/offers/types';
-import { useOfferSelect } from '@components/Table/hooks/useOfferSelect';
+import { IOffer, OffersColumnAccessors, IOffersContext } from '@/context/offers/types';
 
 const OffersContext = createContext<IOffersContext | null>(null);
 
@@ -41,12 +34,9 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setSearchQuery(e);
   }, []);
 
-  const handleFilterStatus = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFilterStatus(e.target.value as OfferState);
-    },
-    [],
-  );
+  const handleFilterStatus = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterStatus(e.target.value as OfferState);
+  }, []);
 
   // TODO add real data
   const tableData = useOffersTableData({ data: mockTableData, filterStatus });
@@ -60,8 +50,8 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
   });
 
   const { statusCounts } = useStatusCount<IOffer, OfferState>({
-    // TODO add real data
-    data: mockTableData,
+    // TODO add real data and fix an any
+    data: mockTableData as any,
     keyExtractor: (item) => item.status,
   });
 
@@ -70,6 +60,8 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
       columns,
       data: filteredData,
       initialState: {
+        // TODO  solve the problem sorry for this
+        // @ts-ignore
         sorting: [
           {
             id: OffersColumnAccessors.ID,
@@ -88,6 +80,7 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     setFilterStatus(status);
   }, [status]);
+
   return (
     <OffersContext.Provider
       value={{
@@ -110,7 +103,6 @@ export const OffersProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
 export const useOffersContext = () => {
   const context = useContext(OffersContext);
-  if (!context)
-    throw new Error('useOfferContext must be used within an OfferProvider');
+  if (!context) throw new Error('useOfferContext must be used within an OfferProvider');
   return context;
 };
