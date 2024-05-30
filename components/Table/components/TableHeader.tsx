@@ -22,7 +22,8 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headerGroups }) => {
     <thead>
       {headerGroups.map((headerGroup) => (
         <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-          {headerGroup.headers.map((column) => {
+          {/* TODO  fix any */}
+          {headerGroup.headers.map((column: any) => {
             return (
               <th
                 {...column.getHeaderProps(column.getSortByToggleProps())}

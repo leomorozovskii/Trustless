@@ -16,24 +16,14 @@ export default {
 
 const Template: StoryFn<ISearch> = (args) => {
   const [value, setValue] = useState<string>(args.value || '');
-  return (
-    <Search
-      {...args}
-      value={value}
-      onChange={({ target }: any) => setValue(target.value)}
-    />
-  );
+  return <Search {...args} value={value} onChange={({ target }: any) => setValue(target.value)} />;
 };
 
 const DarkTemplate: StoryFn<ISearch> = (args) => {
   const [value, setValue] = useState<string>(args.value || '');
   return (
     <div data-theme={'dark'}>
-      <Search
-        {...args}
-        value={value}
-        onChange={({ target }: any) => setValue(target.value)}
-      />
+      <Search {...args} value={value} onChange={({ target }: any) => setValue(target.value)} />
     </div>
   );
 };

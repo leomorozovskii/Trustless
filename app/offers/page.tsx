@@ -18,8 +18,6 @@ const OffersPage: React.FC = () => {
     page,
     pageIndex,
     pageSize,
-    pageCount,
-    gotoPage,
     previousPage,
     nextPage,
     canPreviousPage,

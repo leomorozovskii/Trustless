@@ -9,12 +9,10 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<ICheckbox> = (args) => (
-  <Checkbox {...args} />
-);
+const Template: StoryFn<ICheckbox> = (args) => <Checkbox {...args} />;
 
 const DarkTemplate: StoryFn<ICheckbox> = (args) => (
-  <div data-theme={"dark"}>
+  <div data-theme={'dark'}>
     <Checkbox {...args} />
   </div>
 );
@@ -39,7 +37,7 @@ MixedCheckbox.args = {
 };
 MixedCheckbox.parameters = {
   docs: {
-    storyDescription: 'Need to update check icon'
+    storyDescription: 'Need to update check icon',
   },
 };
 
@@ -70,7 +68,7 @@ DarkThemeChecked.args = {
 };
 MixedCheckbox.parameters = {
   docs: {
-    storyDescription: 'Need to update check icon'
+    storyDescription: 'Need to update check icon',
   },
 };
 
@@ -81,7 +79,7 @@ DarkThemeMixedChecked.args = {
 };
 MixedCheckbox.parameters = {
   docs: {
-    storyDescription: 'Need to update check icon'
+    storyDescription: 'Need to update check icon',
   },
 };
 

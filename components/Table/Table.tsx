@@ -27,7 +27,13 @@ const Table: React.FC<TableProps> = ({
       {children}
       <table {...getTableProps()} className={s.table}>
         <TableHeader headerGroups={headerGroups} />
-        <TableBody rows={rows} prepareRow={prepareRow} getTableBodyProps={getTableBodyProps} />
+        {/* TODO  fix onSelectRow later */}
+        <TableBody
+          rows={rows}
+          onSelectRow={() => undefined}
+          prepareRow={prepareRow}
+          getTableBodyProps={getTableBodyProps}
+        />
       </table>
     </TableContainer>
   );

@@ -7,9 +7,7 @@ export default {
   component: ProgressOfferBar,
 } as Meta;
 
-const Template: StoryFn<IProgressOfferBar> = (args) => (
-  <ProgressOfferBar {...args} />
-);
+const Template: StoryFn<IProgressOfferBar> = (args) => <ProgressOfferBar {...args} />;
 
 export const InitialStep = Template.bind({});
 InitialStep.args = {
