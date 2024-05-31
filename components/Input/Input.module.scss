@@ -31,7 +31,6 @@
 
   width: 100%;
   height: $xxl;
-  padding: 0 $s;
   font-weight: 400;
   font-size: 24px;
   line-height: $xxl;
@@ -41,6 +40,11 @@
   border-radius: $xxs;
   outline: none;
   transition: all 200ms ease-in-out;
+
+  &:disabled {
+    color: $additional-gray-pre-middle;
+    border: 1px solid $additional-gray-pre-middle;
+  }
 
   & svg {
     margin-right: 6px;
@@ -53,11 +57,6 @@
   &:focus-within {
     color: $base-black;
     border: 1px solid $base-black;
-  }
-
-  &:disabled {
-    color: $additional-gray-pre-middle;
-    border: 1px solid $additional-gray-pre-middle;
   }
 
   &:not(.errorInput, :focus-within, :disabled):hover {

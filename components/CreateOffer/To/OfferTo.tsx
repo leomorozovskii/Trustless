@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
@@ -8,10 +8,26 @@ import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { useOfferContext } from '@/context/offer/offer-context';
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
+import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
 
 const OfferTo = () => {
-  const { setOfferToState, offerToState } = useOfferContext();
+  const { setOfferToState, offerToState, offerFromState } = useOfferContext();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (offerFromState.rate && offerFromState.amount) {
+        const newAmount = offerFromState.amount / offerFromState.rate;
+        if (offerToState.amount !== newAmount && !Number.isNaN(newAmount) && Number.isFinite(newAmount)) {
+          setOfferToState({ amount: newAmount });
+        }
+      } else if (offerFromState.rate === 0 || offerFromState.amount === 0) {
+        setOfferToState({ amount: 0 });
+      }
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [offerFromState.rate, offerFromState.amount]);
 
   return (
     <div className={s.container}>
@@ -28,6 +44,7 @@ const OfferTo = () => {
         id="to amount input"
         label={t('token.amount')}
         type="number"
+        error={offerToState.amount && !checkValidAmount(offerToState.amount) ? 'error' : ''}
         size="lg"
         placeholder="0"
         classWrapper={s.inputWrapper}

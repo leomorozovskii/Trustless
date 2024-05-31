@@ -31,12 +31,14 @@ export interface TokenData {
 
 export enum TokenAddress {
   USDT = '0x820CD06B058dcc48a61f44CE58E03C561DdfDCA9',
+  META = '0xB30352A908819A71ed87e451Afc99dD0A34E42Cc',
+  PUCKI = '0xcabd7d5dBEeF08b4395bb7caC1b715a0B5625199',
+  USDC = '0x1F05b02B94de421820d090F6E9FAa0bdBECdb1B8',
   ETH = '0x0000000000000000000000000000000000000002',
   CBETH = '0x0000000000000000000000000000000000000003',
   WETH = '0x0000000000000000000000000000000000000004',
   DAI = '0x0000000000000000000000000000000000000005',
   BUSD = '0x0000000000000000000000000000000000000006',
-  USDC = '0x1F05b02B94de421820d090F6E9FAa0bdBECdb1B8',
   CVX = '0x0000000000000000000000000000000000000008',
   WSTETH = '0x0000000000000000000000000000000000000009',
   LINK = '0x000000000000000000000000000000000000000a',
@@ -56,12 +58,14 @@ export enum TokenAddress {
 
 export const TOKEN_MAP: { [address: string]: TokenData } = {
   [TokenAddress.USDT]: { name: 'USDT', logo: UsdtIcon, decimals: 6 },
+  [TokenAddress.META]: { name: 'META', logo: UnknownIcon, decimals: 18 },
+  [TokenAddress.PUCKI]: { name: 'PUCKI', logo: UnknownIcon, decimals: 18 },
+  [TokenAddress.USDC]: { name: 'USDC', logo: UsdcIcon, decimals: 6 },
   [TokenAddress.ETH]: { name: 'ETH', logo: EthIcon, decimals: 18 },
   [TokenAddress.CBETH]: { name: 'cbETH', logo: CbETHIcon, decimals: 18 },
   [TokenAddress.WETH]: { name: 'WETH', logo: WethIcon, decimals: 18 },
   [TokenAddress.DAI]: { name: 'DAI', logo: DaiIcon, decimals: 18 },
   [TokenAddress.BUSD]: { name: 'BUSD', logo: BusdIcon, decimals: 18 },
-  [TokenAddress.USDC]: { name: 'USDC', logo: UsdcIcon, decimals: 6 },
   [TokenAddress.CVX]: { name: 'CVX', logo: CVXIcon, decimals: 18 },
   [TokenAddress.WSTETH]: { name: 'wstETH', logo: WstETHIcon, decimals: 18 },
   [TokenAddress.LINK]: { name: 'LINK', logo: LinkIcon, decimals: 18 },

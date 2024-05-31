@@ -8,7 +8,7 @@ import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
-import { checkReceiver } from '@components/CreateOffer/Bottom/utils/checkReceiver';
+import { utils } from '@components/CreateOffer/Bottom/utils/utils';
 import { CreateOfferState } from '@lib/constants';
 import { env } from '@/env';
 import { useOfferContext } from '@/context/offer/offer-context';
@@ -19,8 +19,8 @@ import s from './OfferBottom.module.scss';
 const OfferBottom = () => {
   const { t } = useTranslation();
   const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState } = useOfferContext();
-  const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
+  const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
 
   const {
     data: approveHash,
@@ -65,7 +65,7 @@ const OfferBottom = () => {
         tokenToAddress,
         parseUnits(String(offerFromState.amount), tokenFromDecimals),
         parseUnits(String(offerToState.amount), tokenToDecimals),
-        checkReceiver(offerToState.receiver),
+        utils(offerToState.receiver),
       ],
     });
   };
@@ -75,7 +75,8 @@ const OfferBottom = () => {
     if (approveError) {
       console.log(approveError);
     } else if (tradeError) {
-      console.log(tradeError);
+      console.log(tradeError.name);
+      console.log(tradeError.cause);
     }
   }, [approveError, tradeError]);
 

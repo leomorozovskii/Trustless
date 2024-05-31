@@ -8,7 +8,7 @@ import { WagmiProvider } from 'wagmi';
 
 import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
-import { useTheme } from '@context/theme/ThemeProvider';
+import { useTheme } from '@context/theme/theme-provider';
 import { OfferProvider } from '@context/offer/offer-context';
 import i18n from '@/i18n';
 import { wagmiConfig } from '@/wagmiConfig';
