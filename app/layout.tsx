@@ -5,6 +5,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import '@radix-ui/themes/styles.css';
 import { Inter } from 'next/font/google';
 
+import { ThemeProvider } from '@context/theme/ThemeProvider';
 import Providers from '@/app/providers';
 import '@/styles/globals.scss';
 
@@ -22,7 +23,9 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Providers>{children}</Providers>
+        <ThemeProvider>
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
