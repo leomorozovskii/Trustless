@@ -8,16 +8,18 @@ import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
-import { utils } from '@components/CreateOffer/Bottom/utils/utils';
+import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { CreateOfferState } from '@lib/constants';
 import { env } from '@/env';
 import { useOfferContext } from '@/context/offer/offer-context';
 import { contractABI } from '@/contractABI';
 
+import { useToastifyContext } from '@context/toastify/toastify-provider';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
+  const { handleAddItem } = useToastifyContext();
   const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState } = useOfferContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
@@ -65,18 +67,16 @@ const OfferBottom = () => {
         tokenToAddress,
         parseUnits(String(offerFromState.amount), tokenFromDecimals),
         parseUnits(String(offerToState.amount), tokenToDecimals),
-        utils(offerToState.receiver),
+        checkAddress(offerToState.receiver),
       ],
     });
   };
 
   useEffect(() => {
-    //  TODO add error and loading handler
     if (approveError) {
-      console.log(approveError);
+      handleAddItem({ title: 'Approve error', text: String(approveError.cause), type: 'error' });
     } else if (tradeError) {
-      console.log(tradeError.name);
-      console.log(tradeError.cause);
+      handleAddItem({ title: 'Offer error', text: String(tradeError.cause), type: 'error' });
     }
   }, [approveError, tradeError]);
 

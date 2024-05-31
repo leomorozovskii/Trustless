@@ -1,5 +1,6 @@
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { IThemeValues } from '@context/theme/theme-provider.tsx.interfaces';
+
+import { IThemeValues } from '@context/theme/theme-provider.interfaces';
 
 const ThemeContext = createContext<IThemeValues | undefined>(undefined);
 

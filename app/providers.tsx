@@ -10,6 +10,7 @@ import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
 import { useTheme } from '@context/theme/theme-provider';
 import { OfferProvider } from '@context/offer/offer-context';
+import { ToastifyProvider } from '@context/toastify/toastify-provider';
 import i18n from '@/i18n';
 import { wagmiConfig } from '@/wagmiConfig';
 
@@ -26,14 +27,16 @@ const Providers = ({
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider modalSize="compact" theme={theme === 'light' ? lightTheme() : darkTheme()}>
-          <OfferProvider>
-            <I18nextProvider i18n={i18n}>
-              <Sidebar>
-                <Header />
-                {children}
-              </Sidebar>
-            </I18nextProvider>
-          </OfferProvider>
+          <ToastifyProvider>
+            <OfferProvider>
+              <I18nextProvider i18n={i18n}>
+                <Sidebar>
+                  <Header />
+                  {children}
+                </Sidebar>
+              </I18nextProvider>
+            </OfferProvider>
+          </ToastifyProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

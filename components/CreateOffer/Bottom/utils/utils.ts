@@ -1,6 +1,6 @@
 import { Address } from 'viem';
 
-export const utils = (address: string | undefined) => {
+export const checkAddress = (address: string | undefined) => {
   if (!address) {
     return '0x0000000000000000000000000000000000000000' as Address;
   }
