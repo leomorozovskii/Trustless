@@ -20,7 +20,7 @@
 
 .errorInput {
   color: $additional-error !important;
-  border: 2px solid $additional-error !important;
+  border: 1px solid $additional-error !important;
 }
 
 [data-theme='dark'] .errorInput {
@@ -40,7 +40,7 @@
   transition: all 200ms ease-in-out;
 
   &:focus-within {
-    border: 2px solid $base-black;
+    border: 1px solid $base-black;
   }
 
   &:disabled {
@@ -64,7 +64,7 @@
     color: $base-white !important;
 
     &:focus-within {
-      border: 2px solid $base-white;
+      border: 1px solid $base-white;
     }
 
     &::placeholder {
