@@ -52,7 +52,7 @@
 
   &:focus-within {
     color: $base-black;
-    border: 2px solid $base-black;
+    border: 1px solid $base-black;
   }
 
   &:disabled {
@@ -67,7 +67,7 @@
 
   &.errorInput {
     color: $additional-error;
-    border: 2px solid $additional-error;
+    border: 1px solid $additional-error;
   }
 }
 

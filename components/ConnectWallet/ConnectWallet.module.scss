@@ -1,0 +1,50 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+
+.button {
+  max-width: 138px;
+}
+
+.infoWrapper {
+  display: flex;
+  padding: $xxs;
+  align-items: center;
+  gap: $m;
+  border-radius: $xxs;
+  border: 1px solid $bg-gray;
+  background: $base-white;
+  height: 36px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $xxs;
+}
+
+.accountIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+}
+
+.accountContainer {
+  display: flex;
+  padding: $xxs $s;
+  align-items: center;
+  gap: $s;
+
+  border-radius: $xxs;
+  background: $bg-gray;
+}
+
+.flex {
+  display: flex;
+}
+
+.walletLabel {
+  font-size: 14px;
+  color: $base-black;
+  font-weight: 400;
+}

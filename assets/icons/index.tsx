@@ -311,6 +311,34 @@ export const ArrowDownIcon: React.FC<IconProps> = (props) => {
   );
 };
 
+export const AccountIcon: React.FC<IconProps> = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <rect width="20" height="20" fill="url(#pattern0_245_6058)" />
+      <defs>
+        <pattern id="pattern0_245_6058" patternContentUnits="objectBoundingBox" width="1" height="1">
+          <use xlinkHref="#image0_245_6058" transform="scale(0.03125)" />
+        </pattern>
+        <image
+          id="image0_245_6058"
+          width="32"
+          height="32"
+          xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABdWlDQ1BrQ0dDb2xvclNwYWNlRGlzcGxheVAzAAAokXWQvUvDUBTFT6tS0DqIDh0cMolD1NIKdnFoKxRFMFQFq1OafgltfCQpUnETVyn4H1jBWXCwiFRwcXAQRAcR3Zw6KbhoeN6XVNoi3sfl/Ticc7lcwBtQGSv2AijplpFMxKS11Lrke4OHnlOqZrKooiwK/v276/PR9d5PiFlNu3YQ2U9cl84ul3aeAlN//V3Vn8maGv3f1EGNGRbgkYmVbYsJ3iUeMWgp4qrgvMvHgtMunzuelWSc+JZY0gpqhrhJLKc79HwHl4plrbWD2N6f1VeXxRzqUcxhEyYYilBRgQQF4X/8044/ji1yV2BQLo8CLMpESRETssTz0KFhEjJxCEHqkLhz634PrfvJbW3vFZhtcM4v2tpCAzidoZPV29p4BBgaAG7qTDVUR+qh9uZywPsJMJgChu8os2HmwiF3e38M6Hvh/GMM8B0CdpXzryPO7RqFn4Er/QcXKWq8UwZBywAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACPTkDJAAAAy0lEQVRIDWOcHHaDARs4N98KmzBOMaPEY1jlmLCKUlFw6FvAmPhVCB4gnw2Xwdn2Bgpw9sELD+BsZAYuNbzno+DKhn4Q0dwHLPDAAjKQwxRZnBg2st5zSBpo7oOhbwFKHCAFHQNyWcSLLIHERg7r0bIIKWBIY7LgCjvSjEFVjWzm0E+mNPcBSj5ATvu46gbk0EauJ86dR9Tho3GAHEoE2Sh1MnLYIccHQVOACnDppXkqGvoWoOQDXGGNnCeQ1SC3f5DFkdlDP4ho7gMA8uwr82ay+fcAAAAASUVORK5CYII="
+        />
+      </defs>
+    </svg>
+  );
+};
+
 export const ArrowUpIcon: React.FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>

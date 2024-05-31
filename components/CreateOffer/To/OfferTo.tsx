@@ -39,7 +39,7 @@ const OfferTo = () => {
         label={t('token.receiver')}
         type="text"
         size="lg"
-        placeholder="0x0000000000000000000000000000"
+        placeholder="0x0000000000000000000000000000000000000000"
         error={offerToState.receiver && !isAddress(offerToState.receiver) ? t('token.invalid.address') : ''}
         value={offerToState.receiver ? offerToState.receiver : ''}
         onChange={({ target }) => setOfferToState({ receiver: target.value })}
