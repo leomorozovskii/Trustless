@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Tabs } from '@components/Tabs';
 import { Table } from '@components/Table';
 import { OffersTableHeader } from '@components/Table/components/OffersTableHeader';
-import { OffersProvider, useOffersContext } from '@/context/offers/offers-context';
+import { OffersProvider, useOffersContext } from '@context/offers/OffersContext';
 
 import s from './Offers.module.scss';
 

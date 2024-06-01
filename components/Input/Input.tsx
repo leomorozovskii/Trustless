@@ -45,6 +45,7 @@ const Input: React.FC<IInput> = ({
           [s.md]: size === 'md',
           [s.lg]: size === 'lg',
           [s.errorInput]: error,
+          [s.disabledInput]: disabled,
         })}
         disabled={disabled}
         type={type}

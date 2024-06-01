@@ -8,19 +8,21 @@ import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
-import { checkReceiver } from '@components/CreateOffer/Bottom/utils/checkReceiver';
+import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { CreateOfferState } from '@lib/constants';
-import { env } from '@/env';
-import { useOfferContext } from '@/context/offer/offer-context';
+import { environment } from '@/environment';
+import { useOfferContext } from '@context/offer/OfferContext';
 import { contractABI } from '@/contractABI';
 
+import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
+  const { handleAddItem } = useToastifyContext();
   const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState } = useOfferContext();
-  const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
+  const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
 
   const {
     data: approveHash,
@@ -50,14 +52,14 @@ const OfferBottom = () => {
       address: tokenFromAddress,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [env.NEXT_PUBLIC_CONTRACT_ADDRESS as Address, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
+      args: [environment.contractAddress as Address, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
     });
   };
 
   const createTrade = async () => {
     if (!isValid) return;
     tradeContract({
-      address: env.NEXT_PUBLIC_CONTRACT_ADDRESS as Address,
+      address: environment.contractAddress as Address,
       abi: contractABI,
       functionName: 'initiateTrade',
       args: [
@@ -65,17 +67,16 @@ const OfferBottom = () => {
         tokenToAddress,
         parseUnits(String(offerFromState.amount), tokenFromDecimals),
         parseUnits(String(offerToState.amount), tokenToDecimals),
-        checkReceiver(offerToState.receiver),
+        checkAddress(offerToState.receiver),
       ],
     });
   };
 
   useEffect(() => {
-    //  TODO add error and loading handler
     if (approveError) {
-      console.log(approveError);
+      handleAddItem({ title: 'Approve error', text: String(approveError.cause), type: 'error' });
     } else if (tradeError) {
-      console.log(tradeError);
+      handleAddItem({ title: 'Offer error', text: String(tradeError.cause), type: 'error' });
     }
   }, [approveError, tradeError]);
 

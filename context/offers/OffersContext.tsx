@@ -9,7 +9,7 @@ import { useOffersTableData } from '@components/Table/hooks/useOffersTableData';
 import { useStatusCount } from '@components/Table/hooks/useStatusCount';
 import { OfferState } from '@lib/constants';
 import { useOffersTabs } from '@lib/hooks/useTabs';
-import { IOffer, OffersColumnAccessors, IOffersContext } from '@/context/offers/types';
+import { IOffer, OffersColumnAccessors, IOffersContext } from '@context/offers/OffersContext.interfaces';
 
 const OffersContext = createContext<IOffersContext | null>(null);
 

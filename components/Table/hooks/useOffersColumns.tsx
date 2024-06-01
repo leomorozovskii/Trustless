@@ -9,7 +9,7 @@ import { TokenBadge } from '@components/TokenBadge';
 import { OfferStatus } from '@components/OfferStatus';
 import FormattedNumber from '@components/FormattedAmount/FormattedAmount';
 import { useOfferSelect } from '@components/Table/hooks/useOfferSelect';
-import { OffersColumnAccessors } from '@/context/offers/types';
+import { OffersColumnAccessors } from '@context/offers/OffersContext.interfaces';
 import cn from 'classnames';
 
 import s from '../Table.module.scss';

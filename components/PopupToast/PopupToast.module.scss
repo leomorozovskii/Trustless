@@ -1,0 +1,78 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+.wrapper {
+  position: absolute;
+  max-width: 340px;
+  top: 32px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $sm;
+  transition:
+    top 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: $s;
+  z-index: 11;
+
+  gap: $xxs;
+  border-radius: $xxs;
+}
+
+.success {
+  background: $additional-success;
+}
+
+.error {
+  background: $additional-error;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: $base-white;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.text {
+  color: $base-white;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.wrapper.slideDown {
+  animation: slideDown 0.15s ease-in-out forwards;
+}

@@ -40,7 +40,6 @@
   border: 1px solid $base-gray;
   border-radius: $xxs;
   outline: none;
-  transition: all 200ms ease-in-out;
 
   & svg {
     margin-right: 6px;
@@ -51,23 +50,28 @@
   }
 
   &:focus-within {
+    padding: 0 7px;
     color: $base-black;
-    border: 1px solid $base-black;
+    border: 2px solid $base-black;
   }
 
-  &:disabled {
+  &.disabledInput {
     color: $additional-gray-pre-middle;
+    background: $base-white;
     border: 1px solid $additional-gray-pre-middle;
+    cursor: not-allowed;
   }
 
-  &:not(.errorInput, :focus-within, :disabled):hover {
+  &:not(.errorInput, :focus-within, .disabledInput):hover {
     color: $base-black;
     border: 1px solid $base-black;
+    transition: all 200ms ease-in-out;
   }
 
   &.errorInput {
+    padding: 0 7px;
     color: $additional-error;
-    border: 1px solid $additional-error;
+    border: 2px solid $additional-error;
   }
 }
 

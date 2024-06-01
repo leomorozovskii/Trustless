@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
-import { useOfferContext } from '@/context/offer/offer-context';
+import { useOfferContext } from '@context/offer/OfferContext';
 
+import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState } = useOfferContext();
+  const { setOfferFromState, offerFromState, offerToState } = useOfferContext();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (offerToState.amount && offerFromState.amount) {
+        const newRate = offerFromState.amount / offerToState.amount;
+        if (offerFromState.rate !== newRate && !Number.isNaN(newRate) && Number.isFinite(newRate)) {
+          setOfferFromState({ rate: newRate });
+        }
+      } else if (offerToState.amount === 0 || offerFromState.amount === 0) {
+        setOfferFromState({ rate: 0 });
+      }
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, [offerToState.amount, offerFromState.amount]);
 
   return (
     <div className={s.container}>
@@ -25,6 +41,7 @@ const OfferFrom = () => {
         id="from amount input"
         label="Amount"
         type="number"
+        error={offerFromState.amount && !checkValidAmount(offerFromState.amount) ? 'error' : ''}
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}

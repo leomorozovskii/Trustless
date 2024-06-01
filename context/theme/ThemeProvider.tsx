@@ -1,11 +1,8 @@
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 
-interface ThemeContextValue {
-  theme: string;
-  toggleTheme(theme: 'light' | 'dark'): void;
-}
+import { IThemeValues } from '@context/theme/ThemeProvider.interfaces';
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+const ThemeContext = createContext<IThemeValues | undefined>(undefined);
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<string>(() => {
@@ -27,7 +24,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
-export const useTheme = (): ThemeContextValue => {
+export const useTheme = (): IThemeValues => {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');

@@ -7,7 +7,7 @@ import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
 import { OfferBottom } from '@components/CreateOffer/Bottom';
-import { useOfferContext } from '@/context/offer/offer-context';
+import { useOfferContext } from '@context/offer/OfferContext';
 
 import s from './CreateOffer.module.scss';
 
