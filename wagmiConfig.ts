@@ -9,7 +9,8 @@ import {
   rainbowWallet,
   coinbaseWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { env } from '@/env';
+
+import { environment } from '@/environment';
 
 const connectors = connectorsForWallets(
   [
@@ -23,8 +24,8 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: env.NEXT_PUBLIC_FRONTEND_NAME,
-    projectId: env.NEXT_PUBLIC_PROJECT_ID,
+    appName: environment.appName,
+    projectId: environment.projectId,
   },
 );
 

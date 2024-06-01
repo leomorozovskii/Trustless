@@ -10,7 +10,7 @@ import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButt
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { CreateOfferState } from '@lib/constants';
-import { env } from '@/env';
+import { environment } from '@/environment';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { contractABI } from '@/contractABI';
 
@@ -52,14 +52,14 @@ const OfferBottom = () => {
       address: tokenFromAddress,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [env.NEXT_PUBLIC_CONTRACT_ADDRESS as Address, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
+      args: [environment.contractAddress as Address, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
     });
   };
 
   const createTrade = async () => {
     if (!isValid) return;
     tradeContract({
-      address: env.NEXT_PUBLIC_CONTRACT_ADDRESS as Address,
+      address: environment.contractAddress as Address,
       abi: contractABI,
       functionName: 'initiateTrade',
       args: [
