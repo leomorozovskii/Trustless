@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { IOffer } from '@context/offers/offers-context.interfaces';
+import { IOffer } from '@context/offers/OffersContext.interfaces';
 
 export const useOfferSelect = () => {
   const [selectedOffer, setSelectedOffer] = useState<IOffer | null>(null);

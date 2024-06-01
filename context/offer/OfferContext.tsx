@@ -1,7 +1,7 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
 import { CreateOfferState } from '@lib/constants';
-import { IOfferFrom, IOfferTo, IOfferValues } from '@/context/offer/offer-context.interfaces';
+import { IOfferFrom, IOfferTo, IOfferValues } from '@context/offer/OfferContext.interfaces';
 
 const OfferContext = createContext<IOfferValues | null>(null);
 

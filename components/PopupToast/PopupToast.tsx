@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { IToastifyItem } from '@context/toastify/toastify-provider.interfaces';
+import { IToastifyItem } from '@context/toastify/ToastifyProvider.interfaces';
 import PopupToastItem from '@components/PopupToast/components/PopupToastItem';
 
 import s from './PopupToast.module.scss';

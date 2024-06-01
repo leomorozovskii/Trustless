@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 
 import { DayIcon, NightIcon } from '@assets/icons';
-import { useTheme } from '@/context/theme/theme-provider';
+import { useTheme } from '@context/theme/ThemeProvider';
 
 import s from './ThemeSwitcher.module.scss';
 

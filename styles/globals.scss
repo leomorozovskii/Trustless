@@ -48,8 +48,3 @@ a {
 table {
   border-collapse: collapse;
 }
-
-.rt-TextFieldRoot:where(.rt-r-size-2) :where(.rt-TextFieldInput) {
-  --text-field-selection-color: color(display-p3 0.004 0.235 1/0.169);
-  padding: 0 $s;
-}

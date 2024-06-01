@@ -14,7 +14,9 @@
   flex-direction: column;
   align-items: center;
   gap: $sm;
-  transition: top 0.5s ease, opacity 0.5s ease;
+  transition:
+    top 0.5s ease,
+    opacity 0.5s ease;
 }
 
 .item {

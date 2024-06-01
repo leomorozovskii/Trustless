@@ -1,7 +1,7 @@
 import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
 
 import PopupToast from '@components/PopupToast/PopupToast';
-import { IToastifyItem, IToastifyValues } from '@context/toastify/toastify-provider.interfaces';
+import { IToastifyItem, IToastifyValues } from '@context/toastify/ToastifyProvider.interfaces';
 
 const ToastifyContext = createContext<IToastifyValues | undefined>(undefined);
 

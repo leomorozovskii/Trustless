@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
-import { useOfferContext } from '@/context/offer/offer-context';
+import { useOfferContext } from '@context/offer/OfferContext';
 
 import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
 import s from './OfferFrom.module.scss';

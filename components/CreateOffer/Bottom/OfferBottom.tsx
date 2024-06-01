@@ -11,10 +11,10 @@ import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData'
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { CreateOfferState } from '@lib/constants';
 import { env } from '@/env';
-import { useOfferContext } from '@/context/offer/offer-context';
+import { useOfferContext } from '@context/offer/OfferContext';
 import { contractABI } from '@/contractABI';
 
-import { useToastifyContext } from '@context/toastify/toastify-provider';
+import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {

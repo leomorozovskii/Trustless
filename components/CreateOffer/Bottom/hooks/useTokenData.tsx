@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Address } from 'viem';
 
-import { useOfferContext } from '@context/offer/offer-context';
+import { useOfferContext } from '@context/offer/OfferContext';
 import { TOKEN_MAP } from '@lib/constants';
 
 export const useTokenData = () => {

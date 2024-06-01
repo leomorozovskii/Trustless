@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 import cn from 'classnames';
 
 import { ClearCross } from '@assets/icons';
-import { IToastifyItem } from '@context/toastify/toastify-provider.interfaces';
+import { IToastifyItem } from '@context/toastify/ToastifyProvider.interfaces';
 
 import s from '../PopupToast.module.scss';
 
