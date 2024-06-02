@@ -8,13 +8,13 @@ import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
+import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
+import { useOfferContext } from '@context/offer/OfferContext';
+import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { CreateOfferState } from '@lib/constants';
 import { environment } from '@/environment';
-import { useOfferContext } from '@context/offer/OfferContext';
 import { contractABI } from '@/contractABI';
-import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
 
 import s from './OfferBottom.module.scss';
 

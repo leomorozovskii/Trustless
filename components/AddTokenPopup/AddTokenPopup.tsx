@@ -6,9 +6,9 @@ import { Address, isAddress } from 'viem';
 import { InputCross, WarningIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
-
-import { TOKEN_MAP, TokenAddress } from '@lib/constants';
 import { useOfferContext } from '@context/offer/OfferContext';
+import { TOKEN_MAP, TokenAddress } from '@lib/constants';
+
 import s from './AddTokenPopup.module.scss';
 
 export interface IAddTokenPopupState {

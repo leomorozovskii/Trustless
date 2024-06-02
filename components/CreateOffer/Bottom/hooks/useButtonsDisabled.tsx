@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { isAddress } from 'viem';
 
-import { CreateOfferState } from '@lib/constants';
 import { useOfferContext } from '@context/offer/OfferContext';
+import { CreateOfferState } from '@lib/constants';
 
 export const useButtonsDisabled = () => {
   const { activeStep, offerFromState, offerToState } = useOfferContext();

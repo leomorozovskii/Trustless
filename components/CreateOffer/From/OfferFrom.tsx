@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
-import { useOfferContext } from '@context/offer/OfferContext';
-
 import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
+import { useOfferContext } from '@context/offer/OfferContext';
 
 import s from './OfferFrom.module.scss';
 
@@ -27,6 +26,16 @@ const OfferFrom = () => {
     return () => clearTimeout(timeout);
   }, [offerToState.amount, offerFromState.amount]);
 
+  const amountError = useMemo(() => {
+    if (offerFromState.amount && !checkValidAmount(offerFromState.amount)) {
+      return 'error';
+    }
+    if (offerFromState.amountError) {
+      return offerFromState.amountError;
+    }
+    return '';
+  }, [offerFromState.amount, offerFromState.amountError]);
+
   return (
     <div className={s.container}>
       <div className={s.selectContainer}>
@@ -42,13 +51,7 @@ const OfferFrom = () => {
         id="from amount input"
         label="Amount"
         type="number"
-        error={
-          offerFromState.amount && !checkValidAmount(offerFromState.amount)
-            ? 'error'
-            : offerFromState.amountError
-              ? offerFromState.amountError
-              : ''
-        }
+        error={amountError}
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}

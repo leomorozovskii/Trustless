@@ -7,8 +7,8 @@ import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { useOfferContext } from '@context/offer/OfferContext';
-import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
+import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
   const { setOfferToState, offerToState } = useOfferContext();

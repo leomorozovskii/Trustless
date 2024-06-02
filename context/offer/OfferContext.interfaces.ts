@@ -6,6 +6,8 @@ interface IOfferValues {
   offerToState: IOfferTo;
   activeOfferStep: number;
   activeStep: CreateOfferState;
+  offerId: number;
+  setOfferId: React.Dispatch<React.SetStateAction<number>>;
   setOfferFromState: React.Dispatch<Partial<IOfferFrom>>;
   setOfferToState: React.Dispatch<Partial<IOfferTo>>;
   setActiveOfferStep: React.Dispatch<React.SetStateAction<number>>;

@@ -1,10 +1,10 @@
 import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAccount } from 'wagmi';
 
 import AddTokenPopup from '@components/AddTokenPopup/AddTokenPopup';
-
-import { useAccount } from 'wagmi';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
+
 import s from './AddCustomToken.module.scss';
 
 interface IAddCustomToken {

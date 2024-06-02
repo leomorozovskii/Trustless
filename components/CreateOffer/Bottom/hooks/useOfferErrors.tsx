@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAccount } from 'wagmi';
-import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { CreateOfferState } from '@lib/constants';
-import { useOfferContext } from '@context/offer/OfferContext';
 import { TransactionReceipt } from 'viem';
+import { useAccount } from 'wagmi';
+
+import { useToastifyContext } from '@context/toastify/ToastifyProvider';
+import { useOfferContext } from '@context/offer/OfferContext';
 import { isDenied } from '@components/CreateOffer/Bottom/utils/utils';
+import { CreateOfferState } from '@lib/constants';
 
 interface IOfferErrors {
   approveError: any;

@@ -33,6 +33,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
+  const [offerId, setOfferId] = useState<number>(1233535);
 
   const [activeStep, setActiveStep] = useState<CreateOfferState>(CreateOfferState.None);
 
@@ -41,6 +42,8 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     offerToState,
     activeOfferStep,
     activeStep,
+    offerId,
+    setOfferId,
     setOfferFromState,
     setOfferToState,
     setActiveOfferStep,
