@@ -71,3 +71,42 @@
   align-items: center;
   gap: $lg;
 }
+
+.tokenWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 258px;
+}
+
+.tokenContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $s;
+}
+
+.balanceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $xxs;
+}
+
+.tokenTitle {
+  color: $base-black;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.tokenBalance {
+  color: $base-black;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.tokenLogo {
+  width: 48px;
+  height: 48px;
+}

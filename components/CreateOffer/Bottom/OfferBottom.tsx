@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { Address, erc20Abi, parseUnits } from 'viem';
+import { useAccount, useBalance, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { Address, erc20Abi, formatUnits, parseUnits } from 'viem';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
 import { Button } from '@components/Button';
@@ -13,16 +13,19 @@ import { CreateOfferState } from '@lib/constants';
 import { environment } from '@/environment';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { contractABI } from '@/contractABI';
-
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
+import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
+
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
-  const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState } = useOfferContext();
+  const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState, setOfferFromState } =
+    useOfferContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
+  const { address: userAddress } = useAccount();
 
   const {
     data: approveHash,
@@ -38,6 +41,13 @@ const OfferBottom = () => {
     writeContract: tradeContract,
   } = useWriteContract();
 
+  const { data: allowance } = useReadContract({
+    address: tokenFromAddress,
+    abi: erc20Abi,
+    functionName: 'allowance',
+    args: [userAddress as Address, environment.contractAddress as Address],
+  });
+
   const { data: approveReceipt, isLoading: isApproveTransactionLoading } = useWaitForTransactionReceipt({
     hash: approveHash,
   });
@@ -46,8 +56,27 @@ const OfferBottom = () => {
     hash: tradeHash,
   });
 
+  const { data: balance } = useBalance({
+    address: userAddress,
+    token: tokenFromAddress,
+  });
+
+  useOfferErrors({ approveError, approveReceipt, tradeError, tradeReceipt });
+
+  const checkBalance = useCallback(() => {
+    if (!balance) return;
+    return offerFromState.amount > Number(balance.formatted);
+  }, [tokenFromAddress, balance, offerFromState.amount]);
+
   const approve = async () => {
     if (!isValid) return;
+    const isGreater = checkBalance();
+    if (isGreater) {
+      handleAddItem({ title: t('error.state'), text: t('error.somethingWrong'), type: 'error' });
+      setOfferFromState({ amountError: t('error.insufficientBalance') });
+      return;
+    }
+    setOfferFromState({ amountError: '' });
     approveContract({
       address: tokenFromAddress,
       abi: erc20Abi,
@@ -73,34 +102,26 @@ const OfferBottom = () => {
   };
 
   useEffect(() => {
-    if (approveError) {
-      handleAddItem({ title: 'Approve error', text: String(approveError.cause), type: 'error' });
-    } else if (tradeError) {
-      handleAddItem({ title: 'Offer error', text: String(tradeError.cause), type: 'error' });
-    }
-  }, [approveError, tradeError]);
-
-  useEffect(() => {
-    if (approveReceipt) {
-      setActiveStep(CreateOfferState.Approved);
-      setActiveOfferStep(2);
-    }
-  }, [approveReceipt]);
-
-  useEffect(() => {
-    if (tradeReceipt) {
-      setActiveStep(CreateOfferState.Created);
-      setActiveOfferStep(3);
-    }
-  }, [tradeReceipt]);
-
-  useEffect(() => {
     if (!approveButtonDisabled) {
       setActiveStep(CreateOfferState.Filled);
     } else {
       setActiveStep(CreateOfferState.None);
     }
   }, [approveButtonDisabled]);
+
+  useEffect(() => {
+    if (!allowance) return;
+    const allowanceValue = formatUnits(allowance, tokenFromDecimals);
+    const isAllowanceSufficient = Number(allowanceValue) >= offerFromState.amount;
+
+    if (isAllowanceSufficient && activeStep === CreateOfferState.Filled && !approveReceipt) {
+      setActiveStep(CreateOfferState.Approved);
+      setActiveOfferStep(2);
+    } else if (!isAllowanceSufficient && activeStep === CreateOfferState.Approved && !approveReceipt) {
+      setActiveStep(CreateOfferState.Filled);
+      setActiveOfferStep(1);
+    }
+  }, [allowance, tokenFromDecimals, offerFromState.amount, activeStep, approveReceipt]);
 
   return (
     <div className={s.container}>

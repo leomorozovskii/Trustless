@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
@@ -11,23 +11,8 @@ import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
 
 const OfferTo = () => {
-  const { setOfferToState, offerToState, offerFromState } = useOfferContext();
+  const { setOfferToState, offerToState } = useOfferContext();
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (offerFromState.rate && offerFromState.amount) {
-        const newAmount = offerFromState.amount / offerFromState.rate;
-        if (offerToState.amount !== newAmount && !Number.isNaN(newAmount) && Number.isFinite(newAmount)) {
-          setOfferToState({ amount: newAmount });
-        }
-      } else if (offerFromState.rate === 0 || offerFromState.amount === 0) {
-        setOfferToState({ amount: 0 });
-      }
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, [offerFromState.rate, offerFromState.amount]);
 
   return (
     <div className={s.container}>
@@ -38,7 +23,7 @@ const OfferTo = () => {
           placeholder="Select token"
           onChange={(value) => setOfferToState({ to: value })}
         />
-        <AddCustomToken />
+        <AddCustomToken type="to" />
       </div>
       <Input
         id="to amount input"

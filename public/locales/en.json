@@ -1,45 +1,79 @@
 {
-  "sidebar.newOffer": "New offer",
-  "sidebar.myOffers": "My offers",
-  "sidebar.history": "History",
-  "offers.title": "My offers",
-  "offers.cancelOffer": "Cancel offer",
-  "offers.offerIdOrAsset": "Offer ID or Asset",
-  "offers.tabs.all": "All",
-  "offers.tabs.open": "Open",
-  "offers.tabs.pending": "Pending",
-  "offers.tabs.accepted": "Accepted",
-  "offers.tabs.cancelled": "Cancelled",
-  "offers.column.id": "Offer ID",
-  "offers.column.fromAsset": "From asset 1",
-  "offers.column.toAsset": "To asset 2",
-  "offers.column.amount1": "Amount1",
-  "offers.column.amount2": "Amount2",
-  "offers.column.rate": "Rate",
-  "offers.column.address": "Address",
-  "offers.column.status": "Status",
-  "offers.column.date": "Date",
-  "offers.column.share": "Share",
-  "offer.create.offer": "Offer",
-  "offer.create.addToken": "Add a custom token",
-  "offer.create.signText": "To create an offer, you will have to sign two transactions: Approve and Create",
-  "offer.create.acceptTerms": "By continuing, you accept",
-  "offer.create.termsConditions": "Terms & Conditions",
-  "offer.create.fee": "Service Fee",
-  "offer.warn.addToken": "Anyone can create a token, including creating fake versions of existing tokens. Be aware of scams and security risks",
-  "token.address": "Token contract address",
-  "token.name": "Token name",
-  "token.decimal": "Token decimal",
-  "token.from": "From",
-  "token.to": "To",
-  "token.rate": "Rate",
-  "token.amount": "Amount",
-  "token.receiver": "Receiver (optional)",
-  "token.invalid.address": "Invalid address",
-  "token.approve": "Approve token",
-  "token.create": "Create Trade",
-  "token.select": "Select a token",
-  "token.search": "Search asset or paste address",
-  "token.add.import": "Import",
-  "token.add.back": "Back"
+  "sidebar": {
+    "newOffer": "New offer",
+    "myOffers": "My offers",
+    "history": "History"
+  },
+  "offers": {
+    "title": "My offers",
+    "cancelOffer": "Cancel offer",
+    "offerIdOrAsset": "Offer ID or Asset",
+    "tabs": {
+      "all": "All",
+      "open": "Open",
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "cancelled": "Cancelled"
+    },
+    "column": {
+      "id": "Offer ID",
+      "fromAsset": "From asset 1",
+      "toAsset": "To asset 2",
+      "amount1": "Amount1",
+      "amount2": "Amount2",
+      "rate": "Rate",
+      "address": "Address",
+      "status": "Status",
+      "date": "Date",
+      "share": "Share"
+    }
+  },
+  "offer": {
+    "create": {
+      "offer": "New offer",
+      "addToken": "Add a custom token",
+      "signText": "To create an offer, you will have to sign two transactions: Approve and Create",
+      "acceptTerms": "By continuing, you accept",
+      "termsConditions": "Terms & Conditions",
+      "fee": "Service Fee"
+    },
+    "warn": {
+      "addToken": "Anyone can create a token, including creating fake versions of existing tokens. Be aware of scams and security risks"
+    }
+  },
+  "token": {
+    "address": "Token contract address",
+    "name": "Token name",
+    "decimal": "Token decimal",
+    "from": "From",
+    "to": "To",
+    "rate": "Rate",
+    "amount": "Amount",
+    "receiver": "Receiver (optional)",
+    "invalid.address": "Invalid address",
+    "approve": "Approve token",
+    "create": "Create Trade",
+    "select": "Select a token",
+    "search": "Search asset or paste address",
+    "add": {
+      "import": "Import",
+      "back": "Back"
+    }
+  },
+  "error": {
+    "message": "Error",
+    "state": "Error state",
+    "approve": "Approve error",
+    "offer": "Offer error",
+    "denied": "User denied the transaction",
+    "somethingWrong": "Something went wrong",
+    "insufficientBalance": "Insufficient balance",
+    "walletNotConnected": "Wallet is not connected"
+  },
+  "success": {
+    "message": "Success",
+    "state": "Success state",
+    "approved": "Tokens have been approved",
+    "offerCreated": "Offer has been created"
+  }
 }

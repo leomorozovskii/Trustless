@@ -15,6 +15,7 @@ interface IOfferValues {
 interface IOfferFrom {
   from: string;
   amount: number;
+  amountError?: string;
   rate: number;
 }
 

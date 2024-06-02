@@ -15,7 +15,7 @@ const PopupToastItem: React.FC<IPopupToastItem> = ({ item, handleRemoveItem }) =
   useEffect(() => {
     const timer = setTimeout(() => {
       handleRemoveItem(item.id);
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout(timer);

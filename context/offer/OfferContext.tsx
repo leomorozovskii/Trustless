@@ -14,6 +14,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     {
       from: '',
       amount: 0,
+      amountError: '',
       rate: 0,
     },
   );
@@ -26,6 +27,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     {
       to: '',
       amount: 0,
+      amountError: '',
       receiver: '',
     },
   );

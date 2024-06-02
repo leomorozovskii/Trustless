@@ -16,10 +16,9 @@ const CreateOfferPage: React.FC = () => {
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
   const { activeOfferStep } = useOfferContext();
 
-  // TODO paste a real offer number
   return (
     <div className={s.container}>
-      <h2 className={s.title}>{`${t('offer.create.offer')} #355157`}</h2>
+      <h2 className={s.title}>{`${t('offer.create.offer')}`}</h2>
       <ProgressOfferBar currentStep={activeOfferStep} steps={steps} />
       <div className={s.column}>
         <div className={s.row}>

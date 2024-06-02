@@ -6,6 +6,7 @@ import { Select } from '@components/Select';
 import { useOfferContext } from '@context/offer/OfferContext';
 
 import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
+
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
@@ -35,13 +36,19 @@ const OfferFrom = () => {
           placeholder="Select token"
           onChange={(value) => setOfferFromState({ from: value })}
         />
-        <AddCustomToken />
+        <AddCustomToken type="from" />
       </div>
       <Input
         id="from amount input"
         label="Amount"
         type="number"
-        error={offerFromState.amount && !checkValidAmount(offerFromState.amount) ? 'error' : ''}
+        error={
+          offerFromState.amount && !checkValidAmount(offerFromState.amount)
+            ? 'error'
+            : offerFromState.amountError
+              ? offerFromState.amountError
+              : ''
+        }
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}
@@ -52,6 +59,7 @@ const OfferFrom = () => {
         label="Rate"
         type="number"
         size="lg"
+        disabled
         placeholder="0"
         value={offerFromState.rate ? offerFromState.rate.toString() : ''}
         onChange={({ target }) => setOfferFromState({ rate: +target.value })}
