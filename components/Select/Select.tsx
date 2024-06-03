@@ -20,7 +20,7 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
   const [opened, setOpened] = useState<boolean>(false);
   const { customTokenName } = useOfferContext();
 
-  const handle = (tokenAddress: string) => {
+  const handleSelectToken = (tokenAddress: string) => {
     onChange(tokenAddress);
     setOpened(false);
   };
@@ -39,12 +39,14 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
     return TOKEN_MAP[value].name;
   }, [value]);
 
+  const handleOpen = () => {
+    if (disabled) return;
+    setOpened(true);
+  };
+
   return (
     <div className={s.wrapper}>
-      <button
-        onClick={!disabled ? () => setOpened(true) : () => undefined}
-        className={cn(s.trigger, disabled && s.disabled)}
-      >
+      <button onClick={handleOpen} className={cn(s.trigger, disabled && s.disabled)}>
         <div>
           {value ? (
             <div className={s.selectedItem}>
@@ -57,7 +59,7 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
         </div>
         <SelectIcon />
       </button>
-      {opened && <SelectTokenPopup setOpened={setOpened} handle={handle} />}
+      {opened && <SelectTokenPopup setOpened={setOpened} handleSelectToken={handleSelectToken} />}
     </div>
   );
 };

@@ -6,12 +6,12 @@ interface IOfferValues {
   offerToState: IOfferTo;
   activeOfferStep: number;
   activeStep: CreateOfferState;
-  offerId: number;
+  offerId: number | null;
   customTokenName: string;
   inputsDisabled: boolean;
   setInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
-  setOfferId: React.Dispatch<React.SetStateAction<number>>;
+  setOfferId: React.Dispatch<React.SetStateAction<number | null>>;
   setOfferFromState: React.Dispatch<Partial<IOfferFrom>>;
   setOfferToState: React.Dispatch<Partial<IOfferTo>>;
   setActiveOfferStep: React.Dispatch<React.SetStateAction<number>>;

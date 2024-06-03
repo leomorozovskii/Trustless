@@ -12,10 +12,10 @@ import s from './SelectTokenPopup.module.scss';
 
 interface ISelectTokenPopup {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  handle(tokenAddress: string): void;
+  handleSelectToken(tokenAddress: string): void;
 }
 
-const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handle }) => {
+const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken }) => {
   const { t } = useTranslation();
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -56,13 +56,18 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handle }) =>
             {Object.entries(TOKEN_MAP)
               .slice(0, 7)
               .map(([address, token], idx) => (
-                <TokenItem onClick={() => handle(address)} key={idx} title={token.name} IconComponent={token.logo} />
+                <TokenItem
+                  onClick={() => handleSelectToken(address)}
+                  key={idx}
+                  title={token.name}
+                  IconComponent={token.logo}
+                />
               ))}
           </div>
         </div>
         <div className={s.body}>
           {filteredSearchedData?.map((el) => (
-            <button key={el.address} onClick={() => handle(el.address)}>
+            <button key={el.address} onClick={() => handleSelectToken(el.address)}>
               <div className={s.item}>
                 <el.logo />
                 <p className={s.label}>{el.name}</p>

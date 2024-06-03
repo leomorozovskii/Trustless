@@ -1,14 +1,13 @@
 import React, { memo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@components/Button';
 import { useOfferContext } from '@context/offer/OfferContext';
-
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useTranslation } from 'react-i18next';
+
 import s from './ShareOfferContainer.module.scss';
 
 const ShareOfferContainer = () => {
-  //  TODO get real offerId and change the link
   const { t } = useTranslation();
   const { offerId, setActiveOfferStep } = useOfferContext();
   const [copied, setCopied] = useState<boolean>(false);

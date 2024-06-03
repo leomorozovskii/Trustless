@@ -62,7 +62,7 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
 
   useEffect(() => {
     if (!tradeReceipt) return;
-    const test = async () => {
+    const getOfferId = async () => {
       const event = parseAbiItem('event OfferCreated(uint indexed tradeID)');
 
       const client = createPublicClient({
@@ -83,6 +83,6 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
         setOfferId(Number(result.args.tradeID));
       }
     };
-    test();
+    getOfferId();
   }, [tradeReceipt]);
 };
