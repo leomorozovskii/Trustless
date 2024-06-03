@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
       id={props.id}
       type={type}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading}
       className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
       {...props}
     >

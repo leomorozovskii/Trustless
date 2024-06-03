@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import AddTokenPopup from '@components/AddTokenPopup/AddTokenPopup';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 
+import { useOfferContext } from '@context/offer/OfferContext';
 import s from './AddCustomToken.module.scss';
 
 interface IAddCustomToken {
@@ -14,6 +15,7 @@ interface IAddCustomToken {
 const AddCustomToken: React.FC<IAddCustomToken> = ({ type }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
+  const { inputsDisabled } = useOfferContext();
   const [opened, setOpened] = useState<boolean>(false);
   const { address } = useAccount();
 
@@ -27,7 +29,7 @@ const AddCustomToken: React.FC<IAddCustomToken> = ({ type }) => {
 
   return (
     <div>
-      <button onClick={openModal}>
+      <button onClick={!inputsDisabled ? openModal : undefined}>
         <p className={s.label}>+ {t('offer.create.addToken')}</p>
       </button>
       {opened && <AddTokenPopup setOpened={setOpened} type={type} />}

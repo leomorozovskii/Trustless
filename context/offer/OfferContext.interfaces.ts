@@ -8,6 +8,8 @@ interface IOfferValues {
   activeStep: CreateOfferState;
   offerId: number;
   customTokenName: string;
+  inputsDisabled: boolean;
+  setInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
   setOfferId: React.Dispatch<React.SetStateAction<number>>;
   setOfferFromState: React.Dispatch<Partial<IOfferFrom>>;

@@ -74,8 +74,8 @@
 
 .tokenWrapper {
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
+  align-items: flex-start;
   min-height: 258px;
 }
 
@@ -94,15 +94,15 @@
 }
 
 .tokenTitle {
-  color: $base-black;
-  font-size: 24px;
   font-weight: 400;
+  font-size: 24px;
+  color: $base-black;
 }
 
 .tokenBalance {
-  color: $base-black;
-  font-size: 14px;
   font-weight: 400;
+  font-size: 14px;
+  color: $base-black;
   opacity: 0.5;
 }
 

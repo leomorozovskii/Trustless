@@ -9,7 +9,7 @@ import { useOfferContext } from '@context/offer/OfferContext';
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState } = useOfferContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -43,6 +43,7 @@ const OfferFrom = () => {
         <Select
           value={offerFromState.from}
           placeholder="Select token"
+          disabled={inputsDisabled}
           onChange={(value) => setOfferFromState({ from: value })}
         />
         <AddCustomToken type="from" />
@@ -52,6 +53,7 @@ const OfferFrom = () => {
         label="Amount"
         type="number"
         error={amountError}
+        disabled={inputsDisabled}
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}

@@ -50,5 +50,9 @@ table {
 }
 
 .rt-TextFieldRoot:where(.rt-r-size-2) :where(.rt-TextFieldInput) {
-  --text-field-selection-color: color(display-p3 0.004 0.235 1/0.169);
+  --text-field-selection-color: color(display-p3 0.004 0.235 1/16.9%);
+}
+
+.rt-TextFieldInput:where(:disabled, :read-only) {
+  cursor: not-allowed;
 }

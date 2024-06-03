@@ -19,9 +19,14 @@
 }
 
 .errorInput {
+  padding: 0 7px !important;
   color: $additional-error !important;
   border: 2px solid $additional-error !important;
-  padding: 0 7px !important;
+}
+
+.disabled {
+  background: $additional-gray-pre-middle !important;
+  cursor: not-allowed;
 }
 
 [data-theme='dark'] .errorInput {
@@ -42,8 +47,8 @@
   border-radius: $xxs;
 
   &:focus-within {
-    border: 2px solid $base-black;
     padding: 0 7px;
+    border: 2px solid $base-black;
   }
 
   &:disabled {

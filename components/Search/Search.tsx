@@ -42,7 +42,7 @@ const Search: React.FC<ISearch> = ({
       disabled={disabled}
       value={value}
       onChange={onChange}
-      className={cn(s.input, error && s.errorInput, classWrapper)}
+      className={cn(s.input, error && s.errorInput, classWrapper, disabled && s.disabled)}
     >
       <TextField.Slot>{!disabled && <InputSearch className={cn(s.searchAsset, s.asset)} />}</TextField.Slot>
       <TextField.Slot>

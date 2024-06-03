@@ -35,13 +35,13 @@
 
 .button {
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: $xxs;
-  background: $base-gray;
-
+  align-items: center;
   min-width: 48px;
+  max-width: 48px;
   min-height: 48px;
+  background: $base-gray;
+  border-radius: $xxs;
 }
 
 .button,

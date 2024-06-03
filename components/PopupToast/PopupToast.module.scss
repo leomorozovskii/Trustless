@@ -4,31 +4,29 @@
 
 .wrapper {
   position: absolute;
-  max-width: 340px;
   top: 32px;
-  left: 0;
   right: 0;
-  margin: 0 auto;
-
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $sm;
+  max-width: 340px;
+  margin: 0 auto;
   transition:
     top 0.5s ease,
     opacity 0.5s ease;
+  gap: $sm;
 }
 
 .item {
+  z-index: 11;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   padding: $s;
-  z-index: 11;
-
-  gap: $xxs;
   border-radius: $xxs;
+  gap: $xxs;
 }
 
 .success {
@@ -44,22 +42,22 @@
 }
 
 .titleContainer {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .title {
-  color: $base-white;
-  font-size: 14px;
   font-weight: 700;
+  font-size: 14px;
+  color: $base-white;
 }
 
 .text {
-  color: $base-white;
-  font-size: 14px;
   font-weight: 400;
+  font-size: 14px;
+  color: $base-white;
 }
 
 @keyframes slideDown {
@@ -67,6 +65,7 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;

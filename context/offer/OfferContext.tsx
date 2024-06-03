@@ -35,9 +35,10 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
-  const [offerId, setOfferId] = useState<number>(1233535);
+  const [offerId, setOfferId] = useState<number>(0);
   const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<CreateOfferState>(CreateOfferState.None);
+  const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
   const values: IOfferValues = {
     offerFromState,
@@ -46,6 +47,8 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     activeStep,
     offerId,
     customTokenName,
+    inputsDisabled,
+    setInputsDisabled,
     setCustomTokenName,
     setOfferId,
     setOfferFromState,

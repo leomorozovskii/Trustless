@@ -41,7 +41,10 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
 
   return (
     <div className={s.wrapper}>
-      <button onClick={() => setOpened(true)} className={cn(s.trigger, disabled && s.disabled)}>
+      <button
+        onClick={!disabled ? () => setOpened(true) : () => undefined}
+        className={cn(s.trigger, disabled && s.disabled)}
+      >
         <div>
           {value ? (
             <div className={s.selectedItem}>

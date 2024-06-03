@@ -24,13 +24,23 @@ export const useGetAllowance = ({ approveReceipt }: IUseGetAllowance) => {
 
   useEffect(() => {
     if (!allowance) return;
-    const allowanceValue = formatUnits(allowance, tokenFromDecimals);
-    const isAllowanceSufficient = Number(allowanceValue) >= offerFromState.amount;
 
-    if (isAllowanceSufficient && activeStep === CreateOfferState.Filled && !approveReceipt) {
+    const allowanceValue = parseFloat(formatUnits(allowance, tokenFromDecimals));
+    const offerAmount = parseFloat(String(offerFromState.amount));
+
+    if (Number.isNaN(allowanceValue) || Number.isNaN(offerAmount)) {
+      return;
+    }
+
+    const isAllowanceSufficient = allowanceValue >= offerAmount;
+
+    if (isAllowanceSufficient && activeStep === CreateOfferState.Filled && !approveReceipt && offerFromState.amount) {
       setActiveStep(CreateOfferState.Approved);
       setActiveOfferStep(2);
-    } else if (!isAllowanceSufficient && activeStep === CreateOfferState.Approved && !approveReceipt) {
+    } else if (
+      (!isAllowanceSufficient && activeStep === CreateOfferState.Approved && !approveReceipt) ||
+      !offerFromState.amount
+    ) {
       setActiveStep(CreateOfferState.Filled);
       setActiveOfferStep(1);
     }

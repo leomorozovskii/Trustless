@@ -8,10 +8,11 @@ import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
+
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
-  const { setOfferToState, offerToState } = useOfferContext();
+  const { setOfferToState, offerToState, inputsDisabled } = useOfferContext();
   const { t } = useTranslation();
 
   return (
@@ -21,6 +22,7 @@ const OfferTo = () => {
         <Select
           value={offerToState.to}
           placeholder="Select token"
+          disabled={inputsDisabled}
           onChange={(value) => setOfferToState({ to: value })}
         />
         <AddCustomToken type="to" />
@@ -31,6 +33,7 @@ const OfferTo = () => {
         type="number"
         error={offerToState.amount && !checkValidAmount(offerToState.amount) ? 'error' : ''}
         size="lg"
+        disabled={inputsDisabled}
         placeholder="0"
         classWrapper={s.inputWrapper}
         value={offerToState.amount ? offerToState.amount.toString() : ''}
@@ -41,6 +44,7 @@ const OfferTo = () => {
         label={t('token.receiver')}
         type="text"
         size="lg"
+        disabled={inputsDisabled}
         placeholder="0x0000000000000000000000000000000000000000"
         error={offerToState.receiver && !isAddress(offerToState.receiver) ? t('token.invalid.address') : ''}
         value={offerToState.receiver ? offerToState.receiver : ''}

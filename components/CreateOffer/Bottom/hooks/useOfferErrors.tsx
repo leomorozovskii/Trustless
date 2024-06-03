@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TransactionReceipt } from 'viem';
-import { useAccount } from 'wagmi';
+import { Address, createPublicClient, parseAbiItem, TransactionReceipt } from 'viem';
+import { http, useAccount } from 'wagmi';
 
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { isDenied } from '@components/CreateOffer/Bottom/utils/utils';
 import { CreateOfferState } from '@lib/constants';
+import { sepolia } from 'wagmi/chains';
+import { environment } from '@/environment';
 
 interface IOfferErrors {
   approveError: any;
@@ -17,7 +19,7 @@ interface IOfferErrors {
 
 export const useOfferErrors = ({ approveError, approveReceipt, tradeError, tradeReceipt }: IOfferErrors) => {
   const { t } = useTranslation();
-  const { setActiveStep, setActiveOfferStep } = useOfferContext();
+  const { setActiveStep, setActiveOfferStep, setInputsDisabled, setOfferId } = useOfferContext();
   const { address: userAddress } = useAccount();
   const { handleAddItem } = useToastifyContext();
 
@@ -43,6 +45,7 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
 
   useEffect(() => {
     if (approveReceipt) {
+      setInputsDisabled(true);
       handleAddItem({ title: t('success.message'), text: t('success.approved'), type: 'success' });
       setActiveStep(CreateOfferState.Approved);
       setActiveOfferStep(2);
@@ -55,5 +58,31 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
       setActiveStep(CreateOfferState.Created);
       setActiveOfferStep(3);
     }
+  }, [tradeReceipt]);
+
+  useEffect(() => {
+    if (!tradeReceipt) return;
+    const test = async () => {
+      const event = parseAbiItem('event OfferCreated(uint indexed tradeID)');
+
+      const client = createPublicClient({
+        chain: sepolia,
+        transport: http(environment.apiKey),
+      });
+
+      const logs = await client.getLogs({
+        event,
+        address: environment.contractAddress as Address,
+        blockHash: tradeReceipt?.blockHash,
+      });
+
+      const logIndex = tradeReceipt?.logs[2].logIndex;
+
+      const result = logs.find((item) => item.logIndex === logIndex);
+      if (result && result.args.tradeID) {
+        setOfferId(Number(result.args.tradeID));
+      }
+    };
+    test();
   }, [tradeReceipt]);
 };

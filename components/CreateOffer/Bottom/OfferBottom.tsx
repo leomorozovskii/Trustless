@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAccount, useBalance, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { Address, erc20Abi, parseUnits } from 'viem';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
-import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
+import { useGetBalanceGreater } from '@components/CreateOffer/Bottom/hooks/useGetBalanceGreater';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
 import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
@@ -16,6 +16,7 @@ import { CreateOfferState } from '@lib/constants';
 import { environment } from '@/environment';
 import { contractABI } from '@/contractABI';
 
+import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
@@ -23,8 +24,6 @@ const OfferBottom = () => {
   const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
-  const { address: userAddress } = useAccount();
-
   const {
     data: approveHash,
     error: approveError,
@@ -45,26 +44,17 @@ const OfferBottom = () => {
 
   useGetAllowance({ approveReceipt });
 
+  const { isGreater } = useGetBalanceGreater();
+
   const { data: tradeReceipt, isLoading: isCreateTransactionLoading } = useWaitForTransactionReceipt({
     hash: tradeHash,
   });
 
   useOfferErrors({ approveError, approveReceipt, tradeError, tradeReceipt });
 
-  const { data: balance } = useBalance({
-    address: userAddress,
-    token: tokenFromAddress,
-  });
-
-  const checkBalance = useCallback(() => {
-    if (!balance) return;
-    return offerFromState.amount > Number(balance.formatted);
-  }, [tokenFromAddress, balance, offerFromState.amount]);
-
   const approve = async () => {
     if (!isValid) return;
-    const isGreater = checkBalance();
-    if (isGreater) {
+    if (isGreater()) {
       setOfferFromState({ amountError: t('error.insufficientBalance') });
       return;
     }
@@ -108,7 +98,7 @@ const OfferBottom = () => {
         <div className={s.buttonContainer}>
           {activeStep !== CreateOfferState.Approved && activeStep !== CreateOfferState.Created && (
             <Button
-              disabled={approveButtonDisabled || isApprovePending || isApproveTransactionLoading}
+              disabled={approveButtonDisabled}
               type="button"
               loading={isApprovePending || isApproveTransactionLoading}
               onClick={approve}
@@ -117,7 +107,7 @@ const OfferBottom = () => {
             </Button>
           )}
           <Button
-            disabled={createButtonDisabled || isTradePending || isCreateTransactionLoading}
+            disabled={createButtonDisabled}
             loading={isTradePending || isCreateTransactionLoading}
             type="button"
             onClick={createTrade}
