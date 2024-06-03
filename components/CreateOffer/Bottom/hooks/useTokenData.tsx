@@ -9,31 +9,27 @@ export const useTokenData = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const data = useMemo(() => {
-    const tokenFrom = Object.entries(TOKEN_MAP).find(([, tokenData]) => tokenData.name === offerFromState.from);
-    const tokenTo = Object.entries(TOKEN_MAP).find(([, tokenData]) => tokenData.name === offerToState.to);
+    const tokenFromDecimals = TOKEN_MAP[offerFromState.from]
+      ? TOKEN_MAP[offerFromState.from].decimals
+      : offerFromState.decimals;
+    const tokenToDecimals = TOKEN_MAP[offerToState.to] ? TOKEN_MAP[offerToState.to].decimals : offerToState.decimals;
 
-    if (!tokenFrom || !tokenTo) {
+    if (!tokenFromDecimals || !tokenToDecimals) {
       setIsValid(false);
       return;
     }
 
-    const tokenFromAddress = tokenFrom[0] as Address;
-    const tokenToAddress = tokenTo[0] as Address;
-    const tokenFromDecimals = tokenFrom[1].decimals;
-    const tokenToDecimals = tokenTo[1].decimals;
     setIsValid(true);
 
     return {
-      tokenFromAddress,
-      tokenToAddress,
       tokenFromDecimals,
       tokenToDecimals,
     };
   }, [offerFromState, offerToState]);
 
   return {
-    tokenFromAddress: (data?.tokenFromAddress ?? '') as Address,
-    tokenToAddress: (data?.tokenToAddress ?? '') as Address,
+    tokenFromAddress: offerFromState.from as Address,
+    tokenToAddress: offerToState.to as Address,
     tokenFromDecimals: data?.tokenFromDecimals ?? 0,
     tokenToDecimals: data?.tokenToDecimals ?? 0,
     isValid,

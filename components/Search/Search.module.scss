@@ -49,7 +49,6 @@
   &:disabled {
     color: $additional-gray-middle;
     background-color: $additional-gray-pre-middle;
-    cursor: not-allowed;
   }
 
   &::placeholder {

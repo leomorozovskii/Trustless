@@ -14,7 +14,7 @@ const OfferFrom = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (offerToState.amount && offerFromState.amount) {
-        const newRate = offerFromState.amount / offerToState.amount;
+        const newRate = offerToState.amount / offerFromState.amount;
         if (offerFromState.rate !== newRate && !Number.isNaN(newRate) && Number.isFinite(newRate)) {
           setOfferFromState({ rate: newRate });
         }

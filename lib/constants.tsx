@@ -24,6 +24,7 @@ import {
 } from '@assets/icons/tokens';
 
 export interface TokenData {
+  address: string;
   name: string;
   logo: React.FC<IconProps>;
   decimals: number;
@@ -57,30 +58,30 @@ export enum TokenAddress {
 }
 
 export const TOKEN_MAP: { [address: string]: TokenData } = {
-  [TokenAddress.USDT]: { name: 'USDT', logo: UsdtIcon, decimals: 6 },
-  [TokenAddress.META]: { name: 'META', logo: UnknownIcon, decimals: 18 },
-  [TokenAddress.PUCKI]: { name: 'PUCKI', logo: UnknownIcon, decimals: 18 },
-  [TokenAddress.USDC]: { name: 'USDC', logo: UsdcIcon, decimals: 6 },
-  [TokenAddress.ETH]: { name: 'ETH', logo: EthIcon, decimals: 18 },
-  [TokenAddress.CBETH]: { name: 'cbETH', logo: CbETHIcon, decimals: 18 },
-  [TokenAddress.WETH]: { name: 'WETH', logo: WethIcon, decimals: 18 },
-  [TokenAddress.DAI]: { name: 'DAI', logo: DaiIcon, decimals: 18 },
-  [TokenAddress.BUSD]: { name: 'BUSD', logo: BusdIcon, decimals: 18 },
-  [TokenAddress.CVX]: { name: 'CVX', logo: CVXIcon, decimals: 18 },
-  [TokenAddress.WSTETH]: { name: 'wstETH', logo: WstETHIcon, decimals: 18 },
-  [TokenAddress.LINK]: { name: 'LINK', logo: LinkIcon, decimals: 18 },
-  [TokenAddress.MANA]: { name: 'MANA', logo: ManaIcon, decimals: 18 },
-  [TokenAddress.STETH]: { name: 'stETH', logo: WstETHIcon, decimals: 18 },
-  [TokenAddress.YFI]: { name: 'YFI', logo: YfiIcon, decimals: 18 },
-  [TokenAddress.MKR]: { name: 'MKR', logo: MkrIcon, decimals: 18 },
-  [TokenAddress.BAT]: { name: 'BAT', logo: BatIcon, decimals: 18 },
-  [TokenAddress.UNI]: { name: 'UNI', logo: UniIcon, decimals: 18 },
-  [TokenAddress.ALCX]: { name: 'ALCX', logo: AlcxIcon, decimals: 18 },
-  [TokenAddress.WBTC]: { name: 'WBTC', logo: WbtcIcon, decimals: 18 },
-  [TokenAddress.ARMOR]: { name: 'ARMOR', logo: ARMORIcon, decimals: 18 },
-  [TokenAddress.FEI]: { name: 'FEI', logo: FeiIcon, decimals: 18 },
-  [TokenAddress.UNKNOWN]: { name: 'Unknown', logo: UnknownIcon, decimals: 18 },
-  [TokenAddress.DAO]: { name: 'DAO', logo: DaoTokenIcon, decimals: 18 },
+  [TokenAddress.USDT]: { address: TokenAddress.USDT, name: 'USDT', logo: UsdtIcon, decimals: 6 },
+  [TokenAddress.META]: { address: TokenAddress.META, name: 'META', logo: UnknownIcon, decimals: 18 },
+  [TokenAddress.PUCKI]: { address: TokenAddress.PUCKI, name: 'PUCKI', logo: UnknownIcon, decimals: 18 },
+  [TokenAddress.USDC]: { address: TokenAddress.USDC, name: 'USDC', logo: UsdcIcon, decimals: 6 },
+  [TokenAddress.ETH]: { address: TokenAddress.ETH, name: 'ETH', logo: EthIcon, decimals: 18 },
+  [TokenAddress.CBETH]: { address: TokenAddress.CBETH, name: 'cbETH', logo: CbETHIcon, decimals: 18 },
+  [TokenAddress.WETH]: { address: TokenAddress.WETH, name: 'WETH', logo: WethIcon, decimals: 18 },
+  [TokenAddress.DAI]: { address: TokenAddress.DAI, name: 'DAI', logo: DaiIcon, decimals: 18 },
+  [TokenAddress.BUSD]: { address: TokenAddress.BUSD, name: 'BUSD', logo: BusdIcon, decimals: 18 },
+  [TokenAddress.CVX]: { address: TokenAddress.CVX, name: 'CVX', logo: CVXIcon, decimals: 18 },
+  [TokenAddress.WSTETH]: { address: TokenAddress.WSTETH, name: 'wstETH', logo: WstETHIcon, decimals: 18 },
+  [TokenAddress.LINK]: { address: TokenAddress.LINK, name: 'LINK', logo: LinkIcon, decimals: 18 },
+  [TokenAddress.MANA]: { address: TokenAddress.MANA, name: 'MANA', logo: ManaIcon, decimals: 18 },
+  [TokenAddress.STETH]: { address: TokenAddress.STETH, name: 'stETH', logo: WstETHIcon, decimals: 18 },
+  [TokenAddress.YFI]: { address: TokenAddress.YFI, name: 'YFI', logo: YfiIcon, decimals: 18 },
+  [TokenAddress.MKR]: { address: TokenAddress.MKR, name: 'MKR', logo: MkrIcon, decimals: 18 },
+  [TokenAddress.BAT]: { address: TokenAddress.BAT, name: 'BAT', logo: BatIcon, decimals: 18 },
+  [TokenAddress.UNI]: { address: TokenAddress.UNI, name: 'UNI', logo: UniIcon, decimals: 18 },
+  [TokenAddress.ALCX]: { address: TokenAddress.ALCX, name: 'ALCX', logo: AlcxIcon, decimals: 18 },
+  [TokenAddress.WBTC]: { address: TokenAddress.WBTC, name: 'WBTC', logo: WbtcIcon, decimals: 18 },
+  [TokenAddress.ARMOR]: { address: TokenAddress.ARMOR, name: 'ARMOR', logo: ARMORIcon, decimals: 18 },
+  [TokenAddress.FEI]: { address: TokenAddress.FEI, name: 'FEI', logo: FeiIcon, decimals: 18 },
+  [TokenAddress.UNKNOWN]: { address: TokenAddress.UNKNOWN, name: 'Unknown', logo: UnknownIcon, decimals: 18 },
+  [TokenAddress.DAO]: { address: TokenAddress.DAO, name: 'DAO', logo: DaoTokenIcon, decimals: 18 },
 };
 
 export const WalletIconsMap = {

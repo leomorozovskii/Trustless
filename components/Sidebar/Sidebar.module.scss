@@ -34,7 +34,13 @@
 }
 
 .button {
-  max-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $xxs;
+  background: $base-gray;
+
+  min-width: 48px;
   min-height: 48px;
 }
 

@@ -37,6 +37,7 @@
       "termsConditions": "Terms & Conditions",
       "fee": "Service Fee"
     },
+    "created": "New offer has been created!",
     "warn": {
       "addToken": "Anyone can create a token, including creating fake versions of existing tokens. Be aware of scams and security risks"
     }
@@ -52,7 +53,9 @@
     "receiver": "Receiver (optional)",
     "invalid.address": "Invalid address",
     "approve": "Approve token",
+    "approving": "Approving token...",
     "create": "Create Trade",
+    "creating": "Creating Trade...",
     "select": "Select a token",
     "search": "Search asset or paste address",
     "add": {

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useReducer, useState } from 'react';
+import React, { memo, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount, useBalance, useToken } from 'wagmi';
 import { Address, isAddress } from 'viem';
@@ -8,6 +8,7 @@ import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { TOKEN_MAP, TokenAddress } from '@lib/constants';
+import { useClickOutside } from '@lib/hooks/useClickOutside';
 
 import s from './AddTokenPopup.module.scss';
 
@@ -24,7 +25,8 @@ interface IAddTokenPopup {
 
 const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const { t } = useTranslation();
-  const { setOfferFromState, setOfferToState } = useOfferContext();
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferContext();
   const [step, setStep] = useState<number>(1);
   const [tokenState, setTokenState] = useReducer(
     (oldState: IAddTokenPopupState, newState: Partial<IAddTokenPopupState>): IAddTokenPopupState => ({
@@ -71,17 +73,25 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
       setStep(2);
     } else if (step === 2) {
       if (type === 'to') {
-        setOfferToState({ to: tokenState.name });
+        setOfferToState({ to: tokenState.address, decimals: tokenState.decimal });
+        setCustomTokenName(tokenState.name);
       } else if (type === 'from') {
-        setOfferFromState({ from: tokenState.name });
+        setOfferFromState({ from: tokenState.address, decimals: tokenState.decimal });
+        setCustomTokenName(tokenState.name);
       }
       setOpened(false);
     }
   };
 
+  useClickOutside(ref, (ev) => {
+    if (!ref.current?.contains(ev.target as Node)) {
+      setOpened(false);
+    }
+  });
+
   return (
     <form onSubmit={handleAdd} className={s.wrapper}>
-      <div className={s.container}>
+      <div className={s.container} ref={ref}>
         <div className={s.titleContainer}>
           <h2 className={s.title}>{t('offer.create.addToken')}</h2>
           <InputCross onClick={() => setOpened(false)} className={s.cross} />

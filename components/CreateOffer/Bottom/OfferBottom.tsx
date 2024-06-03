@@ -11,7 +11,6 @@ import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData'
 import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { useOfferContext } from '@context/offer/OfferContext';
-import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { CreateOfferState } from '@lib/constants';
 import { environment } from '@/environment';
 import { contractABI } from '@/contractABI';
@@ -20,7 +19,6 @@ import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
-  const { handleAddItem } = useToastifyContext();
   const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState, setOfferFromState } =
     useOfferContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
@@ -72,7 +70,6 @@ const OfferBottom = () => {
     if (!isValid) return;
     const isGreater = checkBalance();
     if (isGreater) {
-      handleAddItem({ title: t('error.state'), text: t('error.somethingWrong'), type: 'error' });
       setOfferFromState({ amountError: t('error.insufficientBalance') });
       return;
     }
@@ -132,17 +129,19 @@ const OfferBottom = () => {
             <Button
               disabled={approveButtonDisabled || isApprovePending || isApproveTransactionLoading}
               type="button"
+              loading={isApprovePending || isApproveTransactionLoading}
               onClick={approve}
             >
-              {t('token.approve')}
+              {isApprovePending || isApproveTransactionLoading ? t('token.approving') : t('token.approve')}
             </Button>
           )}
           <Button
             disabled={createButtonDisabled || isTradePending || isCreateTransactionLoading}
+            loading={isTradePending || isCreateTransactionLoading}
             type="button"
             onClick={createTrade}
           >
-            {t('token.create')}
+            {isTradePending || isCreateTransactionLoading ? t('token.creating') : t('token.create')}
           </Button>
         </div>
         <ProgressBar currentStep={activeStep} />

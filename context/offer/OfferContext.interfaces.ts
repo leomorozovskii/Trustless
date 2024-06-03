@@ -7,6 +7,8 @@ interface IOfferValues {
   activeOfferStep: number;
   activeStep: CreateOfferState;
   offerId: number;
+  customTokenName: string;
+  setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
   setOfferId: React.Dispatch<React.SetStateAction<number>>;
   setOfferFromState: React.Dispatch<Partial<IOfferFrom>>;
   setOfferToState: React.Dispatch<Partial<IOfferTo>>;
@@ -18,6 +20,7 @@ interface IOfferFrom {
   from: string;
   amount: number;
   amountError?: string;
+  decimals?: number;
   rate: number;
 }
 

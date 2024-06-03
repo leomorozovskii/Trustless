@@ -20,7 +20,9 @@ const CreateOfferPage: React.FC = () => {
 
   return (
     <div className={s.container}>
-      <h2 className={s.title}>{`${t('offer.create.offer')}`}</h2>
+      <h2 className={s.title}>
+        {activeStep === CreateOfferState.Created ? t('offer.created') : t('offer.create.offer')}
+      </h2>
       <ProgressOfferBar currentStep={activeOfferStep} steps={steps} />
       {activeStep === CreateOfferState.Created && offerId ? (
         <ShareOfferContainer />
