@@ -7,23 +7,23 @@ import { GasIcon, SelectIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
+import { useGetBalanceGreater } from '@components/CreateOffer/Bottom/hooks/useGetBalanceGreater';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
+import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
+import { useOfferContext } from '@context/offer/OfferContext';
 import { CreateOfferState } from '@lib/constants';
 import { environment } from '@/environment';
-import { useOfferContext } from '@context/offer/OfferContext';
 import { contractABI } from '@/contractABI';
 
-import { useToastifyContext } from '@context/toastify/ToastifyProvider';
+import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
-  const { handleAddItem } = useToastifyContext();
-  const { activeStep, setActiveStep, setActiveOfferStep, offerToState, offerFromState } = useOfferContext();
+  const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
-
   const {
     data: approveHash,
     error: approveError,
@@ -42,12 +42,23 @@ const OfferBottom = () => {
     hash: approveHash,
   });
 
+  useGetAllowance({ approveReceipt });
+
+  const { isGreater } = useGetBalanceGreater();
+
   const { data: tradeReceipt, isLoading: isCreateTransactionLoading } = useWaitForTransactionReceipt({
     hash: tradeHash,
   });
 
+  useOfferErrors({ approveError, approveReceipt, tradeError, tradeReceipt });
+
   const approve = async () => {
     if (!isValid) return;
+    if (isGreater()) {
+      setOfferFromState({ amountError: t('error.insufficientBalance') });
+      return;
+    }
+    setOfferFromState({ amountError: '' });
     approveContract({
       address: tokenFromAddress,
       abi: erc20Abi,
@@ -73,28 +84,6 @@ const OfferBottom = () => {
   };
 
   useEffect(() => {
-    if (approveError) {
-      handleAddItem({ title: 'Approve error', text: String(approveError.cause), type: 'error' });
-    } else if (tradeError) {
-      handleAddItem({ title: 'Offer error', text: String(tradeError.cause), type: 'error' });
-    }
-  }, [approveError, tradeError]);
-
-  useEffect(() => {
-    if (approveReceipt) {
-      setActiveStep(CreateOfferState.Approved);
-      setActiveOfferStep(2);
-    }
-  }, [approveReceipt]);
-
-  useEffect(() => {
-    if (tradeReceipt) {
-      setActiveStep(CreateOfferState.Created);
-      setActiveOfferStep(3);
-    }
-  }, [tradeReceipt]);
-
-  useEffect(() => {
     if (!approveButtonDisabled) {
       setActiveStep(CreateOfferState.Filled);
     } else {
@@ -109,19 +98,21 @@ const OfferBottom = () => {
         <div className={s.buttonContainer}>
           {activeStep !== CreateOfferState.Approved && activeStep !== CreateOfferState.Created && (
             <Button
-              disabled={approveButtonDisabled || isApprovePending || isApproveTransactionLoading}
+              disabled={approveButtonDisabled}
               type="button"
+              loading={isApprovePending || isApproveTransactionLoading}
               onClick={approve}
             >
-              {t('token.approve')}
+              {isApprovePending || isApproveTransactionLoading ? t('token.approving') : t('token.approve')}
             </Button>
           )}
           <Button
-            disabled={createButtonDisabled || isTradePending || isCreateTransactionLoading}
+            disabled={createButtonDisabled}
+            loading={isTradePending || isCreateTransactionLoading}
             type="button"
             onClick={createTrade}
           >
-            {t('token.create')}
+            {isTradePending || isCreateTransactionLoading ? t('token.creating') : t('token.create')}
           </Button>
         </div>
         <ProgressBar currentStep={activeStep} />

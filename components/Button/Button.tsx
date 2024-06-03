@@ -8,6 +8,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'ghost';
   onClick?: () => void;
+  loading?: boolean;
   disabled?: boolean;
 }
 
@@ -16,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   type = 'button',
   onClick,
+  loading = false,
   disabled = false,
   className,
   ...props
@@ -29,11 +31,11 @@ const Button: React.FC<ButtonProps> = ({
       id={props.id}
       type={type}
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || loading}
       className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
       {...props}
     >
-      {children}
+      <span className={cn({ [s.loading]: loading })}>{children}</span>
     </button>
   );
 };

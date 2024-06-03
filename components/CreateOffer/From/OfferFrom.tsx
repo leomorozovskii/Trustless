@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
+import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
 import { useOfferContext } from '@context/offer/OfferContext';
 
-import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState } = useOfferContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (offerToState.amount && offerFromState.amount) {
-        const newRate = offerFromState.amount / offerToState.amount;
+        const newRate = offerToState.amount / offerFromState.amount;
         if (offerFromState.rate !== newRate && !Number.isNaN(newRate) && Number.isFinite(newRate)) {
           setOfferFromState({ rate: newRate });
         }
@@ -26,6 +26,16 @@ const OfferFrom = () => {
     return () => clearTimeout(timeout);
   }, [offerToState.amount, offerFromState.amount]);
 
+  const amountError = useMemo(() => {
+    if (offerFromState.amount && !checkValidAmount(offerFromState.amount)) {
+      return 'error';
+    }
+    if (offerFromState.amountError) {
+      return offerFromState.amountError;
+    }
+    return '';
+  }, [offerFromState.amount, offerFromState.amountError]);
+
   return (
     <div className={s.container}>
       <div className={s.selectContainer}>
@@ -33,15 +43,17 @@ const OfferFrom = () => {
         <Select
           value={offerFromState.from}
           placeholder="Select token"
+          disabled={inputsDisabled}
           onChange={(value) => setOfferFromState({ from: value })}
         />
-        <AddCustomToken />
+        <AddCustomToken type="from" />
       </div>
       <Input
         id="from amount input"
         label="Amount"
         type="number"
-        error={offerFromState.amount && !checkValidAmount(offerFromState.amount) ? 'error' : ''}
+        error={amountError}
+        disabled={inputsDisabled}
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}
@@ -52,6 +64,7 @@ const OfferFrom = () => {
         label="Rate"
         type="number"
         size="lg"
+        disabled
         placeholder="0"
         value={offerFromState.rate ? offerFromState.rate.toString() : ''}
         onChange={({ target }) => setOfferFromState({ rate: +target.value })}

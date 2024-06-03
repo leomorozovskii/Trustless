@@ -1,7 +1,7 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
-import { CreateOfferState } from '@lib/constants';
 import { IOfferFrom, IOfferTo, IOfferValues } from '@context/offer/OfferContext.interfaces';
+import { CreateOfferState } from '@lib/constants';
 
 const OfferContext = createContext<IOfferValues | null>(null);
 
@@ -14,6 +14,8 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     {
       from: '',
       amount: 0,
+      amountError: '',
+      decimals: 0,
       rate: 0,
     },
   );
@@ -26,19 +28,29 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     {
       to: '',
       amount: 0,
+      amountError: '',
+      decimals: 0,
       receiver: '',
     },
   );
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
-
+  const [offerId, setOfferId] = useState<number | null>(null);
+  const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<CreateOfferState>(CreateOfferState.None);
+  const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
   const values: IOfferValues = {
     offerFromState,
     offerToState,
     activeOfferStep,
     activeStep,
+    offerId,
+    customTokenName,
+    inputsDisabled,
+    setInputsDisabled,
+    setCustomTokenName,
+    setOfferId,
     setOfferFromState,
     setOfferToState,
     setActiveOfferStep,

@@ -1,10 +1,10 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import cn from 'classnames';
 
 import { ButtonPlus, HistoryIcon, OfferIcon } from '@assets/icons';
-import { Button } from '@components/Button';
 import { MenuTab } from '@components/MenuTab';
 import { ROUTES } from '@lib/routes';
 
@@ -14,16 +14,27 @@ interface SidebarProps extends React.PropsWithChildren {}
 
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const { t } = useTranslation();
-  const router = useRouter();
+  const pathname = usePathname();
+
+  const isCreateOffer = useMemo(() => {
+    if (!pathname) return;
+    return pathname === '/offer/create';
+  }, [pathname]);
 
   return (
     <div className={cn(s.container)}>
       <aside className={cn(s.sidebar)}>
         <div className={s.navigation}>
           <div className={s.buttonContainer}>
-            <Button onClick={() => router.push('/offer/create')} className={s.button}>
-              <ButtonPlus />
-            </Button>
+            {isCreateOffer ? (
+              <a aria-label="Create Offer" className={s.button} href="/offer/create">
+                <ButtonPlus />
+              </a>
+            ) : (
+              <Link className={s.button} href="/offer/create">
+                <ButtonPlus />
+              </Link>
+            )}
           </div>
           <div className={s.menu}>
             <MenuTab icon={<OfferIcon />} href={ROUTES.offers}>

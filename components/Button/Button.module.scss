@@ -16,7 +16,6 @@
   border: none;
   border-radius: $xxs;
   cursor: pointer;
-  transition: all 200ms ease-in-out;
 
   &.primary {
     background-color: $base-gray;
@@ -36,10 +35,12 @@
 
     &:disabled {
       background-color: $additional-gray-pre-middle;
+      cursor: not-allowed;
     }
 
     &:not(:disabled):hover {
       background-color: $base-black;
+      transition: all 200ms ease-in-out;
     }
   }
 
@@ -47,6 +48,18 @@
     color: $base-gray;
     background-color: transparent;
     border: 1px solid $base-gray;
+  }
+}
+
+.loading {
+  display: inline-block;
+  clip-path: inset(0 1.175ch 0 0);
+  animation: l 1s steps(4) infinite;
+}
+
+@keyframes l {
+  to {
+    clip-path: inset(0 -1ch 0 0);
   }
 }
 
@@ -60,10 +73,12 @@
       &:disabled {
         color: $base-white;
         background-color: $additional-black-almost;
+        cursor: not-allowed;
       }
 
       &:not(:disabled):hover {
         background-color: $base-white;
+        transition: all 200ms ease-in-out;
       }
     }
   }

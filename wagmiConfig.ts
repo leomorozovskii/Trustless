@@ -1,4 +1,4 @@
-import { http, createConfig } from 'wagmi';
+import { createConfig, http } from 'wagmi';
 import { sepolia } from 'wagmi/chains';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import {
@@ -33,7 +33,7 @@ export const wagmiConfig = createConfig({
   chains: [sepolia],
   connectors,
   transports: {
-    [sepolia.id]: http(),
+    [sepolia.id]: http(environment.apiKey),
   },
   ssr: true,
 });

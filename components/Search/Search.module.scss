@@ -19,8 +19,14 @@
 }
 
 .errorInput {
+  padding: 0 7px !important;
   color: $additional-error !important;
-  border: 1px solid $additional-error !important;
+  border: 2px solid $additional-error !important;
+}
+
+.disabled {
+  background: $additional-gray-pre-middle !important;
+  cursor: not-allowed;
 }
 
 [data-theme='dark'] .errorInput {
@@ -28,6 +34,8 @@
 }
 
 .input {
+  --text-field-border-width: 0px;
+
   width: 100%;
   height: 36px;
   padding: 0 $s;
@@ -37,16 +45,15 @@
   color: $base-black;
   border: 1px solid $base-gray;
   border-radius: $xxs;
-  transition: all 200ms ease-in-out;
 
   &:focus-within {
-    border: 1px solid $base-black;
+    padding: 0 7px;
+    border: 2px solid $base-black;
   }
 
   &:disabled {
     color: $additional-gray-middle;
     background-color: $additional-gray-pre-middle;
-    cursor: not-allowed;
   }
 
   &::placeholder {
@@ -56,6 +63,7 @@
   &:not(.errorInput, :disabled, :focus-within):hover {
     color: $base-black;
     border: 1px solid $base-black;
+    transition: all 200ms ease-in-out;
   }
 }
 
