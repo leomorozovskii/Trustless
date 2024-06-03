@@ -25,8 +25,11 @@ interface IAddTokenPopup {
 
 const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const { t } = useTranslation();
-  const ref = useRef<HTMLDivElement | null>(null);
   const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferContext();
+  const { address: userAddress } = useAccount();
+
+  const ref = useRef<HTMLDivElement | null>(null);
+
   const [step, setStep] = useState<number>(1);
   const [tokenState, setTokenState] = useReducer(
     (oldState: IAddTokenPopupState, newState: Partial<IAddTokenPopupState>): IAddTokenPopupState => ({
@@ -39,8 +42,6 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
       decimal: 0,
     },
   );
-
-  const { address: userAddress } = useAccount();
 
   const result = useToken({
     address: tokenState.address as Address,
@@ -67,18 +68,22 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     }
   }, [result.data]);
 
+  const stepHandler = () => {
+    if (type === 'to') {
+      setOfferToState({ to: tokenState.address, decimals: tokenState.decimal });
+      setCustomTokenName(tokenState.name);
+    } else if (type === 'from') {
+      setOfferFromState({ from: tokenState.address, decimals: tokenState.decimal });
+      setCustomTokenName(tokenState.name);
+    }
+  };
+
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 1) {
       setStep(2);
     } else if (step === 2) {
-      if (type === 'to') {
-        setOfferToState({ to: tokenState.address, decimals: tokenState.decimal });
-        setCustomTokenName(tokenState.name);
-      } else if (type === 'from') {
-        setOfferFromState({ from: tokenState.address, decimals: tokenState.decimal });
-        setCustomTokenName(tokenState.name);
-      }
+      stepHandler();
       setOpened(false);
     }
   };

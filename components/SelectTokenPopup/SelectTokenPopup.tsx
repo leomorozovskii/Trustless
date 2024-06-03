@@ -17,7 +17,9 @@ interface ISelectTokenPopup {
 
 const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handle }) => {
   const { t } = useTranslation();
+
   const ref = useRef<HTMLDivElement | null>(null);
+
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { searchedData } = useSearchToken({ query: searchQuery });
 

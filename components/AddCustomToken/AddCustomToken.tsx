@@ -19,7 +19,7 @@ const AddCustomToken: React.FC<IAddCustomToken> = ({ type }) => {
 
   const openModal = useCallback(() => {
     if (!address) {
-      handleAddItem({ title: 'Error', text: 'Wallet is not connected', type: 'error' });
+      handleAddItem({ title: t('error.message'), text: t('error.walletNotConnected'), type: 'error' });
     } else {
       setOpened(true);
     }
