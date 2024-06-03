@@ -40,6 +40,9 @@
     "created": "New offer has been created!",
     "warn": {
       "addToken": "Anyone can create a token, including creating fake versions of existing tokens. Be aware of scams and security risks"
+    },
+    "share": {
+      "copy": "Copy"
     }
   },
   "token": {
@@ -77,6 +80,7 @@
     "message": "Success",
     "state": "Success state",
     "approved": "Tokens have been approved",
-    "offerCreated": "Offer has been created"
+    "offerCreated": "Offer has been created",
+    "codeCopied": "Code has been copied"
   }
 }
