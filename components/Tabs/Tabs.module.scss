@@ -1,12 +1,50 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
-  padding: 10px 0;
 }
 
 .tabList {
   display: flex;
-  gap: 16px;
+  column-gap: 8px;
+}
+
+.tabItem {
+  height: 32px;
+  padding: 16px;
+  font-weight: 500;
+  vertical-align: middle;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $additional-gray-middle;
+  }
+
+  &_active {
+    padding: 8px 16px;
+    font-weight: bold;
+    color: $base-black;
+    background-color: $additional-gray-middle;
+    border-radius: 100px;
+  }
+
+  &__label {
+    text-transform: capitalize;
+
+    @include font-m-flat;
+  }
+
+  .badge {
+    position: relative;
+    top: -1px;
+    left: 4px;
+    font-weight: 700;
+    color: $additional-gray-medium;
+
+    @include font-s-flat;
+  }
 }

@@ -15,7 +15,6 @@ import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
-import { contractABI } from '@/contractABI';
 
 import s from './OfferBottom.module.scss';
 

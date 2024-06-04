@@ -1,41 +1,35 @@
-import React, { memo } from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
-
-import { Tab } from '@components/Tabs/components/Tab';
-import { OfferState } from '@lib/constants';
+import { TabItem } from './components/TabItem';
 
 import s from './Tabs.module.scss';
 
-interface TabItem {
+interface Option<T extends string> {
+  value: T;
   label: string;
-  query: OfferState;
+  badge?: string;
 }
 
-interface TabsProps {
-  tabs: TabItem[];
-  activeTab: string;
-  tabBages: Record<string, number>;
-  handleTabClick: (tab: OfferState) => void;
+interface TabsProps<T extends string> {
+  options: Option<T>[];
+  value: T;
+  onValueChange: (tab: T) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({ tabs = [], activeTab, tabBages, handleTabClick }) => {
+const Tabs = <T extends string>({ options, value, onValueChange }: TabsProps<T>) => {
+  const handleValueChange = (nextValue: string) => {
+    onValueChange(nextValue as T);
+  };
   return (
-    <RadixTabs.Root className={s.container} value={activeTab}>
+    <RadixTabs.Root className={s.container} value={value} onValueChange={handleValueChange}>
       <RadixTabs.List className={s.tabList}>
-        {tabs.map((tab) => (
-          <RadixTabs.Trigger key={tab.query} value={tab.query} asChild>
-            <Tab
-              active={activeTab === tab.query}
-              onClick={() => handleTabClick(tab.query)}
-              tabBage={tabBages[tab.query]}
-            >
-              {tab.label}
-            </Tab>
-          </RadixTabs.Trigger>
+        {options.map((tab) => (
+          <TabItem key={tab.value} value={tab.value} badge={tab.badge}>
+            {tab.label}
+          </TabItem>
         ))}
       </RadixTabs.List>
     </RadixTabs.Root>
   );
 };
 
-export default memo(Tabs);
+export { Tabs };

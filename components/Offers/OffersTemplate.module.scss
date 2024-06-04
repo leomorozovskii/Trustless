@@ -1,0 +1,35 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+.container {
+  display: grid;
+}
+
+.header {
+  padding: 0 32px;
+}
+
+.title {
+  color: $base-black;
+
+  @include font-3xl;
+}
+
+.filters {
+  padding: 16px 0 4px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    column-gap: 16px;
+  }
+}
