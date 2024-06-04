@@ -6,6 +6,7 @@ import { Address, erc20Abi, formatUnits } from 'viem';
 import { useAccount, useBalance, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
+import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
@@ -15,14 +16,13 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
-import { contractABI } from '@/contractABI';
 
 import s from '@components/CreateOffer/Bottom/OfferBottom.module.scss';
 
 const AcceptBottom: React.FC = () => {
   const router = useRouter();
   const { activeAcceptStep, setActiveAcceptStep, acceptId } = useOfferContext();
-  const { tokenTo, amountTo, active, isLoading } = useGetOfferDetails({ acceptId });
+  const { tokenTo, amountTo, active, isLoading } = useGetOfferDetails();
   const { address: userAddress } = useAccount();
   const { handleAddItem } = useToastifyContext();
   const { tokenDecimals } = useTokenInfo(tokenTo);
@@ -89,7 +89,7 @@ const AcceptBottom: React.FC = () => {
     if (!acceptId) return;
     acceptContract({
       address: environment.contractAddress as Address,
-      abi: contractABI,
+      abi: trustlessOtcAbi,
       functionName: 'take',
       args: [BigInt(acceptId)],
     });

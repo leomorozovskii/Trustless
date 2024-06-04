@@ -4,6 +4,7 @@ import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { Address, erc20Abi, parseUnits } from 'viem';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
+import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
@@ -70,7 +71,7 @@ const OfferBottom = () => {
     if (!isValid) return;
     tradeContract({
       address: environment.contractAddress as Address,
-      abi: contractABI,
+      abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
       args: [
         tokenFromAddress,

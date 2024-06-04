@@ -3,15 +3,14 @@
 
 .container {
   display: flex;
-  width: 100%;
-  max-width: 600px;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
+  max-width: 600px;
   margin: 88px auto 0;
-
-  border-radius: $s;
   background: $base-white;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  border-radius: $s;
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
 }
 
 .heading {
@@ -19,22 +18,23 @@
 }
 
 .headingAccepted {
-  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .cross {
   cursor: pointer;
+
   path {
     stroke: $base-black;
   }
 }
 
 .label {
-  color: $base-black;
-  font-size: 14px;
   font-weight: 600;
+  font-size: 14px;
+  color: $base-black;
 }

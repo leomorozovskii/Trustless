@@ -14,8 +14,8 @@ import s from './AcceptedOffer.module.scss';
 
 const AcceptedOffer: React.FC = () => {
   const router = useRouter();
-  const { setActiveAcceptStep, acceptId } = useOfferContext();
-  const { tokenFrom, tokenTo, amountTo, amountFrom, rate } = useGetOfferDetails({ acceptId });
+  const { setActiveAcceptStep } = useOfferContext();
+  const { tokenFrom, tokenTo, amountTo, amountFrom, rate } = useGetOfferDetails();
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo(tokenFrom, amountFrom);
   const { tokenName: tokenToName, tokenValue: tokenToValue } = useTokenInfo(tokenTo, amountTo);
 

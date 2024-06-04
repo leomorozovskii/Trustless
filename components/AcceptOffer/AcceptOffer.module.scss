@@ -22,8 +22,12 @@
   align-items: flex-start;
   gap: $lg;
 
-  border-top: 2px solid #F5F5F5;
-  border-bottom: 2px solid #F5F5F5;
+  border-top: 2px solid #f5f5f5;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.paddingLg {
+  padding: $lg;
 }
 
 .tokenWrapper {
@@ -95,4 +99,49 @@
 
 .receiver {
   @include with-opacity;
+}
+
+.warnContainer {
+  display: flex;
+  padding: $s;
+  align-items: center;
+  gap: $s;
+
+  border-radius: $s;
+  background: $additional-warn;
+}
+
+.warning {
+  display: flex;
+}
+
+.warn {
+  cursor: pointer;
+}
+
+.warnParagraph {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $m;
+}
+
+.warnText {
+  color: $base-black;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.warnTokenName {
+  color: $base-black;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.warnShareAddress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $s;
 }

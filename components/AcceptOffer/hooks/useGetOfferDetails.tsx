@@ -2,13 +2,10 @@ import { useMemo } from 'react';
 import { Address, formatUnits } from 'viem';
 import { useReadContract } from 'wagmi';
 
+import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
+import { useOfferContext } from '@context/offer/OfferContext';
 import { environment } from '@/environment';
-import { contractABI } from '@/contractABI';
-
-interface IGetOfferDetails {
-  acceptId: string | null;
-}
 
 interface OfferDetails {
   tokenFrom: Address;
@@ -21,7 +18,8 @@ interface OfferDetails {
   completed: boolean;
 }
 
-export const useGetOfferDetails = ({ acceptId }: IGetOfferDetails) => {
+export const useGetOfferDetails = () => {
+  const { acceptId } = useOfferContext();
   const memoizedId = useMemo(() => {
     if (!acceptId) return BigInt(0);
     return BigInt(acceptId);
@@ -33,12 +31,14 @@ export const useGetOfferDetails = ({ acceptId }: IGetOfferDetails) => {
     error,
   } = useReadContract({
     address: environment.contractAddress as Address,
-    abi: contractABI,
+    abi: trustlessOtcAbi,
     functionName: 'getOfferDetails',
     args: [memoizedId],
   });
 
-  const { tokenDecimals: tokenFromDecimals } = useTokenInfo(details ? (details[0] as Address) : ('' as Address));
+  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo(
+    details ? (details[0] as Address) : ('' as Address),
+  );
   const { tokenDecimals: tokenToDecimals } = useTokenInfo(details ? (details[1] as Address) : ('' as Address));
 
   const offerDetails: OfferDetails = useMemo(() => {
@@ -83,5 +83,6 @@ export const useGetOfferDetails = ({ acceptId }: IGetOfferDetails) => {
     rate,
     isLoading,
     error,
+    isTokenFromCustom: isCustom,
   };
 };

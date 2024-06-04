@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { Address, formatUnits } from 'viem';
 import { useToken } from 'wagmi';
@@ -13,12 +15,20 @@ export const useTokenInfo = (address: Address, amount?: bigint) => {
   const token = useMemo(() => {
     if (!address) return;
     const localToken = TOKEN_MAP[address];
-    if (!localToken && result) return result;
+    if (!localToken && result) {
+      return result;
+    }
     return localToken;
   }, [address, result]);
 
+  const isCustom = useMemo(() => {
+    return !TOKEN_MAP[address];
+  }, [address]);
+
   const TokenLogo = useMemo(() => {
-    if (token && 'logo' in token) return token.logo;
+    if (token && 'logo' in token) {
+      return token.logo;
+    }
     return UnknownIcon;
   }, [token, result]);
 
@@ -44,6 +54,7 @@ export const useTokenInfo = (address: Address, amount?: bigint) => {
     TokenLogo,
     tokenName,
     tokenValue,
+    isCustom,
     tokenDecimals: tokenDecimals || 0,
   };
 };

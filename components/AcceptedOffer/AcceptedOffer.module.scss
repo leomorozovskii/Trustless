@@ -1,7 +1,6 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
 
-
 .wrapper {
   width: 100%;
   display: flex;
@@ -12,7 +11,7 @@
   gap: $lg;
 
   border-radius: 0 0 $s $s;
-  border-top: 2px solid #F5F5F5;
+  border-top: 2px solid #f5f5f5;
 }
 
 .labelContainer {

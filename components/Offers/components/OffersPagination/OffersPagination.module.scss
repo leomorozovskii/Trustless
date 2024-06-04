@@ -26,10 +26,10 @@
 }
 
 .label {
-  font-family: var(--font-family-base);
-  color: $additional-gray-medium;
   font-weight: 500;
+  font-family: var(--font-family-base);
   text-align: left;
+  color: $additional-gray-medium;
 
   @include font-m-flat;
 }
