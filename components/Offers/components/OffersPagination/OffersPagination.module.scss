@@ -1,0 +1,35 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.button {
+  padding: 8px;
+  cursor: pointer;
+
+  path {
+    fill: $base-black;
+  }
+
+  &:disabled {
+    cursor: default;
+
+    path {
+      fill: $additional-gray-medium;
+    }
+  }
+}
+
+.label {
+  font-family: var(--font-family-base);
+  color: $additional-gray-medium;
+  font-weight: 500;
+  text-align: left;
+
+  @include font-m-flat;
+}

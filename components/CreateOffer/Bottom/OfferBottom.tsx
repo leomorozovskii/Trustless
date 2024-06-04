@@ -14,9 +14,9 @@ import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { CreateOfferState } from '@lib/constants';
 import { environment } from '@/environment';
-import { contractABI } from '@/contractABI';
 
 import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
+import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
@@ -71,7 +71,7 @@ const OfferBottom = () => {
     if (!isValid) return;
     tradeContract({
       address: environment.contractAddress as Address,
-      abi: contractABI,
+      abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
       args: [
         tokenFromAddress,

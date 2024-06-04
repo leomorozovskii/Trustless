@@ -1,0 +1,22 @@
+.cell {
+  display: inline-flex;
+  align-items: center;
+
+  &_align_start {
+    justify-content: start;
+    width: max-content;
+  }
+
+  &_align_end {
+    justify-content: end;
+    width: 100%;
+  }
+}
+
+.token {
+  margin-left: 4px;
+}
+
+.address {
+  margin-right: 4px;
+}
