@@ -1,7 +1,29 @@
+'use client';
+
 import React from 'react';
 
-const History: React.FC = () => {
-  return <main>History</main>;
+import { createOffersTemplate } from '@components/Offers';
+import { OfferColumns } from '@components/Offers/types';
+import { useTranslation } from 'react-i18next';
+
+const OffersTemplate = createOffersTemplate({
+  filters: ['all', 'accepted', 'cancelled'],
+  actions: ['re-open', 'search'],
+  columnsToDisplay: [
+    OfferColumns.ID,
+    OfferColumns.AssetFrom,
+    OfferColumns.AssetTo,
+    OfferColumns.AmountFrom,
+    OfferColumns.AmountTo,
+    OfferColumns.Rate,
+    OfferColumns.Address,
+    OfferColumns.Status,
+  ],
+});
+
+const HistoryPage: React.FC = () => {
+  const { t } = useTranslation();
+  return <OffersTemplate title={t('offers.title.history')} />;
 };
 
-export default History;
+export default HistoryPage;

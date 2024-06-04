@@ -5,27 +5,46 @@
     "history": "History"
   },
   "offers": {
-    "title": "My offers",
+    "title": {
+      "myOffers": "My offers",
+      "history": "History"
+    },
+    "emptyMessage": "There is no offers at the moment.",
+    "createOffer": "Create offer",
     "cancelOffer": "Cancel offer",
-    "offerIdOrAsset": "Offer ID or Asset",
-    "tabs": {
+    "cancellingOffer": "Cancelling offer...",
+    "reOpenOffer": "Re-open offer",
+    "reOpeningOffer": "Re-opening offer...",
+    "search": {
+      "placeholder": "Offer ID or Asset"
+    },
+    "pagination": {
+      "label": "{{rangeStart}}-{{rangeEnd}} of {{total}}"
+    },
+    "filters": {
       "all": "All",
       "open": "Open",
-      "pending": "Pending",
       "accepted": "Accepted",
       "cancelled": "Cancelled"
     },
-    "column": {
-      "id": "Offer ID",
-      "fromAsset": "From asset 1",
-      "toAsset": "To asset 2",
-      "amount1": "Amount1",
-      "amount2": "Amount2",
-      "rate": "Rate",
-      "address": "Address",
-      "status": "Status",
-      "date": "Date",
-      "share": "Share"
+    "table": {
+      "status": {
+        "open": "Open",
+        "accepted": "Accepted",
+        "cancelled": "Cancelled"
+      },
+      "headings": {
+        "id": "Offer ID",
+        "assetFrom": "From asset 1",
+        "assetTo": "To asset 2",
+        "amountFrom": "Amount 1",
+        "amountTo": "Amount 2",
+        "rate": "Rate",
+        "address": "Address",
+        "status": "Status",
+        "date": "Date",
+        "share": "Share"
+      }
     }
   },
   "offer": {
@@ -71,6 +90,7 @@
     "state": "Error state",
     "approve": "Approve error",
     "offer": "Offer error",
+    "cancel": "Cancel error",
     "denied": "User denied the transaction",
     "somethingWrong": "Something went wrong",
     "insufficientBalance": "Insufficient balance",
@@ -81,6 +101,15 @@
     "state": "Success state",
     "approved": "Tokens have been approved",
     "offerCreated": "Offer has been created",
-    "codeCopied": "Code has been copied"
+    "codeCopied": "Code has been copied",
+    "addressCopied": "Address has been copied",
+    "offerCancelled": "Offer has been cancelled"
+  },
+  "shared": {
+    "copy": "Copy",
+    "nextPage": "Next page",
+    "prevPage": "Previous page",
+    "share": "Share",
+    "selectCell": "Select cell"
   }
 }

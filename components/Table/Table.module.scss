@@ -3,121 +3,124 @@
 @import '@common/typo.scss';
 
 .tableContainer {
-  min-width: 1200px;
-  padding: 20px;
-  background-color: #f9f9f9;
+  overflow-x: auto;
+
+  @include font-m-flat;
 }
 
-.tableHeader {
-  display: flex;
-  justify-content: space-between;
+.table {
+  display: grid;
+  grid-template-columns: repeat(calc(var(--cols) - 1), max-content) 1fr;
+  border-collapse: collapse;
+}
+
+.header {
+  display: contents;
+}
+
+.body {
+  display: contents;
+}
+
+.sortingIcon {
+  position: absolute;
+  left: calc(100% + 4px);
+  width: 12px;
+  height: 12px;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+
+  &_active {
+    opacity: 1;
+  }
+}
+
+.headingCell,
+.cell {
+  display: inline-flex;
   align-items: center;
-  margin-bottom: 16px;
-  gap: 24px;
+
+  * {
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
 }
 
-.searchContainer {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  height: 36px;
-}
-
-.tableHeaderCell {
+.headingCell {
+  min-width: max-content;
+  padding: 8px 0 9px;
   font-weight: 500;
+  text-align: unset;
   text-transform: capitalize;
+  cursor: pointer;
   user-select: none;
 
   @include font-s-flat;
+
+  &:hover {
+    .sortingIcon {
+      opacity: 1;
+    }
+  }
 
   &_active {
     font-weight: 700;
     color: $base-black;
   }
+
+  &__content {
+    position: relative;
+  }
 }
 
-.tableBody {
-  background: $base-white;
+.headingRowSelectionCell {
+  width: 24px;
 
-  @include font-m-flat;
+  &__content {
+    display: none;
+  }
 }
 
-.cancelButton {
-  max-width: 116px;
+.cell {
+  padding: 14px 0;
+
+  @include font-s;
 }
 
-.searchInput {
-  width: 300px;
-  padding: 10px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
+.rowSelectionCell {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &_selected {
+    opacity: 1;
+  }
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  padding: 9px;
-  vertical-align: middle; // Центрируем текст по вертикали
-  text-align: center; // Центрируем текст по горизонтали
+.headingRow,
+.row {
+  display: grid;
+  grid-column: 1 / calc(var(--cols) + 1);
+  grid-template-columns: subgrid;
+  max-height: $xxl;
+  padding: 0 32px;
 }
 
 .row {
-  max-height: $xxl;
   transition: background-color 0.2s ease;
-
-  .idColumn:not(.isChecked) {
-    button {
-      opacity: 0;
-    }
-  }
 
   &:hover {
     background-color: $additional-gray-background;
 
-    .idColumn {
-      button {
-        opacity: 1;
-      }
+    & .rowSelectionCell {
+      opacity: 1;
     }
   }
 }
 
-.cancelled {
-  color: #d9d9d9;
-}
-
-.shareWidget {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.shareButton {
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: $additional-gray-middle;
-  }
-}
-
-.sortIconContainer {
-  width: 12px;
-  height: 12px;
-}
-
-.sortIcon {
-  position: relative;
-  top: 2px;
-  left: 8px;
-  width: 12px;
-  height: 12px;
-  opacity: 1;
-
-  &_hidden {
-    opacity: 0;
-  }
+.headingRow {
+  border-bottom: 1px solid $additional-gray-pre-middle;
 }

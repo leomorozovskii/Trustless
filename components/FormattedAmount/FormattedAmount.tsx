@@ -3,29 +3,29 @@ import { useTranslation } from 'react-i18next';
 
 interface FormattedNumberProps {
   value: BigInt | string | number | null | undefined;
+  minimumFractionDigits?: number;
+  maximumFractionDigits?: number;
   decimals?: number;
 }
 
-const FormattedNumber: React.FC<FormattedNumberProps> = ({ value, decimals = 2 }) => {
+const FormattedNumber: React.FC<FormattedNumberProps> = ({
+  value,
+  minimumFractionDigits,
+  maximumFractionDigits = 2,
+  decimals = 0,
+}) => {
   const { i18n } = useTranslation(undefined, { useSuspense: false });
 
-  const numberValue = value == null || Number.isNaN(Number(value)) ? BigInt(0) : BigInt(value.toString());
+  const formatter = React.useMemo(
+    () =>
+      new Intl.NumberFormat(i18n.language, {
+        minimumFractionDigits,
+        maximumFractionDigits,
+      }),
+    [i18n.language, maximumFractionDigits, minimumFractionDigits],
+  );
 
-  let formatter: Intl.NumberFormat;
-  try {
-    formatter = new Intl.NumberFormat(i18n.language, {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    });
-  } catch (error) {
-    console.warn('Unsupported locale:', i18n.language);
-    formatter = new Intl.NumberFormat('en', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    });
-  }
-
-  const formattedValue = formatter.format(Number(numberValue) / 10 ** Math.max(0, decimals));
+  const formattedValue = formatter.format(Number(value) / 10 ** decimals);
 
   return <span>{formattedValue}</span>;
 };
