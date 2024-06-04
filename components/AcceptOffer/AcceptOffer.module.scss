@@ -1,0 +1,98 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+
+@mixin bold-text {
+  color: $base-black;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+@mixin with-opacity {
+  color: $base-black;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  padding: $xxl $lg;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $lg;
+
+  border-top: 2px solid #F5F5F5;
+  border-bottom: 2px solid #F5F5F5;
+}
+
+.tokenWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $s;
+}
+
+.tokenContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $xxs;
+}
+
+.tokenSum {
+  @include bold-text;
+}
+
+.tokenName {
+  @include with-opacity;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+}
+
+.offerWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrowContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $m;
+}
+
+.rateContainer {
+  display: flex;
+  padding: $s;
+  gap: $xxs;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  border-radius: $s;
+  border: 2px solid $base-black;
+}
+
+.rate {
+  @include bold-text;
+}
+
+.rateLabel {
+  @include with-opacity;
+}
+
+.receiverAddress {
+  @include bold-text;
+}
+
+.receiver {
+  @include with-opacity;
+}

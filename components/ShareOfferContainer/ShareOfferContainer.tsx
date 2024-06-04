@@ -18,7 +18,7 @@ const ShareOfferContainer = () => {
     setActiveOfferStep(4);
     setCopied(true);
     if (!copied) {
-      handleAddItem({ title: t('success.state'), text: t('success.codeCopied'), type: 'success' });
+      handleAddItem({ title: 'Link copied successfully', type: 'success' });
     }
     setTimeout(() => setCopied(false), 5000);
   };

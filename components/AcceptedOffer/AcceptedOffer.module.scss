@@ -1,0 +1,52 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  padding: 84px $xl;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $lg;
+
+  border-radius: 0 0 $s $s;
+  border-top: 2px solid #F5F5F5;
+}
+
+.labelContainer {
+  max-width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: $s;
+}
+
+.label {
+  color: $base-black;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.share {
+  display: flex;
+  flex-direction: row;
+  padding: $xxs $s;
+  align-items: center;
+  gap: $s;
+  border-radius: $s;
+  background: $bg-gray;
+}
+
+.shareLabel {
+  color: $base-black;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.button {
+  max-width: 144px;
+}

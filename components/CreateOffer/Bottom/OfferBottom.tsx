@@ -8,15 +8,15 @@ import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
 import { useGetBalanceGreater } from '@components/CreateOffer/Bottom/hooks/useGetBalanceGreater';
+import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
 import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
 import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
 import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
 import { useOfferContext } from '@context/offer/OfferContext';
-import { CreateOfferState } from '@lib/constants';
+import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 import { contractABI } from '@/contractABI';
 
-import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
 import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
@@ -85,9 +85,9 @@ const OfferBottom = () => {
 
   useEffect(() => {
     if (!approveButtonDisabled) {
-      setActiveStep(CreateOfferState.Filled);
+      setActiveStep(OfferProgress.Filled);
     } else {
-      setActiveStep(CreateOfferState.None);
+      setActiveStep(OfferProgress.None);
     }
   }, [approveButtonDisabled]);
 
@@ -96,7 +96,7 @@ const OfferBottom = () => {
       <p className={s.label}>{t('offer.create.signText')}</p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
-          {activeStep !== CreateOfferState.Approved && activeStep !== CreateOfferState.Created && (
+          {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created && (
             <Button
               disabled={approveButtonDisabled}
               type="button"
@@ -117,7 +117,7 @@ const OfferBottom = () => {
         </div>
         <ProgressBar currentStep={activeStep} />
       </div>
-      {activeStep !== CreateOfferState.None && (
+      {activeStep !== OfferProgress.None && (
         <div className={s.serviceContainer}>
           <p className={s.feeLabel}>{`${t('offer.create.fee')} 0.01%`}</p>
           <div className={s.feeContainer}>

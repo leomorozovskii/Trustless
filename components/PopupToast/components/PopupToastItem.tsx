@@ -30,7 +30,7 @@ const PopupToastItem: React.FC<IPopupToastItem> = ({ item, handleRemoveItem }) =
           <ClearCross className={s.pointer} />
         </button>
       </div>
-      <p className={s.text}>{item.text}</p>
+      {item.text && <p className={s.text}>{item.text}</p>}
     </div>
   );
 };

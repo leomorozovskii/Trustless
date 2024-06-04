@@ -97,7 +97,7 @@ export enum OfferState {
   Cancelled = 'cancelled',
 }
 
-export enum CreateOfferState {
+export enum OfferProgress {
   None = 'none',
   Filled = 'filled',
   Approved = 'approved',

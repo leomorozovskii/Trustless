@@ -26,6 +26,65 @@ export const OfferIcon: React.FC<IconProps> = (props) => {
   );
 };
 
+export const AcceptOfferIcon: React.FC<IconProps> = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="18"
+      viewBox="0 0 20 18"
+      className={className}
+      fill="none"
+      {...props}
+    >
+      <path d="M1 9H18.25" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M10.75 1.5L18.25 9L10.75 16.5"
+        stroke="black"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const SuccessAcceptIcon: React.FC<IconProps> = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="96"
+      height="96"
+      viewBox="0 0 96 96"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <circle cx="48" cy="48" r="47" fill="white" stroke="black" strokeWidth="2" />
+      <path d="M24.0747 49.2442L41.3649 69.3796L72.0057 27.139" stroke="black" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+};
+
+export const SmallArrow: React.FC<IconProps> = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="26"
+      height="15"
+      viewBox="0 0 26 15"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <path
+        d="M25.2071 8.20711C25.5976 7.81658 25.5976 7.18342 25.2071 6.79289L18.8431 0.428932C18.4526 0.0384078 17.8195 0.0384078 17.4289 0.428932C17.0384 0.819457 17.0384 1.45262 17.4289 1.84315L23.0858 7.5L17.4289 13.1569C17.0384 13.5474 17.0384 14.1805 17.4289 14.5711C17.8195 14.9616 18.4526 14.9616 18.8431 14.5711L25.2071 8.20711ZM0.5 8.5H24.5V6.5H0.5V8.5Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
 export const ClearCross: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg

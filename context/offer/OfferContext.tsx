@@ -1,7 +1,7 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
 import { IOfferFrom, IOfferTo, IOfferValues } from '@context/offer/OfferContext.interfaces';
-import { CreateOfferState } from '@lib/constants';
+import { OfferProgress } from '@lib/constants';
 
 const OfferContext = createContext<IOfferValues | null>(null);
 
@@ -36,8 +36,10 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
   const [offerId, setOfferId] = useState<number | null>(null);
+  const [acceptId, setAcceptId] = useState<string | null>(null);
   const [customTokenName, setCustomTokenName] = useState<string>('');
-  const [activeStep, setActiveStep] = useState<CreateOfferState>(CreateOfferState.None);
+  const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
+  const [activeAcceptStep, setActiveAcceptStep] = useState<OfferProgress>(OfferProgress.Filled);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
   const values: IOfferValues = {
@@ -45,16 +47,20 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     offerToState,
     activeOfferStep,
     activeStep,
+    activeAcceptStep,
     offerId,
+    acceptId,
     customTokenName,
     inputsDisabled,
     setInputsDisabled,
     setCustomTokenName,
     setOfferId,
+    setAcceptId,
     setOfferFromState,
     setOfferToState,
     setActiveOfferStep,
     setActiveStep,
+    setActiveAcceptStep,
   };
 
   return <OfferContext.Provider value={values}>{children}</OfferContext.Provider>;

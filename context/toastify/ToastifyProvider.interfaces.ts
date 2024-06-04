@@ -1,7 +1,7 @@
 interface IToastifyItem {
   id: number;
   title: string;
-  text: string;
+  text?: string;
   type: 'error' | 'success';
 }
 

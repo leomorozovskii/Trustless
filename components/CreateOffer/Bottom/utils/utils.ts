@@ -8,7 +8,7 @@ export const checkAddress = (address: string | undefined) => {
 };
 
 export const checkValidAmount = (value: number) => {
-  return Math.sign(value) === 1 && Number.isInteger(value);
+  return Math.sign(value) === 1;
 };
 
 export const isDenied = (text: string) => {

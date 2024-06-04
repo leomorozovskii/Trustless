@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { isAddress } from 'viem';
 
 import { useOfferContext } from '@context/offer/OfferContext';
-import { CreateOfferState } from '@lib/constants';
+import { OfferProgress } from '@lib/constants';
 
 export const useButtonsDisabled = () => {
   const { activeStep, offerFromState, offerToState } = useOfferContext();
@@ -14,7 +14,7 @@ export const useButtonsDisabled = () => {
     const isOfferToStateValid = offerToState.to !== '' && offerToState.amount > 0;
     const isReceiverValid = !offerToState.receiver || isAddress(offerToState.receiver);
     const isApproveValid = isOfferFromStateValid && isOfferToStateValid && isReceiverValid;
-    const isCreateValid = isApproveValid && activeStep === CreateOfferState.Approved;
+    const isCreateValid = isApproveValid && activeStep === OfferProgress.Approved;
 
     setApproveButtonDisabled(!isApproveValid);
     setCreateButtonDisabled(!isCreateValid);

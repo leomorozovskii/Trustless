@@ -6,7 +6,7 @@ import { http, useAccount } from 'wagmi';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferContext } from '@context/offer/OfferContext';
 import { isDenied } from '@components/CreateOffer/Bottom/utils/utils';
-import { CreateOfferState } from '@lib/constants';
+import { OfferProgress } from '@lib/constants';
 import { sepolia } from 'wagmi/chains';
 import { environment } from '@/environment';
 
@@ -47,7 +47,7 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
     if (approveReceipt) {
       setInputsDisabled(true);
       handleAddItem({ title: t('success.message'), text: t('success.approved'), type: 'success' });
-      setActiveStep(CreateOfferState.Approved);
+      setActiveStep(OfferProgress.Approved);
       setActiveOfferStep(2);
     }
   }, [approveReceipt]);
@@ -55,7 +55,7 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
   useEffect(() => {
     if (tradeReceipt) {
       handleAddItem({ title: t('success.message'), text: t('success.offerCreated'), type: 'success' });
-      setActiveStep(CreateOfferState.Created);
+      setActiveStep(OfferProgress.Created);
       setActiveOfferStep(3);
     }
   }, [tradeReceipt]);
