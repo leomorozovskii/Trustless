@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { Address, erc20Abi, formatUnits } from 'viem';
 
-import { useOfferContext } from '@context/offer/OfferContext';
-import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
-import { CreateOfferState } from '@lib/constants';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
+import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
 interface IUseGetAllowance {
@@ -14,13 +14,13 @@ interface IUseGetAllowance {
 export const useGetAllowance = ({ approveReceipt }: IUseGetAllowance) => {
   const { address: userAddress } = useAccount();
   const { tokenFromAddress, tokenFromDecimals } = useTokenData();
-  const { offerFromState, activeStep, setActiveOfferStep, setActiveStep } = useOfferContext();
+  const { offerFromState, activeStep, setActiveOfferStep, setActiveStep } = useOfferCreateContext();
 
   const { data: allowance } = useReadContract({
     address: tokenFromAddress,
     abi: erc20Abi,
     functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress as Address],
+    args: [userAddress as Address, environment.contractAddress],
   });
 
   useEffect(() => {
@@ -35,14 +35,14 @@ export const useGetAllowance = ({ approveReceipt }: IUseGetAllowance) => {
 
     const isAllowanceSufficient = allowanceValue >= offerAmount;
 
-    if (isAllowanceSufficient && activeStep === CreateOfferState.Filled && !approveReceipt && offerFromState.amount) {
-      setActiveStep(CreateOfferState.Approved);
+    if (isAllowanceSufficient && activeStep === OfferProgress.Filled && !approveReceipt && offerFromState.amount) {
+      setActiveStep(OfferProgress.Approved);
       setActiveOfferStep(2);
     } else if (
-      (!isAllowanceSufficient && activeStep === CreateOfferState.Approved && !approveReceipt) ||
+      (!isAllowanceSufficient && activeStep === OfferProgress.Approved && !approveReceipt) ||
       !offerFromState.amount
     ) {
-      setActiveStep(CreateOfferState.Filled);
+      setActiveStep(OfferProgress.Filled);
       setActiveOfferStep(1);
     }
   }, [allowance, tokenFromDecimals, offerFromState.amount, activeStep, approveReceipt]);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo } from 'react';
+import React from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 
 import { CheckboxCheck } from '@assets/icons';
@@ -39,4 +39,4 @@ const Checkbox: React.FC<ICheckbox> = ({ label, checked, defaultChecked, onCheck
   );
 };
 
-export default memo(Checkbox);
+export default Checkbox;

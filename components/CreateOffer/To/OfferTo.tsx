@@ -6,13 +6,13 @@ import cn from 'classnames';
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
-import { useOfferContext } from '@context/offer/OfferContext';
-import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
 
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
-  const { setOfferToState, offerToState, inputsDisabled } = useOfferContext();
+  const { setOfferToState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
 
   return (
@@ -30,14 +30,14 @@ const OfferTo = () => {
       <Input
         id="to amount input"
         label={t('token.amount')}
-        type="number"
+        type="text"
         error={offerToState.amount && !checkValidAmount(offerToState.amount) ? 'error' : ''}
         size="lg"
         disabled={inputsDisabled}
         placeholder="0"
         classWrapper={s.inputWrapper}
         value={offerToState.amount ? offerToState.amount.toString() : ''}
-        onChange={({ target }) => setOfferToState({ amount: +target.value })}
+        onChange={({ target }) => setOfferToState({ amount: target.value })}
       />
       <Input
         id="to receiver input"

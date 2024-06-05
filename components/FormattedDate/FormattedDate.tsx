@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { formatCustomDate } from '@lib/utils/handleDate';
 
@@ -18,4 +18,4 @@ const FormattedDate: React.FC<FormattedDateProps> = ({ date }) => {
   return <span>{formattedDate}</span>;
 };
 
-export default memo(FormattedDate);
+export default FormattedDate;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import * as RadixSwitch from '@radix-ui/react-switch';
 
 import s from './Switch.module.scss';
@@ -20,4 +20,4 @@ const Switch: React.FC<ISwitch> = ({ label, checked, onCheckedChange, ...props }
   </div>
 );
 
-export default memo(Switch);
+export default Switch;

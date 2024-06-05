@@ -1,11 +1,11 @@
-import { CreateOfferState } from '@lib/constants';
+import { OfferProgress } from '@lib/constants';
 import React from 'react';
 
-interface IOfferValues {
+interface IOfferCreateValues {
   offerFromState: IOfferFrom;
   offerToState: IOfferTo;
   activeOfferStep: number;
-  activeStep: CreateOfferState;
+  activeStep: OfferProgress;
   offerId: number | null;
   customTokenName: string;
   inputsDisabled: boolean;
@@ -15,12 +15,12 @@ interface IOfferValues {
   setOfferFromState: React.Dispatch<Partial<IOfferFrom>>;
   setOfferToState: React.Dispatch<Partial<IOfferTo>>;
   setActiveOfferStep: React.Dispatch<React.SetStateAction<number>>;
-  setActiveStep: React.Dispatch<React.SetStateAction<CreateOfferState>>;
+  setActiveStep: React.Dispatch<React.SetStateAction<OfferProgress>>;
 }
 
 interface IOfferFrom {
   from: string;
-  amount: number;
+  amount: string;
   amountError?: string;
   decimals?: number;
   rate: number;
@@ -31,4 +31,4 @@ type IOfferTo = Omit<IOfferFrom, 'from' | 'rate'> & {
   receiver?: string;
 };
 
-export type { IOfferValues, IOfferFrom, IOfferTo };
+export type { IOfferCreateValues, IOfferFrom, IOfferTo };

@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import cn from 'classnames';
 
 import { ClearCross } from '@assets/icons';
@@ -30,9 +30,9 @@ const PopupToastItem: React.FC<IPopupToastItem> = ({ item, handleRemoveItem }) =
           <ClearCross className={s.pointer} />
         </button>
       </div>
-      <p className={s.text}>{item.text}</p>
+      {item.text && <p className={s.text}>{item.text}</p>}
     </div>
   );
 };
 
-export default memo(PopupToastItem);
+export default PopupToastItem;

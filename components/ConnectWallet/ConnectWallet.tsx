@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
@@ -72,4 +72,4 @@ const ConnectWallet = () => {
   );
 };
 
-export default memo(ConnectWallet);
+export default ConnectWallet;

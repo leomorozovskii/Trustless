@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { Address, erc20Abi, parseUnits } from 'viem';
+import { erc20Abi, parseUnits } from 'viem';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
+import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
-import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
-import { useGetBalanceGreater } from '@components/CreateOffer/Bottom/hooks/useGetBalanceGreater';
-import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
-import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
-import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
-import { useOfferContext } from '@context/offer/OfferContext';
-import { CreateOfferState } from '@lib/constants';
+import { useButtonsDisabled } from '@components/CreateOffer/Buttons/hooks/useButtonsDisabled';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
+import { useGetAllowance } from '@components/CreateOffer/Buttons/hooks/useGetAllowance';
+import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
+import { useOfferErrors } from '@components/CreateOffer/Buttons/hooks/useOfferErrors';
+import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
-import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
-import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
-import s from './OfferBottom.module.scss';
+import s from './OfferButtons.module.scss';
 
-const OfferBottom = () => {
+const OfferButtons = () => {
   const { t } = useTranslation();
-  const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferContext();
+  const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferCreateContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
   const {
@@ -63,14 +63,14 @@ const OfferBottom = () => {
       address: tokenFromAddress,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [environment.contractAddress as Address, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
+      args: [environment.contractAddress, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
     });
   };
 
   const createTrade = async () => {
     if (!isValid) return;
     tradeContract({
-      address: environment.contractAddress as Address,
+      address: environment.contractAddress,
       abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
       args: [
@@ -85,9 +85,9 @@ const OfferBottom = () => {
 
   useEffect(() => {
     if (!approveButtonDisabled) {
-      setActiveStep(CreateOfferState.Filled);
+      setActiveStep(OfferProgress.Filled);
     } else {
-      setActiveStep(CreateOfferState.None);
+      setActiveStep(OfferProgress.None);
     }
   }, [approveButtonDisabled]);
 
@@ -96,7 +96,7 @@ const OfferBottom = () => {
       <p className={s.label}>{t('offer.create.signText')}</p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
-          {activeStep !== CreateOfferState.Approved && activeStep !== CreateOfferState.Created && (
+          {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created && (
             <Button
               disabled={approveButtonDisabled}
               type="button"
@@ -117,7 +117,7 @@ const OfferBottom = () => {
         </div>
         <ProgressBar currentStep={activeStep} />
       </div>
-      {activeStep !== CreateOfferState.None && (
+      {activeStep !== OfferProgress.None && (
         <div className={s.serviceContainer}>
           <p className={s.feeLabel}>{`${t('offer.create.fee')} 0.01%`}</p>
           <div className={s.feeContainer}>
@@ -135,4 +135,4 @@ const OfferBottom = () => {
   );
 };
 
-export default OfferBottom;
+export default OfferButtons;

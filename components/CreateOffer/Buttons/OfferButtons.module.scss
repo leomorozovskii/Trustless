@@ -10,6 +10,8 @@
   padding: $m $lg;
   background: $base-white;
   gap: $m;
+  border-bottom-right-radius: $s;
+  border-bottom-left-radius: $s;
 }
 
 .label {

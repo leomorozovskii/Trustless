@@ -31,10 +31,10 @@ export interface TokenData {
 }
 
 export enum TokenAddress {
-  USDT = '0x820cd06b058dcc48a61f44ce58e03c561ddfdca9',
+  USDT = '0x820CD06B058dcc48a61f44CE58E03C561DdfDCA9',
   META = '0xB30352A908819A71ed87e451Afc99dD0A34E42Cc',
   PUCKI = '0xcabd7d5dBEeF08b4395bb7caC1b715a0B5625199',
-  USDC = '0x1f05b02b94de421820d090f6e9faa0bdbecdb1b8',
+  USDC = '0x1F05b02B94de421820d090F6E9FAa0bdBECdb1B8',
   ETH = '0x0000000000000000000000000000000000000002',
   CBETH = '0x0000000000000000000000000000000000000003',
   WETH = '0x0000000000000000000000000000000000000004',
@@ -84,6 +84,11 @@ export const TOKEN_MAP: { [address: string]: TokenData } = {
   [TokenAddress.DAO]: { address: TokenAddress.DAO, name: 'DAO', logo: DaoTokenIcon, decimals: 18 },
 };
 
+export const links = {
+  etherscan: 'https://etherscan.io',
+  sepoliaEtherscan: 'https://sepolia.etherscan.io',
+};
+
 export const WalletIconsMap = {
   metaMask: '',
   coinbaseWallet: '',
@@ -97,7 +102,7 @@ export enum OfferState {
   Cancelled = 'cancelled',
 }
 
-export enum CreateOfferState {
+export enum OfferProgress {
   None = 'none',
   Filled = 'filled',
   Approved = 'approved',

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { IconProps } from '@assets/icons/tokens';
 
@@ -19,4 +19,4 @@ const TokenItem: React.FC<ITokenItem> = ({ title, IconComponent, onClick }) => {
   );
 };
 
-export default memo(TokenItem);
+export default TokenItem;

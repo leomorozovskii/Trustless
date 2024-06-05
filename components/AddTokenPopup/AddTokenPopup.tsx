@@ -1,12 +1,12 @@
-import React, { memo, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount, useBalance, useToken } from 'wagmi';
-import { Address, isAddress } from 'viem';
+import { Address, getAddress, isAddress } from 'viem';
 
 import { InputCross, WarningIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
-import { useOfferContext } from '@context/offer/OfferContext';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { TOKEN_MAP, TokenAddress } from '@lib/constants';
 import { useClickOutside } from '@lib/hooks/useClickOutside';
 
@@ -25,7 +25,8 @@ interface IAddTokenPopup {
 
 const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const { t } = useTranslation();
-  const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferContext();
+  const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
+  const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferCreateContext();
   const { address: userAddress } = useAccount();
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -94,6 +95,21 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     }
   });
 
+  const changeAddressHandler = (value: string) => {
+    try {
+      if (value && isAddress(value)) {
+        setTokenState({ address: getAddress(value) });
+      } else if (value) {
+        setTokenState({ address: value });
+      } else {
+        setTokenState({ address: '' });
+      }
+      setIsInvalidAddress(false);
+    } catch (e: any) {
+      setIsInvalidAddress(true);
+    }
+  };
+
   return (
     <form onSubmit={handleAdd} className={s.wrapper}>
       <div className={s.container} ref={ref}>
@@ -113,9 +129,13 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
               label={t('token.address')}
               size="lg"
               id="token address input"
-              error={tokenState.address && !isAddress(tokenState.address) ? t('token.invalid.address') : ''}
+              error={
+                (tokenState.address && !isAddress(tokenState.address)) || isInvalidAddress
+                  ? t('token.invalid.address')
+                  : ''
+              }
               value={tokenState.address}
-              onChange={({ target }) => setTokenState({ address: target.value })}
+              onChange={({ target }) => changeAddressHandler(target.value)}
             />
             <Input
               label={t('token.name')}
@@ -161,4 +181,4 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   );
 };
 
-export default memo(AddTokenPopup);
+export default AddTokenPopup;

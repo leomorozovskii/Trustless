@@ -1,0 +1,40 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 600px;
+  margin: 88px auto 0;
+  background: $base-white;
+  border-radius: $s;
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
+}
+
+.heading {
+  padding: $m $lg;
+}
+
+.headingAccepted {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cross {
+  cursor: pointer;
+
+  path {
+    stroke: $base-black;
+  }
+}
+
+.label {
+  font-weight: 600;
+  font-size: 14px;
+  color: $base-black;
+}

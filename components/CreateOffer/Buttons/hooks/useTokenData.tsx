@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { Address } from 'viem';
 
-import { useOfferContext } from '@context/offer/OfferContext';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { TOKEN_MAP } from '@lib/constants';
 
 export const useTokenData = () => {
-  const { offerFromState, offerToState } = useOfferContext();
+  const { offerFromState, offerToState } = useOfferCreateContext();
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const data = useMemo(() => {

@@ -1,11 +1,11 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
-import { IOfferFrom, IOfferTo, IOfferValues } from '@context/offer/OfferContext.interfaces';
-import { CreateOfferState } from '@lib/constants';
+import { IOfferFrom, IOfferTo, IOfferCreateValues } from '@context/offer/create/OfferCreateContext.interfaces';
+import { OfferProgress } from '@lib/constants';
 
-const OfferContext = createContext<IOfferValues | null>(null);
+const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
 
-export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [offerFromState, setOfferFromState] = useReducer(
     (oldState: IOfferFrom, newState: Partial<IOfferFrom>): IOfferFrom => ({
       ...oldState,
@@ -13,7 +13,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }),
     {
       from: '',
-      amount: 0,
+      amount: '',
       amountError: '',
       decimals: 0,
       rate: 0,
@@ -27,7 +27,7 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }),
     {
       to: '',
-      amount: 0,
+      amount: '',
       amountError: '',
       decimals: 0,
       receiver: '',
@@ -37,10 +37,10 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
   const [offerId, setOfferId] = useState<number | null>(null);
   const [customTokenName, setCustomTokenName] = useState<string>('');
-  const [activeStep, setActiveStep] = useState<CreateOfferState>(CreateOfferState.None);
+  const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
-  const values: IOfferValues = {
+  const values: IOfferCreateValues = {
     offerFromState,
     offerToState,
     activeOfferStep,
@@ -57,11 +57,11 @@ export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setActiveStep,
   };
 
-  return <OfferContext.Provider value={values}>{children}</OfferContext.Provider>;
+  return <OfferCreateContext.Provider value={values}>{children}</OfferCreateContext.Provider>;
 };
 
-export const useOfferContext = () => {
-  const context = useContext(OfferContext);
-  if (!context) throw new Error('useOfferContext must be used within an OfferProvider');
+export const useOfferCreateContext = () => {
+  const context = useContext(OfferCreateContext);
+  if (!context) throw new Error('useOfferCreateContext must be used within an OfferProvider');
   return context;
 };

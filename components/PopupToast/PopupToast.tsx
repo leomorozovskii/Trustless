@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { IToastifyItem } from '@context/toastify/ToastifyProvider.interfaces';
 import PopupToastItem from '@components/PopupToast/components/PopupToastItem';
@@ -19,4 +19,4 @@ const PopupToast: React.FC<IPopupToast> = ({ items, handleRemoveItem }) => {
   );
 };
 
-export default memo(PopupToast);
+export default PopupToast;

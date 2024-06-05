@@ -1,10 +1,10 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import cn from 'classnames';
 
 import { SelectIcon } from '@assets/icons';
 import { IconProps, UnknownIcon } from '@assets/icons/tokens';
 import { SelectTokenPopup } from '@components/SelectTokenPopup';
-import { useOfferContext } from '@context/offer/OfferContext';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { TOKEN_MAP } from '@lib/constants';
 
 import s from './Select.module.scss';
@@ -18,7 +18,7 @@ export interface ISelect {
 
 const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) => {
   const [opened, setOpened] = useState<boolean>(false);
-  const { customTokenName } = useOfferContext();
+  const { customTokenName } = useOfferCreateContext();
 
   const handleSelectToken = (tokenAddress: string) => {
     onChange(tokenAddress);
@@ -64,4 +64,4 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
   );
 };
 
-export default memo(Select);
+export default Select;
