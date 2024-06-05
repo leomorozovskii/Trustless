@@ -72,4 +72,9 @@
   padding: $s $lg;
   gap: $xxs;
   cursor: pointer;
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    background: $bg-gray;
+  }
 }
