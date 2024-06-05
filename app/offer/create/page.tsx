@@ -7,7 +7,7 @@ import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
-import { OfferBottom } from 'components/CreateOffer/Buttons';
+import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
@@ -32,7 +32,7 @@ const CreateOfferPage: React.FC = () => {
             </div>
             <OfferTo />
           </div>
-          <OfferBottom />
+          <OfferButtons />
         </div>
       )}
     </div>

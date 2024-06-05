@@ -1,3 +1,3 @@
-import OfferBottom from './OfferBottom';
+import OfferButtons from './OfferButtons';
 
-export { OfferBottom };
+export { OfferButtons };

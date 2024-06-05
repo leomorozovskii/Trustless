@@ -10,7 +10,6 @@ import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
-import { useGetFee } from '@components/CreateOffer/Buttons/hooks/useGetFee';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
 import { isDenied } from '@components/CreateOffer/Buttons/utils/utils';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
@@ -18,7 +17,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
-import s from '@components/CreateOffer/Buttons/OfferBottom.module.scss';
+import s from '@components/CreateOffer/Buttons/OfferButtons.module.scss';
 
 const AcceptOfferButtons: React.FC = () => {
   const router = useRouter();
@@ -68,8 +67,6 @@ const AcceptOfferButtons: React.FC = () => {
   const { data: acceptReceipt, isLoading: isAcceptTransactionLoading } = useWaitForTransactionReceipt({
     hash: acceptHash,
   });
-
-  useGetFee();
 
   const isGreater = () => {
     if (!balance) return;

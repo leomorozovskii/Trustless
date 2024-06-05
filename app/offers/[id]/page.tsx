@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import cn from 'classnames';
 
 import { ClearCross } from '@assets/icons';
@@ -11,20 +10,16 @@ import AcceptOfferButtons from '@components/AcceptOffer/components/AcceptOfferBu
 import { OfferProgress } from '@lib/constants';
 
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
+import Link from 'next/link';
 import s from './AcceptOffer.module.scss';
 
 const Page = ({ params }: { params: { id: string } }) => {
-  const router = useRouter();
   const { activeAcceptStep, setAcceptId } = useOfferAcceptContext();
 
   const labelText = useMemo(() => {
     if (activeAcceptStep === OfferProgress.Created) return 'Offer has been successfully accepted!';
     return `Offer ID #${params.id}`;
   }, [activeAcceptStep]);
-
-  const handleClose = () => {
-    router.push('/offers');
-  };
 
   useEffect(() => {
     if (params.id) {
@@ -36,7 +31,11 @@ const Page = ({ params }: { params: { id: string } }) => {
     <div className={s.container}>
       <div className={cn(s.heading, { [s.headingAccepted]: activeAcceptStep === OfferProgress.Created })}>
         <h2 className={s.label}>{labelText}</h2>
-        {activeAcceptStep === OfferProgress.Created && <ClearCross onClick={handleClose} className={s.cross} />}
+        {activeAcceptStep === OfferProgress.Created && (
+          <Link href="/offers">
+            <ClearCross className={s.cross} />
+          </Link>
+        )}
       </div>
       {activeAcceptStep === OfferProgress.Created ? (
         <AcceptedOffer />

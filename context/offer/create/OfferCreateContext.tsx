@@ -5,7 +5,7 @@ import { OfferProgress } from '@lib/constants';
 
 const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
 
-export const OfferProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [offerFromState, setOfferFromState] = useReducer(
     (oldState: IOfferFrom, newState: Partial<IOfferFrom>): IOfferFrom => ({
       ...oldState,

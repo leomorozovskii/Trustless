@@ -6,11 +6,14 @@ import { useToken } from 'wagmi';
 
 import { UnknownIcon } from '@assets/icons/tokens';
 import { TOKEN_MAP } from '@lib/constants';
+import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
 
-export const useTokenInfo = (address: Address, amount?: bigint) => {
+export const useTokenInfo = (address: Address, amount?: bigint, withFee?: boolean) => {
   const result = useToken({
     address,
   });
+
+  const { calculatedFee } = useGetFee();
 
   const token = useMemo(() => {
     if (!address) return;
@@ -45,15 +48,20 @@ export const useTokenInfo = (address: Address, amount?: bigint) => {
   }, [token, result]);
 
   const tokenValue = useMemo(() => {
-    if (!tokenDecimals) return;
-    if (!amount) return;
+    if (!tokenDecimals || !amount) return;
     return formatUnits(amount, tokenDecimals);
   }, [amount, tokenDecimals]);
+
+  const tokenFeeValue = useMemo(() => {
+    if (!tokenDecimals || !amount || !withFee || !calculatedFee) return;
+    const value = formatUnits(amount, tokenDecimals);
+    return (1 - calculatedFee) * Number(value);
+  }, [amount, tokenDecimals, calculatedFee, withFee]);
 
   return {
     TokenLogo,
     tokenName,
-    tokenValue,
+    tokenValue: withFee ? tokenFeeValue : tokenValue,
     isCustom,
     tokenDecimals: tokenDecimals || 0,
   };

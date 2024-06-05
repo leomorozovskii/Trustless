@@ -10,7 +10,6 @@ import { ProgressBar } from '@components/ProgressBar';
 import { useButtonsDisabled } from '@components/CreateOffer/Buttons/hooks/useButtonsDisabled';
 import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 import { useGetAllowance } from '@components/CreateOffer/Buttons/hooks/useGetAllowance';
-import { useGetFee } from '@components/CreateOffer/Buttons/hooks/useGetFee';
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useOfferErrors } from '@components/CreateOffer/Buttons/hooks/useOfferErrors';
 import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
@@ -18,9 +17,9 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
-import s from './OfferBottom.module.scss';
+import s from './OfferButtons.module.scss';
 
-const OfferBottom = () => {
+const OfferButtons = () => {
   const { t } = useTranslation();
   const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferCreateContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
@@ -42,8 +41,6 @@ const OfferBottom = () => {
   const { data: approveReceipt, isLoading: isApproveTransactionLoading } = useWaitForTransactionReceipt({
     hash: approveHash,
   });
-
-  useGetFee();
 
   useGetAllowance({ approveReceipt });
 
@@ -138,4 +135,4 @@ const OfferBottom = () => {
   );
 };
 
-export default OfferBottom;
+export default OfferButtons;

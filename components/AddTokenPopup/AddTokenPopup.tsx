@@ -25,6 +25,7 @@ interface IAddTokenPopup {
 
 const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const { t } = useTranslation();
+  const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
   const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferCreateContext();
   const { address: userAddress } = useAccount();
 
@@ -94,6 +95,21 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     }
   });
 
+  const changeAddressHandler = (value: string) => {
+    try {
+      if (value && isAddress(value)) {
+        setTokenState({ address: getAddress(value) });
+      } else if (value) {
+        setTokenState({ address: value });
+      } else {
+        setTokenState({ address: '' });
+      }
+      setIsInvalidAddress(false);
+    } catch (e: any) {
+      setIsInvalidAddress(true);
+    }
+  };
+
   return (
     <form onSubmit={handleAdd} className={s.wrapper}>
       <div className={s.container} ref={ref}>
@@ -113,9 +129,13 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
               label={t('token.address')}
               size="lg"
               id="token address input"
-              error={tokenState.address && !isAddress(tokenState.address) ? t('token.invalid.address') : ''}
+              error={
+                (tokenState.address && !isAddress(tokenState.address)) || isInvalidAddress
+                  ? t('token.invalid.address')
+                  : ''
+              }
               value={tokenState.address}
-              onChange={({ target }) => setTokenState({ address: target.value ? getAddress(target.value) : '' })}
+              onChange={({ target }) => changeAddressHandler(target.value)}
             />
             <Input
               label={t('token.name')}
