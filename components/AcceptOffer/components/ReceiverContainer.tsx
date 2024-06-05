@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { AcceptOfferIcon } from '@assets/icons';
 
@@ -17,4 +17,4 @@ const ReceiverContainer = () => {
   );
 };
 
-export default memo(ReceiverContainer);
+export default ReceiverContainer;

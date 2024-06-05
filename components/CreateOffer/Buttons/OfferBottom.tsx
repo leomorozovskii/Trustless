@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { Address, erc20Abi, parseUnits } from 'viem';
+import { erc20Abi, parseUnits } from 'viem';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
-import { useButtonsDisabled } from '@components/CreateOffer/Bottom/hooks/useButtonsDisabled';
-import { useGetBalanceGreater } from '@components/CreateOffer/Bottom/hooks/useGetBalanceGreater';
-import { useGetAllowance } from '@components/CreateOffer/Bottom/hooks/useGetAllowance';
-import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
-import { useOfferErrors } from '@components/CreateOffer/Bottom/hooks/useOfferErrors';
-import { checkAddress } from '@components/CreateOffer/Bottom/utils/utils';
-import { useOfferContext } from '@context/offer/OfferContext';
+import { useButtonsDisabled } from '@components/CreateOffer/Buttons/hooks/useButtonsDisabled';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
+import { useGetAllowance } from '@components/CreateOffer/Buttons/hooks/useGetAllowance';
+import { useGetFee } from '@components/CreateOffer/Buttons/hooks/useGetFee';
+import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
+import { useOfferErrors } from '@components/CreateOffer/Buttons/hooks/useOfferErrors';
+import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
@@ -21,7 +22,7 @@ import s from './OfferBottom.module.scss';
 
 const OfferBottom = () => {
   const { t } = useTranslation();
-  const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferContext();
+  const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferCreateContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
   const {
@@ -41,6 +42,8 @@ const OfferBottom = () => {
   const { data: approveReceipt, isLoading: isApproveTransactionLoading } = useWaitForTransactionReceipt({
     hash: approveHash,
   });
+
+  useGetFee();
 
   useGetAllowance({ approveReceipt });
 
@@ -63,14 +66,14 @@ const OfferBottom = () => {
       address: tokenFromAddress,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [environment.contractAddress as Address, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
+      args: [environment.contractAddress, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
     });
   };
 
   const createTrade = async () => {
     if (!isValid) return;
     tradeContract({
-      address: environment.contractAddress as Address,
+      address: environment.contractAddress,
       abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
       args: [

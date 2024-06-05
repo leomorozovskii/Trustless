@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, memo } from 'react';
+import React, { HTMLAttributes } from 'react';
 import { TextField } from '@radix-ui/themes';
 import cn from 'classnames';
 
@@ -61,4 +61,4 @@ const Input: React.FC<IInput> = ({
   );
 };
 
-export default memo(Input);
+export default Input;

@@ -12,9 +12,9 @@
     "emptyMessage": "There is no offers at the moment.",
     "createOffer": "Create offer",
     "cancelOffer": "Cancel offer",
-    "cancellingOffer": "Cancelling offer...",
+    "cancellingOffer": "Cancelling offer",
     "reOpenOffer": "Re-open offer",
-    "reOpeningOffer": "Re-opening offer...",
+    "reOpeningOffer": "Re-opening offer",
     "search": {
       "placeholder": "Offer ID or Asset"
     },
@@ -75,9 +75,9 @@
     "receiver": "Receiver (optional)",
     "invalid.address": "Invalid address",
     "approve": "Approve token",
-    "approving": "Approving token...",
+    "approving": "Approving token",
     "create": "Create Trade",
-    "creating": "Creating Trade...",
+    "creating": "Creating Trade",
     "select": "Select a token",
     "search": "Search asset or paste address",
     "add": {

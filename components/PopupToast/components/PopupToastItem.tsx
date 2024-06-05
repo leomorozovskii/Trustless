@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import cn from 'classnames';
 
 import { ClearCross } from '@assets/icons';
@@ -35,4 +35,4 @@ const PopupToastItem: React.FC<IPopupToastItem> = ({ item, handleRemoveItem }) =
   );
 };
 
-export default memo(PopupToastItem);
+export default PopupToastItem;

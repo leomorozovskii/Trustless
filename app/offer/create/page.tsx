@@ -7,8 +7,8 @@ import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
-import { OfferBottom } from '@components/CreateOffer/Bottom';
-import { useOfferContext } from '@context/offer/OfferContext';
+import { OfferBottom } from 'components/CreateOffer/Buttons';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
 import s from './CreateOffer.module.scss';
@@ -16,7 +16,7 @@ import s from './CreateOffer.module.scss';
 const CreateOfferPage: React.FC = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
-  const { offerId, activeOfferStep, activeStep } = useOfferContext();
+  const { offerId, activeOfferStep, activeStep } = useOfferCreateContext();
 
   return (
     <div className={s.container}>

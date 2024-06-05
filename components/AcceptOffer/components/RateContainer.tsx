@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import s from '../AcceptOffer.module.scss';
 
@@ -15,4 +15,4 @@ const RateContainer: React.FC<IRateProps> = ({ value }) => {
   );
 };
 
-export default memo(RateContainer);
+export default RateContainer;

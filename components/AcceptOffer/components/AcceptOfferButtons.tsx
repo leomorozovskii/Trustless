@@ -10,18 +10,19 @@ import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
+import { useGetFee } from '@components/CreateOffer/Buttons/hooks/useGetFee';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { isDenied } from '@components/CreateOffer/Bottom/utils/utils';
+import { isDenied } from '@components/CreateOffer/Buttons/utils/utils';
+import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useOfferContext } from '@context/offer/OfferContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
-import s from '@components/CreateOffer/Bottom/OfferBottom.module.scss';
+import s from '@components/CreateOffer/Buttons/OfferBottom.module.scss';
 
-const AcceptBottom: React.FC = () => {
+const AcceptOfferButtons: React.FC = () => {
   const router = useRouter();
-  const { activeAcceptStep, setActiveAcceptStep, acceptId } = useOfferContext();
+  const { activeAcceptStep, setActiveAcceptStep, acceptId, setTxHash } = useOfferAcceptContext();
   const { tokenTo, amountTo, active, isLoading } = useGetOfferDetails();
   const { address: userAddress } = useAccount();
   const { handleAddItem } = useToastifyContext();
@@ -29,6 +30,7 @@ const AcceptBottom: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && !active) {
+      handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
       router.push('/offer/create');
     }
   }, [active, isLoading]);
@@ -51,7 +53,7 @@ const AcceptBottom: React.FC = () => {
     address: tokenTo,
     abi: erc20Abi,
     functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress as Address],
+    args: [userAddress as Address, environment.contractAddress],
   });
 
   const { data: balance } = useBalance({
@@ -67,6 +69,8 @@ const AcceptBottom: React.FC = () => {
     hash: acceptHash,
   });
 
+  useGetFee();
+
   const isGreater = () => {
     if (!balance) return;
     return Number(formatUnits(amountTo, tokenDecimals)) > Number(balance.formatted);
@@ -81,14 +85,14 @@ const AcceptBottom: React.FC = () => {
       address: tokenTo,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [environment.contractAddress as Address, amountTo],
+      args: [environment.contractAddress, amountTo],
     });
   };
 
   const acceptTrade = async () => {
     if (!acceptId) return;
     acceptContract({
-      address: environment.contractAddress as Address,
+      address: environment.contractAddress,
       abi: trustlessOtcAbi,
       functionName: 'take',
       args: [BigInt(acceptId)],
@@ -134,6 +138,7 @@ const AcceptBottom: React.FC = () => {
   useEffect(() => {
     if (acceptReceipt) {
       handleAddItem({ title: 'Success', text: 'Trade has been accepted', type: 'success' });
+      setTxHash(acceptReceipt.transactionHash);
       setActiveAcceptStep(OfferProgress.Created);
     }
   }, [acceptReceipt]);
@@ -150,7 +155,7 @@ const AcceptBottom: React.FC = () => {
               loading={isApproveTransactionLoading || isApprovePending}
               onClick={approve}
             >
-              {isApprovePending || isApproveTransactionLoading ? 'Approving Token...' : 'Approve Token'}
+              {isApprovePending || isApproveTransactionLoading ? 'Approving Token' : 'Approve Token'}
             </Button>
           )}
           <Button
@@ -159,7 +164,7 @@ const AcceptBottom: React.FC = () => {
             type="button"
             onClick={acceptTrade}
           >
-            {isAcceptTransactionLoading || isAcceptPending ? 'Accepting Trade...' : 'Accept Trade'}
+            {isAcceptTransactionLoading || isAcceptPending ? 'Accepting Trade' : 'Accept Trade'}
           </Button>
         </div>
         <ProgressBar currentStep={activeAcceptStep} />
@@ -180,4 +185,4 @@ const AcceptBottom: React.FC = () => {
   );
 };
 
-export default AcceptBottom;
+export default AcceptOfferButtons;

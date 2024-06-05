@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { TOKEN_MAP, TokenAddress } from '@lib/constants';
 
@@ -23,4 +23,4 @@ const TokenBadge: React.FC<TokenBadgeProps> = ({ address }) => {
   );
 };
 
-export default memo(TokenBadge);
+export default TokenBadge;

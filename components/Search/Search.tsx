@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, memo, useMemo } from 'react';
+import React, { HTMLAttributes, useMemo } from 'react';
 import { TextField } from '@radix-ui/themes';
 import cn from 'classnames';
 
@@ -56,4 +56,4 @@ const Search: React.FC<ISearch> = ({
   );
 };
 
-export default memo(Search);
+export default Search;

@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -52,4 +52,4 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   );
 };
 
-export default memo(Sidebar);
+export default Sidebar;

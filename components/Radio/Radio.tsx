@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo } from 'react';
+import React from 'react';
 import * as RadixRadioGroup from '@radix-ui/react-radio-group';
 
 import s from './Radio.module.scss';
@@ -38,4 +38,4 @@ const Radio: React.FC<IRadio> = ({ options, onChange, defaultValue }) => {
   );
 };
 
-export default memo(Radio);
+export default Radio;

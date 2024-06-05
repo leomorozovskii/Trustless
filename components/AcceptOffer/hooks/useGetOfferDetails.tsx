@@ -4,8 +4,8 @@ import { useReadContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { useOfferContext } from '@context/offer/OfferContext';
 import { environment } from '@/environment';
+import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 
 interface OfferDetails {
   tokenFrom: Address;
@@ -19,7 +19,7 @@ interface OfferDetails {
 }
 
 export const useGetOfferDetails = () => {
-  const { acceptId } = useOfferContext();
+  const { acceptId } = useOfferAcceptContext();
   const memoizedId = useMemo(() => {
     if (!acceptId) return BigInt(0);
     return BigInt(acceptId);
@@ -30,16 +30,14 @@ export const useGetOfferDetails = () => {
     isLoading,
     error,
   } = useReadContract({
-    address: environment.contractAddress as Address,
+    address: environment.contractAddress,
     abi: trustlessOtcAbi,
     functionName: 'getOfferDetails',
     args: [memoizedId],
   });
 
-  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo(
-    details ? (details[0] as Address) : ('' as Address),
-  );
-  const { tokenDecimals: tokenToDecimals } = useTokenInfo(details ? (details[1] as Address) : ('' as Address));
+  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo(details ? details[0] : '0x');
+  const { tokenDecimals: tokenToDecimals } = useTokenInfo(details ? details[1] : '0x');
 
   const offerDetails: OfferDetails = useMemo(() => {
     if (!details) {
@@ -56,31 +54,31 @@ export const useGetOfferDetails = () => {
     }
 
     return {
-      tokenFrom: details[0] as Address,
-      tokenTo: details[1] as Address,
+      tokenFrom: details[0],
+      tokenTo: details[1],
       amountFrom: details[2],
       amountTo: details[3],
-      creator: details[4] as Address,
+      creator: details[4],
       fee: details[5],
       active: details[6],
       completed: details[7],
     };
   }, [details]);
 
-  const rate = useMemo(() => {
+  const rateToFrom = useMemo(() => {
     if (!details) return;
     if (!tokenFromDecimals) return;
-    const num1 = formatUnits(details[2], tokenFromDecimals);
+    const amountFrom = formatUnits(details[2], tokenFromDecimals);
     if (!tokenToDecimals) return;
-    const num2 = formatUnits(details[3], tokenToDecimals);
-    const result = Number(num1) / Number(num2);
+    const amountTo = formatUnits(details[3], tokenToDecimals);
+    const result = Number(amountFrom) / Number(amountTo);
     if (Number.isNaN(result)) return;
     return Number(result).toFixed(2);
   }, [details, tokenToDecimals, tokenFromDecimals]);
 
   return {
     ...offerDetails,
-    rate,
+    rateToFrom,
     isLoading,
     error,
     isTokenFromCustom: isCustom,

@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import cn from 'classnames';
 
 import Link from 'next/link';
@@ -41,4 +41,4 @@ const Button: React.FC<ButtonLinkProps> = ({
   );
 };
 
-export default memo(Button);
+export default Button;

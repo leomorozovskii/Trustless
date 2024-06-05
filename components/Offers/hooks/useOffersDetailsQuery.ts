@@ -45,8 +45,8 @@ const mkTransformOfferDetails =
     boolean,
     boolean,
   ]): Promise<OfferTrade> => {
-    let tokenFromDetails = TOKEN_MAP[tokenFrom.toLowerCase()];
-    let tokenToDetails = TOKEN_MAP[tokenTo.toLowerCase()];
+    let tokenFromDetails = TOKEN_MAP[tokenFrom];
+    let tokenToDetails = TOKEN_MAP[tokenTo];
 
     if (!tokenFromDetails) {
       tokenFromDetails = await getTokenData(config, tokenFrom);
@@ -170,7 +170,7 @@ const useOffersDetailsQuery = ({
         return [];
       }
       const userTrades = await readContract(wagmiConfig, {
-        address: environment.contractAddress as Address,
+        address: environment.contractAddress,
         functionName: 'getUserTrades',
         abi: trustlessOtcAbi,
         args: [account.address],
@@ -178,7 +178,7 @@ const useOffersDetailsQuery = ({
       const offers = await Promise.all(
         userTrades.map((offerId) =>
           readContract(wagmiConfig, {
-            address: environment.contractAddress as Address,
+            address: environment.contractAddress,
             functionName: 'getOfferDetails',
             abi: trustlessOtcAbi,
             args: [offerId],

@@ -7,8 +7,9 @@ export const checkAddress = (address: string | undefined) => {
   return address as Address;
 };
 
-export const checkValidAmount = (value: number) => {
-  return Math.sign(value) === 1;
+export const checkValidAmount = (value: string) => {
+  if (Number.isNaN(Number(value))) return false;
+  return Math.sign(Number(value)) === 1;
 };
 
 export const isDenied = (text: string) => {

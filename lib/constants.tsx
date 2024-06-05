@@ -84,6 +84,11 @@ export const TOKEN_MAP: { [address: string]: TokenData } = {
   [TokenAddress.DAO]: { address: TokenAddress.DAO, name: 'DAO', logo: DaoTokenIcon, decimals: 18 },
 };
 
+export const links = {
+  etherscan: 'https://etherscan.io',
+  sepoliaEtherscan: 'https://sepolia.etherscan.io',
+};
+
 export const WalletIconsMap = {
   metaMask: '',
   coinbaseWallet: '',

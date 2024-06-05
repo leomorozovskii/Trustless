@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import cn from 'classnames';
 
@@ -27,4 +27,4 @@ const Link: React.FC<LinkProps> = ({ children, className, variant = 'default', .
   );
 };
 
-export default memo(Link);
+export default Link;

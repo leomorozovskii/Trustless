@@ -9,10 +9,11 @@ import { WagmiProvider } from 'wagmi';
 import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
 import { useTheme } from '@context/theme/ThemeProvider';
-import { OfferProvider } from '@context/offer/OfferContext';
+import { OfferProvider } from '@context/offer/create/OfferCreateContext';
 import { ToastifyProvider } from '@context/toastify/ToastifyProvider';
 import i18n from '@/i18n';
 import { wagmiConfig } from '@/wagmiConfig';
+import { OfferAcceptProvider } from '@context/offer/accept/OfferAcceptContext';
 
 const queryClient = new QueryClient();
 
@@ -29,12 +30,14 @@ const Providers = ({
         <RainbowKitProvider modalSize="compact" theme={theme === 'light' ? lightTheme() : darkTheme()}>
           <ToastifyProvider>
             <OfferProvider>
-              <I18nextProvider i18n={i18n}>
-                <Sidebar>
-                  <Header />
-                  {children}
-                </Sidebar>
-              </I18nextProvider>
+              <OfferAcceptProvider>
+                <I18nextProvider i18n={i18n}>
+                  <Sidebar>
+                    <Header />
+                    {children}
+                  </Sidebar>
+                </I18nextProvider>
+              </OfferAcceptProvider>
             </OfferProvider>
           </ToastifyProvider>
         </RainbowKitProvider>

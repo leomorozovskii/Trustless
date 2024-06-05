@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Address } from 'viem';
 
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
@@ -27,4 +27,4 @@ const TokenEntity: React.FC<ITokenEntity> = ({ address, amount, type }) => {
   );
 };
 
-export default memo(TokenEntity);
+export default TokenEntity;

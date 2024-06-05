@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { Address, erc20Abi, formatUnits } from 'viem';
 
-import { useOfferContext } from '@context/offer/OfferContext';
-import { useTokenData } from '@components/CreateOffer/Bottom/hooks/useTokenData';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@/environment';
 
@@ -14,13 +14,13 @@ interface IUseGetAllowance {
 export const useGetAllowance = ({ approveReceipt }: IUseGetAllowance) => {
   const { address: userAddress } = useAccount();
   const { tokenFromAddress, tokenFromDecimals } = useTokenData();
-  const { offerFromState, activeStep, setActiveOfferStep, setActiveStep } = useOfferContext();
+  const { offerFromState, activeStep, setActiveOfferStep, setActiveStep } = useOfferCreateContext();
 
   const { data: allowance } = useReadContract({
     address: tokenFromAddress,
     abi: erc20Abi,
     functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress as Address],
+    args: [userAddress as Address, environment.contractAddress],
   });
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { AcceptOfferIcon } from '@assets/icons';
 import RateContainer from '@components/AcceptOffer/components/RateContainer';
@@ -8,7 +8,7 @@ import TokenEntity from '@components/AcceptOffer/components/TokenEntity';
 import s from '../AcceptOffer.module.scss';
 
 const TokensContainer: React.FC = () => {
-  const { tokenFrom, amountFrom, tokenTo, amountTo, rate } = useGetOfferDetails();
+  const { tokenFrom, amountFrom, tokenTo, amountTo, rateToFrom } = useGetOfferDetails();
 
   return (
     <div className={s.offerWrapper}>
@@ -17,9 +17,9 @@ const TokensContainer: React.FC = () => {
         <AcceptOfferIcon />
         <TokenEntity type="get" address={tokenFrom} amount={amountFrom} />
       </div>
-      <RateContainer value={rate} />
+      <RateContainer value={rateToFrom} />
     </div>
   );
 };
 
-export default memo(TokensContainer);
+export default TokensContainer;

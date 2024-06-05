@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { InputCross } from '@assets/icons';
@@ -80,4 +80,4 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
   );
 };
 
-export default memo(SelectTokenPopup);
+export default SelectTokenPopup;

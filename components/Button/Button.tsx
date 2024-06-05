@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import cn from 'classnames';
 
 import s from './Button.module.scss';
@@ -35,9 +35,9 @@ const Button: React.FC<ButtonProps> = ({
       className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
       {...props}
     >
-      <span className={cn({ [s.loading]: loading })}>{children}</span>
+      <span className={cn({ [s.loading]: loading })}>{loading ? `${children}...` : children}</span>
     </button>
   );
 };
 
-export default memo(Button);
+export default Button;

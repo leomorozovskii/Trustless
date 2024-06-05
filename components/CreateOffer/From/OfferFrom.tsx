@@ -3,22 +3,23 @@ import React, { useEffect, useMemo } from 'react';
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
-import { checkValidAmount } from '@components/CreateOffer/Bottom/utils/utils';
-import { useOfferContext } from '@context/offer/OfferContext';
+import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      if (Number.isNaN(Number(offerToState.amount)) || Number.isNaN(Number(offerFromState.amount))) return;
       if (offerToState.amount && offerFromState.amount) {
-        const newRate = offerToState.amount / offerFromState.amount;
+        const newRate = Number(offerToState.amount) / Number(offerFromState.amount);
         if (offerFromState.rate !== newRate && !Number.isNaN(newRate) && Number.isFinite(newRate)) {
           setOfferFromState({ rate: newRate });
         }
-      } else if (offerToState.amount === 0 || offerFromState.amount === 0) {
+      } else if (Number(offerToState.amount) === 0 || Number(offerFromState.amount) === 0) {
         setOfferFromState({ rate: 0 });
       }
     }, 250);
@@ -51,13 +52,13 @@ const OfferFrom = () => {
       <Input
         id="from amount input"
         label="Amount"
-        type="number"
+        type="text"
         error={amountError}
         disabled={inputsDisabled}
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}
-        onChange={({ target }) => setOfferFromState({ amount: +target.value })}
+        onChange={({ target }) => setOfferFromState({ amount: target.value })}
       />
       <Input
         id="from rate input"

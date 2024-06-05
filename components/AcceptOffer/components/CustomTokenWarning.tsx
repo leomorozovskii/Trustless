@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import { NewWindowIcon, WarningIcon } from '@assets/icons';
 
@@ -29,4 +29,4 @@ const CustomTokenWarning: React.FC<ICustomTokenWarning> = ({ name, address }) =>
   );
 };
 
-export default memo(CustomTokenWarning);
+export default CustomTokenWarning;

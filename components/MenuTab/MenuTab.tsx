@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo } from 'react';
+import React from 'react';
 import { usePathname } from 'next/navigation';
 import cn from 'classnames';
 
@@ -32,4 +32,4 @@ const MenuTab: React.FC<MenuTabProps> = ({ children, icon, active = false, disab
   );
 };
 
-export default memo(MenuTab);
+export default MenuTab;

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Address, createPublicClient, parseAbiItem, TransactionReceipt } from 'viem';
+import { createPublicClient, parseAbiItem, TransactionReceipt } from 'viem';
 import { http, useAccount } from 'wagmi';
 
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useOfferContext } from '@context/offer/OfferContext';
-import { isDenied } from '@components/CreateOffer/Bottom/utils/utils';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { isDenied } from '@components/CreateOffer/Buttons/utils/utils';
 import { OfferProgress } from '@lib/constants';
 import { sepolia } from 'wagmi/chains';
 import { environment } from '@/environment';
@@ -19,7 +19,7 @@ interface IOfferErrors {
 
 export const useOfferErrors = ({ approveError, approveReceipt, tradeError, tradeReceipt }: IOfferErrors) => {
   const { t } = useTranslation();
-  const { setActiveStep, setActiveOfferStep, setInputsDisabled, setOfferId } = useOfferContext();
+  const { setActiveStep, setActiveOfferStep, setInputsDisabled, setOfferId } = useOfferCreateContext();
   const { address: userAddress } = useAccount();
   const { handleAddItem } = useToastifyContext();
 
@@ -72,7 +72,7 @@ export const useOfferErrors = ({ approveError, approveReceipt, tradeError, trade
 
       const logs = await client.getLogs({
         event,
-        address: environment.contractAddress as Address,
+        address: environment.contractAddress,
         blockHash: tradeReceipt?.blockHash,
       });
 

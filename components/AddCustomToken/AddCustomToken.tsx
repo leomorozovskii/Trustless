@@ -1,10 +1,10 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
 import AddTokenPopup from '@components/AddTokenPopup/AddTokenPopup';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useOfferContext } from '@context/offer/OfferContext';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import s from './AddCustomToken.module.scss';
 
@@ -15,7 +15,7 @@ interface IAddCustomToken {
 const AddCustomToken: React.FC<IAddCustomToken> = ({ type }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
-  const { inputsDisabled } = useOfferContext();
+  const { inputsDisabled } = useOfferCreateContext();
   const [opened, setOpened] = useState<boolean>(false);
   const { address } = useAccount();
 
@@ -42,4 +42,4 @@ const AddCustomToken: React.FC<IAddCustomToken> = ({ type }) => {
   );
 };
 
-export default memo(AddCustomToken);
+export default AddCustomToken;
