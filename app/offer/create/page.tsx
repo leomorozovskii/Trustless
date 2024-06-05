@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
+import { IncludeFee } from '@components/IncludeFee';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
 import { OfferButtons } from 'components/CreateOffer/Buttons';
@@ -32,6 +33,9 @@ const CreateOfferPage: React.FC = () => {
             </div>
             <OfferTo />
           </div>
+          <Suspense>
+            <IncludeFee />
+          </Suspense>
           <OfferButtons />
         </div>
       )}

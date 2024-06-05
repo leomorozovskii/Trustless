@@ -14,8 +14,11 @@ import s from './AcceptedOffer.module.scss';
 const AcceptedOffer: React.FC = () => {
   const { txHash } = useOfferAcceptContext();
   const { tokenFrom, tokenTo, amountTo, amountFrom, rateToFrom } = useGetOfferDetails();
-  const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo(tokenFrom, amountFrom);
-  const { tokenName: tokenToName, tokenValue: tokenToValue } = useTokenInfo(tokenTo, amountTo);
+  const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
+    address: tokenFrom,
+    amount: amountFrom,
+  });
+  const { tokenName: tokenToName, tokenValue: tokenToValue } = useTokenInfo({ address: tokenTo, amount: amountTo });
 
   return (
     <div className={s.wrapper}>

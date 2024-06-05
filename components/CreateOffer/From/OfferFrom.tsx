@@ -9,7 +9,7 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled, setIsIncluded } = useOfferCreateContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -58,7 +58,10 @@ const OfferFrom = () => {
         size="lg"
         placeholder="0"
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}
-        onChange={({ target }) => setOfferFromState({ amount: target.value })}
+        onChange={({ target }) => {
+          setOfferFromState({ amount: target.value });
+          setIsIncluded(false);
+        }}
       />
       <Input
         id="from rate input"

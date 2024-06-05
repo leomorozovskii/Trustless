@@ -1,5 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useEffect, useReducer, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
 import { IOfferFrom, IOfferTo, IOfferCreateValues } from '@context/offer/create/OfferCreateContext.interfaces';
 import { OfferProgress } from '@lib/constants';
@@ -7,8 +6,6 @@ import { OfferProgress } from '@lib/constants';
 const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
 
 export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const searchParams = useSearchParams();
-
   const [offerFromState, setOfferFromState] = useReducer(
     (oldState: IOfferFrom, newState: Partial<IOfferFrom>): IOfferFrom => ({
       ...oldState,
@@ -37,32 +34,12 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
     },
   );
 
-  const tokenFromParam = searchParams.get('tokenFrom');
-  const tokenToParam = searchParams.get('tokenTo');
-  const amountFromParam = searchParams.get('amountFrom');
-  const amountToParam = searchParams.get('amountTo');
-  const receiverParam = searchParams.get('receiver');
-
-  useEffect(() => {
-    if (searchParams) {
-      setOfferFromState({
-        from: tokenFromParam || '',
-        amount: amountFromParam || '',
-        rate: 0,
-      });
-      setOfferToState({
-        to: tokenToParam || '',
-        amount: amountToParam || '',
-        receiver: receiverParam || '',
-      });
-    }
-  }, [tokenFromParam, tokenToParam, amountFromParam, amountToParam, receiverParam]);
-
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
   const [offerId, setOfferId] = useState<number | null>(null);
   const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
+  const [isIncluded, setIsIncluded] = useState<boolean>(false);
 
   const values: IOfferCreateValues = {
     offerFromState,
@@ -72,6 +49,8 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
     offerId,
     customTokenName,
     inputsDisabled,
+    isIncluded,
+    setIsIncluded,
     setInputsDisabled,
     setCustomTokenName,
     setOfferId,

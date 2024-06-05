@@ -16,7 +16,7 @@ import s from './AcceptOffer.module.scss';
 const AcceptOffer: React.FC = () => {
   const { isLoading } = useGetOfferDetails();
   const { isTokenFromCustom, tokenFrom } = useGetOfferDetails();
-  const { tokenName } = useTokenInfo(tokenFrom);
+  const { tokenName } = useTokenInfo({ address: tokenFrom });
   const receiver = '0x0000000000000000000000000000000000000000';
 
   return (

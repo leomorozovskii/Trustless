@@ -36,8 +36,8 @@ export const useGetOfferDetails = () => {
     args: [memoizedId],
   });
 
-  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo(details ? details[0] : '0x');
-  const { tokenDecimals: tokenToDecimals } = useTokenInfo(details ? details[1] : '0x');
+  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo({ address: details ? details[0] : '0x' });
+  const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details[1] : '0x' });
 
   const offerDetails: OfferDetails = useMemo(() => {
     if (!details) {

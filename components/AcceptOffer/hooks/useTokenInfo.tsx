@@ -7,8 +7,16 @@ import { useToken } from 'wagmi';
 import { UnknownIcon } from '@assets/icons/tokens';
 import { TOKEN_MAP } from '@lib/constants';
 import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
-export const useTokenInfo = (address: Address, amount?: bigint, withFee?: boolean) => {
+interface IUseTokenInfo {
+  address: Address;
+  amount?: bigint;
+  withFee?: boolean;
+}
+
+export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
+  const { offerFromState } = useOfferCreateContext();
   const result = useToken({
     address,
   });
@@ -53,10 +61,15 @@ export const useTokenInfo = (address: Address, amount?: bigint, withFee?: boolea
   }, [amount, tokenDecimals]);
 
   const tokenFeeValue = useMemo(() => {
-    if (!tokenDecimals || !amount || !withFee || !calculatedFee) return;
-    const value = formatUnits(amount, tokenDecimals);
-    return (1 - calculatedFee) * Number(value);
-  }, [amount, tokenDecimals, calculatedFee, withFee]);
+    if (!tokenDecimals || !withFee || !calculatedFee) return;
+    if (amount) {
+      const value = formatUnits(amount, tokenDecimals);
+      return (1 - calculatedFee) * Number(value);
+    }
+    if (offerFromState.amount) {
+      return Number(calculatedFee * Number(offerFromState.amount));
+    }
+  }, [amount, tokenDecimals, calculatedFee, withFee, offerFromState]);
 
   return {
     TokenLogo,

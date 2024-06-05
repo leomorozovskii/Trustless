@@ -12,7 +12,11 @@ interface ITokenEntity {
 }
 
 const TokenEntity: React.FC<ITokenEntity> = ({ address, amount, type }) => {
-  const { TokenLogo, tokenName, tokenValue } = useTokenInfo(address, amount, type === 'get');
+  const { TokenLogo, tokenName, tokenValue } = useTokenInfo({
+    address,
+    amount,
+    withFee: type === 'get',
+  });
 
   return (
     <div className={s.tokenWrapper}>
