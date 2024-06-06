@@ -31,14 +31,16 @@ const IncludeFee = () => {
   }, [offerFromState.amount, isFeeIncluded]);
 
   const handleCheckboxChange = () => {
+    setIsFeeIncluded(false);
     if (isFeeIncluded) {
       setOfferFromState({ amount: originalAmount });
       setIsFeeIncluded(false);
     } else {
-      const newAmount = String(Number(originalAmount) + Number(tokenValue));
+      setIsFeeIncluded(true);
+      if (!originalAmount) return;
+      const newAmount = String(Number(originalAmount) + Number(tokenValue ?? fee));
       setOfferFromState({ amount: newAmount });
       setOriginalAmount(offerFromState.amount);
-      setIsFeeIncluded(true);
     }
   };
 
@@ -46,7 +48,8 @@ const IncludeFee = () => {
     <div className={s.container}>
       <Checkbox checked={isFeeIncluded} onCheckedChange={handleCheckboxChange} />
       <h2 className={s.label}>
-        Include service fee 0.01% {tokenValue && tokenName && <span>({`${fee} ${tokenName}`})</span>}
+        Include service fee 0.01%{' '}
+        {fee && tokenName ? <span>({`${fee} ${tokenName}`})</span> : fee && <span>({`${fee}`})</span>}
       </h2>
       <div id="tooltip" className={s.tooltip}>
         <InfoIcon />
