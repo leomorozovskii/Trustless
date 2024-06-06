@@ -60,7 +60,10 @@ const OfferFrom = () => {
         size="lg"
         placeholder="0"
         value={offerFromState.rate ? offerFromState.rate.toString() : ''}
-        onChange={({ target }) => setOfferFromState({ rate: Number(target.value) })}
+        onChange={({ target }) => {
+          setOfferFromState({ rate: Number(target.value) });
+          setIsFeeIncluded(false);
+        }}
       />
     </div>
   );

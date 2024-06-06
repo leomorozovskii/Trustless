@@ -31,16 +31,13 @@ const IncludeFee = () => {
   }, [offerFromState.amount, isFeeIncluded]);
 
   const handleCheckboxChange = () => {
-    setIsFeeIncluded(false);
+    setIsFeeIncluded(!isFeeIncluded);
     if (isFeeIncluded) {
       setOfferFromState({ amount: originalAmount });
-      setIsFeeIncluded(false);
     } else {
-      setIsFeeIncluded(true);
       if (!originalAmount) return;
       const newAmount = String(Number(originalAmount) + Number(tokenValue ?? fee));
       setOfferFromState({ amount: newAmount });
-      setOriginalAmount(offerFromState.amount);
     }
   };
 
