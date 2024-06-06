@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
@@ -9,7 +10,18 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
+  const searchParams = useSearchParams();
   const { setOfferFromState, offerFromState, offerToState, inputsDisabled, setIsFeeIncluded } = useOfferCreateContext();
+
+  useEffect(() => {
+    const tokenFromParam = searchParams.get('tokenFrom');
+    const amountFromParam = searchParams.get('amountFrom');
+    setOfferFromState({
+      from: tokenFromParam || '',
+      amount: amountFromParam || '',
+      rate: 0,
+    });
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {

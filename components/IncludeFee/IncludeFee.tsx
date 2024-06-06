@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { Tooltip } from 'react-tooltip';
 import { Address } from 'viem';
 
@@ -12,36 +11,13 @@ import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
 import s from './IncludeFee.module.scss';
 
 const IncludeFee = () => {
-  const searchParams = useSearchParams();
-  const { offerFromState, setOfferFromState, setOfferToState, setIsFeeIncluded, isFeeIncluded } =
-    useOfferCreateContext();
+  const { offerFromState, setOfferFromState, setIsFeeIncluded, isFeeIncluded } = useOfferCreateContext();
   const [originalAmount, setOriginalAmount] = useState<string>(offerFromState.amount);
   const { calculatedFee } = useGetFee();
   const { tokenName, tokenValue } = useTokenInfo({
     address: offerFromState.from as Address,
     withFee: true,
   });
-
-  const tokenFromParam = searchParams.get('tokenFrom');
-  const tokenToParam = searchParams.get('tokenTo');
-  const amountFromParam = searchParams.get('amountFrom');
-  const amountToParam = searchParams.get('amountTo');
-  const receiverParam = searchParams.get('receiver');
-
-  useEffect(() => {
-    if (searchParams) {
-      setOfferFromState({
-        from: tokenFromParam || '',
-        amount: amountFromParam || '',
-        rate: 0,
-      });
-      setOfferToState({
-        to: tokenToParam || '',
-        amount: amountToParam || '',
-        receiver: receiverParam || '',
-      });
-    }
-  }, [tokenFromParam, tokenToParam, amountFromParam, amountToParam, receiverParam]);
 
   const fee = useMemo(() => {
     if (!originalAmount || !calculatedFee) return;

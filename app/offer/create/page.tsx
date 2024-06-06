@@ -29,13 +29,15 @@ const CreateOfferPage: React.FC = () => {
         <div className={s.column}>
           <div className={s.row}>
             <div className={s.fromWrapper}>
-              <OfferFrom />
+              <Suspense>
+                <OfferFrom />
+              </Suspense>
             </div>
-            <OfferTo />
+            <Suspense>
+              <OfferTo />
+            </Suspense>
           </div>
-          <Suspense>
-            <IncludeFee />
-          </Suspense>
+          <IncludeFee />
           <OfferButtons />
         </div>
       )}

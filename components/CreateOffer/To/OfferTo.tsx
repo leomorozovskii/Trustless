@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
@@ -10,10 +10,23 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
 
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
+import { useSearchParams } from 'next/navigation';
 
 const OfferTo = () => {
+  const searchParams = useSearchParams();
   const { setOfferToState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const tokenToParam = searchParams.get('tokenTo');
+    const amountToParam = searchParams.get('amountTo');
+    const receiverParam = searchParams.get('receiver');
+    setOfferToState({
+      to: tokenToParam || '',
+      amount: amountToParam || '',
+      receiver: receiverParam || '',
+    });
+  }, []);
 
   return (
     <div className={s.container}>
