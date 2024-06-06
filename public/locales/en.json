@@ -9,7 +9,7 @@
       "myOffers": "My offers",
       "history": "History"
     },
-    "emptyMessage": "There is no offers at the moment.",
+    "emptyMessage": "There is no offers at the moment",
     "createOffer": "Create offer",
     "cancelOffer": "Cancel offer",
     "cancellingOffer": "Cancelling offer",
@@ -91,6 +91,7 @@
     "approve": "Approve error",
     "offer": "Offer error",
     "cancel": "Cancel error",
+    "transaction": "Transaction error",
     "denied": "User denied the transaction",
     "somethingWrong": "Something went wrong",
     "insufficientBalance": "Insufficient balance",
@@ -110,6 +111,9 @@
     "nextPage": "Next page",
     "prevPage": "Previous page",
     "share": "Share",
-    "selectCell": "Select cell"
+    "selectCell": "Select cell",
+    "wrongNetwork": "Wrong network",
+    "connectWallet": "Connect wallet",
+    "notConnectedMessage": "There's nothing to see until you are connected"
   }
 }

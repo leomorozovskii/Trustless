@@ -5,9 +5,11 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { AccountIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 
+import { useTranslation } from 'react-i18next';
 import s from './ConnectWallet.module.scss';
 
 const ConnectWallet = () => {
+  const { t } = useTranslation();
   return (
     <ConnectButton.Custom>
       {({ account, chain, openAccountModal, openChainModal, openConnectModal, authenticationStatus, mounted }) => {
@@ -29,14 +31,14 @@ const ConnectWallet = () => {
               if (!connected) {
                 return (
                   <Button className={s.button} onClick={openConnectModal} type="button">
-                    Connect Wallet
+                    {t('shared.connectWallet')}
                   </Button>
                 );
               }
               if (chain.unsupported) {
                 return (
                   <Button onClick={openChainModal} type="button">
-                    Wrong network
+                    {t('shared.wrongNetwork')}
                   </Button>
                 );
               }

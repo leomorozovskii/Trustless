@@ -16,16 +16,12 @@ const useWriteCancelTrade = () => {
       });
     },
     writeContractAsync: (offerId: string) => {
-      return writeContract
-        .writeContractAsync({
-          address: environment.contractAddress,
-          abi: trustlessOtcAbi,
-          functionName: 'cancelTrade',
-          args: [BigInt(offerId)],
-        })
-        .then((tx) => {
-          return tx;
-        });
+      return writeContract.writeContractAsync({
+        address: environment.contractAddress,
+        abi: trustlessOtcAbi,
+        functionName: 'cancelTrade',
+        args: [BigInt(offerId)],
+      });
     },
   };
 };
