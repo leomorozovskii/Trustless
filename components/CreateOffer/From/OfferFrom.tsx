@@ -57,6 +57,7 @@ const OfferFrom = () => {
         id="from rate input"
         label="Rate"
         type="number"
+        disabled={inputsDisabled}
         size="lg"
         placeholder="0"
         value={offerFromState.rate ? offerFromState.rate.toString() : ''}
