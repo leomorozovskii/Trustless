@@ -13,7 +13,8 @@ import s from './IncludeFee.module.scss';
 
 const IncludeFee = () => {
   const searchParams = useSearchParams();
-  const { offerFromState, setOfferFromState, setOfferToState, setIsIncluded, isIncluded } = useOfferCreateContext();
+  const { offerFromState, setOfferFromState, setOfferToState, setIsFeeIncluded, isFeeIncluded } =
+    useOfferCreateContext();
   const [originalAmount, setOriginalAmount] = useState<string>(offerFromState.amount);
   const { calculatedFee } = useGetFee();
   const { tokenName, tokenValue } = useTokenInfo({
@@ -48,26 +49,26 @@ const IncludeFee = () => {
   }, [calculatedFee, originalAmount]);
 
   useEffect(() => {
-    if (offerFromState.amount !== originalAmount && !isIncluded) {
+    if (offerFromState.amount !== originalAmount && !isFeeIncluded) {
       setOriginalAmount(offerFromState.amount);
     }
-  }, [offerFromState.amount, isIncluded]);
+  }, [offerFromState.amount, isFeeIncluded]);
 
   const handleCheckboxChange = () => {
-    if (isIncluded) {
+    if (isFeeIncluded) {
       setOfferFromState({ amount: originalAmount });
-      setIsIncluded(false);
+      setIsFeeIncluded(false);
     } else {
       const newAmount = String(Number(originalAmount) + Number(tokenValue));
       setOfferFromState({ amount: newAmount });
       setOriginalAmount(offerFromState.amount);
-      setIsIncluded(true);
+      setIsFeeIncluded(true);
     }
   };
 
   return (
     <div className={s.container}>
-      <Checkbox checked={isIncluded} onCheckedChange={handleCheckboxChange} />
+      <Checkbox checked={isFeeIncluded} onCheckedChange={handleCheckboxChange} />
       <h2 className={s.label}>
         Include service fee 0.01% {tokenValue && tokenName && <span>({`${fee} ${tokenName}`})</span>}
       </h2>

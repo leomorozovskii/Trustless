@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@components/Button';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
+import { environment } from '@/environment';
 
 import s from './ShareOfferContainer.module.scss';
 
@@ -22,7 +23,7 @@ const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId }) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && offerId) {
-      setLink(`${window.location.origin}/offers/${offerId}`);
+      setLink(`${environment.siteUrl}/offers/${offerId}`);
     }
   }, [offerId]);
 
