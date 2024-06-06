@@ -7,6 +7,8 @@ import { SelectTokenPopup } from '@components/SelectTokenPopup';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { TOKEN_MAP } from '@lib/constants';
 
+import { useToken } from 'wagmi';
+import { Address } from 'viem';
 import s from './Select.module.scss';
 
 export interface ISelect {
@@ -25,6 +27,10 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
     setOpened(false);
   };
 
+  const result = useToken({
+    address: value as Address,
+  });
+
   const IconComponent: React.FC<IconProps> | undefined = useMemo(() => {
     if (!value) return;
     const item = TOKEN_MAP[value];
@@ -35,9 +41,10 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
   const tokenTitle = useMemo(() => {
     if (!value) return;
     const notImported = TOKEN_MAP[value]?.name;
-    if (!notImported) return customTokenName;
+    if (!notImported && !result.data) return customTokenName;
+    if (!notImported && result.data) return result.data.name;
     return TOKEN_MAP[value].name;
-  }, [value]);
+  }, [value, result]);
 
   const handleOpen = () => {
     if (disabled) return;

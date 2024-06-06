@@ -1,25 +1,31 @@
-import React, { useMemo, useState } from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@components/Button';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
+import { environment } from '@/environment';
 
 import s from './ShareOfferContainer.module.scss';
 
-const ShareOfferContainer = () => {
+interface IShareOfferContainer {
+  offerId: number | null | string;
+}
+
+const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId }) => {
   const { t } = useTranslation();
-  const { offerId, setActiveOfferStep } = useOfferCreateContext();
+  const { setActiveOfferStep } = useOfferCreateContext();
   const [copied, setCopied] = useState<boolean>(false);
   const { handleAddItem } = useToastifyContext();
+  const [link, setLink] = useState<string | undefined>(undefined);
 
-  const link = useMemo(() => {
-    if (typeof window === 'undefined') return;
-    return `${window.location.origin}/offers/${offerId}`;
+  useEffect(() => {
+    setLink(`${environment.siteUrl}/offers/${offerId}`);
   }, [offerId]);
 
   const handleCopy = () => {
-    console.log(window.location.origin);
     if (!link) return;
     navigator.clipboard.writeText(link);
     setActiveOfferStep(4);
@@ -29,6 +35,8 @@ const ShareOfferContainer = () => {
     }
     setTimeout(() => setCopied(false), 5000);
   };
+
+  if (!link) return;
 
   return (
     <div className={s.wrapper}>

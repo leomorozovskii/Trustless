@@ -25,7 +25,7 @@ const AcceptOfferButtons: React.FC = () => {
   const { tokenTo, amountTo, active, isLoading } = useGetOfferDetails();
   const { address: userAddress } = useAccount();
   const { handleAddItem } = useToastifyContext();
-  const { tokenDecimals } = useTokenInfo(tokenTo);
+  const { tokenDecimals } = useTokenInfo({ address: tokenTo });
 
   useEffect(() => {
     if (!isLoading && !active) {

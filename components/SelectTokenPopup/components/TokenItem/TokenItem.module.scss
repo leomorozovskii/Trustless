@@ -12,6 +12,11 @@
   border-radius: 100px;
   cursor: pointer;
   gap: $xxs;
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    background: $base-white;
+  }
 }
 
 .title {
