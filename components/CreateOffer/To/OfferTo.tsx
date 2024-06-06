@@ -9,13 +9,27 @@ import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
+import { useCalculateAmountValue } from '@components/CreateOffer/From/hooks/useCalculateAmountValue';
 
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
   const searchParams = useSearchParams();
-  const { setOfferToState, setOfferFromState, offerToState, inputsDisabled } = useOfferCreateContext();
+  const { setOfferToState, setOfferFromState, offerToState, offerFromState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
+  const { calculateAmountToValue } = useCalculateAmountValue();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      calculateAmountToValue();
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [offerFromState.rate, offerFromState.amount]);
+
+  useEffect(() => {
+    calculateAmountToValue();
+  }, [offerFromState.amount]);
 
   useEffect(() => {
     const tokenToParam = searchParams.get('tokenTo');
