@@ -7,6 +7,7 @@ import { Select } from '@components/Select';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
+import { getAddress } from 'viem';
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
@@ -16,8 +17,17 @@ const OfferFrom = () => {
   useEffect(() => {
     const tokenFromParam = searchParams.get('tokenFrom');
     const amountFromParam = searchParams.get('amountFrom');
+    let validatedTokenFrom = '';
+    if (tokenFromParam) {
+      try {
+        validatedTokenFrom = getAddress(tokenFromParam);
+      } catch (error) {
+        validatedTokenFrom = '';
+      }
+    }
+
     setOfferFromState({
-      from: tokenFromParam || '',
+      from: validatedTokenFrom,
       amount: amountFromParam || '',
       rate: 0,
     });

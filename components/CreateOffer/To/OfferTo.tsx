@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { isAddress } from 'viem';
+import { getAddress, isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
@@ -21,10 +21,30 @@ const OfferTo = () => {
     const tokenToParam = searchParams.get('tokenTo');
     const amountToParam = searchParams.get('amountTo');
     const receiverParam = searchParams.get('receiver');
+
+    let validatedTokenTo = '';
+    let validatedReceiver = '';
+
+    if (tokenToParam) {
+      try {
+        validatedTokenTo = getAddress(tokenToParam);
+      } catch (error) {
+        validatedTokenTo = '';
+      }
+    }
+
+    if (receiverParam) {
+      try {
+        validatedReceiver = getAddress(receiverParam);
+      } catch (error) {
+        validatedReceiver = '';
+      }
+    }
+
     setOfferToState({
-      to: tokenToParam || '',
+      to: validatedTokenTo,
       amount: amountToParam || '',
-      receiver: receiverParam || '',
+      receiver: validatedReceiver,
     });
   }, []);
 
