@@ -6,14 +6,13 @@ import { darkTheme, lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowki
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 
-import { Sidebar } from '@components/Sidebar';
-import { Header } from '@components/Header';
 import { useTheme } from '@context/theme/ThemeProvider';
 import { ToastifyProvider } from '@context/toastify/ToastifyProvider';
 import { OfferAcceptProvider } from '@context/offer/accept/OfferAcceptContext';
 import { OfferCreateProvider } from '@context/offer/create/OfferCreateContext';
 import i18n from '@/i18n';
 import { wagmiConfig } from '@/wagmiConfig';
+import { IsMountedProvider } from '@lib/hooks/useIsMounted';
 
 const queryClient = new QueryClient();
 
@@ -23,7 +22,6 @@ const Providers = ({
   children: React.ReactNode;
 }>) => {
   const { theme } = useTheme();
-
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
@@ -32,10 +30,7 @@ const Providers = ({
             <OfferCreateProvider>
               <OfferAcceptProvider>
                 <I18nextProvider i18n={i18n}>
-                  <Sidebar>
-                    <Header />
-                    {children}
-                  </Sidebar>
+                  <IsMountedProvider>{children}</IsMountedProvider>
                 </I18nextProvider>
               </OfferAcceptProvider>
             </OfferCreateProvider>

@@ -1,13 +1,24 @@
 import React from 'react';
+import { create } from 'zustand';
 
-const useIsMounted = () => {
-  const [isMounted, setIsMounted] = React.useState(false);
+const useIsMountedStore = create<{ isMounted: boolean; mount: () => void }>((set) => ({
+  isMounted: false,
+  mount: () => set({ isMounted: true }),
+}));
+
+export function IsMountedProvider({ children }: React.PropsWithChildren): React.ReactNode {
+  const { isMounted, mount } = useIsMountedStore((state) => ({
+    isMounted: state.isMounted,
+    mount: state.mount,
+  }));
 
   React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    if (!isMounted) mount();
+  }, [isMounted, mount]);
 
-  return isMounted;
-};
+  return children;
+}
 
-export { useIsMounted };
+export function useIsMounted() {
+  return useIsMountedStore((state) => state.isMounted);
+}

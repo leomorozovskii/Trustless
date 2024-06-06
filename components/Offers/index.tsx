@@ -1,6 +1,5 @@
 'use client';
 
-import { useIsMounted } from '@lib/hooks/useIsMounted';
 import { OfferColumns, OfferFilter } from './types';
 
 import { createOffersView } from './view';
@@ -49,8 +48,6 @@ export const createOffersTemplate = ({
   };
 
   const OffersTemplate = ({ title }: OffersProps) => {
-    const isMounted = useIsMounted();
-    if (!isMounted) return null;
     return (
       <div className={s.container}>
         <div className={s.header}>
