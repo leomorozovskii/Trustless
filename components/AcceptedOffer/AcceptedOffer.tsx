@@ -30,7 +30,7 @@ const AcceptedOffer: React.FC = () => {
         </h2>
         <h2 className={s.label}>Rate {rateToFrom}</h2>
       </div>
-      <Link target="_blank" rel="noreferrer" href={`${links.sepoliaEtherscan}/tx/${txHash}`} className={s.share}>
+      <Link target="_blank" rel="noreferrer" href={`${links.etherscan}/tx/${txHash}`} className={s.share}>
         <p className={s.shareLabel}>View transaction</p>
         <NewWindowIcon />
       </Link>

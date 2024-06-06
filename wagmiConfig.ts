@@ -1,5 +1,5 @@
 import { createConfig, http } from 'wagmi';
-import { sepolia } from 'wagmi/chains';
+import { mainnet, sepolia, Chain } from 'wagmi/chains';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 import {
   ledgerWallet,
@@ -11,6 +11,8 @@ import {
 } from '@rainbow-me/rainbowkit/wallets';
 
 import { environment } from '@/environment';
+
+const network: Chain = environment.isTestnet ? sepolia : mainnet;
 
 const connectors = connectorsForWallets(
   [
@@ -30,13 +32,13 @@ const connectors = connectorsForWallets(
 );
 
 export const wagmiConfig = createConfig({
-  chains: [sepolia],
+  chains: [network],
   connectors,
   batch: {
     multicall: true,
   },
   transports: {
-    [sepolia.id]: http(environment.apiKey),
+    [network.id]: http(environment.apiKey),
   },
   ssr: true,
 });

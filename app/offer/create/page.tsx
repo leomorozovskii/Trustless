@@ -11,6 +11,8 @@ import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
+import { Sidebar } from '@components/Sidebar';
+import { Header } from '@components/Header';
 import s from './CreateOffer.module.scss';
 
 const CreateOfferPage: React.FC = () => {
@@ -19,23 +21,28 @@ const CreateOfferPage: React.FC = () => {
   const { offerId, activeOfferStep, activeStep } = useOfferCreateContext();
 
   return (
-    <div className={s.container}>
-      <h2 className={s.title}>{activeStep === OfferProgress.Created ? t('offer.created') : t('offer.create.offer')}</h2>
-      <ProgressOfferBar currentStep={activeOfferStep} steps={steps} />
-      {activeStep === OfferProgress.Created && offerId ? (
-        <ShareOfferContainer />
-      ) : (
-        <div className={s.column}>
-          <div className={s.row}>
-            <div className={s.fromWrapper}>
-              <OfferFrom />
+    <Sidebar>
+      <Header />
+      <div className={s.container}>
+        <h2 className={s.title}>
+          {activeStep === OfferProgress.Created ? t('offer.created') : t('offer.create.offer')}
+        </h2>
+        <ProgressOfferBar currentStep={activeOfferStep} steps={steps} />
+        {activeStep === OfferProgress.Created && offerId ? (
+          <ShareOfferContainer />
+        ) : (
+          <div className={s.column}>
+            <div className={s.row}>
+              <div className={s.fromWrapper}>
+                <OfferFrom />
+              </div>
+              <OfferTo />
             </div>
-            <OfferTo />
+            <OfferButtons />
           </div>
-          <OfferButtons />
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </Sidebar>
   );
 };
 

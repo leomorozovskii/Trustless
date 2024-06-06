@@ -6,13 +6,14 @@ import cn from 'classnames';
 
 import { ButtonPlus, HistoryIcon, OfferIcon } from '@assets/icons';
 import { MenuTab } from '@components/MenuTab';
-import { ROUTES } from '@lib/routes';
 
 import s from './Sidebar.module.scss';
 
-interface SidebarProps extends React.PropsWithChildren {}
+interface SidebarProps extends React.PropsWithChildren {
+  contentBg?: 'contrast' | 'default';
+}
 
-const Sidebar: React.FC<SidebarProps> = ({ children }) => {
+const Sidebar: React.FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
   const { t } = useTranslation();
   const pathname = usePathname();
 
@@ -37,17 +38,24 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             )}
           </div>
           <div className={s.menu}>
-            <MenuTab icon={<OfferIcon />} href={ROUTES.offers}>
+            <MenuTab icon={<OfferIcon />} href="/">
               {t('sidebar.myOffers')}
             </MenuTab>
-            <MenuTab icon={<HistoryIcon />} href={ROUTES.history}>
+            <MenuTab icon={<HistoryIcon />} href="/history">
               {t('sidebar.history')}
             </MenuTab>
           </div>
         </div>
         <p className={s.rightsLabel}>© 2024 Berezka DAO</p>
       </aside>
-      <div className={s.content}>{children}</div>
+      <div
+        className={cn(s.content, {
+          [s.content_bg_contrast]: contentBg === 'contrast',
+          [s.content_bg_default]: contentBg === 'default',
+        })}
+      >
+        {children}
+      </div>
     </div>
   );
 };
