@@ -22,9 +22,7 @@ const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId }) => {
   const [link, setLink] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && offerId) {
-      setLink(`${environment.siteUrl}/offers/${offerId}`);
-    }
+    setLink(`${environment.siteUrl}/offers/${offerId}`);
   }, [offerId]);
 
   const handleCopy = () => {

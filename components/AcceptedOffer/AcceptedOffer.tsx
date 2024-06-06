@@ -37,7 +37,7 @@ const AcceptedOffer: React.FC = () => {
         <p className={s.shareLabel}>View transaction</p>
         <NewWindowIcon />
       </Link>
-      <Link href="/offers" className={s.button}>
+      <Link href="/" className={s.button}>
         Great!
       </Link>
     </div>

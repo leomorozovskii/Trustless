@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
@@ -7,31 +6,10 @@ import { Select } from '@components/Select';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
-import { getAddress } from 'viem';
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const searchParams = useSearchParams();
   const { setOfferFromState, offerFromState, offerToState, inputsDisabled, setIsFeeIncluded } = useOfferCreateContext();
-
-  useEffect(() => {
-    const tokenFromParam = searchParams.get('tokenFrom');
-    const amountFromParam = searchParams.get('amountFrom');
-    let validatedTokenFrom = '';
-    if (tokenFromParam) {
-      try {
-        validatedTokenFrom = getAddress(tokenFromParam);
-      } catch (error) {
-        validatedTokenFrom = '';
-      }
-    }
-
-    setOfferFromState({
-      from: validatedTokenFrom,
-      amount: amountFromParam || '',
-      rate: 0,
-    });
-  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {

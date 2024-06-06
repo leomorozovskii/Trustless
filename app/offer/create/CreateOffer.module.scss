@@ -4,7 +4,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 724px;
+  max-width: 736px;
+  width: 100%;
   margin: 0 auto;
   gap: $lg;
 }
