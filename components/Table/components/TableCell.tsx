@@ -12,6 +12,7 @@ const TableCell = <TData, TValue>({ cell }: { cell: Cell<TData, TValue> }) => {
         width: meta?.columnWidth,
         minWidth: meta?.columnMinWidth,
         justifyContent: meta?.columnAlign,
+        textAlign: meta?.columnAlign,
         marginLeft: meta?.columnMarginLeft,
         marginRight: meta?.columnMarginRight,
         paddingLeft: meta?.columnPaddingLeft,

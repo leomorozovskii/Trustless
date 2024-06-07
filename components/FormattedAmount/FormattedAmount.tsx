@@ -6,13 +6,17 @@ interface FormattedNumberProps {
   minimumFractionDigits?: number;
   maximumFractionDigits?: number;
   decimals?: number;
+  className?: string;
+  formatValue?: (value: string) => string;
 }
 
 const FormattedNumber: React.FC<FormattedNumberProps> = ({
   value,
-  minimumFractionDigits,
+  minimumFractionDigits = 2,
   maximumFractionDigits = 2,
   decimals = 0,
+  className,
+  formatValue = (val) => val.toString(),
 }) => {
   const { i18n } = useTranslation(undefined, { useSuspense: false });
 
@@ -27,7 +31,7 @@ const FormattedNumber: React.FC<FormattedNumberProps> = ({
 
   const formattedValue = formatter.format(Number(value) / 10 ** decimals);
 
-  return <span>{formattedValue}</span>;
+  return <span className={className}>{formatValue(formattedValue)}</span>;
 };
 
 export default FormattedNumber;

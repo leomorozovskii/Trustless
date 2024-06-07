@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .cell {
   display: inline-flex;
   align-items: center;
@@ -9,6 +11,14 @@
 
   &_uppercase {
     text-transform: uppercase;
+  }
+
+  &_column {
+    display: inline-grid;
+  }
+
+  &__secondaryText {
+    @include font-s-flat;
   }
 }
 

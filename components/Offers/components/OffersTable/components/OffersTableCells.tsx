@@ -36,11 +36,36 @@ const OffersTableAsset: React.FC<OffersTableAssetProps> = ({ name, icon }) => {
   );
 };
 
-type OffersTableAmountProps = {
+type OffersTableAmountFromProps = {
+  amount: number;
+  amountWithFee: number;
+};
+
+const OffersTableAmountFrom: React.FC<OffersTableAmountFromProps> = ({ amount, amountWithFee }) => {
+  const { t } = useTranslation();
+  return (
+    <OffersTableCell
+      column
+      secondaryText={
+        amount !== amountWithFee && (
+          <FormattedNumber
+            value={amountWithFee}
+            className={s.cell__text_small}
+            formatValue={(value) => t('offers.table.cell.amountWithFee', { amount: value })}
+          />
+        )
+      }
+    >
+      <FormattedNumber value={amount} />
+    </OffersTableCell>
+  );
+};
+
+type OffersTableAmountToProps = {
   amount: number;
 };
 
-const OffersTableAmount: React.FC<OffersTableAmountProps> = ({ amount }) => {
+const OffersTableAmountTo: React.FC<OffersTableAmountToProps> = ({ amount }) => {
   return (
     <OffersTableCell>
       <FormattedNumber value={amount} />
@@ -55,7 +80,7 @@ type OffersTableRateProps = {
 const OffersTableRate: React.FC<OffersTableRateProps> = ({ rate }) => {
   return (
     <OffersTableCell>
-      <FormattedNumber value={rate} />
+      <FormattedNumber value={rate} minimumFractionDigits={0} />
     </OffersTableCell>
   );
 };
@@ -111,7 +136,8 @@ const OffersTableShare: React.FC<OffersTableShareProps> = ({ id }) => {
 export {
   OffersTableId,
   OffersTableAsset,
-  OffersTableAmount,
+  OffersTableAmountFrom,
+  OffersTableAmountTo,
   OffersTableRate,
   OffersTableTxHash,
   OffersTableStatus,

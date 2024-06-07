@@ -28,6 +28,9 @@
       "cancelled": "Cancelled"
     },
     "table": {
+      "cell": {
+        "amountWithFee": "& fee {{amount}}"
+      },
       "status": {
         "open": "Open",
         "accepted": "Accepted",

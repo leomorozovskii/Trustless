@@ -44,19 +44,13 @@ type OffersDetailsRawQuery = {
 
 const OFFERS_DETAILS_QUERY = gql`
   query OffersDetails(
-    $filters: TradeOffer_filter,
-    $skip: Int,
-    $first: Int,
-    $orderBy: TradeOffer_orderBy,
+    $filters: TradeOffer_filter
+    $skip: Int
+    $first: Int
+    $orderBy: TradeOffer_orderBy
     $orderDirection: OrderDirection
   ) {
-    tradeOffers(
-      where: $filters,
-      skip: $skip,
-      first: $first,
-      orderBy: $orderBy,
-      orderDirection: $orderDirection
-    ) {
+    tradeOffers(where: $filters, skip: $skip, first: $first, orderBy: $orderBy, orderDirection: $orderDirection) {
       taker
       creationHash
       creationTimestamp

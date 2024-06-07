@@ -15,7 +15,8 @@ import {
 } from './components/OffersTableHeading';
 import {
   OffersTableTxHash,
-  OffersTableAmount,
+  OffersTableAmountFrom,
+  OffersTableAmountTo,
   OffersTableAsset,
   OffersTableId,
   OffersTableRate,
@@ -62,7 +63,7 @@ export const columns = [
     },
     header: () => <OffersTableAssetToHeading />,
   }),
-  columnHelper.accessor((props) => props.amountFrom, {
+  columnHelper.accessor((props) => ({ amount: props.amountFrom, amountWithFee: props.amountFromWithFee }), {
     id: OfferColumns.AmountFrom,
     size: 100,
     meta: {
@@ -70,7 +71,10 @@ export const columns = [
       columnAlign: 'end',
     },
     enableSorting: false,
-    cell: (info) => <OffersTableAmount amount={info.getValue()} />,
+    cell: (info) => {
+      const { amount, amountWithFee } = info.getValue();
+      return <OffersTableAmountFrom amount={amount} amountWithFee={amountWithFee} />;
+    },
     header: () => <OffersTableAmountFromHeading />,
   }),
   columnHelper.accessor((props) => props.amountTo, {
@@ -80,7 +84,7 @@ export const columns = [
       columnAlign: 'end',
     },
     enableSorting: false,
-    cell: (info) => <OffersTableAmount amount={info.getValue()} />,
+    cell: (info) => <OffersTableAmountTo amount={info.getValue()} />,
     header: () => <OffersTableAmountToHeading />,
   }),
   columnHelper.accessor((props) => props.amountTo / props.amountFrom, {
@@ -123,7 +127,7 @@ export const columns = [
   columnHelper.accessor((props) => props.unixTimestamp, {
     id: OfferColumns.Date,
     meta: {
-      columnWidth: '132',
+      columnWidth: '132px',
       columnAlign: 'start',
       columnPaddingLeft: '8px',
     },

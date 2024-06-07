@@ -15,6 +15,7 @@ const TableHeadingCell = <TData, TValue>({ header }: { header: Header<TData, TVa
         width: header.column.columnDef.meta?.columnWidth,
         minWidth: header.column.columnDef.meta?.columnMinWidth,
         justifyContent: header.column.columnDef.meta?.columnAlign,
+        textAlign: header.column.columnDef.meta?.columnAlign,
         marginLeft: header.column.columnDef.meta?.columnMarginLeft,
         marginRight: header.column.columnDef.meta?.columnMarginRight,
         paddingLeft: header.column.columnDef.meta?.columnPaddingLeft,
