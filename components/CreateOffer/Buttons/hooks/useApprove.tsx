@@ -11,7 +11,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { OfferProgress } from '@lib/constants';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 export const useApprove = () => {
   const { t } = useTranslation();

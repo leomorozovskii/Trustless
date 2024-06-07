@@ -1,6 +1,6 @@
 import { useReadContract } from 'wagmi';
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 import { useMemo } from 'react';
 
 export const useGetFee = () => {

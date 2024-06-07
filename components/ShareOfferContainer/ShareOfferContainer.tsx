@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@components/Button';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 import s from './ShareOfferContainer.module.scss';
 

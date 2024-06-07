@@ -1,15 +1,24 @@
+@import '@common/typo.scss';
+
 .cell {
   display: inline-flex;
   align-items: center;
+  column-gap: 8px;
 
-  &_align_start {
-    justify-content: start;
-    width: max-content;
+  &_full {
+    width: 100%;
   }
 
-  &_align_end {
-    justify-content: end;
-    width: 100%;
+  &_uppercase {
+    text-transform: uppercase;
+  }
+
+  &_column {
+    display: inline-grid;
+  }
+
+  &__secondaryText {
+    @include font-s-flat;
   }
 }
 
@@ -17,6 +26,9 @@
   margin-left: 4px;
 }
 
-.address {
-  margin-right: 4px;
+.controls {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  column-gap: 8px;
 }

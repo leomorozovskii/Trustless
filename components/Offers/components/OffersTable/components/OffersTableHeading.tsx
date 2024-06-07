@@ -33,14 +33,19 @@ const OffersTableRateHeading: React.FC = () => {
   return <OffersTableCell>{t('offers.table.headings.rate')}</OffersTableCell>;
 };
 
-const OffersTableAddressHeading: React.FC = () => {
+const OffersTableTxHashHeading: React.FC = () => {
   const { t } = useTranslation();
-  return <OffersTableCell>{t('offers.table.headings.address')}</OffersTableCell>;
+  return <OffersTableCell>{t('offers.table.headings.txHash')}</OffersTableCell>;
 };
 
 const OffersTableStatusHeading: React.FC = () => {
   const { t } = useTranslation();
   return <OffersTableCell>{t('offers.table.headings.status')}</OffersTableCell>;
+};
+
+const OffersTableDateHeading: React.FC = () => {
+  const { t } = useTranslation();
+  return <OffersTableCell>{t('offers.table.headings.date')}</OffersTableCell>;
 };
 
 const OffersTableShareHeading: React.FC = () => {
@@ -55,7 +60,8 @@ export {
   OffersTableAmountFromHeading,
   OffersTableAmountToHeading,
   OffersTableRateHeading,
-  OffersTableAddressHeading,
+  OffersTableTxHashHeading,
   OffersTableStatusHeading,
   OffersTableShareHeading,
+  OffersTableDateHeading,
 };

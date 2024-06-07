@@ -11,8 +11,12 @@ import { ToastifyProvider } from '@context/toastify/ToastifyProvider';
 import { OfferAcceptProvider } from '@context/offer/accept/OfferAcceptContext';
 import { OfferCreateProvider } from '@context/offer/create/OfferCreateContext';
 import i18n from '@/i18n';
-import { wagmiConfig } from '@/wagmiConfig';
+import { wagmiConfig } from '@lib/wagmiConfig';
 import { IsMountedProvider } from '@lib/hooks/useIsMounted';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 const queryClient = new QueryClient();
 

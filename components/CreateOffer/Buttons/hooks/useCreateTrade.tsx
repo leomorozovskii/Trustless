@@ -9,7 +9,7 @@ import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
