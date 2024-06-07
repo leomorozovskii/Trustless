@@ -8,7 +8,7 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import { isDenied } from '@components/CreateOffer/Buttons/utils/utils';
 import { OfferProgress } from '@lib/constants';
 import { sepolia } from 'wagmi/chains';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 interface IOfferErrors {
   approveError: any;

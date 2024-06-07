@@ -33,7 +33,8 @@ const Button: React.FC<ButtonLinkProps> = ({
       id={props.id}
       type={type}
       onClick={onClick}
-      className={cn(s.button, className, s[variant], { [s.icon]: isIcon, [s.disabled]: disabled })}
+      className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
+      data-disabled={disabled}
       {...props}
     >
       <span className={cn({ [s.loading]: loading })}>{children}</span>

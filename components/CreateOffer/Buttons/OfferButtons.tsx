@@ -15,7 +15,7 @@ import { useOfferErrors } from '@components/CreateOffer/Buttons/hooks/useOfferEr
 import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 import s from './OfferButtons.module.scss';
 

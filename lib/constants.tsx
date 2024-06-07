@@ -1,4 +1,4 @@
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 import {
   ARMORIcon,
   AlcxIcon,

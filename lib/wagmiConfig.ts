@@ -10,7 +10,7 @@ import {
   coinbaseWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 const network: Chain = environment.isTestnet ? sepolia : mainnet;
 

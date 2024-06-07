@@ -10,9 +10,12 @@ const TableCell = <TData, TValue>({ cell }: { cell: Cell<TData, TValue> }) => {
       className={s.cell}
       style={{
         width: meta?.columnWidth,
+        minWidth: meta?.columnMinWidth,
         justifyContent: meta?.columnAlign,
         marginLeft: meta?.columnMarginLeft,
         marginRight: meta?.columnMarginRight,
+        paddingLeft: meta?.columnPaddingLeft,
+        paddingRight: meta?.columnPaddingRight,
       }}
     >
       {flexRender(cell.column.columnDef.cell, cell.getContext())}

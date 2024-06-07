@@ -15,7 +15,7 @@ import { isDenied } from '@components/CreateOffer/Buttons/utils/utils';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { OfferProgress } from '@lib/constants';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 import s from '@components/CreateOffer/Buttons/OfferButtons.module.scss';
 

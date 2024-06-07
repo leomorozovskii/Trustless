@@ -21,8 +21,9 @@ const OffersTemplate = createOffersTemplate({
     OfferColumns.AmountFrom,
     OfferColumns.AmountTo,
     OfferColumns.Rate,
-    OfferColumns.Address,
+    OfferColumns.TxHash,
     OfferColumns.Status,
+    OfferColumns.Date,
   ],
 });
 

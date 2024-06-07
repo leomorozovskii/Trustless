@@ -2,7 +2,7 @@ import { OfferColumns, OfferTrade } from '@components/Offers/types';
 import { createColumnHelper } from '@tanstack/react-table';
 
 import {
-  OffersTableAddressHeading,
+  OffersTableTxHashHeading,
   OffersTableAmountFromHeading,
   OffersTableAmountToHeading,
   OffersTableAssetFromHeading,
@@ -11,15 +11,17 @@ import {
   OffersTableRateHeading,
   OffersTableShareHeading,
   OffersTableStatusHeading,
+  OffersTableDateHeading,
 } from './components/OffersTableHeading';
 import {
-  OffersTableAddress,
+  OffersTableTxHash,
   OffersTableAmount,
   OffersTableAsset,
   OffersTableId,
   OffersTableRate,
   OffersTableShare,
   OffersTableStatus,
+  OffersTableDate,
 } from './components/OffersTableCells';
 
 const columnHelper = createColumnHelper<OfferTrade>();
@@ -91,19 +93,21 @@ export const columns = [
     cell: (info) => <OffersTableRate rate={info.getValue()} />,
     header: () => <OffersTableRateHeading />,
   }),
-  columnHelper.accessor((props) => props.address, {
-    id: OfferColumns.Address,
+  columnHelper.accessor((props) => props.txHash, {
+    id: OfferColumns.TxHash,
     meta: {
-      columnWidth: '138px',
+      columnWidth: 'auto',
+      columnMinWidth: '138px',
       columnMarginLeft: '32px',
+      columnPaddingRight: '26px',
       columnAlign: 'start',
     },
     enableSorting: false,
     cell: (info) => {
-      const address = info.getValue();
-      return <OffersTableAddress address={address} />;
+      const txHash = info.getValue();
+      return <OffersTableTxHash hash={txHash} />;
     },
-    header: () => <OffersTableAddressHeading />,
+    header: () => <OffersTableTxHashHeading />,
   }),
   columnHelper.accessor((props) => props.status, {
     id: OfferColumns.Status,
@@ -115,6 +119,17 @@ export const columns = [
     enableSorting: false,
     cell: (info) => <OffersTableStatus status={info.getValue()} />,
     header: () => <OffersTableStatusHeading />,
+  }),
+  columnHelper.accessor((props) => props.unixTimestamp, {
+    id: OfferColumns.Date,
+    meta: {
+      columnWidth: '132',
+      columnAlign: 'start',
+      columnPaddingLeft: '8px',
+    },
+    enableSorting: true,
+    cell: (info) => <OffersTableDate unixTimestamp={info.getValue()} />,
+    header: () => <OffersTableDateHeading />,
   }),
   columnHelper.accessor((props) => props.id, {
     id: OfferColumns.Share,

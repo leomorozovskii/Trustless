@@ -3,7 +3,11 @@
     "rootDir": ".",
     "sourceMap": true,
     "target": "es2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,25 +25,47 @@
     "importHelpers": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@assets/*": ["./assets/*"],
-      "@common/*": ["./styles/common/*"],
-      "@context/*": ["./context/*"],
-      "@components/*": ["./components/*"],
-      "@styles/*": ["./styles/*"],
-      "@containers/*": ["./containers/*"],
-      "@lib/*": ["./lib/*"],
-      "@pages/*": ["./pages/*"],
-      "@~/*": ["./"],
-      "@/*": ["./*"],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@common/*": [
+        "./styles/common/*"
+      ],
+      "@context/*": [
+        "./context/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@containers/*": [
+        "./containers/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
+      "@pages/*": [
+        "./pages/*"
+      ],
+      "@~/*": [
+        "./"
+      ],
+      "@/*": [
+        "./*"
+      ],
     },
-    "moduleResolution": "node"
+    "moduleResolution": "bundler"
   },
   "include": [
     "next-env.d.ts",
