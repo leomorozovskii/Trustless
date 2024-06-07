@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createPublicClient, parseAbiItem, parseUnits } from 'viem';
-import { http, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { createPublicClient, parseAbiItem, parseUnits, TransactionReceipt } from 'viem';
+import { http, useWriteContract } from 'wagmi';
 import { sepolia } from 'wagmi/chains';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
@@ -18,13 +17,35 @@ export const useCreateTrade = () => {
   const { setActiveStep, setActiveOfferStep, setOfferId, offerToState, offerFromState } = useOfferCreateContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
 
-  const { data: tradeHash, writeContractAsync: tradeContract } = useWriteContract();
-  const { data: tradeReceipt } = useWaitForTransactionReceipt({ hash: tradeHash });
+  const { writeContractAsync: tradeContract } = useWriteContract();
 
-  const onCreateReceipt = () => {
+  const onCreateReceipt = (receipt: TransactionReceipt) => {
     handleAddItem({ title: t('success.message'), text: t('success.offerCreated'), type: 'success' });
     setActiveStep(OfferProgress.Created);
     setActiveOfferStep(3);
+
+    const getOfferId = async () => {
+      const event = parseAbiItem('event OfferCreated(uint indexed tradeID)');
+
+      const client = createPublicClient({
+        chain: sepolia,
+        transport: http(environment.apiKey),
+      });
+
+      const logs = await client.getLogs({
+        event,
+        address: environment.contractAddress,
+        blockHash: receipt?.blockHash,
+      });
+
+      const logIndex = receipt?.logs[2]?.logIndex;
+      const result = logs.find((item) => item.logIndex === logIndex);
+
+      if (result && result.args.tradeID) {
+        setOfferId(Number(result.args.tradeID));
+      }
+    };
+    getOfferId();
   };
 
   const createTrade = async () => {
@@ -42,31 +63,6 @@ export const useCreateTrade = () => {
       ],
     });
   };
-
-  useEffect(() => {
-    const getOfferId = async () => {
-      const event = parseAbiItem('event OfferCreated(uint indexed tradeID)');
-
-      const client = createPublicClient({
-        chain: sepolia,
-        transport: http(environment.apiKey),
-      });
-
-      const logs = await client.getLogs({
-        event,
-        address: environment.contractAddress,
-        blockHash: tradeReceipt?.blockHash,
-      });
-
-      const logIndex = tradeReceipt?.logs[2]?.logIndex;
-      const result = logs.find((item) => item.logIndex === logIndex);
-
-      if (result && result.args.tradeID) {
-        setOfferId(Number(result.args.tradeID));
-      }
-    };
-    getOfferId();
-  }, [tradeReceipt]);
 
   return {
     onCreateReceipt,

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { TransactionReceipt } from 'viem';
+import { useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
@@ -11,8 +11,7 @@ export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();
   const { setActiveAcceptStep, setTxHash, acceptId } = useOfferAcceptContext();
 
-  const { data: acceptHash, writeContractAsync: acceptContract } = useWriteContract();
-  const { data: acceptReceipt } = useWaitForTransactionReceipt({ hash: acceptHash });
+  const { writeContractAsync: acceptContract } = useWriteContract();
 
   const acceptTrade = async () => {
     if (!acceptId) return;
@@ -24,14 +23,15 @@ export const useAcceptOffer = () => {
     });
   };
 
-  useEffect(() => {
-    if (!acceptReceipt) return;
+  const onAcceptReceipt = (receipt: TransactionReceipt) => {
+    if (!receipt) return;
     handleAddItem({ title: 'Success', text: 'Trade has been accepted', type: 'success' });
-    setTxHash(acceptReceipt.transactionHash);
+    setTxHash(receipt.transactionHash);
     setActiveAcceptStep(OfferProgress.Created);
-  }, [acceptReceipt]);
+  };
 
   return {
     acceptTrade,
+    onAcceptReceipt,
   };
 };

@@ -46,7 +46,7 @@ const OfferButtons = () => {
           )}
           <TxButton
             type="button"
-            onReceipt={onCreateReceipt}
+            onReceipt={(receipt) => onCreateReceipt(receipt)}
             disabled={createButtonDisabled}
             errorTitle={t('error.offer')}
             writeContract={createTrade}

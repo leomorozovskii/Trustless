@@ -24,7 +24,7 @@ const AcceptOfferButtons: React.FC = () => {
   const { t } = useTranslation();
 
   const { onAcceptApproveReceipt, acceptApproveHandler } = useApprove();
-  const { acceptTrade } = useAcceptOffer();
+  const { acceptTrade, onAcceptReceipt } = useAcceptOffer();
 
   useEffect(() => {
     if (!isLoading && !active) {
@@ -53,6 +53,7 @@ const AcceptOfferButtons: React.FC = () => {
             type="button"
             disabled={activeAcceptStep !== OfferProgress.Approved || !active}
             errorTitle="Accept error"
+            onReceipt={(receipt) => onAcceptReceipt(receipt)}
             writeContract={acceptTrade}
           >
             {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('Accepting Trade') : t('Accept Trade'))}
