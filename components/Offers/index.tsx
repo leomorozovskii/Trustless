@@ -31,7 +31,8 @@ export const createOffersTemplate = ({
     OfferColumns.AmountFrom,
     OfferColumns.AmountTo,
     OfferColumns.Rate,
-    OfferColumns.Address,
+    OfferColumns.TxHash,
+    OfferColumns.Date,
     OfferColumns.Status,
   ],
 }: CreateOffersParams) => {

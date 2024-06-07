@@ -7,6 +7,10 @@ import { useTranslation } from 'react-i18next';
 import FormattedNumber from '@components/FormattedAmount/FormattedAmount';
 import { ShareIcon } from '@assets/icons';
 import Link from 'next/link';
+import { TxLink } from '@components/TxLink';
+import { Hash } from 'viem';
+import { links } from '@lib/constants';
+import dayjs from 'dayjs';
 import { OffersTableCell } from './OffersTableCell';
 import s from './OffersTableCell.module.scss';
 
@@ -32,11 +36,36 @@ const OffersTableAsset: React.FC<OffersTableAssetProps> = ({ name, icon }) => {
   );
 };
 
-type OffersTableAmountProps = {
+type OffersTableAmountFromProps = {
+  amount: number;
+  amountWithFee: number;
+};
+
+const OffersTableAmountFrom: React.FC<OffersTableAmountFromProps> = ({ amount, amountWithFee }) => {
+  const { t } = useTranslation();
+  return (
+    <OffersTableCell
+      column
+      secondaryText={
+        amount !== amountWithFee && (
+          <FormattedNumber
+            value={amount - amountWithFee}
+            className={s.cell__text_small}
+            formatValue={(value) => t('offers.table.cell.amountWithFee', { amount: value })}
+          />
+        )
+      }
+    >
+      <FormattedNumber value={amount} />
+    </OffersTableCell>
+  );
+};
+
+type OffersTableAmountToProps = {
   amount: number;
 };
 
-const OffersTableAmount: React.FC<OffersTableAmountProps> = ({ amount }) => {
+const OffersTableAmountTo: React.FC<OffersTableAmountToProps> = ({ amount }) => {
   return (
     <OffersTableCell>
       <FormattedNumber value={amount} />
@@ -51,21 +80,24 @@ type OffersTableRateProps = {
 const OffersTableRate: React.FC<OffersTableRateProps> = ({ rate }) => {
   return (
     <OffersTableCell>
-      <FormattedNumber value={rate} />
+      <FormattedNumber value={rate} minimumFractionDigits={0} />
     </OffersTableCell>
   );
 };
 
-type OffersTableAddressProps = {
-  address: string;
+type OffersTableTxHashProps = {
+  hash: Hash;
 };
 
-const OffersTableAddress: React.FC<OffersTableAddressProps> = ({ address }) => {
+const OffersTableTxHash: React.FC<OffersTableTxHashProps> = ({ hash }) => {
   const { t } = useTranslation();
   return (
-    <OffersTableCell>
-      <span className={s.address}>{`${address.slice(0, 4)}...${address.slice(-6)}`}</span>
-      <CopyText text={address} successMessage={t('success.addressCopied')} />
+    <OffersTableCell full>
+      <span>{`${hash.slice(0, 4)}...${hash.slice(-6)}`}</span>
+      <span className={s.controls}>
+        <TxLink hash={hash} />
+        <CopyText text={`${links.etherscan}/tx/${hash}`} successMessage={t('success.txLinkCopied')} />
+      </span>
     </OffersTableCell>
   );
 };
@@ -77,6 +109,14 @@ type OffersTableStatusProps = {
 const OffersTableStatus: React.FC<OffersTableStatusProps> = ({ status }) => {
   const { t } = useTranslation();
   return <OffersTableCell>{t(`offers.table.status.${status}`)}</OffersTableCell>;
+};
+
+type OffersTableDateProps = {
+  unixTimestamp: number;
+};
+
+const OffersTableDate: React.FC<OffersTableDateProps> = ({ unixTimestamp }) => {
+  return <OffersTableCell uppercase>{dayjs.unix(unixTimestamp).utc().format('DD MMM YYYY HH:mm')}</OffersTableCell>;
 };
 
 type OffersTableShareProps = {
@@ -96,9 +136,11 @@ const OffersTableShare: React.FC<OffersTableShareProps> = ({ id }) => {
 export {
   OffersTableId,
   OffersTableAsset,
-  OffersTableAmount,
+  OffersTableAmountFrom,
+  OffersTableAmountTo,
   OffersTableRate,
-  OffersTableAddress,
+  OffersTableTxHash,
   OffersTableStatus,
   OffersTableShare,
+  OffersTableDate,
 };

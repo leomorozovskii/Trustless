@@ -10,7 +10,7 @@ import { useOffersDetailsQuery } from './hooks/useOffersDetailsQuery';
 import { OffersCancelOffer } from './components/OffersCancelOffer/OffersCancelOffer';
 import { OfferReOpenOffer } from './components/OffersReOpenOffer/OffersReOpenOffer';
 import { OffersEmptyState } from './components/OffersEmptyState';
-import { useFilteredWithBadges } from './hooks/useFilteredWithBadges';
+import { useOffersStatsQuery } from './hooks/useOffersStatsQuery';
 
 type CreateOffersView = {
   columnsToDisplay: OfferColumns[];
@@ -45,7 +45,7 @@ const createOffersView = (
         sorting,
         filters,
       });
-      const selectedOffer = offerDetails.data?.offers.find((offer) => offer.id === selection) || null;
+      const selectedOffer = offerDetails.data?.find((offer) => offer.id === selection) || null;
       return <OfferReOpenOffer offer={selectedOffer} />;
     },
     Table: () => {
@@ -68,33 +68,35 @@ const createOffersView = (
         searchFilter,
         sorting,
       });
-      if (!offerDetails.isFetching && offerDetails.data?.total === 0) {
+      if (!offerDetails.isLoading && offerDetails.data?.length === 0) {
         return <OffersEmptyState />;
       }
       return (
         <OffersTable
           sorting={sorting}
-          offers={offerDetails.data?.offers}
+          offers={offerDetails.data}
           onSortingChange={setSorting}
           onRowSelectionChange={setSelection}
           columnsToDisplay={columnsToDisplay}
-          isLoading={offerDetails.isFetching && offerDetails.data?.offers.length === 0}
+          isLoading={offerDetails.isLoading}
         />
       );
     },
     Filters: () => {
-      const { filter, filters, setFilter } = useOffersStore((state) => ({
+      const { filter, searchFilter, filters, setFilter } = useOffersStore((state) => ({
         filter: state.filter,
         filters: state.filters,
         setFilter: state.setFilter,
+        searchFilter: state.searchFilter,
       }));
-      const filtersWithBadges = useFilteredWithBadges(filters);
+      const offersStats = useOffersStatsQuery({ searchFilter, filters });
       return (
         <OffersFilters
-          filters={filtersWithBadges.data}
+          filters={filters}
+          offersStats={offersStats.data}
           value={filter}
           onValueChange={setFilter}
-          isLoading={filtersWithBadges.isFetching && filtersWithBadges.data.length === 0}
+          isLoading={offersStats.isLoading}
         />
       );
     },
@@ -106,34 +108,22 @@ const createOffersView = (
       return <OffersSearchFilter value={searchFilter} onValueChange={setSearchFilter} />;
     },
     Pagination: () => {
-      const { pagination, filter, sorting, searchFilter, nextPage, prevPage, filters } = useOffersStore((state) => ({
-        filter: state.filter,
+      const { pagination, searchFilter, nextPage, prevPage, filters } = useOffersStore((state) => ({
         searchFilter: state.searchFilter,
-        sorting: state.sorting,
         pagination: state.pagination,
         nextPage: state.nextPage,
         prevPage: state.prevPage,
         filters: state.filters,
       }));
-      const offerDetails = useOffersDetailsQuery({
-        filter,
-        filters,
-        limit: pagination.limit,
-        searchFilter,
-        offset: pagination.offset,
-        sorting,
-      });
-      if (!offerDetails.isFetching && offerDetails.data?.total === 0) {
-        return null;
-      }
+      const offerStats = useOffersStatsQuery({ searchFilter, filters });
       return (
         <OffersPagination
-          total={offerDetails.data?.total}
+          total={offerStats.data?.total}
           offset={pagination.offset}
           limit={pagination.limit}
           onNextPage={nextPage}
           onPrevPage={prevPage}
-          isLoading={offerDetails.isFetching && offerDetails.data?.offers.length === 0}
+          isLoading={offerStats.isLoading}
         />
       );
     },

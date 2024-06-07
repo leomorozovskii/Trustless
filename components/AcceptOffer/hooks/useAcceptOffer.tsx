@@ -5,7 +5,7 @@ import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { OfferProgress } from '@lib/constants';
-import { environment } from '@/environment';
+import { environment } from '@lib/environment';
 
 export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();

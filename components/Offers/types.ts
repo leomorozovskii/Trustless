@@ -1,4 +1,5 @@
 import { TokenData } from '@lib/constants';
+import { Hash } from 'viem';
 
 export type OfferStatus = 'open' | 'accepted' | 'cancelled';
 
@@ -11,9 +12,17 @@ export enum OfferColumns {
   AmountFrom = 'AmountFrom',
   AmountTo = 'AmountTo',
   Rate = 'Rate',
-  Address = 'Address',
+  TxHash = 'TxHash',
   Status = 'Status',
+  Date = 'Date',
   Share = 'Share',
+}
+
+export interface OffersStats {
+  accepted: number;
+  cancelled: number;
+  open: number;
+  total: number;
 }
 
 export type OfferSortingOrder = 'asc' | 'desc';
@@ -51,7 +60,10 @@ export interface OfferTrade {
   tokenFromDetails: TokenData;
   tokenToDetails: TokenData;
   amountFrom: number;
+  amountFromWithFee: number;
   amountTo: number;
-  address: string;
+  txHash: Hash;
+  receiver: string;
+  unixTimestamp: number;
   status: OfferStatus;
 }

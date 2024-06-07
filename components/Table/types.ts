@@ -5,9 +5,12 @@ declare module '@tanstack/table-core' {
   interface ColumnMeta<TData extends RowData, TValue> {
     isLoading?: boolean;
     columnWidth?: string | number;
+    columnMinWidth?: string | number;
     columnAlign?: 'start' | 'center' | 'end';
     columnMarginLeft?: string | number;
     columnMarginRight?: string | number;
+    columnPaddingLeft?: string | number;
+    columnPaddingRight?: string | number;
   }
 }
 

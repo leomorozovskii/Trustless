@@ -28,6 +28,9 @@
       "cancelled": "Cancelled"
     },
     "table": {
+      "cell": {
+        "amountWithFee": "& fee {{amount}}"
+      },
       "status": {
         "open": "Open",
         "accepted": "Accepted",
@@ -40,7 +43,7 @@
         "amountFrom": "Amount 1",
         "amountTo": "Amount 2",
         "rate": "Rate",
-        "address": "Address",
+        "txHash": "Tx hash",
         "status": "Status",
         "date": "Date",
         "share": "Share"
@@ -104,6 +107,7 @@
     "offerCreated": "Offer has been created",
     "codeCopied": "Code has been copied",
     "addressCopied": "Address has been copied",
+    "txLinkCopied": "Tx link has been copied",
     "offerCancelled": "Offer has been cancelled"
   },
   "shared": {

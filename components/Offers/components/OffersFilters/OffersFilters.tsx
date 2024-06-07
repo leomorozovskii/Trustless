@@ -4,16 +4,17 @@ import { Tabs } from '@components/Tabs';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TabsSkeleton } from '@components/Tabs/TabsSkeleton';
-import { OfferFilter } from '../../types';
+import { OfferFilter, OffersStats } from '../../types';
 
 type OffersFiltersProps = {
   value: OfferFilter;
-  filters: { badge?: string; value: OfferFilter }[];
+  filters: OfferFilter[];
+  offersStats?: OffersStats | undefined;
   isLoading?: boolean;
   onValueChange: (value: OfferFilter) => void;
 };
 
-const OffersFilters: React.FC<OffersFiltersProps> = ({ filters, value, isLoading, onValueChange }) => {
+const OffersFilters: React.FC<OffersFiltersProps> = ({ filters, value, offersStats, isLoading, onValueChange }) => {
   const { t } = useTranslation();
   if (isLoading) {
     <TabsSkeleton count={filters.length} />;
@@ -22,9 +23,9 @@ const OffersFilters: React.FC<OffersFiltersProps> = ({ filters, value, isLoading
     <Tabs<OfferFilter>
       value={value}
       options={filters.map((filter) => ({
-        value: filter.value,
-        badge: filter.badge,
-        label: t(`offers.filters.${filter.value}`),
+        value: filter,
+        badge: filter === 'all' ? undefined : offersStats?.[filter].toString(),
+        label: t(`offers.filters.${filter}`),
       }))}
       onValueChange={onValueChange}
     />
