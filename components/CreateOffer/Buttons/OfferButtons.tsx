@@ -1,87 +1,24 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { erc20Abi, parseUnits } from 'viem';
 
 import { GasIcon, SelectIcon } from '@assets/icons';
-import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
-import { Button } from '@components/Button';
 import { ProgressBar } from '@components/ProgressBar';
+import { TxButton } from '@components/TxFlow';
 import { useButtonsDisabled } from '@components/CreateOffer/Buttons/hooks/useButtonsDisabled';
-import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
-import { useGetAllowance } from '@components/CreateOffer/Buttons/hooks/useGetAllowance';
-import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
-import { useOfferErrors } from '@components/CreateOffer/Buttons/hooks/useOfferErrors';
-import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
+import { useApprove } from '@components/CreateOffer/Buttons/hooks/useApprove';
+import { useCreateTrade } from '@components/CreateOffer/Buttons/hooks/useCreateTrade';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
-import { environment } from '@/environment';
 
 import s from './OfferButtons.module.scss';
 
 const OfferButtons = () => {
   const { t } = useTranslation();
-  const { activeStep, setActiveStep, offerToState, offerFromState, setOfferFromState } = useOfferCreateContext();
-  const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
+  const { activeStep, setActiveStep } = useOfferCreateContext();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
-  const {
-    data: approveHash,
-    error: approveError,
-    isPending: isApprovePending,
-    writeContract: approveContract,
-  } = useWriteContract();
 
-  const {
-    data: tradeHash,
-    error: tradeError,
-    isPending: isTradePending,
-    writeContract: tradeContract,
-  } = useWriteContract();
-
-  const { data: approveReceipt, isLoading: isApproveTransactionLoading } = useWaitForTransactionReceipt({
-    hash: approveHash,
-  });
-
-  useGetAllowance({ approveReceipt });
-
-  const { isGreater } = useGetBalanceGreater();
-
-  const { data: tradeReceipt, isLoading: isCreateTransactionLoading } = useWaitForTransactionReceipt({
-    hash: tradeHash,
-  });
-
-  useOfferErrors({ approveError, approveReceipt, tradeError, tradeReceipt });
-
-  const approve = async () => {
-    if (!isValid) return;
-    if (isGreater()) {
-      setOfferFromState({ amountError: t('error.insufficientBalance') });
-      return;
-    }
-    setOfferFromState({ amountError: '' });
-    approveContract({
-      address: tokenFromAddress,
-      abi: erc20Abi,
-      functionName: 'approve',
-      args: [environment.contractAddress, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
-    });
-  };
-
-  const createTrade = async () => {
-    if (!isValid) return;
-    tradeContract({
-      address: environment.contractAddress,
-      abi: trustlessOtcAbi,
-      functionName: 'initiateTrade',
-      args: [
-        tokenFromAddress,
-        tokenToAddress,
-        parseUnits(String(offerFromState.amount), tokenFromDecimals),
-        parseUnits(String(offerToState.amount), tokenToDecimals),
-        checkAddress(offerToState.receiver),
-      ],
-    });
-  };
+  const { onCreateApproveReceipt, createApproveHandler } = useApprove();
+  const { onCreateReceipt, createTrade } = useCreateTrade();
 
   useEffect(() => {
     if (!approveButtonDisabled) {
@@ -97,23 +34,25 @@ const OfferButtons = () => {
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
           {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created && (
-            <Button
-              disabled={approveButtonDisabled}
+            <TxButton
               type="button"
-              loading={isApprovePending || isApproveTransactionLoading}
-              onClick={approve}
+              onReceipt={onCreateApproveReceipt}
+              disabled={approveButtonDisabled}
+              errorTitle={t('error.approve')}
+              writeContract={createApproveHandler}
             >
-              {isApprovePending || isApproveTransactionLoading ? t('token.approving') : t('token.approve')}
-            </Button>
+              {({ isLoading }) => (isLoading ? t('token.approving') : t('token.approve'))}
+            </TxButton>
           )}
-          <Button
-            disabled={createButtonDisabled}
-            loading={isTradePending || isCreateTransactionLoading}
+          <TxButton
             type="button"
-            onClick={createTrade}
+            onReceipt={(receipt) => onCreateReceipt(receipt)}
+            disabled={createButtonDisabled}
+            errorTitle={t('error.offer')}
+            writeContract={createTrade}
           >
-            {isTradePending || isCreateTransactionLoading ? t('token.creating') : t('token.create')}
-          </Button>
+            {({ isLoading }) => (isLoading ? t('token.creating') : t('token.create'))}
+          </TxButton>
         </div>
         <ProgressBar currentStep={activeStep} />
       </div>

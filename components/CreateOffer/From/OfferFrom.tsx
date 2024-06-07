@@ -4,27 +4,17 @@ import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
+import { useCalculateAmountValue } from '@components/CreateOffer/From/hooks/useCalculateAmountValue';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
   const { setOfferFromState, offerFromState, offerToState, inputsDisabled, setIsFeeIncluded } = useOfferCreateContext();
+  const { calculateRateValue } = useCalculateAmountValue();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (Number.isNaN(Number(offerToState.amount)) || Number.isNaN(Number(offerFromState.amount))) return;
-      if (offerToState.amount && offerFromState.amount) {
-        const newRate = Number(offerToState.amount) / Number(offerFromState.amount);
-        if (offerFromState.rate !== newRate && !Number.isNaN(newRate) && Number.isFinite(newRate)) {
-          setOfferFromState({ rate: newRate });
-        }
-      } else if (Number(offerToState.amount) === 0 || Number(offerFromState.amount) === 0) {
-        setOfferFromState({ rate: 0 });
-      }
-    }, 250);
-
-    return () => clearTimeout(timeout);
+    calculateRateValue();
   }, [offerToState.amount, offerFromState.amount]);
 
   const amountError = useMemo(() => {
@@ -67,11 +57,14 @@ const OfferFrom = () => {
         id="from rate input"
         label="Rate"
         type="number"
+        disabled={inputsDisabled}
         size="lg"
-        disabled
         placeholder="0"
         value={offerFromState.rate ? offerFromState.rate.toString() : ''}
-        onChange={({ target }) => setOfferFromState({ rate: +target.value })}
+        onChange={({ target }) => {
+          setOfferFromState({ rate: Number(target.value) });
+          setIsFeeIncluded(false);
+        }}
       />
     </div>
   );
