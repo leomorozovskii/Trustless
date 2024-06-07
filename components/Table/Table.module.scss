@@ -105,7 +105,6 @@
   display: grid;
   grid-column: 1 / calc(var(--cols) + 1);
   grid-template-columns: subgrid;
-  max-height: $xxl;
   padding: 0 32px;
 }
 

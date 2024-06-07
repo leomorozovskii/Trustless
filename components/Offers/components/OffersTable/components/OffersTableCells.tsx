@@ -49,7 +49,7 @@ const OffersTableAmountFrom: React.FC<OffersTableAmountFromProps> = ({ amount, a
       secondaryText={
         amount !== amountWithFee && (
           <FormattedNumber
-            value={amountWithFee}
+            value={amount - amountWithFee}
             className={s.cell__text_small}
             formatValue={(value) => t('offers.table.cell.amountWithFee', { amount: value })}
           />

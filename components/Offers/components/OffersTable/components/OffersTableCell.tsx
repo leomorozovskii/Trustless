@@ -18,7 +18,7 @@ const OffersTableCell: React.FC<OffersTableCellProps> = ({ children, full, upper
         [s.cell_column]: column,
       })}
     >
-      <span className={s.cell__content}>{children}</span>
+      {children}
       {secondaryText && <span className={s.cell__secondaryText}>{secondaryText}</span>}
     </span>
   );
