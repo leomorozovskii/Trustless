@@ -1,6 +1,7 @@
-import { environment } from '@/environment';
-import { IconProps, UnknownIcon, UsdcIcon, UsdtIcon } from '@assets/icons/tokens';
 import { Address } from 'viem';
+
+import { IconProps, UnknownIcon, UsdcIcon, UsdtIcon } from '@assets/icons/tokens';
+import { environment } from '@lib/environment';
 
 export interface TokenData {
   address: Address;

@@ -52,7 +52,8 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const TokenLogo = useMemo(() => {
     if (!tokenState.address) return UnknownIcon;
     const data = TOKEN_MAP[tokenState.address];
-    return data.logo || UnknownIcon;
+    if (!data) return UnknownIcon;
+    return data.logo;
   }, [tokenState.address]);
 
   const { data: balance } = useBalance({

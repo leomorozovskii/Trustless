@@ -11,6 +11,7 @@ import { IncludeFee } from '@components/IncludeFee';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
 import { OfferButtons } from 'components/CreateOffer/Buttons';
+import { useGetUserTokens } from '@components/SelectTokenPopup/hooks/useGetUserTokens';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
@@ -20,6 +21,7 @@ const CreateOfferPage: React.FC = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
   const { offerId, activeOfferStep, activeStep } = useOfferCreateContext();
+  useGetUserTokens();
 
   return (
     <Sidebar>

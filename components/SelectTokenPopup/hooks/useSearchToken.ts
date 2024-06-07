@@ -1,15 +1,31 @@
 import { useEffect, useState } from 'react';
 
+import { IToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { TOKEN_MAP, TokenData } from '@lib/constants';
 
 interface ISearchProps {
   query: string;
+  type: 'from' | 'to' | 'default';
 }
 
-export const useSearchToken = ({ query }: ISearchProps) => {
-  const [searchedData, setSearchedData] = useState<TokenData[]>(Object.values(TOKEN_MAP));
+export const useSearchToken = ({ query, type }: ISearchProps) => {
+  const [searchedData, setSearchedData] = useState<TokenData[] | IToken[]>([]);
+  const { userTokens: tokens } = useOfferCreateContext();
 
-  useEffect(() => {
+  const handleSearchFrom = () => {
+    if (!query) setSearchedData(tokens);
+    const lowerCaseQuery = query.toLowerCase();
+    const result = tokens.filter(
+      (token) =>
+        token.address.toLowerCase() === lowerCaseQuery ||
+        token.name.toLowerCase().includes(lowerCaseQuery) ||
+        token.symbol.toLowerCase().includes(lowerCaseQuery),
+    );
+    setSearchedData(result);
+  };
+
+  const handleSearchTo = () => {
     if (!query) setSearchedData(Object.values(TOKEN_MAP));
     const lowerCaseQuery = query.toLowerCase();
     const result = Object.entries(TOKEN_MAP)
@@ -19,7 +35,15 @@ export const useSearchToken = ({ query }: ISearchProps) => {
       )
       .map(([, tokenData]) => tokenData);
     setSearchedData(result);
-  }, [query]);
+  };
+
+  useEffect(() => {
+    if (type !== 'from') {
+      handleSearchTo();
+    } else {
+      handleSearchFrom();
+    }
+  }, [query, tokens, type]);
 
   return { searchedData };
 };
