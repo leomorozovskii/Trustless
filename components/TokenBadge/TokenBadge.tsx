@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { TOKEN_MAP, TokenAddress } from '@lib/constants';
+import { UnknownIcon } from '@assets/icons/tokens';
+import { TOKEN_MAP } from '@lib/constants';
 
 import s from './TokenBadge.module.scss';
 
@@ -9,16 +10,22 @@ interface TokenBadgeProps {
 }
 
 const TokenBadge: React.FC<TokenBadgeProps> = ({ address }) => {
-  const token = useMemo(() => {
-    if (!address) return TOKEN_MAP[TokenAddress.UNKNOWN];
-    const data = TOKEN_MAP[address.toLowerCase()];
-    return data || TOKEN_MAP[TokenAddress.UNKNOWN];
+  const TokenLogo = useMemo(() => {
+    if (!address) return UnknownIcon;
+    const data = TOKEN_MAP[address.toLowerCase()].logo;
+    return data || UnknownIcon;
+  }, [address]);
+
+  const tokenName = useMemo(() => {
+    if (!address) return 'UNKNOWN';
+    const data = TOKEN_MAP[address.toLowerCase()].name;
+    return data || 'UNKNOWN';
   }, [address]);
 
   return (
     <div className={s.container}>
-      <token.logo className={s.logo} />
-      <span className={s.text}>{token.name}</span>
+      <TokenLogo className={s.logo} />
+      <span className={s.text}>{tokenName}</span>
     </div>
   );
 };
