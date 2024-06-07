@@ -116,7 +116,7 @@ type OffersTableDateProps = {
 };
 
 const OffersTableDate: React.FC<OffersTableDateProps> = ({ unixTimestamp }) => {
-  return <OffersTableCell>{dayjs.unix(unixTimestamp).utc().format('DD MMM YYYY HH:mm')}</OffersTableCell>;
+  return <OffersTableCell uppercase>{dayjs.unix(unixTimestamp).utc().format('DD MMM YYYY HH:mm')}</OffersTableCell>;
 };
 
 type OffersTableShareProps = {
