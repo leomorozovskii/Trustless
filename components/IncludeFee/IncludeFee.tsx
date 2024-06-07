@@ -47,7 +47,7 @@ const IncludeFee = () => {
     <div className={s.container}>
       <Checkbox disabled={inputsDisabled} checked={isFeeIncluded} onCheckedChange={handleCheckboxChange} />
       <h2 className={s.label}>
-        Include service fee 0.01%{' '}
+        Include service fee {calculatedFee && `${calculatedFee}%`}{' '}
         {fee && tokenName ? <span>({`${fee} ${tokenName}`})</span> : fee && <span>({`${fee}`})</span>}
       </h2>
       <div id="tooltip" className={s.tooltip}>
