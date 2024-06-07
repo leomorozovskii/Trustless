@@ -36,7 +36,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         <div className={cn(s.heading, { [s.headingAccepted]: activeAcceptStep === OfferProgress.Created })}>
           <h2 className={s.label}>{labelText}</h2>
           {activeAcceptStep === OfferProgress.Created && (
-            <Link href="/offers">
+            <Link href="/">
               <ClearCross className={s.cross} />
             </Link>
           )}

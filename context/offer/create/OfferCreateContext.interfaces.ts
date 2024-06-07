@@ -9,6 +9,8 @@ interface IOfferCreateValues {
   offerId: number | null;
   customTokenName: string;
   inputsDisabled: boolean;
+  isFeeIncluded: boolean;
+  setIsFeeIncluded: React.Dispatch<React.SetStateAction<boolean>>;
   setInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
   setOfferId: React.Dispatch<React.SetStateAction<number | null>>;

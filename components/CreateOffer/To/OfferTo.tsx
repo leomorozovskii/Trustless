@@ -1,6 +1,7 @@
-import React from 'react';
-import { isAddress } from 'viem';
+import React, { useEffect } from 'react';
+import { getAddress, isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'next/navigation';
 import cn from 'classnames';
 
 import { AddCustomToken } from '@components/AddCustomToken';
@@ -12,8 +13,57 @@ import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
-  const { setOfferToState, offerToState, inputsDisabled } = useOfferCreateContext();
+  const searchParams = useSearchParams();
+  const { setOfferToState, setOfferFromState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const tokenToParam = searchParams.get('tokenTo');
+    const amountToParam = searchParams.get('amountTo');
+    const receiverParam = searchParams.get('receiver');
+    const tokenFromParam = searchParams.get('tokenFrom');
+    const amountFromParam = searchParams.get('amountFrom');
+
+    let validatedTokenFrom = '';
+    let validatedTokenTo = '';
+    let validatedReceiver = '';
+
+    if (tokenFromParam) {
+      try {
+        validatedTokenFrom = getAddress(tokenFromParam);
+      } catch (error) {
+        validatedTokenFrom = '';
+      }
+    }
+
+    if (tokenToParam) {
+      try {
+        validatedTokenTo = getAddress(tokenToParam);
+      } catch (error) {
+        validatedTokenTo = '';
+      }
+    }
+
+    if (receiverParam) {
+      try {
+        validatedReceiver = getAddress(receiverParam);
+      } catch (error) {
+        validatedReceiver = '';
+      }
+    }
+
+    setOfferFromState({
+      from: validatedTokenFrom,
+      amount: amountFromParam || '',
+      rate: 0,
+    });
+
+    setOfferToState({
+      to: validatedTokenTo,
+      amount: amountToParam || '',
+      receiver: validatedReceiver,
+    });
+  }, []);
 
   return (
     <div className={s.container}>
@@ -44,6 +94,7 @@ const OfferTo = () => {
         label={t('token.receiver')}
         type="text"
         size="lg"
+        classInput={s.receiverInput}
         disabled={inputsDisabled}
         placeholder="0x0000000000000000000000000000000000000000"
         error={offerToState.receiver && !isAddress(offerToState.receiver) ? t('token.invalid.address') : ''}

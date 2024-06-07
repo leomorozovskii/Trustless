@@ -66,6 +66,27 @@ export const SuccessAcceptIcon: React.FC<IconProps> = ({ className, ...props }) 
   );
 };
 
+export const InfoIcon: React.FC<IconProps> = ({ className, ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="17"
+      viewBox="0 0 16 17"
+      fill="none"
+      className={className}
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7.99998 1.83325C4.31998 1.83325 1.33331 4.81992 1.33331 8.49992C1.33331 12.1799 4.31998 15.1666 7.99998 15.1666C11.68 15.1666 14.6666 12.1799 14.6666 8.49992C14.6666 4.81992 11.68 1.83325 7.99998 1.83325ZM7.33331 11.8333V10.4999H8.66665V11.8333H7.33331ZM7.33331 5.16659V9.16659H8.66665V5.16659H7.33331Z"
+        fill="black"
+      />
+    </svg>
+  );
+};
+
 export const SmallArrow: React.FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg

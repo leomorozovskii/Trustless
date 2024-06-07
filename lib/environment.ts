@@ -7,4 +7,5 @@ export const environment = {
   apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY as unknown as string,
   subgraphEndpoint: process.env.NEXT_PUBLIC_SUBGRAPH_ENDPOINT as unknown as string,
   isTestnet: process.env.NEXT_PUBLIC_IS_TESTNET === 'true',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL as unknown as string,
 } as const;

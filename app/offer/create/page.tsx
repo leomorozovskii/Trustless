@@ -1,18 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
+import { Sidebar } from '@components/Sidebar';
+import { Header } from '@components/Header';
+import { IncludeFee } from '@components/IncludeFee';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
 import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
-import { Sidebar } from '@components/Sidebar';
-import { Header } from '@components/Header';
 import s from './CreateOffer.module.scss';
 
 const CreateOfferPage: React.FC = () => {
@@ -29,15 +30,18 @@ const CreateOfferPage: React.FC = () => {
         </h2>
         <ProgressOfferBar currentStep={activeOfferStep} steps={steps} />
         {activeStep === OfferProgress.Created && offerId ? (
-          <ShareOfferContainer />
+          <ShareOfferContainer offerId={offerId} />
         ) : (
           <div className={s.column}>
             <div className={s.row}>
               <div className={s.fromWrapper}>
                 <OfferFrom />
               </div>
-              <OfferTo />
+              <Suspense>
+                <OfferTo />
+              </Suspense>
             </div>
+            <IncludeFee />
             <OfferButtons />
           </div>
         )}
