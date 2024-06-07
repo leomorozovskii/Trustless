@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import cn from 'classnames';
 
 import { ClearCross } from '@assets/icons';
 import { AcceptOffer } from '@components/AcceptOffer';
 import { AcceptedOffer } from '@components/AcceptedOffer';
-import AcceptOfferButtons from '@components/AcceptOffer/components/AcceptOfferButtons';
-import { OfferProgress } from '@lib/constants';
-
-import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
-import Link from 'next/link';
 import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
+import AcceptOfferButtons from '@components/AcceptOffer/components/AcceptOfferButtons';
+import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
+import { OfferProgress } from '@lib/constants';
+
 import s from './AcceptOffer.module.scss';
 
 const Page = ({ params }: { params: { id: string } }) => {
