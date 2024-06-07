@@ -116,9 +116,6 @@ const createOffersView = (
         filters: state.filters,
       }));
       const offerStats = useOffersStatsQuery({ searchFilter, filters });
-      if (!offerStats.isLoading) {
-        return null;
-      }
       return (
         <OffersPagination
           total={offerStats.data?.total}

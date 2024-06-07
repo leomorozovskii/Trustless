@@ -14,11 +14,15 @@ const OfferReOpenOffer: React.FC<OfferReOpenOfferProps> = ({ offer }) => {
   const { t } = useTranslation();
   const getReOpenOfferUrl = () => {
     const searchParams = new URLSearchParams();
-    searchParams.set('tokenFrom', offer?.tokenFromDetails.address || '');
-    searchParams.set('amountFrom', offer?.amountFrom.toString() || '');
-    searchParams.set('tokenTo', offer?.tokenToDetails.address || '');
-    searchParams.set('amountTo', offer?.amountTo.toString() || '');
-    searchParams.set('receiver', offer?.receiver || '');
+    if (offer) {
+      searchParams.set('tokenFrom', offer.tokenFromDetails.address);
+      searchParams.set('amountFrom', offer.amountFrom.toString());
+      searchParams.set('tokenTo', offer.tokenToDetails.address);
+      searchParams.set('amountTo', offer.amountTo.toString());
+      if (offer.receiver !== '0x0000000000000000000000000000000000000000') {
+        searchParams.set('receiver', offer.receiver);
+      }
+    }
     return `/offer/create?${searchParams.toString()}`;
   };
 
