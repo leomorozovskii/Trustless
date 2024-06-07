@@ -1,4 +1,4 @@
-import { Address, Hash, formatUnits } from 'viem';
+import { Address, Hash, formatUnits, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
 import { TOKEN_MAP, Token } from '@lib/constants';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -99,12 +99,14 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
       tokenTo,
       tradeID,
     }) => {
-      let tokenFromDetails = TOKEN_MAP[tokenFrom.id];
-      let tokenToDetails = TOKEN_MAP[tokenTo.id];
+      const normalizedAddressFrom = getAddress(tokenFrom.id);
+      const normalizedAddressTo = getAddress(tokenTo.id);
+      let tokenFromDetails = TOKEN_MAP[normalizedAddressFrom];
+      let tokenToDetails = TOKEN_MAP[normalizedAddressTo];
 
       if (!tokenFromDetails) {
         tokenFromDetails = {
-          address: tokenFrom.id,
+          address: normalizedAddressFrom,
           name: tokenFrom.symbol,
           decimals: Number(tokenFrom.decimals),
           logo: UnknownIcon,
@@ -113,7 +115,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
 
       if (!tokenToDetails) {
         tokenToDetails = {
-          address: tokenTo.id,
+          address: normalizedAddressTo,
           name: tokenTo.symbol,
           decimals: Number(tokenTo.decimals),
           logo: UnknownIcon,
