@@ -4,15 +4,15 @@ import * as React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { darkTheme, lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { WagmiProvider } from 'wagmi';
 
 import { useTheme } from '@context/theme/ThemeProvider';
 import { ToastifyProvider } from '@context/toastify/ToastifyProvider';
-import i18n from '@/i18n';
 import { wagmiConfig } from '@lib/wagmiConfig';
 import { IsMountedProvider } from '@lib/hooks/useIsMounted';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
+import i18n from '@/i18n';
 
 dayjs.extend(utc);
 

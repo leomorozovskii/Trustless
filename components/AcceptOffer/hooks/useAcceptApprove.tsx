@@ -1,12 +1,13 @@
-import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useAccount, useBalance, useWriteContract } from 'wagmi';
+import { erc20Abi, formatUnits } from 'viem';
+
+import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { erc20Abi, formatUnits } from 'viem';
+import { useAcceptAllowance } from '@components/AcceptOffer/hooks/useAcceptAllowance';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
-import { useAcceptAllowance } from '@components/AcceptOffer/hooks/useAcceptAllowance';
 
 export const useAcceptApprove = () => {
   const { handleAddItem } = useToastifyContext();
