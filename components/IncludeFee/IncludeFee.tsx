@@ -1,62 +1,36 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Tooltip } from 'react-tooltip';
+import React, { useMemo } from 'react';
 import { Address } from 'viem';
 
-import { InfoIcon } from '@assets/icons';
-import { Checkbox } from '@components/Checkbox';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import s from './IncludeFee.module.scss';
 
 const IncludeFee = () => {
-  const { offerFromState, setOfferFromState, setIsFeeIncluded, isFeeIncluded, inputsDisabled } =
-    useOfferCreateContext();
+  const { offerFromState } = useOfferCreateContext();
   const { calculatedFee } = useGetFee();
-  const { tokenName, tokenValue } = useTokenInfo({
+  const { tokenName } = useTokenInfo({
     address: offerFromState.from as Address,
     withFee: true,
   });
 
-  const [originalAmount, setOriginalAmount] = useState<string>(offerFromState.amount);
-
   const fee = useMemo(() => {
-    if (!originalAmount || !calculatedFee) return;
+    if (!offerFromState.amount || !calculatedFee || !Number.isFinite(offerFromState.amount)) return;
     return Number(calculatedFee * Number(offerFromState.amount));
-  }, [calculatedFee, originalAmount]);
-
-  useEffect(() => {
-    if (offerFromState.amount !== originalAmount && !isFeeIncluded) {
-      setOriginalAmount(offerFromState.amount);
-    }
-  }, [offerFromState.amount, isFeeIncluded]);
-
-  const handleCheckboxChange = () => {
-    setIsFeeIncluded(!isFeeIncluded);
-    if (isFeeIncluded) {
-      setOfferFromState({ amount: originalAmount });
-    } else {
-      if (!originalAmount) return;
-      const newAmount = String(Number(originalAmount) + Number(tokenValue ?? fee));
-      setOfferFromState({ amount: newAmount });
-    }
-  };
+  }, [calculatedFee, offerFromState.amount, offerFromState.amountError]);
 
   return (
     <div className={s.container}>
-      <Checkbox disabled={inputsDisabled} checked={isFeeIncluded} onCheckedChange={handleCheckboxChange} />
       <h2 className={s.label}>
-        Include service fee {calculatedFee && `${calculatedFee}%`}{' '}
+        Service fee {calculatedFee && `${calculatedFee}%`}{' '}
         {fee && tokenName ? <span>({`${fee} ${tokenName}`})</span> : fee && <span>({`${fee}`})</span>}
+        {calculatedFee && Number(offerFromState.amount) > 0 && !offerFromState.amountError && (
+          <span>
+            . Receiver will get {Number(offerFromState.amount) * (1 - calculatedFee)} {tokenName}
+          </span>
+        )}
       </h2>
-      <div id="tooltip" className={s.tooltip}>
-        <InfoIcon />
-      </div>
-      <Tooltip anchorSelect="#tooltip">
-        The service fee is paid by the receiving part. You can include the cost of the commission so that the Receiver
-        does not have to pay.
-      </Tooltip>
     </div>
   );
 };

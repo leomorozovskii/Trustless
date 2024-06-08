@@ -46,7 +46,7 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
   const tokenName = useMemo(() => {
     if (!token) return;
     if ('name' in token) return token.name;
-    return token.data?.name;
+    return token.data?.symbol;
   }, [token, result]);
 
   const tokenDecimals = useMemo(() => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
+import cn from 'classnames';
 
-import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
@@ -10,7 +10,7 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState, inputsDisabled, setIsFeeIncluded } = useOfferCreateContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { calculateRateValue } = useCalculateAmountValue();
 
   useEffect(() => {
@@ -29,15 +29,15 @@ const OfferFrom = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.selectContainer}>
+      <div className={cn(s.selectContainer, s.mb)}>
         <h2 className={s.selectLabel}>From</h2>
         <Select
+          type="from"
           value={offerFromState.from}
           placeholder="Select token"
           disabled={inputsDisabled}
           onChange={(value) => setOfferFromState({ from: value })}
         />
-        <AddCustomToken type="from" />
       </div>
       <Input
         id="from amount input"
@@ -50,7 +50,6 @@ const OfferFrom = () => {
         value={offerFromState.amount ? offerFromState.amount.toString() : ''}
         onChange={({ target }) => {
           setOfferFromState({ amount: target.value });
-          setIsFeeIncluded(false);
         }}
       />
       <Input
@@ -63,7 +62,6 @@ const OfferFrom = () => {
         value={offerFromState.rate ? offerFromState.rate.toString() : ''}
         onChange={({ target }) => {
           setOfferFromState({ rate: Number(target.value) });
-          setIsFeeIncluded(false);
         }}
       />
     </div>

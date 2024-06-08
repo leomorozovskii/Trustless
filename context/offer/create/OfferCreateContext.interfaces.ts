@@ -1,5 +1,7 @@
-import { OfferProgress } from '@lib/constants';
 import React from 'react';
+
+import { IToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
+import { OfferProgress } from '@lib/constants';
 
 interface IOfferCreateValues {
   offerFromState: IOfferFrom;
@@ -9,8 +11,8 @@ interface IOfferCreateValues {
   offerId: number | null;
   customTokenName: string;
   inputsDisabled: boolean;
-  isFeeIncluded: boolean;
-  setIsFeeIncluded: React.Dispatch<React.SetStateAction<boolean>>;
+  userTokens: IToken[];
+  setUserTokens: React.Dispatch<React.SetStateAction<IToken[]>>;
   setInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
   setOfferId: React.Dispatch<React.SetStateAction<number | null>>;

@@ -7,16 +7,15 @@ import cn from 'classnames';
 import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
 import { useCalculateAmountValue } from '@components/CreateOffer/From/hooks/useCalculateAmountValue';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
   const searchParams = useSearchParams();
-  const { setOfferToState, setOfferFromState, offerToState, offerFromState, inputsDisabled, setIsFeeIncluded } =
-    useOfferCreateContext();
+  const { setOfferToState, setOfferFromState, offerToState, offerFromState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
   const { calculateAmountToValue } = useCalculateAmountValue();
 
@@ -104,7 +103,6 @@ const OfferTo = () => {
         value={offerToState.amount ? offerToState.amount.toString() : ''}
         onChange={({ target }) => {
           setOfferToState({ amount: target.value });
-          setIsFeeIncluded(false);
         }}
       />
       <Input

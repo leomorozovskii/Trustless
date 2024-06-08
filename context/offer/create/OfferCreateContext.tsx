@@ -1,5 +1,6 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
+import { IToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 import { IOfferFrom, IOfferTo, IOfferCreateValues } from '@context/offer/create/OfferCreateContext.interfaces';
 import { OfferProgress } from '@lib/constants';
 
@@ -34,12 +35,13 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
     },
   );
 
+  const [userTokens, setUserTokens] = useState<IToken[]>([]);
+
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
   const [offerId, setOfferId] = useState<number | null>(null);
   const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
-  const [isFeeIncluded, setIsFeeIncluded] = useState<boolean>(false);
 
   const values: IOfferCreateValues = {
     offerFromState,
@@ -49,8 +51,8 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
     offerId,
     customTokenName,
     inputsDisabled,
-    isFeeIncluded,
-    setIsFeeIncluded,
+    userTokens,
+    setUserTokens,
     setInputsDisabled,
     setCustomTokenName,
     setOfferId,

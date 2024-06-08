@@ -4,10 +4,11 @@ import { useAccount, useBalance, useToken } from 'wagmi';
 import { Address, getAddress, isAddress } from 'viem';
 
 import { InputCross, WarningIcon } from '@assets/icons';
+import { UnknownIcon } from '@assets/icons/tokens';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
-import { TOKEN_MAP, TokenAddress } from '@lib/constants';
+import { TOKEN_MAP } from '@lib/constants';
 import { useClickOutside } from '@lib/hooks/useClickOutside';
 
 import s from './AddTokenPopup.module.scss';
@@ -48,10 +49,11 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     address: tokenState.address as Address,
   });
 
-  const token = useMemo(() => {
-    if (!tokenState.address) return TOKEN_MAP[TokenAddress.UNKNOWN];
+  const TokenLogo = useMemo(() => {
+    if (!tokenState.address) return UnknownIcon;
     const data = TOKEN_MAP[tokenState.address];
-    return data || TOKEN_MAP[TokenAddress.UNKNOWN];
+    if (!data) return UnknownIcon;
+    return data.logo;
   }, [tokenState.address]);
 
   const { data: balance } = useBalance({
@@ -158,7 +160,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
         ) : (
           <div className={s.tokenWrapper}>
             <div className={s.tokenContainer}>
-              <token.logo className={s.tokenLogo} />
+              <TokenLogo className={s.tokenLogo} />
               <div className={s.balanceContainer}>
                 <h2 className={s.tokenTitle}>{tokenState.name}</h2>
                 <h2 className={s.tokenBalance}>

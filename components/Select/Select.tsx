@@ -16,11 +16,13 @@ export interface ISelect {
   placeholder: string;
   disabled?: boolean;
   onChange: (value: string) => void;
+  type?: 'from' | 'to' | 'default';
 }
 
-const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) => {
+const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
   const [opened, setOpened] = useState<boolean>(false);
   const { customTokenName } = useOfferCreateContext();
+  const { userTokens: tokens } = useOfferCreateContext();
 
   const handleSelectToken = (tokenAddress: string) => {
     onChange(tokenAddress);
@@ -34,17 +36,19 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
   const IconComponent: React.FC<IconProps> | undefined = useMemo(() => {
     if (!value) return;
     const item = TOKEN_MAP[value];
+    if (type === 'from' && tokens && item) return item.logo;
     if (!item) return UnknownIcon;
     return item.logo;
-  }, [value]);
+  }, [value, tokens, type]);
 
   const tokenTitle = useMemo(() => {
     if (!value) return;
+    if (type === 'from' && value) return tokens.find((el) => el.address === value)?.symbol;
     const notImported = TOKEN_MAP[value]?.name;
     if (!notImported && !result.data) return customTokenName;
-    if (!notImported && result.data) return result.data.name;
+    if (!notImported && result.data) return result.data.symbol;
     return TOKEN_MAP[value].name;
-  }, [value, result]);
+  }, [value, result, tokens, type]);
 
   const handleOpen = () => {
     if (disabled) return;
@@ -66,7 +70,7 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled }) =
         </div>
         <SelectIcon />
       </button>
-      {opened && <SelectTokenPopup setOpened={setOpened} handleSelectToken={handleSelectToken} />}
+      {opened && <SelectTokenPopup setOpened={setOpened} type={type} handleSelectToken={handleSelectToken} />}
     </div>
   );
 };
