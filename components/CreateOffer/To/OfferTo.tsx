@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { getAddress, isAddress } from 'viem';
+import { isAddress } from 'viem';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'next/navigation';
 import cn from 'classnames';
 
 import { AddCustomToken } from '@components/AddCustomToken';
@@ -14,8 +13,7 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
-  const searchParams = useSearchParams();
-  const { setOfferToState, setOfferFromState, offerToState, offerFromState, inputsDisabled } = useOfferCreateContext();
+  const { setOfferToState, offerToState, offerFromState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
   const { calculateAmountToValue } = useCalculateAmountValue();
 
@@ -30,54 +28,6 @@ const OfferTo = () => {
   useEffect(() => {
     calculateAmountToValue();
   }, [offerFromState.amount]);
-
-  useEffect(() => {
-    const tokenToParam = searchParams.get('tokenTo');
-    const amountToParam = searchParams.get('amountTo');
-    const receiverParam = searchParams.get('receiver');
-    const tokenFromParam = searchParams.get('tokenFrom');
-    const amountFromParam = searchParams.get('amountFrom');
-
-    let validatedTokenFrom = '';
-    let validatedTokenTo = '';
-    let validatedReceiver = '';
-
-    if (tokenFromParam) {
-      try {
-        validatedTokenFrom = getAddress(tokenFromParam);
-      } catch (error) {
-        validatedTokenFrom = '';
-      }
-    }
-
-    if (tokenToParam) {
-      try {
-        validatedTokenTo = getAddress(tokenToParam);
-      } catch (error) {
-        validatedTokenTo = '';
-      }
-    }
-
-    if (receiverParam) {
-      try {
-        validatedReceiver = getAddress(receiverParam);
-      } catch (error) {
-        validatedReceiver = '';
-      }
-    }
-
-    setOfferFromState({
-      from: validatedTokenFrom,
-      amount: amountFromParam || '',
-      rate: 0,
-    });
-
-    setOfferToState({
-      to: validatedTokenTo,
-      amount: amountToParam || '',
-      receiver: validatedReceiver,
-    });
-  }, []);
 
   return (
     <div className={s.container}>

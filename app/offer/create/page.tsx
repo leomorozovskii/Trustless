@@ -10,6 +10,7 @@ import { Header } from '@components/Header';
 import { IncludeFee } from '@components/IncludeFee';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
+import { ParamsData } from '@components/CreateOffer/ParamsData';
 import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useGetUserTokens } from '@components/SelectTokenPopup/hooks/useGetUserTokens';
 import { OfferCreateProvider, useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
@@ -39,8 +40,9 @@ const CreateOfferPageContent: React.FC = () => {
               <div className={s.fromWrapper}>
                 <OfferFrom />
               </div>
+              <OfferTo />
               <Suspense>
-                <OfferTo />
+                <ParamsData />
               </Suspense>
             </div>
             <IncludeFee />
