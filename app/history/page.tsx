@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAccount } from 'wagmi';
 
 import { createOffersTemplate } from '@components/Offers';
 import { OfferColumns } from '@components/Offers/types';
-import { useTranslation } from 'react-i18next';
 import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
-import { useAccount } from 'wagmi';
 import { NotConnectedMessage } from '@components/NotConnectedMessage';
 import { useIsMounted } from '@lib/hooks/useIsMounted';
 

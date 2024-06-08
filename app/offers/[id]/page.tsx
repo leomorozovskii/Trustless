@@ -10,12 +10,12 @@ import { AcceptedOffer } from '@components/AcceptedOffer';
 import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
 import AcceptOfferButtons from '@components/AcceptOffer/components/AcceptOfferButtons';
-import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
+import { OfferAcceptProvider, useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { OfferProgress } from '@lib/constants';
 
 import s from './AcceptOffer.module.scss';
 
-const Page = ({ params }: { params: { id: string } }) => {
+const AcceptOfferPageContent = ({ params }: { params: { id: string } }) => {
   const { activeAcceptStep, setAcceptId } = useOfferAcceptContext();
 
   const labelText = useMemo(() => {
@@ -54,4 +54,12 @@ const Page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default Page;
+const AcceptOfferPage = ({ params }: { params: { id: string } }) => {
+  return (
+    <OfferAcceptProvider>
+      <AcceptOfferPageContent params={params} />
+    </OfferAcceptProvider>
+  );
+};
+
+export default AcceptOfferPage;

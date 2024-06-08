@@ -10,14 +10,15 @@ import { Header } from '@components/Header';
 import { IncludeFee } from '@components/IncludeFee';
 import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
+import { ParamsData } from '@components/CreateOffer/ParamsData';
 import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useGetUserTokens } from '@components/SelectTokenPopup/hooks/useGetUserTokens';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { OfferCreateProvider, useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
 import s from './CreateOffer.module.scss';
 
-const CreateOfferPage: React.FC = () => {
+const CreateOfferPageContent: React.FC = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
   const { offerId, activeOfferStep, activeStep } = useOfferCreateContext();
@@ -39,8 +40,9 @@ const CreateOfferPage: React.FC = () => {
               <div className={s.fromWrapper}>
                 <OfferFrom />
               </div>
+              <OfferTo />
               <Suspense>
-                <OfferTo />
+                <ParamsData />
               </Suspense>
             </div>
             <IncludeFee />
@@ -51,5 +53,11 @@ const CreateOfferPage: React.FC = () => {
     </Sidebar>
   );
 };
+
+const CreateOfferPage: React.FC = () => (
+  <OfferCreateProvider>
+    <CreateOfferPageContent />
+  </OfferCreateProvider>
+);
 
 export default CreateOfferPage;

@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-import { useAccount, useReadContract } from 'wagmi';
 import { Address, erc20Abi, formatUnits } from 'viem';
+import { useAccount, useReadContract } from 'wagmi';
 
-import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
-import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
 
@@ -13,23 +11,14 @@ interface IUseGetAllowance {
   approveReceipt: any;
 }
 
-export const useGetAllowance = ({ approveReceipt }: IUseGetAllowance) => {
-  const { setActiveAcceptStep } = useOfferAcceptContext();
+export const useCreateAllowance = ({ approveReceipt }: IUseGetAllowance) => {
   const { offerFromState, activeStep, setActiveOfferStep, setActiveStep } = useOfferCreateContext();
 
   const { address: userAddress } = useAccount();
   const { tokenFromAddress, tokenFromDecimals } = useTokenData();
-  const { amountTo, tokenTo } = useGetOfferDetails();
 
   const { data: createOfferAllowance } = useReadContract({
     address: tokenFromAddress,
-    abi: erc20Abi,
-    functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress],
-  });
-
-  const { data: acceptOfferAllowance } = useReadContract({
-    address: tokenTo,
     abi: erc20Abi,
     functionName: 'allowance',
     args: [userAddress as Address, environment.contractAddress],
@@ -63,13 +52,4 @@ export const useGetAllowance = ({ approveReceipt }: IUseGetAllowance) => {
       setActiveOfferStep(1);
     }
   }, [createOfferAllowance, tokenFromDecimals, tokenFromAddress, offerFromState.amount, activeStep, approveReceipt]);
-
-  useEffect(() => {
-    if (!acceptOfferAllowance) return;
-    if (acceptOfferAllowance >= amountTo) {
-      setActiveAcceptStep(OfferProgress.Approved);
-    } else {
-      setActiveAcceptStep(OfferProgress.Filled);
-    }
-  }, [acceptOfferAllowance, amountTo]);
 };

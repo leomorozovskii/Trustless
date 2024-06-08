@@ -3,7 +3,6 @@
 import React from 'react';
 
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
-
 import { Header } from '@components/Header';
 import { Sidebar } from '@components/Sidebar';
 

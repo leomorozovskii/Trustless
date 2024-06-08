@@ -4,8 +4,8 @@ import { useReadContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { environment } from '@lib/environment';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
+import { environment } from '@lib/environment';
 
 interface OfferDetails {
   tokenFrom: Address;
