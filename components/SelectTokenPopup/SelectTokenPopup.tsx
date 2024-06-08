@@ -79,7 +79,7 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
             </Skeleton>
           )}
           <Skeleton loading={!tokens}>
-            <div className={s.popularTokens}>
+            <div className={s.pinnedTokens}>
               {type === 'from'
                 ? tokens
                     .slice(0, 7)
