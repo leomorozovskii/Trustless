@@ -23,6 +23,6 @@ export const OfferAcceptProvider: React.FC<PropsWithChildren> = ({ children }) =
 
 export const useOfferAcceptContext = () => {
   const context = useContext(OfferAcceptContext);
-  if (!context) throw new Error('useOfferAcceptContext must be used within an OfferProvider');
+  if (!context) throw new Error('useOfferAcceptContext must be used within an OfferAcceptProvider');
   return context;
 };

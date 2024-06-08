@@ -8,10 +8,10 @@ import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
 
 export const useAcceptAllowance = () => {
-  const { setActiveAcceptStep } = useOfferAcceptContext();
+  const { setActiveAcceptStep, acceptId } = useOfferAcceptContext();
 
   const { address: userAddress } = useAccount();
-  const { amountTo, tokenTo } = useGetOfferDetails();
+  const { amountTo, tokenTo } = useGetOfferDetails({ id: acceptId });
 
   const { data: acceptOfferAllowance } = useReadContract({
     address: tokenTo,

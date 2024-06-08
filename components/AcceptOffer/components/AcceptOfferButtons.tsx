@@ -19,8 +19,8 @@ import s from '@components/CreateOffer/Buttons/OfferButtons.module.scss';
 const AcceptOfferButtons: React.FC = () => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
-  const { activeAcceptStep } = useOfferAcceptContext();
-  const { active, isLoading } = useGetOfferDetails();
+  const { activeAcceptStep, acceptId } = useOfferAcceptContext();
+  const { active, isLoading } = useGetOfferDetails({ id: acceptId });
   const { t } = useTranslation();
 
   const { onAcceptApproveReceipt, acceptApproveHandler } = useAcceptApprove();

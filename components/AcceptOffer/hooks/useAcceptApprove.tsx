@@ -12,9 +12,9 @@ import { environment } from '@lib/environment';
 export const useAcceptApprove = () => {
   const { handleAddItem } = useToastifyContext();
   const { address: userAddress } = useAccount();
-  const { setActiveAcceptStep } = useOfferAcceptContext();
+  const { setActiveAcceptStep, acceptId } = useOfferAcceptContext();
 
-  const { tokenTo, amountTo } = useGetOfferDetails();
+  const { tokenTo, amountTo } = useGetOfferDetails({ id: acceptId });
   const { tokenDecimals } = useTokenInfo({ address: tokenTo });
 
   const { data: balance } = useBalance({ address: userAddress, token: tokenTo });

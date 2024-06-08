@@ -1,10 +1,9 @@
-import { useMemo } from 'react';
-import { Address, formatUnits } from 'viem';
-import { useReadContract } from 'wagmi';
+import { useEffect, useMemo, useState } from 'react';
+import { Address, formatUnits, getAddress } from 'viem';
+import { useAccount, useReadContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { environment } from '@lib/environment';
 
 interface OfferDetails {
@@ -18,12 +17,11 @@ interface OfferDetails {
   completed: boolean;
 }
 
-export const useGetOfferDetails = () => {
-  const { acceptId } = useOfferAcceptContext();
+export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   const memoizedId = useMemo(() => {
-    if (!acceptId) return BigInt(0);
-    return BigInt(acceptId);
-  }, [acceptId]);
+    if (!id) return BigInt(0);
+    return BigInt(id);
+  }, [id]);
 
   const {
     data: details,
@@ -36,8 +34,11 @@ export const useGetOfferDetails = () => {
     args: [memoizedId],
   });
 
+  const { address } = useAccount();
   const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo({ address: details ? details[0] : '0x' });
   const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details[1] : '0x' });
+  const [isCreator, setIsCreator] = useState<boolean>(false);
+  const [isCreatorLoading, setIsCreatorLoading] = useState<boolean>(true);
 
   const offerDetails: OfferDetails = useMemo(() => {
     if (!details) {
@@ -65,6 +66,18 @@ export const useGetOfferDetails = () => {
     };
   }, [details]);
 
+  useEffect(() => {
+    if (!address || !offerDetails.creator) return;
+    try {
+      setIsCreatorLoading(true);
+      setIsCreator(getAddress(address) === getAddress(offerDetails.creator));
+    } catch (e) {
+      setIsCreator(false);
+    } finally {
+      setIsCreatorLoading(false);
+    }
+  }, [address, offerDetails.creator]);
+
   const rateToFrom = useMemo(() => {
     if (!details) return;
     if (!tokenFromDecimals) return;
@@ -80,6 +93,8 @@ export const useGetOfferDetails = () => {
     ...offerDetails,
     rateToFrom,
     isLoading,
+    isCreatorLoading,
+    isCreator,
     error,
     isTokenFromCustom: isCustom,
   };

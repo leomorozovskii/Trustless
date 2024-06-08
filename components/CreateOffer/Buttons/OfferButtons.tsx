@@ -29,7 +29,7 @@ const OfferButtons = () => {
   }, [approveButtonDisabled]);
 
   return (
-    <div className={s.container}>
+    <div className={s.createContainer}>
       <p className={s.label}>{t('offer.create.signText')}</p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
