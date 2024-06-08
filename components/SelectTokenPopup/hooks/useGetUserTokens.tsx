@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Address, erc20Abi, formatUnits, fromHex, getAddress } from 'viem';
+import { erc20Abi, formatUnits, fromHex, getAddress } from 'viem';
 import { useAccount, useReadContracts } from 'wagmi';
 
-import { IContractTokens, IToken, IUserTokens } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
+import { IContractTokens, IToken, IResponseToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { environment } from '@lib/environment';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
@@ -12,7 +12,7 @@ export const useGetUserTokens = () => {
   const { handleAddItem } = useToastifyContext();
   const { setUserTokens } = useOfferCreateContext();
 
-  const [responseTokens, setResponseTokens] = useState<IUserTokens | null>(null);
+  const [responseTokens, setResponseTokens] = useState<IResponseToken[]>([]);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +46,10 @@ export const useGetUserTokens = () => {
         if (data.error) {
           throw new Error(data.error.message);
         }
-        setResponseTokens(data.result);
+        const filteredTokens = data.result.tokenBalances.filter(
+          (token: IResponseToken) => fromHex(token.tokenBalance, 'number') > 0,
+        );
+        setResponseTokens(filteredTokens);
       } catch (err: any) {
         handleAddItem({ title: 'Tokens Error', text: 'Something went wrong', type: 'error' });
       } finally {
@@ -59,9 +62,8 @@ export const useGetUserTokens = () => {
 
   const getRawTokens = useCallback(() => {
     if (!responseTokens) return;
-    if (!responseTokens.tokenBalances) return;
     const contractTokens: IContractTokens[] = [];
-    responseTokens.tokenBalances.forEach((el: any) => {
+    responseTokens.forEach((el: IResponseToken) => {
       contractTokens.push({
         address: el.contractAddress,
         abi: erc20Abi,
@@ -98,8 +100,8 @@ export const useGetUserTokens = () => {
       });
     }
 
-    const data = responseTokens.tokenBalances.map((token, idx) => {
-      const balance = fromHex(token.tokenBalance as Address, 'bigint');
+    const data = responseTokens.map((token, idx) => {
+      const balance = fromHex(token.tokenBalance, 'bigint');
       return {
         address: getAddress(token.contractAddress),
         balance: formatUnits(balance, tokenData[idx].decimals),
@@ -109,7 +111,11 @@ export const useGetUserTokens = () => {
       };
     });
 
-    setUserTokens(data);
+    const filteredData = data.sort((a, b) => {
+      return Number(b.balance) - Number(a.balance);
+    });
+
+    setUserTokens(filteredData);
   }, [result.data, responseTokens]);
 
   return { loading, error };

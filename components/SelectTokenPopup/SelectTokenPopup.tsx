@@ -61,14 +61,17 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
             <h2 className={s.title}>{t('token.select')}</h2>
             <InputCross onClick={() => setOpened(false)} className={s.cross} />
           </div>
-          {tokens.length > 7 && (
-            <Search
-              type="text"
-              value={searchQuery}
-              placeholder={t('Search asset or paste address')}
-              onChange={({ target }) => setSearchQuery(target.value)}
-              id="token search"
-            />
+          <Search
+            type="text"
+            value={searchQuery}
+            placeholder={t('Search asset or paste address')}
+            onChange={({ target }) => setSearchQuery(target.value)}
+            id="token search"
+          />
+          {tokens.length === 0 && (
+            <Skeleton loading={!tokens}>
+              <p>{`You don't have tokens`}</p>
+            </Skeleton>
           )}
           <Skeleton loading={!tokens}>
             <div className={s.popularTokens}>

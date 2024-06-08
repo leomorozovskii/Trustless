@@ -1,4 +1,4 @@
-import { Address } from 'viem';
+import { Address, erc20Abi } from 'viem';
 
 interface IToken {
   address: Address;
@@ -10,18 +10,13 @@ interface IToken {
 
 interface IContractTokens {
   address: Address;
-  abi: any;
+  abi: typeof erc20Abi;
   functionName: string;
 }
 
-interface IUserTokens {
-  address: Address;
-  tokenBalances: IUserToken[];
-}
-
-interface IUserToken {
+interface IResponseToken {
   contractAddress: Address;
-  tokenBalance: string;
+  tokenBalance: Address;
 }
 
-export type { IToken, IContractTokens, IUserToken, IUserTokens };
+export type { IToken, IContractTokens, IResponseToken };
