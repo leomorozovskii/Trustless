@@ -42,7 +42,6 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
   const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
-  const [isFeeIncluded, setIsFeeIncluded] = useState<boolean>(false);
 
   const values: IOfferCreateValues = {
     offerFromState,
@@ -52,10 +51,8 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
     offerId,
     customTokenName,
     inputsDisabled,
-    isFeeIncluded,
     userTokens,
     setUserTokens,
-    setIsFeeIncluded,
     setInputsDisabled,
     setCustomTokenName,
     setOfferId,

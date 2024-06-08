@@ -15,8 +15,7 @@ import s from '@/components/CreateOffer/From/OfferFrom.module.scss';
 
 const OfferTo = () => {
   const searchParams = useSearchParams();
-  const { setOfferToState, setOfferFromState, offerToState, offerFromState, inputsDisabled, setIsFeeIncluded } =
-    useOfferCreateContext();
+  const { setOfferToState, setOfferFromState, offerToState, offerFromState, inputsDisabled } = useOfferCreateContext();
   const { t } = useTranslation();
   const { calculateAmountToValue } = useCalculateAmountValue();
 
@@ -104,7 +103,6 @@ const OfferTo = () => {
         value={offerToState.amount ? offerToState.amount.toString() : ''}
         onChange={({ target }) => {
           setOfferToState({ amount: target.value });
-          setIsFeeIncluded(false);
         }}
       />
       <Input
