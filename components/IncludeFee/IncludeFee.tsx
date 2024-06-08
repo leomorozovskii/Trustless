@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { Address } from 'viem';
 
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
+import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import s from './IncludeFee.module.scss';
 

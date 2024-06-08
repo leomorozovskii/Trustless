@@ -1,8 +1,8 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
 
+import { IToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 import { IOfferFrom, IOfferTo, IOfferCreateValues } from '@context/offer/create/OfferCreateContext.interfaces';
 import { OfferProgress } from '@lib/constants';
-import { IToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 
 const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
 
