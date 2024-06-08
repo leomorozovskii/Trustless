@@ -53,6 +53,11 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
     return item.logo;
   };
 
+  const withTokensList = useMemo(() => {
+    if (type === 'from' && tokens.length > 7) return true;
+    return type !== 'from' && Object.entries(TOKEN_MAP).length > 7;
+  }, [tokens, type]);
+
   return (
     <div className={s.wrapper}>
       <div className={s.container} ref={ref}>
@@ -99,7 +104,7 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
             </div>
           </Skeleton>
         </div>
-        {tokens.length > 7 && (
+        {withTokensList && (
           <Skeleton loading={!tokens}>
             <div className={s.body}>
               {filteredSearchedData?.map((el) => (
