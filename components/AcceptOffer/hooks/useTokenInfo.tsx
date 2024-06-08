@@ -7,7 +7,6 @@ import { useToken } from 'wagmi';
 import { UnknownIcon } from '@assets/icons/tokens';
 import { TOKEN_MAP } from '@lib/constants';
 import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 interface IUseTokenInfo {
   address: Address;
@@ -16,7 +15,6 @@ interface IUseTokenInfo {
 }
 
 export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
-  const { offerFromState } = useOfferCreateContext();
   const result = useToken({
     address,
   });
@@ -66,10 +64,7 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
       const value = formatUnits(amount, tokenDecimals);
       return (1 - calculatedFee) * Number(value);
     }
-    if (offerFromState.amount) {
-      return Number(calculatedFee * Number(offerFromState.amount));
-    }
-  }, [amount, tokenDecimals, calculatedFee, withFee, offerFromState]);
+  }, [amount, tokenDecimals, calculatedFee, withFee]);
 
   return {
     TokenLogo,

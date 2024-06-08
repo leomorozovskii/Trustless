@@ -12,12 +12,12 @@ import { OfferFrom } from '@components/CreateOffer/From';
 import { OfferTo } from '@components/CreateOffer/To';
 import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useGetUserTokens } from '@components/SelectTokenPopup/hooks/useGetUserTokens';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { OfferCreateProvider, useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
 import s from './CreateOffer.module.scss';
 
-const CreateOfferPage: React.FC = () => {
+const CreateOfferPageContent: React.FC = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
   const { offerId, activeOfferStep, activeStep } = useOfferCreateContext();
@@ -51,5 +51,11 @@ const CreateOfferPage: React.FC = () => {
     </Sidebar>
   );
 };
+
+const CreateOfferPage: React.FC = () => (
+  <OfferCreateProvider>
+    <CreateOfferPageContent />
+  </OfferCreateProvider>
+);
 
 export default CreateOfferPage;

@@ -5,8 +5,8 @@ import { GasIcon, SelectIcon } from '@assets/icons';
 import { ProgressBar } from '@components/ProgressBar';
 import { TxButton } from '@components/TxFlow';
 import { useButtonsDisabled } from '@components/CreateOffer/Buttons/hooks/useButtonsDisabled';
-import { useApprove } from '@components/CreateOffer/Buttons/hooks/useApprove';
 import { useCreateTrade } from '@components/CreateOffer/Buttons/hooks/useCreateTrade';
+import { useCreateApprove } from '@components/CreateOffer/Buttons/hooks/useCreateApprove';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
@@ -17,7 +17,7 @@ const OfferButtons = () => {
   const { activeStep, setActiveStep } = useOfferCreateContext();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
 
-  const { onCreateApproveReceipt, createApproveHandler } = useApprove();
+  const { onCreateApproveReceipt, createApproveHandler } = useCreateApprove();
   const { onCreateReceipt, createTrade } = useCreateTrade();
 
   useEffect(() => {

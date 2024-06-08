@@ -8,7 +8,7 @@ import { GasIcon, SelectIcon } from '@assets/icons';
 import { ProgressBar } from '@components/ProgressBar';
 import { TxButton } from '@components/TxFlow';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
-import { useApprove } from '@components/CreateOffer/Buttons/hooks/useApprove';
+import { useAcceptApprove } from '@components/AcceptOffer/hooks/useAcceptApprove';
 import { useAcceptOffer } from '@components/AcceptOffer/hooks/useAcceptOffer';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
@@ -23,7 +23,7 @@ const AcceptOfferButtons: React.FC = () => {
   const { active, isLoading } = useGetOfferDetails();
   const { t } = useTranslation();
 
-  const { onAcceptApproveReceipt, acceptApproveHandler } = useApprove();
+  const { onAcceptApproveReceipt, acceptApproveHandler } = useAcceptApprove();
   const { acceptTrade, onAcceptReceipt } = useAcceptOffer();
 
   useEffect(() => {

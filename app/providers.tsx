@@ -8,8 +8,6 @@ import { WagmiProvider } from 'wagmi';
 
 import { useTheme } from '@context/theme/ThemeProvider';
 import { ToastifyProvider } from '@context/toastify/ToastifyProvider';
-import { OfferAcceptProvider } from '@context/offer/accept/OfferAcceptContext';
-import { OfferCreateProvider } from '@context/offer/create/OfferCreateContext';
 import i18n from '@/i18n';
 import { wagmiConfig } from '@lib/wagmiConfig';
 import { IsMountedProvider } from '@lib/hooks/useIsMounted';
@@ -31,13 +29,9 @@ const Providers = ({
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider modalSize="compact" theme={theme === 'light' ? lightTheme() : darkTheme()}>
           <ToastifyProvider>
-            <OfferCreateProvider>
-              <OfferAcceptProvider>
-                <I18nextProvider i18n={i18n}>
-                  <IsMountedProvider>{children}</IsMountedProvider>
-                </I18nextProvider>
-              </OfferAcceptProvider>
-            </OfferCreateProvider>
+            <I18nextProvider i18n={i18n}>
+              <IsMountedProvider>{children}</IsMountedProvider>
+            </I18nextProvider>
           </ToastifyProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
