@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
-import { Address, formatUnits } from 'viem';
-import { useReadContract } from 'wagmi';
+import { Address, formatUnits, getAddress } from 'viem';
 
-import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
-import { environment } from '@lib/environment';
+import { useQuery } from '@tanstack/react-query';
+import { subgraphClient } from '@lib/subgraphClient';
 
 interface OfferDetails {
   tokenFrom: Address;
@@ -13,31 +12,100 @@ interface OfferDetails {
   amountFrom: bigint;
   amountTo: bigint;
   creator: Address;
+  receiver: Address;
   fee: bigint;
   active: boolean;
   completed: boolean;
 }
+const OFFER_DETAILS_QUERY = `
+  query OfferDetails($id: BigInt!) {
+    tradeOffer(id: $id) {
+      tokenFrom {
+        ...TokenFragment
+      }
+      tokenTo {
+        ...TokenFragment
+      }
+      amountFrom
+      amountFromWithFee
+      amountTo
+      creator
+      active
+      optionalTaker
+      completed
+    }
+  }
+
+  fragment TokenFragment on Token {
+    decimals
+    symbol
+    id
+  }
+`;
+
+const GET_OFFER_DETAILS_QUERY_KEY = 'GET_OFFER_DETAILS';
+
+type OfferDetailsQueryRaw = {
+  tradeOffer: {
+    tokenFrom: {
+      id: Address;
+      symbol: string;
+      decimals: string;
+    };
+    tokenTo: {
+      id: Address;
+      symbol: string;
+      decimals: string;
+    };
+    amountFrom: string;
+    amountFromWithFee: string;
+    amountTo: string;
+    creator: Address;
+    active: boolean;
+    optionalTaker: Address;
+    completed: boolean;
+  };
+};
 
 export const useGetOfferDetails = () => {
   const { acceptId } = useOfferAcceptContext();
-  const memoizedId = useMemo(() => {
-    if (!acceptId) return BigInt(0);
-    return BigInt(acceptId);
-  }, [acceptId]);
 
   const {
     data: details,
     isLoading,
     error,
-  } = useReadContract({
-    address: environment.contractAddress,
-    abi: trustlessOtcAbi,
-    functionName: 'getOfferDetails',
-    args: [memoizedId],
+  } = useQuery({
+    queryKey: [GET_OFFER_DETAILS_QUERY_KEY, acceptId],
+    queryFn: async () => {
+      return subgraphClient.request<OfferDetailsQueryRaw>(OFFER_DETAILS_QUERY, { id: acceptId }).then((data) => {
+        const amountFrom = BigInt(data.tradeOffer.amountFrom);
+        const amountTo = BigInt(data.tradeOffer.amountTo);
+        const fee = amountFrom - BigInt(data.tradeOffer.amountFromWithFee);
+        return {
+          tokenFrom: {
+            ...data.tradeOffer.tokenFrom,
+            id: getAddress(data.tradeOffer.tokenFrom.id),
+          },
+          tokenTo: {
+            ...data.tradeOffer.tokenTo,
+            id: getAddress(data.tradeOffer.tokenTo.id),
+          },
+          amountFrom,
+          amountTo,
+          creator: getAddress(data.tradeOffer.creator),
+          receiver: getAddress(data.tradeOffer.optionalTaker),
+          fee,
+          active: data.tradeOffer.active,
+          completed: data.tradeOffer.completed,
+        };
+      });
+    },
   });
 
-  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo({ address: details ? details[0] : '0x' });
-  const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details[1] : '0x' });
+  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo({
+    address: details ? details.tokenFrom.id : '0x',
+  });
+  const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details.tokenTo.id : '0x' });
 
   const offerDetails: OfferDetails = useMemo(() => {
     if (!details) {
@@ -47,6 +115,7 @@ export const useGetOfferDetails = () => {
         amountFrom: BigInt(0),
         amountTo: BigInt(0),
         creator: '' as Address,
+        receiver: '' as Address,
         fee: BigInt(0),
         active: false,
         completed: false,
@@ -54,23 +123,24 @@ export const useGetOfferDetails = () => {
     }
 
     return {
-      tokenFrom: details[0],
-      tokenTo: details[1],
-      amountFrom: details[2],
-      amountTo: details[3],
-      creator: details[4],
-      fee: details[5],
-      active: details[6],
-      completed: details[7],
+      tokenFrom: details.tokenFrom.id,
+      tokenTo: details.tokenTo.id,
+      amountFrom: details.amountFrom,
+      amountTo: details.amountTo,
+      creator: details.creator,
+      fee: details.fee,
+      active: details.active,
+      receiver: details.receiver,
+      completed: details.completed,
     };
   }, [details]);
 
   const rateToFrom = useMemo(() => {
     if (!details) return;
     if (!tokenFromDecimals) return;
-    const amountFrom = formatUnits(details[2], tokenFromDecimals);
+    const amountFrom = formatUnits(details.amountFrom, tokenFromDecimals);
     if (!tokenToDecimals) return;
-    const amountTo = formatUnits(details[3], tokenToDecimals);
+    const amountTo = formatUnits(details.amountTo, tokenToDecimals);
     const result = Number(amountFrom) / Number(amountTo);
     if (Number.isNaN(result)) return;
     return Number(result).toFixed(2);
