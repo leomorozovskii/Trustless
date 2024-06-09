@@ -18,7 +18,7 @@ type CreateOffersView = {
   columnsToDisplay: OfferColumns[];
 };
 
-const emptyTable = [{ id: 'non-grouped', data: [] as OfferTrade[], showAsPrimary: true }];
+const emptyTable = [{ id: 'non-grouped', data: [] as OfferTrade[], showAsPrimary: true, disableRowSelection: false }];
 
 const createOffersView = (
   useOffersStore: UseBoundStore<Mutate<StoreApi<OffersStore>, []>>,
@@ -97,6 +97,7 @@ const createOffersView = (
             onRowSelectionChange={setSelection}
             columnsToDisplay={columnsToDisplay}
             isLoading={offerDetails.isLoading}
+            disableRowSelection={group.disableRowSelection}
             showEmptyState={showAsGroup && group.showAsPrimary}
           />
         );

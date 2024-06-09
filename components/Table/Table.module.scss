@@ -112,6 +112,10 @@
   &_selected {
     opacity: 1;
   }
+
+  &_disabled {
+    opacity: 0;
+  }
 }
 
 .headingRow,
@@ -142,7 +146,7 @@
   &:hover {
     background-color: $additional-gray-background;
 
-    & .rowSelectionCell {
+    & .rowSelectionCell:not(.rowSelectionCell_disabled) {
       opacity: 1;
     }
   }

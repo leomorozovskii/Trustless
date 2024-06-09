@@ -18,6 +18,7 @@ const OffersTemplate = createOffersTemplate({
     {
       id: 'recently-accepted',
       filters: ['recently-accepted'],
+      disableRowSelection: true,
     },
     {
       id: 'open',

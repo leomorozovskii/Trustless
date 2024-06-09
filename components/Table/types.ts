@@ -20,4 +20,5 @@ export interface TableProps<TData> {
   showHeader?: boolean;
   isLoading?: boolean;
   emptyState?: React.ReactNode;
+  disableRowSelection?: boolean;
 }

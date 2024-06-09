@@ -20,6 +20,7 @@ export const Table = <TData,>({
   subtitle,
   isLoading,
   emptyState = null,
+  disableRowSelection = false,
 }: TableProps<TData>) => {
   const { enableRowSelection, data } = table.options;
   const columns = table.getAllColumns();
@@ -77,7 +78,7 @@ export const Table = <TData,>({
             {data.length > 0 ? (
               table.getRowModel().rows?.map((row) => (
                 <TableRow key={row.id}>
-                  {enableRowSelection && <TableRowSelectionCell row={row} />}
+                  {enableRowSelection && <TableRowSelectionCell row={row} disabled={disableRowSelection} />}
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} cell={cell} />
                   ))}

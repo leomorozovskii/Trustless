@@ -260,10 +260,15 @@ const groupData = (data: OfferTrade[], groups?: OfferGrouping[] | null) => {
           (filter) => (filter === 'recently-accepted' && item.recentlyAccepted) || filter === item.status,
         ),
       );
-      acc.push({ id: group.id, data: offers, showAsPrimary: group.showAsPrimary });
+      acc.push({
+        id: group.id,
+        data: offers,
+        showAsPrimary: group.showAsPrimary,
+        disableRowSelection: group.disableRowSelection,
+      });
       return acc;
     },
-    [] as { id: string; data: OfferTrade[]; showAsPrimary?: boolean }[],
+    [] as { id: string; data: OfferTrade[]; showAsPrimary?: boolean; disableRowSelection?: boolean }[],
   );
 };
 
@@ -308,11 +313,13 @@ const useOffersDetailsQuery = ({
         id: group.id,
         data: sortData(group.data, sorting),
         showAsPrimary: group.showAsPrimary,
+        disableRowSelection: group.disableRowSelection,
       }));
       const paginatedOffers = sortedOffers.map((group) => ({
         id: group.id,
         data: paginateData(group.data, offset, limit),
         showAsPrimary: group.showAsPrimary,
+        disableRowSelection: group.disableRowSelection,
       }));
       return paginatedOffers;
     },

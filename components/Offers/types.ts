@@ -10,6 +10,7 @@ export type OfferGrouping = {
   filters: OfferFilter[];
   showGroupingIfEmpty?: boolean;
   showAsPrimary?: boolean;
+  disableRowSelection?: boolean;
 };
 
 export enum OfferColumns {

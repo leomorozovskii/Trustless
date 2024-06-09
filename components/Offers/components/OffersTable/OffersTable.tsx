@@ -17,6 +17,7 @@ type OffersTableProps = {
   columnsToDisplay: OfferColumns[];
   isLoading?: boolean;
   sorting: OfferSorting | null;
+  disableRowSelection?: boolean;
   onSortingChange: (sorting: OfferSorting | null) => void;
   onRowSelectionChange: (selectedRowId: string | null) => void;
 };
@@ -31,6 +32,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
   subtitle,
   showEmptyState,
   columnsToDisplay,
+  disableRowSelection,
   onSortingChange,
   onRowSelectionChange,
 }) => {
@@ -89,6 +91,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
       subtitle={subtitle}
       table={offersTable}
       isLoading={isLoading}
+      disableRowSelection={disableRowSelection}
       emptyState={showEmptyState && <OffersTableEmptyState />}
     />
   );
