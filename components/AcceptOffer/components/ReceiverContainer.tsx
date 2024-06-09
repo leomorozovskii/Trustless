@@ -2,15 +2,19 @@ import React from 'react';
 
 import { AcceptOfferIcon } from '@assets/icons';
 
+import { Address } from 'viem';
 import s from '../AcceptOffer.module.scss';
 
-const ReceiverContainer = () => {
-  //  TODO add real data
+type ReceiverContainerProps = {
+  receiver: Address;
+};
+
+const ReceiverContainer: React.FC<ReceiverContainerProps> = ({ receiver }) => {
   return (
     <div className={s.arrowContainer}>
       <AcceptOfferIcon />
       <div className={s.tokenContainer}>
-        <h2 className={s.receiverAddress}>0x0000000000000000000000000000</h2>
+        <h2 className={s.receiverAddress}>{receiver}</h2>
         <p className={s.receiver}>Receiver</p>
       </div>
     </div>

@@ -15,15 +15,14 @@ import s from './AcceptOffer.module.scss';
 
 const AcceptOffer: React.FC = () => {
   const { isLoading } = useGetOfferDetails();
-  const { isTokenFromCustom, tokenFrom } = useGetOfferDetails();
+  const { isTokenFromCustom, tokenFrom, receiver } = useGetOfferDetails();
   const { tokenName } = useTokenInfo({ address: tokenFrom });
-  const receiver = '0x0000000000000000000000000000000000000000';
 
   return (
     <Skeleton loading={isLoading}>
       <div className={cn(s.container, { [s.paddingLg]: isTokenFromCustom })}>
         <TokensContainer />
-        {!isEmptyAddress(receiver) && <ReceiverContainer />}
+        {!isEmptyAddress(receiver) && <ReceiverContainer receiver={receiver} />}
         {isTokenFromCustom && <CustomTokenWarning address={tokenFrom} name={tokenName} />}
       </div>
     </Skeleton>
