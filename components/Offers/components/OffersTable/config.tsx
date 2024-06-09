@@ -25,7 +25,7 @@ import {
   OffersTableDate,
 } from './components/OffersTableCells';
 
-const columnHelper = createColumnHelper<OfferTrade>();
+export const columnHelper = createColumnHelper<OfferTrade>();
 export const columns = [
   columnHelper.accessor((props) => props.id, {
     id: OfferColumns.ID,
@@ -135,7 +135,7 @@ export const columns = [
     cell: (info) => <OffersTableDate unixTimestamp={info.getValue()} />,
     header: () => <OffersTableDateHeading />,
   }),
-  columnHelper.accessor((props) => props.id, {
+  columnHelper.accessor((props) => ({ status: props.status, id: props.id }), {
     id: OfferColumns.Share,
     meta: {
       columnWidth: '124px',
@@ -143,6 +143,9 @@ export const columns = [
     },
     enableSorting: false,
     header: () => <OffersTableShareHeading />,
-    cell: (info) => <OffersTableShare id={info.getValue()} />,
+    cell: (info) => {
+      const { status, id } = info.getValue();
+      return (status === 'open' || status === 'pending') && <OffersTableShare id={id} />;
+    },
   }),
 ];

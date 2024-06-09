@@ -16,5 +16,8 @@ declare module '@tanstack/table-core' {
 
 export interface TableProps<TData> {
   table: Table<TData>;
+  subtitle?: string;
+  showHeader?: boolean;
   isLoading?: boolean;
+  emptyState?: React.ReactNode;
 }

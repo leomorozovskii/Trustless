@@ -12,9 +12,19 @@ import { NotConnectedMessage } from '@components/NotConnectedMessage';
 import { useIsMounted } from '@lib/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
-  filters: ['all', 'open'],
-  hideFilters: true,
+  filters: ['all', 'open', 'pending', 'recently-accepted'],
   actions: ['cancel', 'search'],
+  grouping: [
+    {
+      id: 'recently-accepted',
+      filters: ['recently-accepted'],
+    },
+    {
+      id: 'open',
+      filters: ['open', 'pending'],
+      showAsPrimary: true,
+    },
+  ],
   columnsToDisplay: [
     OfferColumns.ID,
     OfferColumns.AssetFrom,

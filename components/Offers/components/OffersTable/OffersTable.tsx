@@ -7,9 +7,13 @@ import { OfferSorting, OfferColumns, OfferTrade } from '@components/Offers/types
 import { RowSelectionState, SortingState, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { columns } from './config';
+import { OffersTableEmptyState } from './components/OffersTableEmptyState';
 
 type OffersTableProps = {
   offers?: OfferTrade[];
+  subtitle?: string;
+  showHeader?: boolean;
+  showEmptyState?: boolean;
   columnsToDisplay: OfferColumns[];
   isLoading?: boolean;
   sorting: OfferSorting | null;
@@ -23,6 +27,9 @@ const OffersTable: React.FC<OffersTableProps> = ({
   offers = defaultOffers,
   isLoading,
   sorting,
+  showHeader,
+  subtitle,
+  showEmptyState,
   columnsToDisplay,
   onSortingChange,
   onRowSelectionChange,
@@ -73,7 +80,18 @@ const OffersTable: React.FC<OffersTableProps> = ({
   React.useEffect(() => {
     setRowSelectionState({});
   }, [offers]);
-  return <Table table={offersTable} isLoading={isLoading} />;
+  if (!isLoading && offers.length === 0 && !showEmptyState) {
+    return null;
+  }
+  return (
+    <Table
+      showHeader={showHeader}
+      subtitle={subtitle}
+      table={offersTable}
+      isLoading={isLoading}
+      emptyState={<OffersTableEmptyState />}
+    />
+  );
 };
 
 export { OffersTable };

@@ -3,8 +3,6 @@
 @import '@common/typo.scss';
 
 .tableContainer {
-  overflow-x: auto;
-
   @include font-m-flat;
 }
 
@@ -14,8 +12,23 @@
   border-collapse: collapse;
 }
 
-.header {
+.header,
+.headerPlaceholder {
   display: contents;
+}
+
+.subtitle {
+  display: inline-block;
+  grid-column: 1 / calc(var(--cols) + 1);
+  grid-template-columns: subgrid;
+  padding: $m 0;
+  font-weight: 700;
+
+  @include font-m;
+
+  &.enableRowSelection {
+    grid-column: 2 / calc(var(--cols) + 1);
+  }
 }
 
 .body {
@@ -75,6 +88,7 @@
 }
 
 .headingRowSelectionCell {
+  display: inline-flex;
   width: 24px;
 
   &__content {
@@ -101,11 +115,25 @@
 }
 
 .headingRow,
-.row {
+.headingRowPlaceholder,
+.row,
+.rowPlaceholder {
   display: grid;
   grid-column: 1 / calc(var(--cols) + 1);
   grid-template-columns: subgrid;
   padding: 0 32px;
+}
+
+.emptyState {
+  display: inline-block;
+  grid-column: 1 / calc(var(--cols) + 1);
+  grid-template-columns: subgrid;
+
+  @include font-m;
+
+  &.enableRowSelection {
+    grid-column: 2 / calc(var(--cols) + 1);
+  }
 }
 
 .row {

@@ -1,9 +1,16 @@
 import { TokenData } from '@lib/constants';
 import { Hash } from 'viem';
 
-export type OfferStatus = 'open' | 'accepted' | 'cancelled';
+export type OfferStatus = 'open' | 'accepted' | 'cancelled' | 'pending';
 
-export type OfferFilter = OfferStatus | 'all';
+export type OfferFilter = OfferStatus | 'recently-accepted' | 'all';
+
+export type OfferGrouping = {
+  id: string;
+  filters: OfferFilter[];
+  showGroupingIfEmpty?: boolean;
+  showAsPrimary?: boolean;
+};
 
 export enum OfferColumns {
   ID = 'ID',
@@ -22,6 +29,8 @@ export interface OffersStats {
   accepted: number;
   cancelled: number;
   open: number;
+  pending: number;
+  ['recently-accepted']: number;
   total: number;
 }
 
@@ -35,6 +44,7 @@ export interface OfferSorting {
 export interface OffersState {
   selection: string | null;
   sorting: OfferSorting | null;
+  grouping: OfferGrouping[] | null;
   filter: OfferFilter;
   filters: OfferFilter[];
   searchFilter: string;
@@ -66,4 +76,5 @@ export interface OfferTrade {
   receiver: string;
   unixTimestamp: number;
   status: OfferStatus;
+  recentlyAccepted: boolean;
 }
