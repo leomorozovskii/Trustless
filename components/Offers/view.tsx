@@ -1,8 +1,10 @@
 'use client';
 
 import { Mutate, StoreApi, UseBoundStore } from 'zustand';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { OffersTable } from './components/OffersTable';
-import { OfferColumns, OffersStore } from './types';
+import { OfferColumns, OfferTrade, OffersStore } from './types';
 import { OffersFilters } from './components/OffersFilters';
 import { OffersSearchFilter } from './components/OffersSearchFilter';
 import { OffersPagination } from './components/OffersPagination';
@@ -22,11 +24,10 @@ const createOffersView = (
 ) => {
   return {
     CancelSelectedOrder: () => {
-      const { selection, resetSelection } = useOffersStore((state) => ({
+      const { selection } = useOffersStore((state) => ({
         selection: state.selection,
-        resetSelection: () => state.setSelection(null),
       }));
-      return <OffersCancelOffer offerId={selection} onCancelOffer={resetSelection} />;
+      return <OffersCancelOffer offerId={selection} />;
     },
     ReOpenOrder: () => {
       const { filter, searchFilter, pagination, selection, sorting, filters } = useOffersStore((state) => ({
@@ -45,11 +46,14 @@ const createOffersView = (
         sorting,
         filters,
       });
-      const selectedOffer = offerDetails.data?.find((offer) => offer.id === selection) || null;
+      const selectedOffer =
+        offerDetails.data
+          ?.reduce((acc, group) => [...acc, ...group.data], [] as OfferTrade[])
+          .find((offer) => offer.id === selection) || null;
       return <OfferReOpenOffer offer={selectedOffer} />;
     },
     Table: () => {
-      const { filter, searchFilter, sorting, pagination, setSorting, setSelection, filters } = useOffersStore(
+      const { grouping, filter, searchFilter, sorting, pagination, setSorting, setSelection, filters } = useOffersStore(
         (state) => ({
           filter: state.filter,
           searchFilter: state.searchFilter,
@@ -58,6 +62,7 @@ const createOffersView = (
           setSorting: state.setSorting,
           setSelection: state.setSelection,
           filters: state.filters,
+          grouping: state.grouping,
         }),
       );
       const offerDetails = useOffersDetailsQuery({
@@ -67,20 +72,33 @@ const createOffersView = (
         offset: pagination.offset,
         searchFilter,
         sorting,
+        grouping,
       });
-      if (!offerDetails.isLoading && offerDetails.data?.length === 0) {
+      const { t } = useTranslation();
+      if (!offerDetails.isLoading && offerDetails.data?.reduce((acc, group) => acc + group.data.length, 0) === 0) {
         return <OffersEmptyState />;
       }
-      return (
-        <OffersTable
-          sorting={sorting}
-          offers={offerDetails.data}
-          onSortingChange={setSorting}
-          onRowSelectionChange={setSelection}
-          columnsToDisplay={columnsToDisplay}
-          isLoading={offerDetails.isLoading}
-        />
-      );
+      const notEmptyGroups =
+        offerDetails.data?.filter(
+          (groupItem) => !!groupItem.data.length || (filter === 'all' && groupItem.showAsPrimary),
+        ) || [];
+      return notEmptyGroups.map((group, idx) => {
+        const showAsGroup = !!grouping && (notEmptyGroups.length > 1 || (filter === 'all' && !group.showAsPrimary));
+        return (
+          <OffersTable
+            key={idx}
+            sorting={sorting}
+            subtitle={showAsGroup ? t(`offers.grouping.${group.id}`) : undefined}
+            showHeader={!showAsGroup || idx === 0}
+            offers={group.data}
+            onSortingChange={setSorting}
+            onRowSelectionChange={setSelection}
+            columnsToDisplay={columnsToDisplay}
+            isLoading={offerDetails.isLoading}
+            showEmptyState={showAsGroup && group.showAsPrimary}
+          />
+        );
+      });
     },
     Filters: () => {
       const { filter, searchFilter, filters, setFilter } = useOffersStore((state) => ({

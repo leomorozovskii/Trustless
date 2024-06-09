@@ -25,7 +25,13 @@
       "all": "All",
       "open": "Open",
       "accepted": "Accepted",
-      "cancelled": "Cancelled"
+      "cancelled": "Cancelled",
+      "pending": "Pending",
+      "recently-accepted": "Recently accepted"
+    },
+    "grouping": {
+      "open": "Open offers",
+      "recently-accepted": "Recently accepted offers"
     },
     "table": {
       "cell": {
@@ -34,7 +40,8 @@
       "status": {
         "open": "Open",
         "accepted": "Accepted",
-        "cancelled": "Cancelled"
+        "cancelled": "Cancelled",
+        "pending": "Pending"
       },
       "headings": {
         "id": "Offer ID",

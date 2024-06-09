@@ -22,11 +22,13 @@ const OffersFilters: React.FC<OffersFiltersProps> = ({ filters, value, offersSta
   return (
     <Tabs<OfferFilter>
       value={value}
-      options={filters.map((filter) => ({
-        value: filter,
-        badge: filter === 'all' ? undefined : offersStats?.[filter].toString(),
-        label: t(`offers.filters.${filter}`),
-      }))}
+      options={filters
+        .filter((filter) => (filter === 'all' ? true : !!offersStats?.[filter]))
+        .map((filter) => ({
+          value: filter,
+          badge: filter === 'all' ? undefined : offersStats?.[filter].toString(),
+          label: t(`offers.filters.${filter}`),
+        }))}
       onValueChange={onValueChange}
     />
   );
