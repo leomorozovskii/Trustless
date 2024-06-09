@@ -107,8 +107,14 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
 
   const { address } = useAccount();
   const [isCreator, setIsCreator] = useState<boolean | null>(null);
-  const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo({
+  const {
+    tokenDecimals: tokenFromDecimals,
+    isCustom,
+    tokenValue,
+  } = useTokenInfo({
     address: details ? details.tokenFrom.id : '0x',
+    amount: details ? details.amountFrom : BigInt(0),
+    withFee: true,
   });
   const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details.tokenTo.id : '0x' });
 
@@ -150,15 +156,15 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   }, [address, offerDetails.creator]);
 
   const rateToFrom = useMemo(() => {
-    if (!details) return;
+    if (!details || !tokenValue) return;
     if (!tokenFromDecimals) return;
-    const amountFrom = formatUnits(details.amountFrom, tokenFromDecimals);
+    const amountFrom = tokenValue;
     if (!tokenToDecimals) return;
     const amountTo = formatUnits(details.amountTo, tokenToDecimals);
     const result = Number(amountFrom) / Number(amountTo);
     if (Number.isNaN(result)) return;
     return String(Number(result.toFixed(5)));
-  }, [details, tokenToDecimals, tokenFromDecimals]);
+  }, [details, tokenToDecimals, tokenFromDecimals, tokenValue]);
 
   return {
     ...offerDetails,
