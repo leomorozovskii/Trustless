@@ -36,4 +36,24 @@ const TableHeadingCell = <TData, TValue>({ header }: { header: Header<TData, TVa
   );
 };
 
-export { TableHeadingCell };
+const TableHeadingCellPlaceholder = <TData, TValue>({ header }: { header: Header<TData, TValue> }) => {
+  return (
+    <th
+      className={s.headingCellPlaceholder}
+      colSpan={header.colSpan}
+      aria-label={header.column.columnDef.id}
+      style={{
+        width: header.column.columnDef.meta?.columnWidth,
+        minWidth: header.column.columnDef.meta?.columnMinWidth,
+        justifyContent: header.column.columnDef.meta?.columnAlign,
+        textAlign: header.column.columnDef.meta?.columnAlign,
+        marginLeft: header.column.columnDef.meta?.columnMarginLeft,
+        marginRight: header.column.columnDef.meta?.columnMarginRight,
+        paddingLeft: header.column.columnDef.meta?.columnPaddingLeft,
+        paddingRight: header.column.columnDef.meta?.columnPaddingRight,
+      }}
+    />
+  );
+};
+
+export { TableHeadingCell, TableHeadingCellPlaceholder };

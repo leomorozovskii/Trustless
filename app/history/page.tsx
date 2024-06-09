@@ -45,7 +45,7 @@ const HistoryPage: React.FC = () => {
   return (
     <Sidebar contentBg="contrast">
       <Header />
-      <OffersTemplate title={t('offers.title.history')} />;
+      <OffersTemplate title={t('offers.title.history')} />
     </Sidebar>
   );
 };

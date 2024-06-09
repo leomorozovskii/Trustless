@@ -56,7 +56,7 @@ const OffersTableAmountFrom: React.FC<OffersTableAmountFromProps> = ({ amount, a
         )
       }
     >
-      <FormattedNumber value={amount} />
+      <FormattedNumber value={amountWithFee} />
     </OffersTableCell>
   );
 };

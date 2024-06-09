@@ -1,16 +1,19 @@
 import { Address, Hash, formatUnits, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
-import { TOKEN_MAP, Token } from '@lib/constants';
+import { TOKEN_MAP, Token, dayUnix } from '@lib/constants';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { UnknownIcon } from '@assets/icons/tokens';
 import { subgraphClient } from '@lib/subgraphClient';
 import { gql } from 'graphql-request';
-import { OfferTrade, OfferStatus, OfferFilter, OfferSorting } from '../types';
+import dayjs from 'dayjs';
+import { isEmptyAddress } from '@components/AcceptOffer/utils/isEmptyAddress';
+import { OfferTrade, OfferStatus, OfferFilter, OfferSorting, OfferGrouping } from '../types';
 
 type UseOffersDetailsQueryOptions = {
   filter?: OfferFilter;
   searchFilter?: string;
   filters?: OfferFilter[];
+  grouping?: OfferGrouping[] | null;
   offset?: number;
   limit?: number;
   sorting?: OfferSorting | null;
@@ -33,7 +36,7 @@ type OffersDetailsRawQuery = {
     amountFrom: string;
     amountFromWithFee: string;
     active: boolean;
-    taker: Address;
+    optionalTaker: Address;
     takenHash: Hash;
     takenTimestamp: number;
     tokenFrom: OffersDetailsRawTokenFragment;
@@ -51,7 +54,7 @@ const OFFERS_DETAILS_QUERY = gql`
     $orderDirection: OrderDirection
   ) {
     tradeOffers(where: $filters, skip: $skip, first: $first, orderBy: $orderBy, orderDirection: $orderDirection) {
-      taker
+      optionalTaker
       creationHash
       creationTimestamp
       cancelTimestamp
@@ -91,7 +94,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
       amountTo,
       amountFrom,
       amountFromWithFee,
-      taker,
+      optionalTaker,
       active,
       takenHash,
       takenTimestamp,
@@ -125,7 +128,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
       let status: OfferStatus;
 
       if (active) {
-        status = 'open';
+        status = optionalTaker && !isEmptyAddress(optionalTaker) ? 'pending' : 'open';
       } else if (!completed) {
         status = 'cancelled';
       } else {
@@ -134,7 +137,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
 
       let txHash: Hash;
 
-      if (status === 'open') {
+      if (status === 'open' || status === 'pending') {
         txHash = creationHash;
       } else if (status === 'cancelled') {
         txHash = cancelHash;
@@ -144,7 +147,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
 
       let unixTimestamp: number;
 
-      if (status === 'open') {
+      if (status === 'open' || status === 'pending') {
         unixTimestamp = creationTimestamp;
       } else if (status === 'cancelled') {
         unixTimestamp = cancelTimestamp;
@@ -156,13 +159,14 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
         id: tradeID,
         tokenFromDetails,
         tokenToDetails,
-        receiver: taker,
+        receiver: optionalTaker,
         amountFrom: Number(formatUnits(BigInt(amountFrom), tokenFromDetails.decimals)),
         amountTo: Number(formatUnits(BigInt(amountTo), tokenToDetails.decimals)),
         amountFromWithFee: Number(formatUnits(BigInt(amountFromWithFee), tokenFromDetails.decimals)),
         txHash,
         status,
         unixTimestamp,
+        recentlyAccepted: status === 'accepted' && unixTimestamp > dayjs().unix() - dayUnix,
       };
     },
   );
@@ -219,7 +223,12 @@ const filterData = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFil
         if (filters.length === 0) {
           return true;
         }
-        return filters.includes(offer.status);
+        return filters.some(
+          (item) => item === offer.status || (item === 'recently-accepted' && offer.recentlyAccepted),
+        );
+      }
+      if (filter === 'recently-accepted') {
+        return offer.recentlyAccepted;
       }
       return offer.status === filter;
     })
@@ -240,6 +249,24 @@ const filterData = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFil
     });
 };
 
+const groupData = (data: OfferTrade[], groups?: OfferGrouping[] | null) => {
+  if (!groups) {
+    return [{ id: 'non-grouped', data }];
+  }
+  return groups.reduce(
+    (acc, group) => {
+      const offers = data.filter((item) =>
+        group.filters.some(
+          (filter) => (filter === 'recently-accepted' && item.recentlyAccepted) || filter === item.status,
+        ),
+      );
+      acc.push({ id: group.id, data: offers, showAsPrimary: group.showAsPrimary });
+      return acc;
+    },
+    [] as { id: string; data: OfferTrade[]; showAsPrimary?: boolean }[],
+  );
+};
+
 const paginateData = (data: OfferTrade[], offset?: number, limit?: number) => {
   return offset && limit ? data.slice(offset, offset + limit) : data;
 };
@@ -249,6 +276,7 @@ const UseOffersDetailsQueryKey = 'offersDetails';
 const useOffersDetailsQuery = ({
   filter = 'all',
   filters = ['all'],
+  grouping,
   offset,
   limit,
   searchFilter,
@@ -275,8 +303,17 @@ const useOffersDetailsQuery = ({
     },
     select: (offers) => {
       const filteredOffers = filterData(offers, filters, filter, searchFilter);
-      const sortedOffers = sortData(filteredOffers, sorting);
-      const paginatedOffers = paginateData(sortedOffers, offset, limit);
+      const groupedOffers = groupData(filteredOffers, grouping);
+      const sortedOffers = groupedOffers.map((group) => ({
+        id: group.id,
+        data: sortData(group.data, sorting),
+        showAsPrimary: group.showAsPrimary,
+      }));
+      const paginatedOffers = sortedOffers.map((group) => ({
+        id: group.id,
+        data: paginateData(group.data, offset, limit),
+        showAsPrimary: group.showAsPrimary,
+      }));
       return paginatedOffers;
     },
   });

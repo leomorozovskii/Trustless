@@ -1,6 +1,6 @@
 'use client';
 
-import { OfferColumns, OfferFilter } from './types';
+import { OfferColumns, OfferFilter, OfferGrouping } from './types';
 
 import { createOffersView } from './view';
 import { createUseOffersStore } from './store';
@@ -14,6 +14,7 @@ type CreateOffersParams = {
   hideFilters?: boolean;
   actions: OffersTemplateActions[];
   columnsToDisplay?: OfferColumns[];
+  grouping?: OfferGrouping[] | null;
 };
 
 type OffersProps = {
@@ -23,6 +24,7 @@ type OffersProps = {
 export const createOffersTemplate = ({
   filters = [],
   actions,
+  grouping = null,
   hideFilters = false,
   columnsToDisplay = [
     OfferColumns.ID,
@@ -39,6 +41,7 @@ export const createOffersTemplate = ({
   const useOffersStore = createUseOffersStore({
     limit: 100,
     filters,
+    grouping,
   });
   const OffersView = createOffersView(useOffersStore, { columnsToDisplay });
 
@@ -68,7 +71,9 @@ export const createOffersTemplate = ({
             <OffersView.Pagination />
           </div>
         </div>
-        <OffersView.Table />
+        <div className={s.table}>
+          <OffersView.Table />
+        </div>
       </div>
     );
   };

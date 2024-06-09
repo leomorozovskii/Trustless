@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ConnectWallet } from '@components/ConnectWallet';
-import { ThemeSwitcher } from '@components/ThemeSwitcher';
+// import { ThemeSwitcher } from '@components/ThemeSwitcher';
 
 import s from './Header.module.scss';
 
@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
-        <ThemeSwitcher />
+        {/* TODO :: add dark theme <ThemeSwitcher /> */}
         <ConnectWallet />
       </div>
     </div>

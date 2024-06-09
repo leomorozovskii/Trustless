@@ -1,5 +1,6 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
+@import '@common/typo.scss';
 
 @mixin bold-text {
   color: $base-black;
@@ -95,6 +96,7 @@
 
 .receiverAddress {
   @include bold-text;
+  @include font-xl;
 }
 
 .receiver {

@@ -59,3 +59,5 @@ export enum OfferProgress {
   Approved = 'approved',
   Created = 'created',
 }
+
+export const dayUnix = 24 * 60 * 60;
