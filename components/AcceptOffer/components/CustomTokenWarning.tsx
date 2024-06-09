@@ -24,12 +24,7 @@ const CustomTokenWarning: React.FC<ICustomTokenWarning> = ({ name, address }) =>
         </p>
         <div className={s.warnShareAddress}>
           <p className={s.warnTokenName}>{address}</p>
-          <Link
-            target="_blank"
-            rel="noreferrer"
-            href={`${links.etherscan}/token/${address}`}
-            style={{ display: 'flex' }}
-          >
+          <Link target="_blank" rel="noreferrer" href={`${links.etherscan}/token/${address}`} className={s.warning}>
             <NewWindowIcon className={s.warn} />
           </Link>
         </div>

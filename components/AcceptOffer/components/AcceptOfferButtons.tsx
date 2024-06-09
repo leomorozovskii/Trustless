@@ -21,7 +21,7 @@ const AcceptOfferButtons: React.FC = () => {
   const { activeAcceptStep, acceptId } = useOfferAcceptContext();
   const { active, isLoading } = useGetOfferDetails({ id: acceptId });
   const { t } = useTranslation();
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const { onAcceptApproveReceipt, acceptApproveHandler } = useAcceptApprove();
   const { acceptTrade, onAcceptReceipt } = useAcceptOffer();

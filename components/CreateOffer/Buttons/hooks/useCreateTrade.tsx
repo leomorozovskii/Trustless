@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { createPublicClient, parseAbiItem, parseUnits, TransactionReceipt } from 'viem';
 import { http, useWriteContract } from 'wagmi';
-import { Chain, mainnet, sepolia } from 'wagmi/chains';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
@@ -11,6 +10,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
+import { network } from '@lib/wagmiConfig';
 
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
@@ -31,7 +31,6 @@ export const useCreateTrade = () => {
 
     const getOfferId = async () => {
       const event = parseAbiItem('event OfferCreated(uint indexed tradeID)');
-      const network: Chain = environment.isTestnet ? sepolia : mainnet;
 
       const client = createPublicClient({
         chain: network,
