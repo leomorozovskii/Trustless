@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 
-import { GasIcon, SelectIcon } from '@assets/icons';
 import { ProgressBar } from '@components/ProgressBar';
 import { TxButton } from '@components/TxFlow';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
@@ -61,15 +60,15 @@ const AcceptOfferButtons: React.FC = () => {
         </div>
         <ProgressBar currentStep={activeAcceptStep} />
       </div>
-      <div className={s.serviceContainer}>
-        <p className={s.feeLabel}>Service Fee 0.01%</p>
-        <div className={s.feeContainer}>
-          <GasIcon />
-          {/* TODO: calculate a real number */}
-          <p className={s.feeLabel}>11.43%</p>
-          <SelectIcon />
-        </div>
-      </div>
+      {/* TODO change gas price */}
+      {/* <div className={s.serviceContainer}> */}
+      {/*   <p className={s.feeLabel}>Gas fee</p> */}
+      {/*   <div className={s.feeContainer}> */}
+      {/*     <GasIcon /> */}
+      {/*     /!* TODO: calculate a real number *!/ */}
+      {/*     <p className={s.feeLabel}>11.43%</p> */}
+      {/*   </div> */}
+      {/* </div> */}
       <p className={s.terms}>
         By continuing, you accept <span className={s.conditions}>Terms & Conditions</span>
       </p>
