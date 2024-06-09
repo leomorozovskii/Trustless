@@ -35,7 +35,7 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
 
   const IconComponent: React.FC<IconProps> | undefined = useMemo(() => {
     if (!value) return;
-    const item = TOKEN_MAP[value];
+    const item = TOKEN_MAP[value as Address];
     if (type === 'from' && tokens && item) return item.logo;
     if (!item) return UnknownIcon;
     return item.logo;
@@ -44,10 +44,10 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
   const tokenTitle = useMemo(() => {
     if (!value) return;
     if (type === 'from' && value) return tokens.find((el) => el.address === value)?.symbol;
-    const notImported = TOKEN_MAP[value]?.name;
+    const notImported = TOKEN_MAP[value as Address]?.name;
     if (!notImported && !result.data) return customTokenName;
     if (!notImported && result.data) return result.data.symbol;
-    return TOKEN_MAP[value].name;
+    return TOKEN_MAP[value as Address].name;
   }, [value, result, tokens, type]);
 
   const handleOpen = () => {
@@ -61,7 +61,7 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
         <div>
           {value ? (
             <div className={s.selectedItem}>
-              {IconComponent && <IconComponent />}
+              {IconComponent && <IconComponent width={20} height={20} />}
               {tokenTitle}
             </div>
           ) : (

@@ -9,10 +9,12 @@ export const useTokenData = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const data = useMemo(() => {
-    const tokenFromDecimals = TOKEN_MAP[offerFromState.from]
-      ? TOKEN_MAP[offerFromState.from].decimals
+    const tokenFromDecimals = TOKEN_MAP[offerFromState.from as Address]
+      ? TOKEN_MAP[offerFromState.from as Address].decimals
       : offerFromState.decimals;
-    const tokenToDecimals = TOKEN_MAP[offerToState.to] ? TOKEN_MAP[offerToState.to].decimals : offerToState.decimals;
+    const tokenToDecimals = TOKEN_MAP[offerToState.to as Address]
+      ? TOKEN_MAP[offerToState.to as Address].decimals
+      : offerToState.decimals;
 
     if (!tokenFromDecimals || !tokenToDecimals) {
       setIsValid(false);

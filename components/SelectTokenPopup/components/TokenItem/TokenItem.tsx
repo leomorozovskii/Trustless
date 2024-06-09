@@ -13,7 +13,7 @@ export interface ITokenItem {
 const TokenItem: React.FC<ITokenItem> = ({ title, IconComponent, onClick }) => {
   return (
     <button className={s.tokenItem} onClick={onClick}>
-      <IconComponent />
+      <IconComponent width={20} height={20} />
       <p className={s.title}>{title}</p>
     </button>
   );

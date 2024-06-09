@@ -1,6 +1,6 @@
 import { Address, Hash, formatUnits, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
-import { TOKEN_MAP, Token, dayUnix } from '@lib/constants';
+import { TOKEN_MAP, dayUnix } from '@lib/constants';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { UnknownIcon } from '@assets/icons/tokens';
 import { subgraphClient } from '@lib/subgraphClient';
@@ -21,7 +21,7 @@ type UseOffersDetailsQueryOptions = {
 
 type OffersDetailsRawTokenFragment = {
   decimals: string;
-  symbol: Token;
+  symbol: string;
   id: Address;
 };
 

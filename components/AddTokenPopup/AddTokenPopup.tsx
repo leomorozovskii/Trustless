@@ -51,7 +51,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
 
   const TokenLogo = useMemo(() => {
     if (!tokenState.address) return UnknownIcon;
-    const data = TOKEN_MAP[tokenState.address];
+    const data = TOKEN_MAP[tokenState.address as Address];
     if (!data) return UnknownIcon;
     return data.logo;
   }, [tokenState.address]);

@@ -46,7 +46,7 @@ export const columns = [
     enableSorting: false,
     cell: (info) => {
       const { name, logo: Logo } = info.getValue();
-      return <OffersTableAsset icon={<Logo />} name={name} />;
+      return <OffersTableAsset icon={<Logo width={20} height={20} />} name={name} />;
     },
     header: () => <OffersTableAssetFromHeading />,
   }),
@@ -59,7 +59,7 @@ export const columns = [
     enableSorting: false,
     cell: (info) => {
       const { name, logo: Logo } = info.getValue();
-      return <OffersTableAsset icon={<Logo />} name={name} />;
+      return <OffersTableAsset icon={<Logo width={20} height={20} />} name={name} />;
     },
     header: () => <OffersTableAssetToHeading />,
   }),

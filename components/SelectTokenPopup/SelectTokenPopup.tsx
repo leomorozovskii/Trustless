@@ -110,7 +110,7 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
               {filteredSearchedData?.map((el) => (
                 <button key={el.address} onClick={() => handleSelectToken(el.address)}>
                   <div className={s.item}>
-                    {'logo' in el ? <el.logo /> : <UnknownIcon />}
+                    {'logo' in el ? <el.logo width={20} height={20} /> : <UnknownIcon />}
                     <p className={s.label}>{el.name}</p>
                   </div>
                 </button>
