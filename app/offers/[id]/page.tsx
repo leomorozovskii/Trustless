@@ -27,7 +27,7 @@ const AcceptOfferPageContent = ({ params }: { params: { id: string } }) => {
     if (params.id) {
       setAcceptId(params.id);
     }
-  }, [params, setAcceptId]);
+  }, [params.id, setAcceptId]);
 
   return (
     <Sidebar>
