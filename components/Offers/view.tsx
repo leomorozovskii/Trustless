@@ -18,6 +18,8 @@ type CreateOffersView = {
   columnsToDisplay: OfferColumns[];
 };
 
+const emptyTable = [{ id: 'non-grouped', data: [] as OfferTrade[], showAsPrimary: true }];
+
 const createOffersView = (
   useOffersStore: UseBoundStore<Mutate<StoreApi<OffersStore>, []>>,
   { columnsToDisplay }: CreateOffersView,
@@ -81,7 +83,7 @@ const createOffersView = (
       const notEmptyGroups =
         offerDetails.data?.filter(
           (groupItem) => !!groupItem.data.length || (filter === 'all' && groupItem.showAsPrimary),
-        ) || [];
+        ) || emptyTable;
       return notEmptyGroups.map((group, idx) => {
         const showAsGroup = !!grouping && (notEmptyGroups.length > 1 || (filter === 'all' && !group.showAsPrimary));
         return (

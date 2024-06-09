@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { OfferFilter, OfferGrouping, OffersStore } from './types';
+import { OfferColumns, OfferFilter, OfferGrouping, OffersStore } from './types';
 
 type CreateUseOffersStoreParams = {
   limit: number;
@@ -11,7 +11,7 @@ type CreateUseOffersStoreParams = {
 const createUseOffersStore = ({ limit, filters, grouping }: CreateUseOffersStoreParams) =>
   create<OffersStore>()((set) => ({
     selection: null,
-    sorting: null,
+    sorting: { order: 'desc', field: OfferColumns.Date },
     grouping,
     filters,
     searchFilter: '',

@@ -89,7 +89,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
       subtitle={subtitle}
       table={offersTable}
       isLoading={isLoading}
-      emptyState={<OffersTableEmptyState />}
+      emptyState={showEmptyState && <OffersTableEmptyState />}
     />
   );
 };
