@@ -157,7 +157,7 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
     const amountTo = formatUnits(details.amountTo, tokenToDecimals);
     const result = Number(amountFrom) / Number(amountTo);
     if (Number.isNaN(result)) return;
-    return String(result);
+    return String(Number(result.toFixed(5)));
   }, [details, tokenToDecimals, tokenFromDecimals]);
 
   return {
