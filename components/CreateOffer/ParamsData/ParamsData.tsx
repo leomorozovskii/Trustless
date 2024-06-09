@@ -5,7 +5,7 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 
 const ParamsData = () => {
   const searchParams = useSearchParams();
-  const { setOfferToState, setOfferFromState } = useOfferCreateContext();
+  const { setOfferToState, setOfferFromState, userTokens } = useOfferCreateContext();
 
   useEffect(() => {
     const tokenToParam = searchParams.get('tokenTo');
@@ -21,6 +21,10 @@ const ParamsData = () => {
     if (tokenFromParam) {
       try {
         validatedTokenFrom = getAddress(tokenFromParam);
+        const includes = userTokens.find((token) => token.address === validatedTokenFrom);
+        if (!includes || includes.balance === '0') {
+          validatedTokenFrom = '';
+        }
       } catch (error) {
         validatedTokenFrom = '';
       }
@@ -53,7 +57,7 @@ const ParamsData = () => {
       amount: amountToParam || '',
       receiver: validatedReceiver,
     });
-  }, []);
+  }, [searchParams, setOfferFromState, setOfferToState, userTokens]);
 
   return null;
 };
