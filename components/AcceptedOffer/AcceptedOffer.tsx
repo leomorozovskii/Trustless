@@ -12,8 +12,8 @@ import { links } from '@lib/constants';
 import s from './AcceptedOffer.module.scss';
 
 const AcceptedOffer: React.FC = () => {
-  const { txHash } = useOfferAcceptContext();
-  const { tokenFrom, tokenTo, amountTo, amountFrom, rateToFrom } = useGetOfferDetails();
+  const { txHash, acceptId } = useOfferAcceptContext();
+  const { tokenFrom, tokenTo, amountTo, amountFrom, rateToFrom } = useGetOfferDetails({ id: acceptId });
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
     address: tokenFrom,
     amount: amountFrom,

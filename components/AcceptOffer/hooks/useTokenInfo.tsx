@@ -62,7 +62,7 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
     if (!tokenDecimals || !withFee || !calculatedFee) return;
     if (amount) {
       const value = formatUnits(amount, tokenDecimals);
-      return (1 - calculatedFee) * Number(value);
+      return Number((Number(value) - (Number(value) / 100) * calculatedFee).toFixed(9));
     }
   }, [amount, tokenDecimals, calculatedFee, withFee]);
 

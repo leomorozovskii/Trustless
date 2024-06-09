@@ -2,7 +2,7 @@
 @import '@common/colors.scss';
 @import '@common/typo.scss';
 
-@mixin buttons-container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -12,22 +12,6 @@
   gap: $m;
   border-bottom-right-radius: $s;
   border-bottom-left-radius: $s;
-}
-
-.createContainer {
-  @include buttons-container;
-
-  padding: $m;
-}
-
-.container {
-  @include buttons-container;
-}
-
-.label {
-  color: $base-black;
-
-  @include font-m-flat;
 }
 
 .terms {
@@ -40,20 +24,6 @@
 .conditions {
   text-decoration-line: underline;
   cursor: pointer;
-}
-
-.buttonWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: $m;
 }
 
 .serviceContainer {

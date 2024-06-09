@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@components/Button';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { environment } from '@lib/environment';
 
@@ -12,11 +11,11 @@ import s from './ShareOfferContainer.module.scss';
 
 interface IShareOfferContainer {
   offerId: number | null | string;
+  setActiveOfferStep?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId }) => {
+const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId, setActiveOfferStep }) => {
   const { t } = useTranslation();
-  const { setActiveOfferStep } = useOfferCreateContext();
   const [copied, setCopied] = useState<boolean>(false);
   const { handleAddItem } = useToastifyContext();
   const [link, setLink] = useState<string | undefined>(undefined);
@@ -28,7 +27,7 @@ const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId }) => {
   const handleCopy = () => {
     if (!link) return;
     navigator.clipboard.writeText(link);
-    setActiveOfferStep(4);
+    if (setActiveOfferStep) setActiveOfferStep(4);
     setCopied(true);
     if (!copied) {
       handleAddItem({ title: 'Link copied successfully', type: 'success' });

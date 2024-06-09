@@ -42,3 +42,5 @@ export const wagmiConfig = createConfig({
   },
   ssr: true,
 });
+
+export { network };

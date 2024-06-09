@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 
-import { GasIcon, SelectIcon } from '@assets/icons';
 import { ProgressBar } from '@components/ProgressBar';
 import { TxButton } from '@components/TxFlow';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
@@ -19,19 +18,26 @@ import s from '@components/CreateOffer/Buttons/OfferButtons.module.scss';
 const AcceptOfferButtons: React.FC = () => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
-  const { activeAcceptStep } = useOfferAcceptContext();
-  const { active, isLoading } = useGetOfferDetails();
+  const { activeAcceptStep, acceptId } = useOfferAcceptContext();
+  const { active, isLoading } = useGetOfferDetails({ id: acceptId });
   const { t } = useTranslation();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const { onAcceptApproveReceipt, acceptApproveHandler } = useAcceptApprove();
   const { acceptTrade, onAcceptReceipt } = useAcceptOffer();
 
   useEffect(() => {
-    if (!isLoading && !active) {
+    if (!isLoading && !active && isMounted) {
       handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
       router.push('/offer/create');
     }
   }, [active, isLoading]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsMounted(true);
+    }
+  }, [isLoading]);
 
   return (
     <div className={s.container}>
@@ -61,15 +67,15 @@ const AcceptOfferButtons: React.FC = () => {
         </div>
         <ProgressBar currentStep={activeAcceptStep} />
       </div>
-      <div className={s.serviceContainer}>
-        <p className={s.feeLabel}>Service Fee 0.01%</p>
-        <div className={s.feeContainer}>
-          <GasIcon />
-          {/* TODO: calculate a real number */}
-          <p className={s.feeLabel}>11.43%</p>
-          <SelectIcon />
-        </div>
-      </div>
+      {/* TODO change gas price */}
+      {/* <div className={s.serviceContainer}> */}
+      {/*   <p className={s.feeLabel}>Gas fee</p> */}
+      {/*   <div className={s.feeContainer}> */}
+      {/*     <GasIcon /> */}
+      {/*     /!* TODO: calculate a real number *!/ */}
+      {/*     <p className={s.feeLabel}>11.43%</p> */}
+      {/*   </div> */}
+      {/* </div> */}
       <p className={s.terms}>
         By continuing, you accept <span className={s.conditions}>Terms & Conditions</span>
       </p>

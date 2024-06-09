@@ -1,15 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import { createPublicClient, parseAbiItem, parseUnits, TransactionReceipt } from 'viem';
 import { http, useWriteContract } from 'wagmi';
-import { sepolia } from 'wagmi/chains';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
+import { network } from '@lib/wagmiConfig';
 
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
@@ -18,6 +19,10 @@ export const useCreateTrade = () => {
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
 
   const { writeContractAsync: tradeContract } = useWriteContract();
+  const { isGreater: isCreateGreater } = useGetBalanceGreater({
+    tokenAddress: tokenFromAddress,
+    tokenAmount: offerFromState.amount,
+  });
 
   const onCreateReceipt = (receipt: TransactionReceipt) => {
     handleAddItem({ title: t('success.message'), text: t('success.offerCreated'), type: 'success' });
@@ -28,7 +33,7 @@ export const useCreateTrade = () => {
       const event = parseAbiItem('event OfferCreated(uint indexed tradeID)');
 
       const client = createPublicClient({
-        chain: sepolia,
+        chain: network,
         transport: http(environment.apiKey),
       });
 
@@ -50,6 +55,9 @@ export const useCreateTrade = () => {
 
   const createTrade = async () => {
     if (!isValid) return;
+    if (isCreateGreater()) {
+      throw new Error('Insufficient balance');
+    }
     return tradeContract({
       address: environment.contractAddress,
       abi: trustlessOtcAbi,

@@ -18,7 +18,10 @@ export const useCreateApprove = () => {
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
 
-  const { isGreater: isCreateApproveGreater } = useGetBalanceGreater();
+  const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
+    tokenAddress: tokenFromAddress,
+    tokenAmount: offerFromState.amount,
+  });
 
   const { data: approveHash, writeContractAsync: approveContract } = useWriteContract();
   const { data: approveReceipt } = useWaitForTransactionReceipt({ hash: approveHash });
@@ -36,7 +39,7 @@ export const useCreateApprove = () => {
     if (!isValid) return;
     if (isCreateApproveGreater()) {
       setOfferFromState({ amountError: t('error.insufficientBalance') });
-      return;
+      throw new Error('Insufficient balance');
     }
     setOfferFromState({ amountError: '' });
     return approveContract({

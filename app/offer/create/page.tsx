@@ -21,7 +21,7 @@ import s from './CreateOffer.module.scss';
 const CreateOfferPageContent: React.FC = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
-  const { offerId, activeOfferStep, activeStep } = useOfferCreateContext();
+  const { offerId, activeOfferStep, activeStep, setActiveOfferStep } = useOfferCreateContext();
   useGetUserTokens();
 
   return (
@@ -33,7 +33,7 @@ const CreateOfferPageContent: React.FC = () => {
         </h2>
         <ProgressOfferBar currentStep={activeOfferStep} steps={steps} />
         {activeStep === OfferProgress.Created && offerId ? (
-          <ShareOfferContainer offerId={offerId} />
+          <ShareOfferContainer offerId={offerId} setActiveOfferStep={setActiveOfferStep} />
         ) : (
           <div className={s.column}>
             <div className={s.row}>

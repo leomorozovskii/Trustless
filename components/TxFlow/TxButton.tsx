@@ -47,6 +47,22 @@ const TxButton: React.FC<Props> = ({ writeContract, onError, onReceipt, children
           handleAddItem({ title: errorTitle || t('error.transactionError'), text: t('error.denied'), type: 'error' });
           return;
         }
+        if (e.message === 'You are not the receiver. Change your wallet') {
+          handleAddItem({
+            title: errorTitle || t('error.transactionError'),
+            text: 'You are not the receiver. Change your wallet',
+            type: 'error',
+          });
+          return;
+        }
+        if (e.message === 'Insufficient balance') {
+          handleAddItem({
+            title: errorTitle || t('error.transactionError'),
+            text: 'Insufficient balance',
+            type: 'error',
+          });
+          return;
+        }
         if (e.message.includes('insufficient funds')) {
           handleAddItem({
             title: errorTitle || t('error.transactionError'),

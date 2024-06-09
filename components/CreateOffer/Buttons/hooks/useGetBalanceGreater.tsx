@@ -1,23 +1,24 @@
 import { useCallback } from 'react';
 import { useAccount, useBalance } from 'wagmi';
+import { Address } from 'viem';
 
-import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
-import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+interface IUseGetBalanceGreater {
+  tokenAddress: Address;
+  tokenAmount: string;
+}
 
-export const useGetBalanceGreater = () => {
+export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: IUseGetBalanceGreater) => {
   const { address: userAddress } = useAccount();
-  const { tokenFromAddress } = useTokenData();
-  const { offerFromState } = useOfferCreateContext();
 
   const { data: balance } = useBalance({
     address: userAddress,
-    token: tokenFromAddress,
+    token: tokenAddress,
   });
 
   const isGreater = useCallback(() => {
     if (!balance) return;
-    return Number(offerFromState.amount) > Number(balance.formatted);
-  }, [tokenFromAddress, balance, offerFromState.amount]);
+    return Number(tokenAmount) > Number(balance.formatted);
+  }, [tokenAddress, balance, tokenAmount]);
 
   return {
     isGreater,

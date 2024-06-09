@@ -10,12 +10,13 @@ import CustomTokenWarning from '@components/AcceptOffer/components/CustomTokenWa
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
 import { isEmptyAddress } from '@components/AcceptOffer/utils/isEmptyAddress';
+import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 
 import s from './AcceptOffer.module.scss';
 
 const AcceptOffer: React.FC = () => {
-  const { isLoading } = useGetOfferDetails();
-  const { isTokenFromCustom, tokenFrom, receiver } = useGetOfferDetails();
+  const { acceptId } = useOfferAcceptContext();
+  const { isTokenFromCustom, tokenFrom, isLoading, receiver } = useGetOfferDetails({ id: acceptId });
   const { tokenName } = useTokenInfo({ address: tokenFrom });
 
   return (
