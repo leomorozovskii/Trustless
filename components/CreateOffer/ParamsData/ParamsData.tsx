@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { getAddress } from 'viem';
 import { useSearchParams } from 'next/navigation';
+import { getAddress } from 'viem';
+
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 const ParamsData = () => {
@@ -8,15 +9,8 @@ const ParamsData = () => {
   const { setOfferToState, setOfferFromState, userTokens } = useOfferCreateContext();
 
   useEffect(() => {
-    const tokenToParam = searchParams.get('tokenTo');
-    const amountToParam = searchParams.get('amountTo');
-    const receiverParam = searchParams.get('receiver');
     const tokenFromParam = searchParams.get('tokenFrom');
-    const amountFromParam = searchParams.get('amountFrom');
-
     let validatedTokenFrom = '';
-    let validatedTokenTo = '';
-    let validatedReceiver = '';
 
     if (tokenFromParam) {
       try {
@@ -29,6 +23,20 @@ const ParamsData = () => {
         validatedTokenFrom = '';
       }
     }
+
+    setOfferFromState({
+      from: validatedTokenFrom,
+    });
+  }, [searchParams, setOfferFromState, userTokens]);
+
+  useEffect(() => {
+    const tokenToParam = searchParams.get('tokenTo');
+    const amountToParam = searchParams.get('amountTo');
+    const receiverParam = searchParams.get('receiver');
+    const amountFromParam = searchParams.get('amountFrom');
+
+    let validatedTokenTo = '';
+    let validatedReceiver = '';
 
     if (tokenToParam) {
       try {
@@ -47,7 +55,6 @@ const ParamsData = () => {
     }
 
     setOfferFromState({
-      from: validatedTokenFrom,
       amount: amountFromParam || '',
       rate: '',
     });
@@ -57,7 +64,7 @@ const ParamsData = () => {
       amount: amountToParam || '',
       receiver: validatedReceiver,
     });
-  }, [searchParams, setOfferFromState, setOfferToState, userTokens]);
+  }, []);
 
   return null;
 };
