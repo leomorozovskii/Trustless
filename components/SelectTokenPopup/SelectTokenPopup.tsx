@@ -73,7 +73,7 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
             onChange={({ target }) => setSearchQuery(target.value)}
             id="token search"
           />
-          {tokens.length === 0 && (
+          {tokens.length === 0 && type === 'from' && (
             <Skeleton loading={!tokens}>
               <p>{`You don't have tokens`}</p>
             </Skeleton>
