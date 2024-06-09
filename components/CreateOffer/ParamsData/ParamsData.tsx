@@ -45,7 +45,7 @@ const ParamsData = () => {
     setOfferFromState({
       from: validatedTokenFrom,
       amount: amountFromParam || '',
-      rate: 0,
+      rate: '',
     });
 
     setOfferToState({

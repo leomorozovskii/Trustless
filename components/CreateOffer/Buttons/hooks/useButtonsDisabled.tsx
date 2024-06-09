@@ -14,7 +14,7 @@ export const useButtonsDisabled = () => {
       offerFromState.from !== '' &&
       !Number.isNaN(Number(offerFromState.amount)) &&
       Number(offerFromState.amount) > 0 &&
-      offerFromState.rate > 0;
+      Number(offerFromState.rate) > 0;
     const isOfferToStateValid =
       offerToState.to !== '' && !Number.isNaN(Number(offerToState.amount)) && Number(offerToState.amount) > 0;
     const isReceiverValid = !offerToState.receiver || isAddress(offerToState.receiver);

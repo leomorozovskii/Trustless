@@ -27,7 +27,7 @@ interface IOfferFrom {
   amount: string;
   amountError?: string;
   decimals?: number;
-  rate: number;
+  rate: string;
 }
 
 type IOfferTo = Omit<IOfferFrom, 'from' | 'rate'> & {

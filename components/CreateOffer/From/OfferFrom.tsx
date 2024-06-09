@@ -47,7 +47,7 @@ const OfferFrom = () => {
         disabled={inputsDisabled}
         size="lg"
         placeholder="0"
-        value={offerFromState.amount ? offerFromState.amount.toString() : ''}
+        value={offerFromState.amount ? offerFromState.amount : ''}
         onChange={({ target }) => {
           setOfferFromState({ amount: target.value });
         }}
@@ -55,13 +55,13 @@ const OfferFrom = () => {
       <Input
         id="from rate input"
         label="Rate"
-        type="number"
+        type="text"
         disabled={inputsDisabled}
         size="lg"
         placeholder="0"
-        value={offerFromState.rate ? offerFromState.rate.toString() : ''}
+        value={offerFromState.rate ? offerFromState.rate : ''}
         onChange={({ target }) => {
-          setOfferFromState({ rate: Number(target.value) });
+          setOfferFromState({ rate: target.value });
         }}
       />
     </div>
