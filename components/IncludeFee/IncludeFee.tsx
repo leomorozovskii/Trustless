@@ -17,17 +17,19 @@ const IncludeFee = () => {
 
   const fee = useMemo(() => {
     if (!offerFromState.amount || !calculatedFee || !Number.isFinite(Number(offerFromState.amount))) return;
-    return Number(calculatedFee * Number(offerFromState.amount));
+    return Number(((calculatedFee / 100) * Number(offerFromState.amount)).toFixed(5));
   }, [calculatedFee, offerFromState.amount]);
 
   return (
     <div className={s.container}>
       <h2 className={s.label}>
         Service fee {calculatedFee && `${calculatedFee}%`}{' '}
-        {fee && tokenName ? <span>({`${fee} ${tokenName}`}). </span> : fee && <span>({`${fee}`}). </span>}
+        {fee ? <span>({`${fee}${tokenName ? ` ${tokenName}` : ''}`}). </span> : ''}
         {calculatedFee && Number(offerFromState.amount) > 0 && !offerFromState.amountError && (
           <span>
-            Receiver will get {Number(offerFromState.amount) * (1 - calculatedFee)} {tokenName}
+            Receiver will get{' '}
+            {Number((Number(offerFromState.amount) - (Number(offerFromState.amount) / 100) * calculatedFee).toFixed(9))}{' '}
+            {tokenName}
           </span>
         )}
       </h2>
