@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { Skeleton } from '@components/Skeleton';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
@@ -8,15 +8,14 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 
 import s from './CancelInfo.module.scss';
 
-const CancelInfo = () => {
+const CancelInfo = ({ cancelId }: { cancelId: string }) => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
-  const { id } = useParams();
 
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const { tokenFrom, amountFrom, tokenTo, amountTo, isLoading, active, isCreator } = useGetOfferDetails({
-    id: String(id),
+    id: String(cancelId),
   });
 
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({

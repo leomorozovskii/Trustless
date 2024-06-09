@@ -4,13 +4,11 @@ import { useRouter } from 'next/navigation';
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useOfferCancelContext } from '@context/offer/cancel/OfferCancelContext';
 import { environment } from '@lib/environment';
 
-export const useCancelOffer = () => {
+export const useCancelOffer = ({ cancelId }: { cancelId: string }) => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
-  const { cancelId } = useOfferCancelContext();
   const { isCreator } = useGetOfferDetails({ id: cancelId });
 
   const { writeContractAsync: cancelContract } = useWriteContract();

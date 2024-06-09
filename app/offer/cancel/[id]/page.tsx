@@ -1,24 +1,15 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Header } from '@components/Header';
 import { Sidebar } from '@components/Sidebar';
 import CancelOffer from '@components/CancelOffer/CancelOffer';
 import CancelInfo from '@components/CancelOffer/components/CancelInfo/CancelInfo';
-import { OfferCancelProvider, useOfferCancelContext } from '@context/offer/cancel/OfferCancelContext';
 
 import s from './CancelOffer.module.scss';
 
-const CancelOfferPageContent = ({ params }: { params: { id: string } }) => {
-  const { setCancelId } = useOfferCancelContext();
-
-  useEffect(() => {
-    if (params.id) {
-      setCancelId(params.id);
-    }
-  }, [params]);
-
+const CancelOfferPage = ({ params }: { params: { id: string } }) => {
   return (
     <Sidebar>
       <Header />
@@ -26,17 +17,11 @@ const CancelOfferPageContent = ({ params }: { params: { id: string } }) => {
         <div className={s.heading}>
           <h2 className={s.label}>Cancel offer #{params.id}</h2>
         </div>
-        <CancelInfo />
-        <CancelOffer />
+        <CancelInfo cancelId={params.id} />
+        <CancelOffer cancelId={params.id} />
       </div>
     </Sidebar>
   );
 };
-
-const CancelOfferPage = ({ params }: { params: { id: string } }) => (
-  <OfferCancelProvider>
-    <CancelOfferPageContent params={params} />
-  </OfferCancelProvider>
-);
 
 export default CancelOfferPage;

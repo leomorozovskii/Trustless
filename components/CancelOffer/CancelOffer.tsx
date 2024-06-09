@@ -3,15 +3,13 @@ import React from 'react';
 import { TxButton } from '@components/TxFlow';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useCancelOffer } from '@components/CancelOffer/hooks/useCancelOffer';
-import { useOfferCancelContext } from '@context/offer/cancel/OfferCancelContext';
 
 import s from './CancelOffer.module.scss';
 
-const CancelOffer = () => {
-  const { cancelId } = useOfferCancelContext();
+const CancelOffer = ({ cancelId }: { cancelId: string }) => {
   const { isCreator } = useGetOfferDetails({ id: cancelId });
 
-  const { cancelOffer, onCancelReceipt } = useCancelOffer();
+  const { cancelOffer, onCancelReceipt } = useCancelOffer({ cancelId });
 
   return (
     <div className={s.container}>

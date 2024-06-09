@@ -21,13 +21,13 @@ const AcceptOfferPageContent = ({ params }: { params: { id: string } }) => {
   const labelText = useMemo(() => {
     if (activeAcceptStep === OfferProgress.Created) return 'Offer has been successfully accepted!';
     return `Offer ID #${params.id}`;
-  }, [activeAcceptStep]);
+  }, [activeAcceptStep, params.id]);
 
   useEffect(() => {
     if (params.id) {
       setAcceptId(params.id);
     }
-  }, [params]);
+  }, [params, setAcceptId]);
 
   return (
     <Sidebar>
