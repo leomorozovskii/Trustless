@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 
 import { NewWindowIcon, WarningIcon } from '@assets/icons';
 
+import { links } from '@lib/constants';
 import s from '../AcceptOffer.module.scss';
 
 interface ICustomTokenWarning {
@@ -22,7 +24,14 @@ const CustomTokenWarning: React.FC<ICustomTokenWarning> = ({ name, address }) =>
         </p>
         <div className={s.warnShareAddress}>
           <p className={s.warnTokenName}>{address}</p>
-          <NewWindowIcon className={s.warn} />
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={`${links.etherscan}/token/${address}`}
+            style={{ display: 'flex' }}
+          >
+            <NewWindowIcon className={s.warn} />
+          </Link>
         </div>
       </div>
     </div>
