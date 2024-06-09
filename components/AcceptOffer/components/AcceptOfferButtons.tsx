@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 
@@ -21,16 +21,23 @@ const AcceptOfferButtons: React.FC = () => {
   const { activeAcceptStep, acceptId } = useOfferAcceptContext();
   const { active, isLoading } = useGetOfferDetails({ id: acceptId });
   const { t } = useTranslation();
+  const [isMounted, setIsMounted] = useState(false);
 
   const { onAcceptApproveReceipt, acceptApproveHandler } = useAcceptApprove();
   const { acceptTrade, onAcceptReceipt } = useAcceptOffer();
 
   useEffect(() => {
-    if (!isLoading && !active) {
+    if (!isLoading && !active && isMounted) {
       handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
       router.push('/offer/create');
     }
   }, [active, isLoading]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsMounted(true);
+    }
+  }, [isLoading]);
 
   return (
     <div className={s.container}>
