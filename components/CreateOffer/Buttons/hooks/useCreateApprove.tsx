@@ -39,7 +39,7 @@ export const useCreateApprove = () => {
     if (!isValid) return;
     if (isCreateApproveGreater()) {
       setOfferFromState({ amountError: t('error.insufficientBalance') });
-      return;
+      throw new Error('Insufficient balance');
     }
     setOfferFromState({ amountError: '' });
     return approveContract({

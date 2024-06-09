@@ -6,11 +6,11 @@ import { sepolia } from 'wagmi/chains';
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
-import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
@@ -56,8 +56,7 @@ export const useCreateTrade = () => {
   const createTrade = async () => {
     if (!isValid) return;
     if (isCreateGreater()) {
-      handleAddItem({ title: 'Error', text: t('error.insufficientBalance'), type: 'error' });
-      return;
+      throw new Error('Insufficient balance');
     }
     return tradeContract({
       address: environment.contractAddress,

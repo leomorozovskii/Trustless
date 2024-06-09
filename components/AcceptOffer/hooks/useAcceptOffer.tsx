@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { formatUnits, TransactionReceipt } from 'viem';
 import { useWriteContract } from 'wagmi';
 
@@ -13,7 +12,6 @@ import { environment } from '@lib/environment';
 
 export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();
-  const { t } = useTranslation();
   const { setActiveAcceptStep, setTxHash, acceptId } = useOfferAcceptContext();
 
   const { tokenTo, amountTo } = useGetOfferDetails({ id: acceptId });
@@ -29,8 +27,7 @@ export const useAcceptOffer = () => {
   const acceptTrade = async () => {
     if (!acceptId) return;
     if (isGreater()) {
-      handleAddItem({ title: 'Error', text: t('error.insufficientBalance'), type: 'error' });
-      return;
+      throw new Error('Insufficient balance');
     }
     return acceptContract({
       address: environment.contractAddress,

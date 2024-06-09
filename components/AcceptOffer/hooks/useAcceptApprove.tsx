@@ -33,8 +33,7 @@ export const useAcceptApprove = () => {
 
   const acceptApproveHandler = async () => {
     if (isGreater()) {
-      handleAddItem({ title: 'Error', text: 'Insufficient balance', type: 'error' });
-      return;
+      throw new Error('Insufficient balance');
     }
     return approveContract({
       address: tokenTo,
