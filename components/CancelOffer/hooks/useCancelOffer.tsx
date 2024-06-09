@@ -1,4 +1,3 @@
-import { TransactionReceipt } from 'viem';
 import { useWriteContract } from 'wagmi';
 import { useRouter } from 'next/navigation';
 
@@ -26,8 +25,7 @@ export const useCancelOffer = () => {
     });
   };
 
-  const onCancelReceipt = (receipt: TransactionReceipt) => {
-    if (!receipt) return;
+  const onCancelReceipt = () => {
     handleAddItem({ title: 'Success', text: 'Trade has been canceled', type: 'success' });
     router.push('/');
   };

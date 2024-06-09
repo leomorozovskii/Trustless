@@ -10,6 +10,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
@@ -18,6 +19,10 @@ export const useCreateTrade = () => {
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
 
   const { writeContractAsync: tradeContract } = useWriteContract();
+  const { isGreater: isCreateGreater } = useGetBalanceGreater({
+    tokenAddress: tokenFromAddress,
+    tokenAmount: offerFromState.amount,
+  });
 
   const onCreateReceipt = (receipt: TransactionReceipt) => {
     handleAddItem({ title: t('success.message'), text: t('success.offerCreated'), type: 'success' });
@@ -50,6 +55,10 @@ export const useCreateTrade = () => {
 
   const createTrade = async () => {
     if (!isValid) return;
+    if (isCreateGreater()) {
+      handleAddItem({ title: 'Error', text: t('error.insufficientBalance'), type: 'error' });
+      return;
+    }
     return tradeContract({
       address: environment.contractAddress,
       abi: trustlessOtcAbi,

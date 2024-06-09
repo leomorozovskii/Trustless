@@ -21,7 +21,6 @@ const CancelInfo = () => {
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
     address: tokenFrom,
     amount: amountFrom,
-    withFee: true,
   });
 
   const { tokenName: tokenToName, tokenValue: tokenToValue } = useTokenInfo({
@@ -52,7 +51,7 @@ const CancelInfo = () => {
             {tokenToValue} {tokenToName} to {tokenFromValue} {tokenFromName}.
           </span>
         </p>
-        <p className={s.text}>After cancelling, MKR tokens will be send back to your wallet.</p>
+        <p className={s.text}>After cancelling, {tokenFromName} tokens will be send back to your wallet.</p>
       </div>
     </Skeleton>
   );

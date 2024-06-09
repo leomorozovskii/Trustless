@@ -20,7 +20,7 @@ const CancelOffer = () => {
         type="button"
         disabled={!isCreator}
         errorTitle="Cancel error"
-        onReceipt={(receipt) => onCancelReceipt(receipt)}
+        onReceipt={onCancelReceipt}
         writeContract={cancelOffer}
       >
         {({ isLoading: isButtonLoading }) => (isButtonLoading ? 'Canceling Trade' : 'Cancel Trade')}

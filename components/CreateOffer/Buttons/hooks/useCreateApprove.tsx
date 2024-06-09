@@ -18,7 +18,10 @@ export const useCreateApprove = () => {
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
 
-  const { isGreater: isCreateApproveGreater } = useGetBalanceGreater();
+  const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
+    tokenAddress: tokenFromAddress,
+    tokenAmount: offerFromState.amount,
+  });
 
   const { data: approveHash, writeContractAsync: approveContract } = useWriteContract();
   const { data: approveReceipt } = useWaitForTransactionReceipt({ hash: approveHash });

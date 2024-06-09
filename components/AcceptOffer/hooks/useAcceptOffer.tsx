@@ -1,7 +1,11 @@
-import { TransactionReceipt } from 'viem';
+import { useTranslation } from 'react-i18next';
+import { formatUnits, TransactionReceipt } from 'viem';
 import { useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
+import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
+import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { OfferProgress } from '@lib/constants';
@@ -9,12 +13,25 @@ import { environment } from '@lib/environment';
 
 export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();
+  const { t } = useTranslation();
   const { setActiveAcceptStep, setTxHash, acceptId } = useOfferAcceptContext();
+
+  const { tokenTo, amountTo } = useGetOfferDetails({ id: acceptId });
+  const { tokenDecimals } = useTokenInfo({ address: tokenTo });
+
+  const { isGreater } = useGetBalanceGreater({
+    tokenAddress: tokenTo,
+    tokenAmount: formatUnits(amountTo, tokenDecimals),
+  });
 
   const { writeContractAsync: acceptContract } = useWriteContract();
 
   const acceptTrade = async () => {
     if (!acceptId) return;
+    if (isGreater()) {
+      handleAddItem({ title: 'Error', text: t('error.insufficientBalance'), type: 'error' });
+      return;
+    }
     return acceptContract({
       address: environment.contractAddress,
       abi: trustlessOtcAbi,
