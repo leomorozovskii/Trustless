@@ -29,6 +29,10 @@
     border: 2px solid $base-black;
   }
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:disabled:not([data-state='checked']) {
     background-color: $additional-gray-light;
     border: 2px solid $additional-gray-pre-middle;

@@ -7,7 +7,7 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import s from '../Table.module.scss';
 
-export const TableRowSelectionCell = <TData,>({ row }: { row: Row<TData> }) => {
+export const TableRowSelectionCell = <TData,>({ disabled, row }: { disabled?: boolean; row: Row<TData> }) => {
   const { t } = useTranslation();
   const isSelected = row.getIsSelected();
   const handleChange = (checked: boolean) => {
@@ -17,10 +17,11 @@ export const TableRowSelectionCell = <TData,>({ row }: { row: Row<TData> }) => {
     <td
       className={cn(s.rowSelectionCell, {
         [s.rowSelectionCell_selected]: isSelected,
+        [s.rowSelectionCell_disabled]: disabled,
       })}
       aria-label={t('shared.selectRow')}
     >
-      <Checkbox checked={isSelected} onCheckedChange={handleChange} />
+      <Checkbox checked={isSelected} onCheckedChange={handleChange} disabled={disabled} />
     </td>
   );
 };
