@@ -13,10 +13,9 @@ const CancelInfo = () => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
   const { cancelId } = useOfferCancelContext();
-  const { tokenFrom, amountFrom, tokenTo, amountTo, isLoading, active, isCreator, isCreatorLoading } =
-    useGetOfferDetails({
-      id: cancelId,
-    });
+  const { tokenFrom, amountFrom, tokenTo, amountTo, isLoading, active, isCreator } = useGetOfferDetails({
+    id: cancelId,
+  });
 
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
     address: tokenFrom,
@@ -36,11 +35,11 @@ const CancelInfo = () => {
   }, [active, isLoading]);
 
   useEffect(() => {
-    if (!isLoading && !isCreator && !isCreatorLoading) {
+    if (!isLoading && isCreator === false) {
       handleAddItem({ title: 'Error', text: 'This is not your offer', type: 'error' });
       router.push('/offer/create');
     }
-  }, [isLoading, isCreator, isCreatorLoading]);
+  }, [isLoading, isCreator]);
 
   return (
     <Skeleton loading={isLoading}>

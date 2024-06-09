@@ -37,8 +37,7 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   const { address } = useAccount();
   const { tokenDecimals: tokenFromDecimals, isCustom } = useTokenInfo({ address: details ? details[0] : '0x' });
   const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details[1] : '0x' });
-  const [isCreator, setIsCreator] = useState<boolean>(false);
-  const [isCreatorLoading, setIsCreatorLoading] = useState<boolean>(true);
+  const [isCreator, setIsCreator] = useState<boolean | null>(null);
 
   const offerDetails: OfferDetails = useMemo(() => {
     if (!details) {
@@ -69,12 +68,9 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   useEffect(() => {
     if (!address || !offerDetails.creator) return;
     try {
-      setIsCreatorLoading(true);
       setIsCreator(getAddress(address) === getAddress(offerDetails.creator));
     } catch (e) {
       setIsCreator(false);
-    } finally {
-      setIsCreatorLoading(false);
     }
   }, [address, offerDetails.creator]);
 
@@ -93,7 +89,6 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
     ...offerDetails,
     rateToFrom,
     isLoading,
-    isCreatorLoading,
     isCreator,
     error,
     isTokenFromCustom: isCustom,
