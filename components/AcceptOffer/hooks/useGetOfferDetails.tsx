@@ -107,6 +107,7 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
 
   const { address } = useAccount();
   const [isCreator, setIsCreator] = useState<boolean | null>(null);
+  const [isReceiver, setIsReceiver] = useState<boolean | null>(null);
   const {
     tokenDecimals: tokenFromDecimals,
     isCustom,
@@ -155,6 +156,15 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
     }
   }, [address, offerDetails.creator]);
 
+  useEffect(() => {
+    if (!address || !details || !details.receiver) return;
+    try {
+      setIsReceiver(getAddress(address) === getAddress(details.receiver));
+    } catch (e) {
+      setIsReceiver(false);
+    }
+  }, [address, details]);
+
   const rateToFrom = useMemo(() => {
     if (!details || !tokenValue) return;
     if (!tokenFromDecimals) return;
@@ -171,6 +181,7 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
     rateToFrom,
     isLoading,
     isCreator,
+    isReceiver,
     error,
     isTokenFromCustom: isCustom,
   };

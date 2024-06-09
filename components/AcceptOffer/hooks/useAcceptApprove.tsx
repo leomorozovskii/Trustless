@@ -14,7 +14,7 @@ export const useAcceptApprove = () => {
   const { handleAddItem } = useToastifyContext();
   const { setActiveAcceptStep, acceptId } = useOfferAcceptContext();
 
-  const { tokenTo, amountTo } = useGetOfferDetails({ id: acceptId });
+  const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
   const { tokenDecimals } = useTokenInfo({ address: tokenTo });
 
   const { writeContractAsync: approveContract } = useWriteContract();
@@ -32,6 +32,9 @@ export const useAcceptApprove = () => {
   };
 
   const acceptApproveHandler = async () => {
+    if (isReceiver === false) {
+      throw new Error('You are not the receiver. Change your wallet');
+    }
     if (isGreater()) {
       throw new Error('Insufficient balance');
     }
