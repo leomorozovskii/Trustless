@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 
 import { Skeleton } from '@components/Skeleton';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { useOfferCancelContext } from '@context/offer/cancel/OfferCancelContext';
 
 import s from './CancelInfo.module.scss';
 
 const CancelInfo = () => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
-  const { cancelId } = useOfferCancelContext();
+  const { id } = useParams();
+
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
   const { tokenFrom, amountFrom, tokenTo, amountTo, isLoading, active, isCreator } = useGetOfferDetails({
-    id: cancelId,
+    id: String(id),
   });
 
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
@@ -28,18 +30,20 @@ const CancelInfo = () => {
   });
 
   useEffect(() => {
-    if (!isLoading && !active) {
-      handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
-      router.push('/offer/create');
-    }
-  }, [active, isLoading]);
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
-    if (!isLoading && isCreator === false) {
+    if (!isMounted || isLoading) return;
+
+    if (!active) {
+      handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
+      router.push('/offer/create');
+    } else if (isCreator === false) {
       handleAddItem({ title: 'Error', text: 'This is not your offer', type: 'error' });
       router.push('/offer/create');
     }
-  }, [isLoading, isCreator]);
+  }, [active, isLoading, isCreator, isMounted]);
 
   return (
     <Skeleton loading={isLoading}>
