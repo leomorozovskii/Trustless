@@ -69,8 +69,8 @@ type OfferDetailsQueryRaw = {
 
 export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   const memoizedId = useMemo(() => {
-    if (!id) return BigInt(0);
-    return BigInt(id);
+    if (!id) return '0';
+    return id;
   }, [id]);
 
   const {
