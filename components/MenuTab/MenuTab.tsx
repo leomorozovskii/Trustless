@@ -27,7 +27,7 @@ const MenuTab: React.FC<MenuTabProps> = ({ children, icon, active = false, disab
   return (
     <Link className={className} href={href}>
       {icon && <span className={s.icon}>{icon}</span>}
-      <span className={cn(s.label, { [s.active]: isActive })}>{children}</span>
+      <span className={s.label}>{children}</span>
     </Link>
   );
 };
