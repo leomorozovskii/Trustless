@@ -5,6 +5,7 @@ import { Address, formatUnits, getAddress } from 'viem';
 
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
 import { subgraphClient } from '@lib/subgraphClient';
+import { isEmptyAddress } from '../utils/isEmptyAddress';
 
 interface OfferDetails {
   tokenFrom: Address;
@@ -159,7 +160,9 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   useEffect(() => {
     if (!address || !details || !details.receiver) return;
     try {
-      setIsReceiver(getAddress(address) === getAddress(details.receiver));
+      const isReceiverFromDetails =
+        getAddress(address) === getAddress(details.receiver) || isEmptyAddress(details.receiver);
+      setIsReceiver(isReceiverFromDetails);
     } catch (e) {
       setIsReceiver(false);
     }
