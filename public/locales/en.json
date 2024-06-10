@@ -9,7 +9,7 @@
       "myOffers": "My offers",
       "history": "History"
     },
-    "emptyMessage": "There is no offers at the moment",
+    "emptyMessage": "There are no offers at the moment",
     "createOffer": "Create offer",
     "cancelOffer": "Cancel offer",
     "cancellingOffer": "Cancelling offer",
