@@ -11,6 +11,7 @@ import {
 } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { notUndefined } from '@lib/utils/notUndefined';
 import { environment } from '@lib/environment';
 
 const getRawTokens = (responseTokens: IResponseToken[]) => {
@@ -53,7 +54,7 @@ export const useGetUserTokens = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        params: [address, 'erc20'],
+        params: ['0xe5818d70a9b5aed2bfDe4E41FBcB07dD80f8fC84', 'erc20'],
         id: 1,
       });
 
@@ -73,41 +74,32 @@ export const useGetUserTokens = () => {
           contracts: getRawTokens(filteredTokens),
         });
 
-        const validTokens: Omit<IToken, 'address' | 'balance'>[] = [];
-        for (let i = 0; i < result.length; i += 3) {
-          if (result[i].status === 'failure') {
-            filteredTokens.splice(i / 3, 1);
-          }
+        const userTokens: IToken[] = result
+          .map((_, idx) => {
+            if (idx % 3 === 0) {
+              if (
+                result[idx].status === 'success' &&
+                result[idx + 1]?.status === 'success' &&
+                result[idx + 2]?.status === 'success'
+              ) {
+                const balance = fromHex(filteredTokens[idx / 3].tokenBalance, 'bigint');
+                return {
+                  address: getAddress(filteredTokens[idx / 3].contractAddress),
+                  balance: formatUnits(balance, Number(result[idx].result)),
+                  decimals: Number(result[idx].result),
+                  name: String(result[idx + 1].result),
+                  symbol: String(result[idx + 2].result),
+                };
+              }
+            }
+            return undefined;
+          })
+          .filter(notUndefined)
+          .sort((a, b) => {
+            return Number(b.balance) - Number(a.balance);
+          });
 
-          if (
-            result[i].status === 'success' &&
-            result[i + 1]?.status === 'success' &&
-            result[i + 2]?.status === 'success'
-          ) {
-            validTokens.push({
-              decimals: Number(result[i].result),
-              name: String(result[i + 1].result),
-              symbol: String(result[i + 2].result),
-            });
-          }
-        }
-
-        const finalData = filteredTokens.map((token, idx) => {
-          const balance = fromHex(token.tokenBalance, 'bigint');
-          return {
-            address: getAddress(token.contractAddress),
-            balance: formatUnits(balance, validTokens[idx].decimals),
-            decimals: validTokens[idx].decimals,
-            name: validTokens[idx].name,
-            symbol: validTokens[idx].symbol,
-          };
-        });
-
-        const filteredData = finalData.sort((a, b) => {
-          return Number(b.balance) - Number(a.balance);
-        });
-
-        setUserTokens({ tokens: filteredData });
+        setUserTokens({ tokens: userTokens });
       } catch (err: any) {
         handleAddItem({ title: 'Tokens Error', text: 'Something went wrong', type: 'error' });
       } finally {
