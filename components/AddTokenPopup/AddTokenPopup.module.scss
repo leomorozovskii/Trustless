@@ -65,8 +65,8 @@
 
 .warnText {
   color: $base-black;
-
-  @include font-m-flat;
+  font-size: 14px;
+  line-height: normal;
 }
 
 .buttonContainer {

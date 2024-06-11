@@ -1,8 +1,8 @@
 import React from 'react';
+import { Address } from 'viem';
 
 import { AcceptOfferIcon } from '@assets/icons';
 
-import { Address } from 'viem';
 import s from '../AcceptOffer.module.scss';
 
 type ReceiverContainerProps = {

@@ -54,7 +54,7 @@ export const useGetUserTokens = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        params: [address, 'erc20'],
+        params: ['0xe5818d70a9b5aed2bfDe4E41FBcB07dD80f8fC84', 'erc20'],
         id: 1,
       });
 

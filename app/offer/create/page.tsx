@@ -15,6 +15,7 @@ import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useGetUserTokens } from '@components/SelectTokenPopup/hooks/useGetUserTokens';
 import { OfferCreateProvider, useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
+import cn from 'classnames';
 
 import s from './CreateOffer.module.scss';
 
@@ -27,7 +28,7 @@ const CreateOfferPageContent: React.FC = () => {
   return (
     <Sidebar>
       <Header />
-      <div className={s.container}>
+      <div className={cn(s.container, { [s.created]: activeStep === OfferProgress.Created })}>
         <h2 className={s.title}>
           {activeStep === OfferProgress.Created ? t('offer.created') : t('offer.create.offer')}
         </h2>
