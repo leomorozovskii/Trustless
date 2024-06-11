@@ -23,7 +23,6 @@
     },
     "filters": {
       "all": "All",
-      "open": "Open",
       "accepted": "Accepted",
       "cancelled": "Cancelled",
       "pending": "Pending",
@@ -53,7 +52,8 @@
         "txHash": "Tx hash",
         "status": "Status",
         "date": "Date",
-        "share": "Share"
+        "share": "Share",
+        "receiver": "Receiver"
       }
     }
   },

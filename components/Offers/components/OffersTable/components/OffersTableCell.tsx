@@ -7,15 +7,24 @@ type OffersTableCellProps = {
   uppercase?: boolean;
   column?: boolean;
   secondaryText?: React.ReactNode;
+  small?: boolean;
 };
 
-const OffersTableCell: React.FC<OffersTableCellProps> = ({ children, full, uppercase, column, secondaryText }) => {
+const OffersTableCell: React.FC<OffersTableCellProps> = ({
+  children,
+  full,
+  uppercase,
+  column,
+  secondaryText,
+  small,
+}) => {
   return (
     <span
       className={cn(s.cell, {
         [s.cell_full]: full,
         [s.cell_uppercase]: uppercase,
         [s.cell_column]: column,
+        [s.cell_small]: small,
       })}
     >
       {children}

@@ -6,14 +6,12 @@ import { UnknownIcon } from '@assets/icons/tokens';
 import { subgraphClient } from '@lib/subgraphClient';
 import { gql } from 'graphql-request';
 import dayjs from 'dayjs';
-import { isEmptyAddress } from '@components/AcceptOffer/utils/isEmptyAddress';
-import { OfferTrade, OfferStatus, OfferFilter, OfferSorting, OfferGrouping } from '../types';
+import { OfferTrade, OfferStatus, OfferFilter, OfferSorting } from '../types';
 
 type UseOffersDetailsQueryOptions = {
   filter?: OfferFilter;
   searchFilter?: string;
   filters?: OfferFilter[];
-  grouping?: OfferGrouping[] | null;
   offset?: number;
   limit?: number;
   sorting?: OfferSorting | null;
@@ -128,7 +126,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
       let status: OfferStatus;
 
       if (active) {
-        status = optionalTaker && !isEmptyAddress(optionalTaker) ? 'pending' : 'open';
+        status = 'pending';
       } else if (!completed) {
         status = 'cancelled';
       } else {
@@ -137,7 +135,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
 
       let txHash: Hash;
 
-      if (status === 'open' || status === 'pending') {
+      if (status === 'pending') {
         txHash = creationHash;
       } else if (status === 'cancelled') {
         txHash = cancelHash;
@@ -147,7 +145,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
 
       let unixTimestamp: number;
 
-      if (status === 'open' || status === 'pending') {
+      if (status === 'pending') {
         unixTimestamp = creationTimestamp;
       } else if (status === 'cancelled') {
         unixTimestamp = cancelTimestamp;
@@ -223,12 +221,7 @@ const filterData = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFil
         if (filters.length === 0) {
           return true;
         }
-        return filters.some(
-          (item) => item === offer.status || (item === 'recently-accepted' && offer.recentlyAccepted),
-        );
-      }
-      if (filter === 'recently-accepted') {
-        return offer.recentlyAccepted;
+        return filters.includes(offer.status);
       }
       return offer.status === filter;
     })
@@ -249,29 +242,6 @@ const filterData = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFil
     });
 };
 
-const groupData = (data: OfferTrade[], groups?: OfferGrouping[] | null) => {
-  if (!groups) {
-    return [{ id: 'non-grouped', data }];
-  }
-  return groups.reduce(
-    (acc, group) => {
-      const offers = data.filter((item) =>
-        group.filters.some(
-          (filter) => (filter === 'recently-accepted' && item.recentlyAccepted) || filter === item.status,
-        ),
-      );
-      acc.push({
-        id: group.id,
-        data: offers,
-        showAsPrimary: group.showAsPrimary,
-        disableRowSelection: group.disableRowSelection,
-      });
-      return acc;
-    },
-    [] as { id: string; data: OfferTrade[]; showAsPrimary?: boolean; disableRowSelection?: boolean }[],
-  );
-};
-
 const paginateData = (data: OfferTrade[], offset?: number, limit?: number) => {
   return offset && limit ? data.slice(offset, offset + limit) : data;
 };
@@ -281,7 +251,6 @@ const UseOffersDetailsQueryKey = 'offersDetails';
 const useOffersDetailsQuery = ({
   filter = 'all',
   filters = ['all'],
-  grouping,
   offset,
   limit,
   searchFilter,
@@ -308,19 +277,8 @@ const useOffersDetailsQuery = ({
     },
     select: (offers) => {
       const filteredOffers = filterData(offers, filters, filter, searchFilter);
-      const groupedOffers = groupData(filteredOffers, grouping);
-      const sortedOffers = groupedOffers.map((group) => ({
-        id: group.id,
-        data: sortData(group.data, sorting),
-        showAsPrimary: group.showAsPrimary,
-        disableRowSelection: group.disableRowSelection,
-      }));
-      const paginatedOffers = sortedOffers.map((group) => ({
-        id: group.id,
-        data: paginateData(group.data, offset, limit),
-        showAsPrimary: group.showAsPrimary,
-        disableRowSelection: group.disableRowSelection,
-      }));
+      const sortedOffers = sortData(filteredOffers, sorting);
+      const paginatedOffers = paginateData(sortedOffers, offset, limit);
       return paginatedOffers;
     },
   });
