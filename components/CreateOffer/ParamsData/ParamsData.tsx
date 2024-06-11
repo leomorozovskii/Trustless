@@ -6,37 +6,26 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 
 const ParamsData = () => {
   const searchParams = useSearchParams();
-  const { setOfferToState, setOfferFromState, userTokens } = useOfferCreateContext();
+  const { setOfferToState, setOfferFromState } = useOfferCreateContext();
 
   useEffect(() => {
     const tokenFromParam = searchParams.get('tokenFrom');
-    let validatedTokenFrom = '';
-
-    if (tokenFromParam) {
-      try {
-        validatedTokenFrom = getAddress(tokenFromParam);
-        const includes = userTokens.find((token) => token.address === validatedTokenFrom);
-        if (!includes || includes.balance === '0') {
-          validatedTokenFrom = '';
-        }
-      } catch (error) {
-        validatedTokenFrom = '';
-      }
-    }
-
-    setOfferFromState({
-      from: validatedTokenFrom,
-    });
-  }, [searchParams, setOfferFromState, userTokens]);
-
-  useEffect(() => {
     const tokenToParam = searchParams.get('tokenTo');
     const amountToParam = searchParams.get('amountTo');
     const receiverParam = searchParams.get('receiver');
     const amountFromParam = searchParams.get('amountFrom');
 
+    let validatedTokenFrom = '';
     let validatedTokenTo = '';
     let validatedReceiver = '';
+
+    if (tokenFromParam) {
+      try {
+        validatedTokenFrom = getAddress(tokenFromParam);
+      } catch (error) {
+        validatedTokenFrom = '';
+      }
+    }
 
     if (tokenToParam) {
       try {
@@ -55,6 +44,7 @@ const ParamsData = () => {
     }
 
     setOfferFromState({
+      from: validatedTokenFrom,
       amount: amountFromParam || '',
       rate: '',
     });

@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from 'react';
+import { useToken } from 'wagmi';
+import { Address } from 'viem';
 import cn from 'classnames';
 
 import { SelectIcon } from '@assets/icons';
@@ -7,8 +9,6 @@ import { SelectTokenPopup } from '@components/SelectTokenPopup';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { TOKEN_MAP } from '@lib/constants';
 
-import { useToken } from 'wagmi';
-import { Address } from 'viem';
 import s from './Select.module.scss';
 
 export interface ISelect {
@@ -43,12 +43,13 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
 
   const tokenTitle = useMemo(() => {
     if (!value) return;
-    if (type === 'from' && value) return tokens.find((el) => el.address === value)?.symbol;
+    const walletToken = tokens.find((el) => el.address === value)?.symbol;
+    if (type === 'from' && value && walletToken) return walletToken;
     const notImported = TOKEN_MAP[value as Address]?.name;
     if (!notImported && !result.data) return customTokenName;
     if (!notImported && result.data) return result.data.symbol;
     return TOKEN_MAP[value as Address].name;
-  }, [value, result, tokens, type]);
+  }, [value, tokens, type, result.data, customTokenName]);
 
   const handleOpen = () => {
     if (disabled) return;
