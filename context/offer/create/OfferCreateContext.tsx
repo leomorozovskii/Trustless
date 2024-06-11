@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useReducer, useState } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useMemo, useReducer, useState } from 'react';
 
 import {
   IOfferFrom,
@@ -56,24 +56,27 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
-  const values: IOfferCreateValues = {
-    offerFromState,
-    offerToState,
-    activeOfferStep,
-    activeStep,
-    offerId,
-    customTokenName,
-    inputsDisabled,
-    userTokens,
-    setUserTokens,
-    setInputsDisabled,
-    setCustomTokenName,
-    setOfferId,
-    setOfferFromState,
-    setOfferToState,
-    setActiveOfferStep,
-    setActiveStep,
-  };
+  const values: IOfferCreateValues = useMemo(
+    () => ({
+      offerFromState,
+      offerToState,
+      activeOfferStep,
+      activeStep,
+      offerId,
+      customTokenName,
+      inputsDisabled,
+      userTokens,
+      setUserTokens,
+      setInputsDisabled,
+      setCustomTokenName,
+      setOfferId,
+      setOfferFromState,
+      setOfferToState,
+      setActiveOfferStep,
+      setActiveStep,
+    }),
+    [activeOfferStep, activeStep, customTokenName, inputsDisabled, offerFromState, offerId, offerToState, userTokens],
+  );
 
   return <OfferCreateContext.Provider value={values}>{children}</OfferCreateContext.Provider>;
 };

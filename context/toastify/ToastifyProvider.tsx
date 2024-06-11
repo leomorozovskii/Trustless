@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
+import React, { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from 'react';
 
 import PopupToast from '@components/PopupToast/PopupToast';
 import { IToastifyItem, IToastifyValues } from '@context/toastify/ToastifyProvider.interfaces';
@@ -8,20 +8,23 @@ const ToastifyContext = createContext<IToastifyValues | undefined>(undefined);
 export const ToastifyProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [items, setItems] = useState<IToastifyItem[]>([]);
 
-  const handleAddItem = (item: Omit<IToastifyItem, 'id'>) => {
+  const handleAddItem = useCallback((item: Omit<IToastifyItem, 'id'>) => {
     const newItem: IToastifyItem = { ...item, id: Date.now() };
     setItems((prevState) => [...prevState, newItem]);
-  };
+  }, []);
 
-  const handleRemoveItem = (id: number) => {
+  const handleRemoveItem = useCallback((id: number) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+  }, []);
 
-  const values: IToastifyValues = {
-    items,
-    handleAddItem,
-    handleRemoveItem,
-  };
+  const values: IToastifyValues = useMemo(
+    () => ({
+      items,
+      handleAddItem,
+      handleRemoveItem,
+    }),
+    [items, handleAddItem, handleRemoveItem],
+  );
 
   return (
     <ToastifyContext.Provider value={values}>

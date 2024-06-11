@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useMemo, useState } from 'react';
 import { IOfferAcceptValues } from '@context/offer/accept/OfferAcceptContext.interfaces';
 import { OfferProgress } from '@lib/constants';
 
@@ -9,14 +9,17 @@ export const OfferAcceptProvider: React.FC<PropsWithChildren> = ({ children }) =
   const [acceptId, setAcceptId] = useState<string | null>(null);
   const [txHash, setTxHash] = useState<string>('');
 
-  const values: IOfferAcceptValues = {
-    acceptId,
-    setAcceptId,
-    activeAcceptStep,
-    setActiveAcceptStep,
-    txHash,
-    setTxHash,
-  };
+  const values: IOfferAcceptValues = useMemo(
+    () => ({
+      acceptId,
+      setAcceptId,
+      activeAcceptStep,
+      setActiveAcceptStep,
+      txHash,
+      setTxHash,
+    }),
+    [acceptId, activeAcceptStep, txHash],
+  );
 
   return <OfferAcceptContext.Provider value={values}>{children}</OfferAcceptContext.Provider>;
 };
