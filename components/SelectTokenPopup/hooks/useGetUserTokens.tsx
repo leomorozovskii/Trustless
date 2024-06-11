@@ -13,8 +13,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { environment } from '@lib/environment';
 
-const getRawTokens = (responseTokens: IResponseToken[] | null) => {
-  if (!responseTokens) return;
+const getRawTokens = (responseTokens: IResponseToken[]) => {
   const contractTokens: IContractTokens[] = [];
   responseTokens.forEach((el: IResponseToken) => {
     contractTokens.push({
@@ -71,7 +70,7 @@ export const useGetUserTokens = () => {
         const filteredTokens = data.result.tokenBalances.filter((token) => fromHex(token.tokenBalance, 'number') > 0);
 
         const result = await readContracts(config, {
-          contracts: getRawTokens(filteredTokens) || [],
+          contracts: getRawTokens(filteredTokens),
         });
 
         const validTokens: Omit<IToken, 'address' | 'balance'>[] = [];
