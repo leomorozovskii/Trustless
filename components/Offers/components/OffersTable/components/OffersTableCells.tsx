@@ -11,6 +11,7 @@ import { TxLink } from '@components/TxLink';
 import { Hash } from 'viem';
 import { links } from '@lib/constants';
 import dayjs from 'dayjs';
+import { isEmptyAddress } from '@components/AcceptOffer/utils/isEmptyAddress';
 import { OffersTableCell } from './OffersTableCell';
 import s from './OffersTableCell.module.scss';
 
@@ -116,7 +117,11 @@ type OffersTableDateProps = {
 };
 
 const OffersTableDate: React.FC<OffersTableDateProps> = ({ unixTimestamp }) => {
-  return <OffersTableCell uppercase>{dayjs.unix(unixTimestamp).format('DD MMM YYYY HH:mm')}</OffersTableCell>;
+  return (
+    <OffersTableCell uppercase small>
+      {dayjs.unix(unixTimestamp).format('DD MMM YYYY HH:mm')}
+    </OffersTableCell>
+  );
 };
 
 type OffersTableShareProps = {
@@ -133,6 +138,20 @@ const OffersTableShare: React.FC<OffersTableShareProps> = ({ id }) => {
   );
 };
 
+const OffersTableReceiver: React.FC<{ receiver: string }> = ({ receiver }) => {
+  const { t } = useTranslation();
+  return (
+    <OffersTableCell>
+      {!isEmptyAddress(receiver) && (
+        <>
+          {`${receiver.slice(0, 4)}...${receiver.slice(-6)}`}
+          <CopyText text={receiver} successMessage={t('success.addressCopied')} />
+        </>
+      )}
+    </OffersTableCell>
+  );
+};
+
 export {
   OffersTableId,
   OffersTableAsset,
@@ -143,4 +162,5 @@ export {
   OffersTableStatus,
   OffersTableShare,
   OffersTableDate,
+  OffersTableReceiver,
 };

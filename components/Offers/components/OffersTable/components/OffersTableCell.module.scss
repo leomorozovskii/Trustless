@@ -17,6 +17,10 @@
     display: inline-grid;
   }
 
+  &_small {
+    @include font-s-flat;
+  }
+
   &__secondaryText {
     @include font-s-flat;
   }

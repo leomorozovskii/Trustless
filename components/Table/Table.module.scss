@@ -99,7 +99,7 @@
 .cell {
   padding: 14px 0;
 
-  @include font-s;
+  @include font-m;
 }
 
 .rowSelectionCell {
@@ -143,6 +143,7 @@
 .row {
   transition: background-color 0.2s ease;
 
+  &_selected,
   &:hover {
     background-color: $additional-gray-background;
 

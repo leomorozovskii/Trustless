@@ -12,20 +12,9 @@ import { NotConnectedMessage } from '@components/NotConnectedMessage';
 import { useIsMounted } from '@lib/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
-  filters: ['all', 'open', 'pending', 'recently-accepted'],
+  filters: ['all', 'pending'],
   actions: ['cancel', 'search'],
-  grouping: [
-    {
-      id: 'recently-accepted',
-      filters: ['recently-accepted'],
-      disableRowSelection: true,
-    },
-    {
-      id: 'open',
-      filters: ['open', 'pending'],
-      showAsPrimary: true,
-    },
-  ],
+  hideFilters: true,
   columnsToDisplay: [
     OfferColumns.ID,
     OfferColumns.AssetFrom,
@@ -35,6 +24,7 @@ const OffersTemplate = createOffersTemplate({
     OfferColumns.Rate,
     OfferColumns.TxHash,
     OfferColumns.Status,
+    OfferColumns.Receiver,
     OfferColumns.Date,
     OfferColumns.Share,
   ],
