@@ -12,7 +12,8 @@ interface IUseGetAllowance {
 }
 
 export const useCreateAllowance = ({ approveReceipt }: IUseGetAllowance) => {
-  const { offerFromState, activeStep, setActiveOfferStep, setActiveStep } = useOfferCreateContext();
+  const { offerFromState, activeStep, setActiveOfferStep, setActiveStep, setInputsDisabled, setOfferFromState } =
+    useOfferCreateContext();
 
   const { address: userAddress } = useAccount();
   const { tokenFromAddress, tokenFromDecimals } = useTokenData();
@@ -39,17 +40,41 @@ export const useCreateAllowance = ({ approveReceipt }: IUseGetAllowance) => {
       return;
     }
 
+    const filled = activeStep === OfferProgress.Filled;
+    const approved = activeStep === OfferProgress.Approved;
+
     const isAllowanceSufficient = allowanceValue >= offerAmount;
 
-    if (isAllowanceSufficient && activeStep === OfferProgress.Filled && !approveReceipt && offerFromState.amount) {
+    if (
+      isAllowanceSufficient &&
+      filled &&
+      (!approveReceipt || (approveReceipt && userAddress === offerFromState.approvedAddress)) &&
+      offerFromState.amount
+    ) {
       setActiveStep(OfferProgress.Approved);
       setActiveOfferStep(2);
     } else if (
-      (!isAllowanceSufficient && activeStep === OfferProgress.Approved && !approveReceipt) ||
+      (!isAllowanceSufficient &&
+        approved &&
+        (!approveReceipt || (approveReceipt && userAddress !== offerFromState.approvedAddress))) ||
       !offerFromState.amount
     ) {
       setActiveStep(OfferProgress.Filled);
       setActiveOfferStep(1);
+      setInputsDisabled(false);
     }
-  }, [createOfferAllowance, tokenFromDecimals, tokenFromAddress, offerFromState.amount, activeStep, approveReceipt]);
+  }, [
+    createOfferAllowance,
+    tokenFromDecimals,
+    tokenFromAddress,
+    offerFromState.amount,
+    activeStep,
+    approveReceipt,
+    setActiveStep,
+    setActiveOfferStep,
+    setInputsDisabled,
+    offerFromState.approvedAddress,
+    userAddress,
+    setOfferFromState,
+  ]);
 };

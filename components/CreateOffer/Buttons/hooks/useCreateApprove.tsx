@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, parseUnits } from 'viem';
-import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
@@ -17,6 +17,7 @@ export const useCreateApprove = () => {
     useOfferCreateContext();
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
+  const { address } = useAccount();
 
   const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
     tokenAddress: tokenFromAddress,
@@ -30,6 +31,7 @@ export const useCreateApprove = () => {
 
   const onCreateApproveReceipt = () => {
     setInputsDisabled(true);
+    setOfferFromState({ approvedAddress: address });
     handleAddItem({ title: t('success.message'), text: t('success.approved'), type: 'success' });
     setActiveStep(OfferProgress.Approved);
     setActiveOfferStep(2);
