@@ -32,7 +32,7 @@ export const useCreateApprove = () => {
 
   useEffect(() => {
     setInputsDisabled(false);
-  }, [address]);
+  }, [address, setInputsDisabled]);
 
   const onCreateApproveReceipt = async () => {
     await getAllowance();
