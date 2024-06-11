@@ -26,7 +26,6 @@ interface IOfferFrom {
   from: string;
   amount: string;
   amountError?: string;
-  approvedAddress: string | null;
   decimals?: number;
   rate: string;
 }
@@ -36,7 +35,7 @@ interface ITokensReducer {
   isLoading: boolean;
 }
 
-type IOfferTo = Omit<IOfferFrom, 'from' | 'rate' | 'approvedAddress'> & {
+type IOfferTo = Omit<IOfferFrom, 'from' | 'rate'> & {
   to: string;
   receiver?: string;
 };

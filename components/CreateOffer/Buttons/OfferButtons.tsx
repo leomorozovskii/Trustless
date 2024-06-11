@@ -9,15 +9,12 @@ import { useCreateApprove } from '@components/CreateOffer/Buttons/hooks/useCreat
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 
-import { useAccount } from 'wagmi';
 import s from './OfferButtons.module.scss';
 
 const OfferButtons = () => {
   const { t } = useTranslation();
-  const { activeStep, setActiveStep, offerFromState } = useOfferCreateContext();
+  const { activeStep, setActiveStep } = useOfferCreateContext();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
-
-  const { address } = useAccount();
 
   const { onCreateApproveReceipt, createApproveHandler } = useCreateApprove();
   const { onCreateReceipt, createTrade } = useCreateTrade();
@@ -35,19 +32,17 @@ const OfferButtons = () => {
       <p className={s.label}>{t('offer.create.signText')}</p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
-          {activeStep !== OfferProgress.Approved &&
-            offerFromState.approvedAddress !== address &&
-            activeStep !== OfferProgress.Created && (
-              <TxButton
-                type="button"
-                onReceipt={onCreateApproveReceipt}
-                disabled={approveButtonDisabled}
-                errorTitle={t('error.approve')}
-                writeContract={createApproveHandler}
-              >
-                {({ isLoading }) => (isLoading ? t('token.approving') : t('token.approve'))}
-              </TxButton>
-            )}
+          {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created && (
+            <TxButton
+              type="button"
+              onReceipt={onCreateApproveReceipt}
+              disabled={approveButtonDisabled}
+              errorTitle={t('error.approve')}
+              writeContract={createApproveHandler}
+            >
+              {({ isLoading }) => (isLoading ? t('token.approving') : t('token.approve'))}
+            </TxButton>
+          )}
           <TxButton
             type="button"
             onReceipt={(receipt) => onCreateReceipt(receipt)}

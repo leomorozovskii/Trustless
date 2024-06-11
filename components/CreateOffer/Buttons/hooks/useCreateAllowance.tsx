@@ -7,18 +7,18 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
 
-interface IUseGetAllowance {
-  approveReceipt: any;
-}
-
-export const useCreateAllowance = ({ approveReceipt }: IUseGetAllowance) => {
+export const useCreateAllowance = () => {
   const { offerFromState, activeStep, setActiveOfferStep, setActiveStep, setInputsDisabled, setOfferFromState } =
     useOfferCreateContext();
 
   const { address: userAddress } = useAccount();
   const { tokenFromAddress, tokenFromDecimals } = useTokenData();
 
-  const { data: createOfferAllowance } = useReadContract({
+  const {
+    data: createOfferAllowance,
+    isLoading: isGettingAllowance,
+    refetch: getAllowance,
+  } = useReadContract({
     address: tokenFromAddress,
     abi: erc20Abi,
     functionName: 'allowance',
@@ -26,6 +26,7 @@ export const useCreateAllowance = ({ approveReceipt }: IUseGetAllowance) => {
   });
 
   useEffect(() => {
+    if (isGettingAllowance) return;
     let allowance: bigint | number;
     if (createOfferAllowance) {
       allowance = createOfferAllowance;
@@ -45,36 +46,30 @@ export const useCreateAllowance = ({ approveReceipt }: IUseGetAllowance) => {
 
     const isAllowanceSufficient = allowanceValue >= offerAmount;
 
-    if (
-      isAllowanceSufficient &&
-      filled &&
-      (!approveReceipt || (approveReceipt && userAddress === offerFromState.approvedAddress)) &&
-      offerFromState.amount
-    ) {
+    if (isAllowanceSufficient && filled) {
       setActiveStep(OfferProgress.Approved);
       setActiveOfferStep(2);
-    } else if (
-      (!isAllowanceSufficient &&
-        approved &&
-        (!approveReceipt || (approveReceipt && userAddress !== offerFromState.approvedAddress))) ||
-      !offerFromState.amount
-    ) {
+    } else if (!isAllowanceSufficient && approved) {
       setActiveStep(OfferProgress.Filled);
       setActiveOfferStep(1);
       setInputsDisabled(false);
     }
   }, [
+    isGettingAllowance,
+    getAllowance,
     createOfferAllowance,
     tokenFromDecimals,
     tokenFromAddress,
     offerFromState.amount,
     activeStep,
-    approveReceipt,
     setActiveStep,
     setActiveOfferStep,
     setInputsDisabled,
-    offerFromState.approvedAddress,
     userAddress,
     setOfferFromState,
   ]);
+
+  return {
+    getAllowance,
+  };
 };
