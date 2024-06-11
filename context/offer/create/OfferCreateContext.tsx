@@ -20,6 +20,7 @@ export const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) =
       from: '',
       amount: '',
       amountError: '',
+      isInfinite: false,
       decimals: 0,
       rate: '',
     },

@@ -26,6 +26,7 @@ interface IOfferFrom {
   from: string;
   amount: string;
   amountError?: string;
+  isInfinite: boolean;
   decimals?: number;
   rate: string;
 }
@@ -35,7 +36,7 @@ interface ITokensReducer {
   isLoading: boolean;
 }
 
-type IOfferTo = Omit<IOfferFrom, 'from' | 'rate'> & {
+type IOfferTo = Omit<IOfferFrom, 'from' | 'rate' | 'isInfinite'> & {
   to: string;
   receiver?: string;
 };

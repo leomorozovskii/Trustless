@@ -1,14 +1,20 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: $m;
+  gap: $m;
+
+  background: $base-white;
+}
+
 .container {
   display: flex;
   flex-direction: row;
-  padding: $s $m;
   align-items: center;
   gap: $xxs;
-
-  background: $base-white;
 }
 
 .label {
