@@ -74,7 +74,7 @@ const OfferFrom = () => {
         }
         value={offerFromState.amount ? offerFromState.amount : ''}
         onChange={({ target }) => {
-          setOfferFromState({ amount: target.value });
+          setOfferFromState({ amount: target.value, amountError: '' });
         }}
       />
       <Input
