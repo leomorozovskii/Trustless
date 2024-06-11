@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, parseUnits } from 'viem';
-import { useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
@@ -9,6 +9,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
+import { useEffect } from 'react';
 
 export const useCreateApprove = () => {
   const { t } = useTranslation();
@@ -18,6 +19,8 @@ export const useCreateApprove = () => {
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
 
+  const { address } = useAccount();
+
   const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
     tokenAddress: tokenFromAddress,
     tokenAmount: offerFromState.amount,
@@ -26,6 +29,10 @@ export const useCreateApprove = () => {
   const { getAllowance } = useCreateAllowance();
 
   const { writeContractAsync: approveContract } = useWriteContract();
+
+  useEffect(() => {
+    setInputsDisabled(false);
+  }, [address]);
 
   const onCreateApproveReceipt = async () => {
     await getAllowance();
