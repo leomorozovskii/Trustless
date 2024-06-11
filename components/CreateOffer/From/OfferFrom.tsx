@@ -41,12 +41,23 @@ const OfferFrom = () => {
       </div>
       <Input
         id="from amount input"
-        label="Amount"
+        label={
+          <div className={s.amountContainer}>
+            <p className={s.amountText}>Amount</p>
+            <button className={s.amountButton}>Max</button>
+          </div>
+        }
         type="text"
         error={amountError}
         disabled={inputsDisabled}
         size="lg"
         placeholder="0"
+        subtext={
+          <div className={s.balanceContainer}>
+            <p className={s.balanceLabel}>Balance</p>
+            <p className={s.balanceValue}>105.0000</p>
+          </div>
+        }
         value={offerFromState.amount ? offerFromState.amount : ''}
         onChange={({ target }) => {
           setOfferFromState({ amount: target.value });
