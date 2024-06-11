@@ -31,7 +31,7 @@ const AcceptOfferButtons: React.FC = () => {
       handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
       router.push('/offer/create');
     }
-  }, [active, isLoading]);
+  }, [active, handleAddItem, isLoading, isMounted, router]);
 
   useEffect(() => {
     if (!isLoading) {
