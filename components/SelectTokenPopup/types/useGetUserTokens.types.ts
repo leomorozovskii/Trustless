@@ -14,9 +14,18 @@ interface IContractTokens {
   functionName: string;
 }
 
+interface IWalletTokens {
+  address: Address;
+  tokenBalances: IResponseToken[];
+}
+
+interface IResponseAlchemy {
+  result: IWalletTokens;
+}
+
 interface IResponseToken {
   contractAddress: Address;
   tokenBalance: Address;
 }
 
-export type { IToken, IContractTokens, IResponseToken };
+export type { IToken, IContractTokens, IResponseToken, IResponseAlchemy, IWalletTokens };

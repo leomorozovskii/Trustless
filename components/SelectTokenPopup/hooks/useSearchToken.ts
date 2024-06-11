@@ -11,12 +11,13 @@ interface ISearchProps {
 
 export const useSearchToken = ({ query, type }: ISearchProps) => {
   const [searchedData, setSearchedData] = useState<TokenData[] | IToken[]>([]);
-  const { userTokens: tokens } = useOfferCreateContext();
+  const { userTokens } = useOfferCreateContext();
 
   const handleSearchFrom = () => {
-    if (!query) setSearchedData(tokens);
+    if (!userTokens.tokens) return;
+    if (!query) setSearchedData(userTokens.tokens);
     const lowerCaseQuery = query.toLowerCase();
-    const result = tokens.filter(
+    const result = userTokens.tokens.filter(
       (token) =>
         token.address.toLowerCase() === lowerCaseQuery ||
         token.name.toLowerCase().includes(lowerCaseQuery) ||
@@ -43,7 +44,7 @@ export const useSearchToken = ({ query, type }: ISearchProps) => {
     } else {
       handleSearchFrom();
     }
-  }, [query, tokens, type]);
+  }, [query, userTokens.tokens, type]);
 
   return { searchedData };
 };

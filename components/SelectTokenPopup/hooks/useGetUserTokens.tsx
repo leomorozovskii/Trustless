@@ -1,28 +1,52 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import { erc20Abi, formatUnits, fromHex, getAddress } from 'viem';
-import { useAccount, useReadContracts } from 'wagmi';
+import { useAccount, useConfig } from 'wagmi';
+import { readContracts } from '@wagmi/core';
 
-import { IContractTokens, IToken, IResponseToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
+import {
+  IContractTokens,
+  IToken,
+  IResponseToken,
+  IResponseAlchemy,
+} from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
-import { environment } from '@lib/environment';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
+import { environment } from '@lib/environment';
+
+const getRawTokens = (responseTokens: IResponseToken[] | null) => {
+  if (!responseTokens) return;
+  const contractTokens: IContractTokens[] = [];
+  responseTokens.forEach((el: IResponseToken) => {
+    contractTokens.push({
+      address: el.contractAddress,
+      abi: erc20Abi,
+      functionName: 'decimals',
+    });
+    contractTokens.push({
+      address: el.contractAddress,
+      abi: erc20Abi,
+      functionName: 'name',
+    });
+    contractTokens.push({
+      address: el.contractAddress,
+      abi: erc20Abi,
+      functionName: 'symbol',
+    });
+  });
+  return contractTokens;
+};
 
 export const useGetUserTokens = () => {
   const { address } = useAccount();
   const { handleAddItem } = useToastifyContext();
   const { setUserTokens } = useOfferCreateContext();
-
-  const [responseTokens, setResponseTokens] = useState<IResponseToken[]>([]);
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const config = useConfig();
 
   useEffect(() => {
     if (!address) return;
 
     const fetchUserTokens = async () => {
-      setLoading(true);
-      setError(null);
+      setUserTokens({ isLoading: true });
 
       const requestBody = JSON.stringify({
         jsonrpc: '2.0',
@@ -42,81 +66,56 @@ export const useGetUserTokens = () => {
 
       try {
         const response = await fetch(environment.apiKey, requestOptions);
-        const data = await response.json();
-        if (data.error) {
-          throw new Error(data.error.message);
+        const data: IResponseAlchemy = await response.json();
+
+        const filteredTokens = data.result.tokenBalances.filter((token) => fromHex(token.tokenBalance, 'number') > 0);
+
+        const result = await readContracts(config, {
+          contracts: getRawTokens(filteredTokens) || [],
+        });
+
+        const validTokens: Omit<IToken, 'address' | 'balance'>[] = [];
+        for (let i = 0; i < result.length; i += 3) {
+          if (result[i].status === 'failure') {
+            filteredTokens.splice(i / 3, 1);
+          }
+
+          if (
+            result[i].status === 'success' &&
+            result[i + 1]?.status === 'success' &&
+            result[i + 2]?.status === 'success'
+          ) {
+            validTokens.push({
+              decimals: Number(result[i].result),
+              name: String(result[i + 1].result),
+              symbol: String(result[i + 2].result),
+            });
+          }
         }
-        const filteredTokens = data.result.tokenBalances.filter(
-          (token: IResponseToken) => fromHex(token.tokenBalance, 'number') > 0,
-        );
-        setResponseTokens(filteredTokens);
+
+        const finalData = filteredTokens.map((token, idx) => {
+          const balance = fromHex(token.tokenBalance, 'bigint');
+          return {
+            address: getAddress(token.contractAddress),
+            balance: formatUnits(balance, validTokens[idx].decimals),
+            decimals: validTokens[idx].decimals,
+            name: validTokens[idx].name,
+            symbol: validTokens[idx].symbol,
+          };
+        });
+
+        const filteredData = finalData.sort((a, b) => {
+          return Number(b.balance) - Number(a.balance);
+        });
+
+        setUserTokens({ tokens: filteredData });
       } catch (err: any) {
         handleAddItem({ title: 'Tokens Error', text: 'Something went wrong', type: 'error' });
       } finally {
-        setLoading(false);
+        setUserTokens({ isLoading: false });
       }
     };
 
     fetchUserTokens();
-  }, [address]);
-
-  const getRawTokens = useCallback(() => {
-    if (!responseTokens) return;
-    const contractTokens: IContractTokens[] = [];
-    responseTokens.forEach((el: IResponseToken) => {
-      contractTokens.push({
-        address: el.contractAddress,
-        abi: erc20Abi,
-        functionName: 'decimals',
-      });
-      contractTokens.push({
-        address: el.contractAddress,
-        abi: erc20Abi,
-        functionName: 'name',
-      });
-      contractTokens.push({
-        address: el.contractAddress,
-        abi: erc20Abi,
-        functionName: 'symbol',
-      });
-    });
-    return contractTokens;
-  }, [responseTokens]);
-
-  const result = useReadContracts({
-    contracts: getRawTokens(),
-    allowFailure: false,
-  });
-
-  useEffect(() => {
-    if (!responseTokens || !result.data) return;
-
-    const tokenData: Omit<IToken, 'address' | 'balance'>[] = [];
-    for (let i = 0; i < result.data.length; i += 3) {
-      tokenData.push({
-        decimals: Number(result.data[i]),
-        name: String(result.data[i + 1]),
-        symbol: String(result.data[i + 2]),
-      });
-    }
-
-    const data = responseTokens.map((token, idx) => {
-      const balance = fromHex(token.tokenBalance, 'bigint');
-      return {
-        address: getAddress(token.contractAddress),
-        balance: formatUnits(balance, tokenData[idx].decimals),
-        decimals: tokenData[idx].decimals,
-        name: tokenData[idx].name,
-        symbol: tokenData[idx].symbol,
-      };
-    });
-
-    const filteredData = data.sort((a, b) => {
-      return Number(b.balance) - Number(a.balance);
-    });
-
-    setUserTokens(filteredData);
-  }, [result.data, responseTokens]);
-
-  return { loading, error };
+  }, [address, config, handleAddItem, setUserTokens]);
 };

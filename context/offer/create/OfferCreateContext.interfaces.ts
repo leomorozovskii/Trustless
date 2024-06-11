@@ -11,8 +11,8 @@ interface IOfferCreateValues {
   offerId: number | null;
   customTokenName: string;
   inputsDisabled: boolean;
-  userTokens: IToken[];
-  setUserTokens: React.Dispatch<React.SetStateAction<IToken[]>>;
+  userTokens: ITokensReducer;
+  setUserTokens: React.Dispatch<Partial<ITokensReducer>>;
   setInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
   setOfferId: React.Dispatch<React.SetStateAction<number | null>>;
@@ -30,9 +30,14 @@ interface IOfferFrom {
   rate: string;
 }
 
+interface ITokensReducer {
+  tokens: IToken[] | null;
+  isLoading: boolean;
+}
+
 type IOfferTo = Omit<IOfferFrom, 'from' | 'rate'> & {
   to: string;
   receiver?: string;
 };
 
-export type { IOfferCreateValues, IOfferFrom, IOfferTo };
+export type { IOfferCreateValues, IOfferFrom, IOfferTo, ITokensReducer };
