@@ -17,12 +17,22 @@ type TxState = {
 type Props = Omit<React.ComponentProps<typeof Button>, 'onClick' | 'loading' | 'children'> & {
   children: React.ReactNode | ((txState: TxState) => React.ReactNode);
   errorTitle?: string;
+  size?: 'sm' | 'md' | 'lg';
   writeContract: () => Promise<Hash | undefined>;
   onReceipt?: (receipt: TransactionReceipt) => void;
   onError?: (e: unknown) => void;
 };
 
-const TxButton: React.FC<Props> = ({ writeContract, onError, onReceipt, children, disabled, errorTitle, ...props }) => {
+const TxButton: React.FC<Props> = ({
+  writeContract,
+  onError,
+  onReceipt,
+  children,
+  disabled,
+  errorTitle,
+  size,
+  ...props
+}) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const wagmiConfig = useConfig();
   const { handleAddItem } = useToastifyContext();
@@ -95,7 +105,7 @@ const TxButton: React.FC<Props> = ({ writeContract, onError, onReceipt, children
     return children;
   };
   return (
-    <Button {...props} disabled={!isWrongNetwork && disabled} onClick={handleClick} loading={isLoading}>
+    <Button {...props} size={size} disabled={!isWrongNetwork && disabled} onClick={handleClick} loading={isLoading}>
       {getContent()}
     </Button>
   );
