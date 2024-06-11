@@ -131,6 +131,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
               label={t('token.address')}
               size="lg"
               id="token address input"
+              classInput={s.addressInput}
               error={
                 (tokenState.address && !isAddress(tokenState.address)) || isInvalidAddress
                   ? t('token.invalid.address')

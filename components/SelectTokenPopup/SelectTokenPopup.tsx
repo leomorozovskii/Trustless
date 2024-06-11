@@ -22,7 +22,7 @@ interface ISelectTokenPopup {
 
 const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken, type = 'default' }) => {
   const { t } = useTranslation();
-  const { userTokens: tokens } = useOfferCreateContext();
+  const { userTokens } = useOfferCreateContext();
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -31,15 +31,17 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
 
   const pinnedTokens = useMemo(() => {
     if (type !== 'from') return Object.values(TOKEN_MAP).slice(0, 7);
-    if (!tokens && type === 'from') return;
-    return tokens.slice(0, 7);
-  }, [tokens, type]);
+    if (!userTokens.tokens && type === 'from') return;
+    return userTokens.tokens?.slice(0, 7);
+  }, [userTokens.tokens, type]);
 
-  const pinnedTokenAddresses = new Set(pinnedTokens?.map((token) => token.address));
+  const pinnedTokenAddresses = useMemo(() => {
+    return new Set(pinnedTokens?.map((token) => token.address));
+  }, [pinnedTokens]);
 
   const filteredSearchedData = useMemo(() => {
     return searchedData.filter((token) => !pinnedTokenAddresses.has(token.address));
-  }, [searchedData, pinnedTokens, tokens]);
+  }, [searchedData, pinnedTokenAddresses]);
 
   useClickOutside(ref, (ev) => {
     if (!ref.current?.contains(ev.target as Node)) {
@@ -54,9 +56,9 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
   };
 
   const withTokensList = useMemo(() => {
-    if (type === 'from' && tokens.length > 7) return true;
+    if (type === 'from' && userTokens.tokens && userTokens.tokens.length > 7) return true;
     return type !== 'from' && Object.entries(TOKEN_MAP).length > 7;
-  }, [tokens, type]);
+  }, [userTokens.tokens, type]);
 
   return (
     <div className={s.wrapper}>
@@ -73,16 +75,16 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
             onChange={({ target }) => setSearchQuery(target.value)}
             id="token search"
           />
-          {tokens.length === 0 && type === 'from' && (
-            <Skeleton loading={!tokens}>
+          {userTokens.tokens?.length === 0 && type === 'from' && (
+            <Skeleton loading={userTokens.isLoading}>
               <p>{`You don't have tokens`}</p>
             </Skeleton>
           )}
-          <Skeleton loading={!tokens}>
+          <Skeleton loading={userTokens.isLoading}>
             <div className={s.pinnedTokens}>
               {type === 'from'
-                ? tokens
-                    .slice(0, 7)
+                ? userTokens.tokens
+                    ?.slice(0, 7)
                     .map((token, idx) => (
                       <TokenItem
                         onClick={() => handleSelectToken(token.address)}
@@ -105,7 +107,7 @@ const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelect
           </Skeleton>
         </div>
         {withTokensList && (
-          <Skeleton loading={!tokens}>
+          <Skeleton loading={userTokens.isLoading}>
             <div className={s.body}>
               {filteredSearchedData?.map((el) => (
                 <button key={el.address} onClick={() => handleSelectToken(el.address)}>

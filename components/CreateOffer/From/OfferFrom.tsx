@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
-import cn from 'classnames';
 
+import { AddCustomToken } from '@components/AddCustomToken';
 import { Input } from '@components/Input';
 import { Select } from '@components/Select';
 import { checkValidAmount } from '@components/CreateOffer/Buttons/utils/utils';
@@ -29,7 +29,7 @@ const OfferFrom = () => {
 
   return (
     <div className={s.container}>
-      <div className={cn(s.selectContainer, s.mb)}>
+      <div className={s.selectContainer}>
         <h2 className={s.selectLabel}>From</h2>
         <Select
           type="from"
@@ -38,6 +38,7 @@ const OfferFrom = () => {
           disabled={inputsDisabled}
           onChange={(value) => setOfferFromState({ from: value })}
         />
+        <AddCustomToken type="from" />
       </div>
       <Input
         id="from amount input"
