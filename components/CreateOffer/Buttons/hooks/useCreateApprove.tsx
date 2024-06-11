@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, parseUnits } from 'viem';
-import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
@@ -23,7 +23,6 @@ export const useCreateApprove = () => {
     tokenAmount: offerFromState.amount,
   });
 
-  const { address } = useAccount();
   const { data: approveHash, writeContractAsync: approveContract } = useWriteContract();
   const { data: approveReceipt } = useWaitForTransactionReceipt({ hash: approveHash });
 
@@ -37,13 +36,15 @@ export const useCreateApprove = () => {
   };
 
   const createApproveHandler = async () => {
-    if (!isValid || !address) return;
+    if (!isValid) return;
     if (isCreateApproveGreater() && !offerFromState.isInfinite) {
       setOfferFromState({ amountError: t('error.insufficientBalance') });
       throw new Error('Insufficient balance');
     }
     setOfferFromState({ amountError: '' });
-    const amount = offerFromState.isInfinite ? address : offerFromState.amount;
+    //  TODO change value to real one
+    const value = '1000';
+    const amount = offerFromState.isInfinite ? value : offerFromState.amount;
     return approveContract({
       address: tokenFromAddress,
       abi: erc20Abi,
