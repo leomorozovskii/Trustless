@@ -16,8 +16,7 @@ import { network } from '@lib/wagmiConfig';
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
   const { t } = useTranslation();
-  const { setActiveStep, setActiveOfferStep, setOfferId, offerToState, offerFromState, activeStep } =
-    useOfferCreateContext();
+  const { setActiveStep, setActiveOfferStep, setOfferId, offerToState, offerFromState } = useOfferCreateContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { address } = useAccount();
 
@@ -57,32 +56,42 @@ export const useCreateTrade = () => {
   };
 
   const memoizedTradeRequest = useMemo(() => {
-    if (
-      !isValid ||
-      !tokenFromAddress ||
-      !tokenToAddress ||
-      !offerFromState.amount ||
-      !offerToState.amount ||
-      !address ||
-      !tokenFromDecimals ||
-      !tokenToDecimals
-    )
-      return;
+    if (!tokenFromAddress || !tokenToAddress || !offerFromState.amount || !offerToState.amount || !address) return;
+
+    if (isCreateGreater()) return;
+
+    let offerFromAmount;
+    try {
+      offerFromAmount = parseUnits(String(offerFromState.amount), tokenFromDecimals);
+    } catch (e) {
+      offerFromAmount = BigInt(0);
+    }
+
+    let offerToAmount;
+    try {
+      offerToAmount = parseUnits(String(offerToState.amount), tokenToDecimals);
+    } catch (e) {
+      offerToAmount = BigInt(0);
+    }
 
     return {
       address: environment.contractAddress,
       abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
-      args: [
-        tokenFromAddress,
-        tokenToAddress,
-        parseUnits(String(offerFromState.amount), tokenFromDecimals),
-        parseUnits(String(offerToState.amount), tokenToDecimals),
-        checkAddress(offerToState.receiver),
-      ],
+      args: [tokenFromAddress, tokenToAddress, offerFromAmount, offerToAmount, checkAddress(offerToState.receiver)],
       account: address,
     };
-  }, [activeStep, address]);
+  }, [
+    address,
+    isCreateGreater,
+    offerFromState.amount,
+    offerToState.amount,
+    offerToState.receiver,
+    tokenFromAddress,
+    tokenFromDecimals,
+    tokenToAddress,
+    tokenToDecimals,
+  ]);
 
   const createTrade = async () => {
     if (!isValid) return;

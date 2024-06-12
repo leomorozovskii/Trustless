@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { Address, erc20Abi } from 'viem';
 
@@ -8,7 +8,7 @@ import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
 
 export const useAcceptAllowance = () => {
-  const { setActiveAcceptStep, acceptId, activeAcceptStep } = useOfferAcceptContext();
+  const { setActiveAcceptStep, acceptId } = useOfferAcceptContext();
 
   const { address: userAddress } = useAccount();
   const { amountTo, tokenTo } = useGetOfferDetails({ id: acceptId });
@@ -24,24 +24,28 @@ export const useAcceptAllowance = () => {
     args: [userAddress as Address, environment.contractAddress],
   });
 
+  const [isSufficient, setIsSufficient] = useState<boolean | null>(null);
+
   useEffect(() => {
-    if (isGettingAllowance || !amountTo) return;
-    let allowance: bigint | number;
-    if (acceptOfferAllowance) {
-      allowance = acceptOfferAllowance;
+    setActiveAcceptStep(OfferProgress.None);
+  }, [setActiveAcceptStep, userAddress]);
+
+  useEffect(() => {
+    if (isGettingAllowance || !amountTo || acceptOfferAllowance === null) {
+      setIsSufficient(null);
     } else {
-      allowance = 0;
+      const allowance = acceptOfferAllowance ?? 0;
+      setIsSufficient(allowance >= amountTo);
     }
+  }, [acceptOfferAllowance, amountTo, isGettingAllowance]);
 
-    const filled = activeAcceptStep === OfferProgress.Filled;
-    const approved = activeAcceptStep === OfferProgress.Approved;
-
-    if (allowance >= amountTo && filled) {
+  useEffect(() => {
+    if (isSufficient === true) {
       setActiveAcceptStep(OfferProgress.Approved);
-    } else if (allowance < amountTo && approved) {
+    } else if (isSufficient === false) {
       setActiveAcceptStep(OfferProgress.Filled);
     }
-  }, [acceptOfferAllowance, amountTo, setActiveAcceptStep, isGettingAllowance, userAddress, activeAcceptStep]);
+  }, [isSufficient, setActiveAcceptStep]);
 
   return {
     refetchAllowance,

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { GasIcon } from '@assets/icons';
 import { TxButton } from '@components/TxFlow';
+import { GasPrice } from '@components/GasPrice';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useCancelOffer } from '@components/CancelOffer/hooks/useCancelOffer';
 import { useGetMinFee } from '@components/CreateOffer/Buttons/hooks/useGetMinFee';
@@ -12,7 +12,7 @@ const CancelOffer = ({ cancelId }: { cancelId: string }) => {
   const { isCreator } = useGetOfferDetails({ id: cancelId });
 
   const { cancelOffer, onCancelReceipt, memoizedCancelRequest } = useCancelOffer({ cancelId });
-  const { minFee } = useGetMinFee({ data: memoizedCancelRequest, active: true });
+  const { minFee } = useGetMinFee({ data: memoizedCancelRequest });
 
   return (
     <div className={s.container}>
@@ -25,13 +25,7 @@ const CancelOffer = ({ cancelId }: { cancelId: string }) => {
       >
         {({ isLoading: isButtonLoading }) => (isButtonLoading ? 'Canceling Trade' : 'Cancel Trade')}
       </TxButton>
-      <div className={s.serviceContainer}>
-        <p className={s.feeLabel}>Min gas price</p>
-        <div className={s.feeContainer}>
-          <GasIcon />
-          <p className={s.feeLabel}>~ ${minFee}</p>
-        </div>
-      </div>
+      <GasPrice minFee={minFee} />
       <p className={s.terms}>
         By continuing, you accept <span className={s.conditions}>Terms & Conditions</span>
       </p>

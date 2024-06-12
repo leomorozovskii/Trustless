@@ -14,7 +14,7 @@ import { environment } from '@lib/environment';
 export const useCreateApprove = () => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
-  const { setInputsDisabled, setActiveStep, setActiveOfferStep, setOfferFromState, offerFromState, activeStep } =
+  const { setInputsDisabled, setActiveStep, setActiveOfferStep, setOfferFromState, offerFromState } =
     useOfferCreateContext();
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
@@ -42,11 +42,15 @@ export const useCreateApprove = () => {
   };
 
   const memoizedApproveRequest = useMemo(() => {
-    if (!tokenFromAddress || !offerFromState.amount || !tokenFromDecimals || !address) return;
+    if (!tokenFromAddress || !offerFromState.amount || !address || !isValid) return;
+    if (isCreateApproveGreater() && !offerFromState.isInfinite) return;
 
-    const amount = offerFromState.isInfinite
-      ? maxUint256
-      : parseUnits(String(offerFromState.amount), tokenFromDecimals);
+    let amount;
+    try {
+      amount = offerFromState.isInfinite ? maxUint256 : parseUnits(String(offerFromState.amount), tokenFromDecimals);
+    } catch (e) {
+      amount = BigInt(0);
+    }
 
     return {
       address: tokenFromAddress,
@@ -55,7 +59,15 @@ export const useCreateApprove = () => {
       args: [environment.contractAddress, amount],
       account: address,
     };
-  }, [address, activeStep]);
+  }, [
+    tokenFromAddress,
+    offerFromState.amount,
+    offerFromState.isInfinite,
+    address,
+    isValid,
+    isCreateApproveGreater,
+    tokenFromDecimals,
+  ]);
 
   const createApproveHandler = async () => {
     if (!isValid) return;

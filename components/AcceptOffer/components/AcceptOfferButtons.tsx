@@ -4,10 +4,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 
-import { GasIcon } from '@assets/icons';
 import { Checkbox } from '@components/Checkbox';
 import { ProgressBar } from '@components/ProgressBar';
+import { Skeleton } from '@components/Skeleton';
 import { TxButton } from '@components/TxFlow';
+import { GasPrice } from '@components/GasPrice';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useAcceptApprove } from '@components/AcceptOffer/hooks/useAcceptApprove';
 import { useAcceptOffer } from '@components/AcceptOffer/hooks/useAcceptOffer';
@@ -31,16 +32,14 @@ const AcceptOfferButtons: React.FC = () => {
 
   const { minFee: minApproveFee } = useGetMinFee({
     data: memoizedApproveRequest,
-    active: activeAcceptStep === OfferProgress.Filled,
   });
 
   const { minFee: minAcceptFee } = useGetMinFee({
     data: memoizedAcceptTrade,
-    active: activeAcceptStep === OfferProgress.Approved,
   });
 
   const memoizedFee = useMemo(() => {
-    if (activeAcceptStep === OfferProgress.None || activeAcceptStep === OfferProgress.Created) return;
+    if (activeAcceptStep === OfferProgress.None || activeAcceptStep === OfferProgress.Created) return null;
     if (activeAcceptStep === OfferProgress.Filled) return minApproveFee;
     return minAcceptFee;
   }, [activeAcceptStep, minApproveFee, minAcceptFee]);
@@ -60,50 +59,46 @@ const AcceptOfferButtons: React.FC = () => {
 
   return (
     <div className={s.container}>
-      {activeAcceptStep === OfferProgress.Filled && (
-        <Checkbox
-          label="Infinite approve"
-          onCheckedChange={(checked) => {
-            setIsInfinite(checked);
-          }}
-        />
-      )}
-      <p className={s.label}>You will have to sign 2 transactions: Approval of token & Accept Trade</p>
-      <div className={s.buttonWrapper}>
-        <div className={s.buttonContainer}>
-          {activeAcceptStep !== OfferProgress.Approved && (
+      <Skeleton loading={!isMounted}>
+        {activeAcceptStep === OfferProgress.Filled && (
+          <Checkbox
+            label="Infinite approve"
+            onCheckedChange={(checked) => {
+              setIsInfinite(checked);
+            }}
+          />
+        )}
+        <p className={s.label}>You will have to sign 2 transactions: Approval of token & Accept Trade</p>
+        <div className={s.buttonWrapper}>
+          <div className={s.buttonContainer}>
+            {activeAcceptStep !== OfferProgress.Approved && (
+              <TxButton
+                type="button"
+                onReceipt={onAcceptApproveReceipt}
+                disabled={!active}
+                errorTitle={t('error.approve')}
+                writeContract={acceptApproveHandler}
+              >
+                {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('token.approving') : t('token.approve'))}
+              </TxButton>
+            )}
             <TxButton
               type="button"
-              onReceipt={onAcceptApproveReceipt}
-              disabled={!active}
-              errorTitle={t('error.approve')}
-              writeContract={acceptApproveHandler}
+              disabled={activeAcceptStep !== OfferProgress.Approved || !active}
+              errorTitle="Accept error"
+              onReceipt={(receipt) => onAcceptReceipt(receipt)}
+              writeContract={acceptTrade}
             >
-              {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('token.approving') : t('token.approve'))}
+              {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('Accepting Trade') : t('Accept Trade'))}
             </TxButton>
-          )}
-          <TxButton
-            type="button"
-            disabled={activeAcceptStep !== OfferProgress.Approved || !active}
-            errorTitle="Accept error"
-            onReceipt={(receipt) => onAcceptReceipt(receipt)}
-            writeContract={acceptTrade}
-          >
-            {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('Accepting Trade') : t('Accept Trade'))}
-          </TxButton>
+          </div>
+          <ProgressBar currentStep={activeAcceptStep} />
         </div>
-        <ProgressBar currentStep={activeAcceptStep} />
-      </div>
-      <div className={s.serviceContainer}>
-        <p className={s.feeLabel}>Min gas price</p>
-        <div className={s.feeContainer}>
-          <GasIcon />
-          <p className={s.feeLabel}>~ ${memoizedFee}</p>
-        </div>
-      </div>
-      <p className={s.terms}>
-        By continuing, you accept <span className={s.conditions}>Terms & Conditions</span>
-      </p>
+        <GasPrice minFee={memoizedFee} />
+        <p className={s.terms}>
+          By continuing, you accept <span className={s.conditions}>Terms & Conditions</span>
+        </p>
+      </Skeleton>
     </div>
   );
 };

@@ -27,7 +27,7 @@ export const useAcceptOffer = () => {
   const { writeContractAsync: acceptContract } = useWriteContract();
 
   const memoizedAcceptTrade = useMemo(() => {
-    if (!acceptId || !address) return;
+    if (!acceptId || !address || isGreater()) return;
 
     return {
       address: environment.contractAddress,
@@ -36,7 +36,7 @@ export const useAcceptOffer = () => {
       args: [BigInt(acceptId)],
       account: address,
     };
-  }, [acceptId, address]);
+  }, [acceptId, address, isGreater]);
 
   const acceptTrade = async () => {
     if (!acceptId) return;

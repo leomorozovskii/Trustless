@@ -6,7 +6,7 @@ import { OfferProgress } from '@lib/constants';
 const OfferAcceptContext = createContext<IOfferAcceptValues | null>(null);
 
 export const OfferAcceptProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [activeAcceptStep, setActiveAcceptStep] = useState<OfferProgress>(OfferProgress.Filled);
+  const [activeAcceptStep, setActiveAcceptStep] = useState<OfferProgress>(OfferProgress.None);
   const [acceptId, setAcceptId] = useState<string | null>(null);
   const [txHash, setTxHash] = useState<string>('');
   const [isInfinite, setIsInfinite] = useState<boolean>(false);
