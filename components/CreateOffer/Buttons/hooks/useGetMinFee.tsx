@@ -41,7 +41,7 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
     }
   }, [publicClient, data]);
 
-  const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 1000);
+  const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 300);
 
   useEffect(() => {
     if (!address) return;
