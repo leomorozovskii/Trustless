@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EstimateContractGasParameters } from 'viem';
 import { useAccount, usePublicClient } from 'wagmi';
 
 import { environment } from '@lib/environment';
+import { useDebounce } from '@lib/hooks/useDebounce';
 
 interface IEtherscanResponse {
   result: {
@@ -12,19 +13,6 @@ interface IEtherscanResponse {
     ethusd_timestamp: string;
   };
 }
-
-const useDebounce = (callback: Function, delay: number) => {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  return (...args: any) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = setTimeout(() => {
-      callback(...args);
-    }, delay);
-  };
-};
 
 export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | undefined }) => {
   const { address } = useAccount();
