@@ -7,17 +7,13 @@ import { OfferSorting, OfferColumns, OfferTrade } from '@components/Offers/types
 import { RowSelectionState, SortingState, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { columns } from './config';
-import { OffersTableEmptyState } from './components/OffersTableEmptyState';
 
 type OffersTableProps = {
   offers?: OfferTrade[];
   subtitle?: string;
-  showHeader?: boolean;
-  showEmptyState?: boolean;
   columnsToDisplay: OfferColumns[];
   isLoading?: boolean;
   sorting: OfferSorting | null;
-  disableRowSelection?: boolean;
   onSortingChange: (sorting: OfferSorting | null) => void;
   onRowSelectionChange: (selectedRowId: string | null) => void;
 };
@@ -28,11 +24,8 @@ const OffersTable: React.FC<OffersTableProps> = ({
   offers = defaultOffers,
   isLoading,
   sorting,
-  showHeader,
   subtitle,
-  showEmptyState,
   columnsToDisplay,
-  disableRowSelection,
   onSortingChange,
   onRowSelectionChange,
 }) => {
@@ -82,19 +75,10 @@ const OffersTable: React.FC<OffersTableProps> = ({
   React.useEffect(() => {
     setRowSelectionState({});
   }, [offers]);
-  if (!isLoading && offers.length === 0 && !showEmptyState) {
+  if (!isLoading && offers.length === 0) {
     return null;
   }
-  return (
-    <Table
-      showHeader={showHeader}
-      subtitle={subtitle}
-      table={offersTable}
-      isLoading={isLoading}
-      disableRowSelection={disableRowSelection}
-      emptyState={showEmptyState && <OffersTableEmptyState />}
-    />
-  );
+  return <Table subtitle={subtitle} table={offersTable} isLoading={isLoading} />;
 };
 
 export { OffersTable };

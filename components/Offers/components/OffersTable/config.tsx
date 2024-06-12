@@ -12,6 +12,7 @@ import {
   OffersTableShareHeading,
   OffersTableStatusHeading,
   OffersTableDateHeading,
+  OffersTableReceiverHeading,
 } from './components/OffersTableHeading';
 import {
   OffersTableTxHash,
@@ -23,6 +24,7 @@ import {
   OffersTableShare,
   OffersTableStatus,
   OffersTableDate,
+  OffersTableReceiver,
 } from './components/OffersTableCells';
 
 export const columnHelper = createColumnHelper<OfferTrade>();
@@ -30,7 +32,7 @@ export const columns = [
   columnHelper.accessor((props) => props.id, {
     id: OfferColumns.ID,
     meta: {
-      columnWidth: '100px',
+      columnWidth: '70px',
       columnAlign: 'start',
     },
     enableSorting: false,
@@ -80,7 +82,7 @@ export const columns = [
   columnHelper.accessor((props) => props.amountTo, {
     id: OfferColumns.AmountTo,
     meta: {
-      columnWidth: '120px',
+      columnWidth: '100px',
       columnAlign: 'end',
     },
     enableSorting: false,
@@ -101,9 +103,9 @@ export const columns = [
     id: OfferColumns.TxHash,
     meta: {
       columnWidth: 'auto',
-      columnMinWidth: '138px',
-      columnMarginLeft: '32px',
-      columnPaddingRight: '26px',
+      columnMinWidth: '180px',
+      columnPaddingLeft: '24px',
+      columnPaddingRight: '8px',
       columnAlign: 'start',
     },
     enableSorting: false,
@@ -116,18 +118,28 @@ export const columns = [
   columnHelper.accessor((props) => props.status, {
     id: OfferColumns.Status,
     meta: {
-      columnWidth: '120px',
-      columnMarginLeft: '8px',
-      columnAlign: 'start',
+      columnWidth: '90px',
+      columnAlign: 'center',
     },
     enableSorting: false,
     cell: (info) => <OffersTableStatus status={info.getValue()} />,
     header: () => <OffersTableStatusHeading />,
   }),
+  columnHelper.accessor((props) => props.receiver, {
+    id: OfferColumns.Receiver,
+    meta: {
+      columnWidth: '170px',
+      columnPaddingLeft: '18px',
+      columnAlign: 'start',
+    },
+    enableSorting: false,
+    header: () => <OffersTableReceiverHeading />,
+    cell: (info) => <OffersTableReceiver receiver={info.getValue()} />,
+  }),
   columnHelper.accessor((props) => props.unixTimestamp, {
     id: OfferColumns.Date,
     meta: {
-      columnWidth: '132px',
+      columnWidth: '128px',
       columnAlign: 'start',
       columnPaddingLeft: '8px',
     },
@@ -138,14 +150,14 @@ export const columns = [
   columnHelper.accessor((props) => ({ status: props.status, id: props.id }), {
     id: OfferColumns.Share,
     meta: {
-      columnWidth: '124px',
+      columnWidth: '34px',
       columnAlign: 'end',
     },
     enableSorting: false,
     header: () => <OffersTableShareHeading />,
     cell: (info) => {
       const { status, id } = info.getValue();
-      return (status === 'open' || status === 'pending') && <OffersTableShare id={id} />;
+      return status === 'pending' && <OffersTableShare id={id} />;
     },
   }),
 ];

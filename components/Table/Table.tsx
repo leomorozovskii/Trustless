@@ -77,7 +77,7 @@ export const Table = <TData,>({
             )}
             {data.length > 0 ? (
               table.getRowModel().rows?.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow key={row.id} row={row}>
                   {enableRowSelection && <TableRowSelectionCell row={row} disabled={disableRowSelection} />}
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} cell={cell} />

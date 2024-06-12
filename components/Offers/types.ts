@@ -1,17 +1,9 @@
 import { TokenData } from '@lib/constants';
 import { Hash } from 'viem';
 
-export type OfferStatus = 'open' | 'accepted' | 'cancelled' | 'pending';
+export type OfferStatus = 'pending' | 'accepted' | 'cancelled';
 
-export type OfferFilter = OfferStatus | 'recently-accepted' | 'all';
-
-export type OfferGrouping = {
-  id: string;
-  filters: OfferFilter[];
-  showGroupingIfEmpty?: boolean;
-  showAsPrimary?: boolean;
-  disableRowSelection?: boolean;
-};
+export type OfferFilter = OfferStatus | 'all';
 
 export enum OfferColumns {
   ID = 'ID',
@@ -23,15 +15,14 @@ export enum OfferColumns {
   TxHash = 'TxHash',
   Status = 'Status',
   Date = 'Date',
+  Receiver = 'Receiver',
   Share = 'Share',
 }
 
 export interface OffersStats {
   accepted: number;
   cancelled: number;
-  open: number;
   pending: number;
-  ['recently-accepted']: number;
   total: number;
 }
 
@@ -45,7 +36,6 @@ export interface OfferSorting {
 export interface OffersState {
   selection: string | null;
   sorting: OfferSorting | null;
-  grouping: OfferGrouping[] | null;
   filter: OfferFilter;
   filters: OfferFilter[];
   searchFilter: string;

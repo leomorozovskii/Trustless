@@ -10,7 +10,7 @@ import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext'
 import s from './OfferFrom.module.scss';
 
 const OfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled, userTokens } = useOfferCreateContext();
   const { calculateRateValue } = useCalculateAmountValue();
 
   useEffect(() => {
@@ -27,6 +27,18 @@ const OfferFrom = () => {
     return '';
   }, [offerFromState.amount, offerFromState.amountError]);
 
+  const maxBalance = useMemo(() => {
+    if (!offerFromState.from) return '0';
+    const currentToken = userTokens.find((token) => token.address === offerFromState.from);
+    if (!currentToken) return '0';
+    return currentToken.balance;
+  }, [offerFromState.from, userTokens]);
+
+  const handleSetMaxBalance = () => {
+    if (!offerFromState.from) return;
+    setOfferFromState({ amount: maxBalance });
+  };
+
   return (
     <div className={s.container}>
       <div className={s.selectContainer}>
@@ -42,15 +54,28 @@ const OfferFrom = () => {
       </div>
       <Input
         id="from amount input"
-        label="Amount"
+        label={
+          <div className={s.amountContainer}>
+            <p className={s.amountText}>Amount</p>
+            <button onClick={handleSetMaxBalance} className={s.amountButton}>
+              Max
+            </button>
+          </div>
+        }
         type="text"
         error={amountError}
         disabled={inputsDisabled}
         size="lg"
         placeholder="0"
+        subtext={
+          <div className={s.balanceContainer}>
+            <p className={s.balanceLabel}>Balance</p>
+            <p className={s.balanceValue}>{maxBalance}</p>
+          </div>
+        }
         value={offerFromState.amount ? offerFromState.amount : ''}
         onChange={({ target }) => {
-          setOfferFromState({ amount: target.value });
+          setOfferFromState({ amount: target.value, amountError: '' });
         }}
       />
       <Input

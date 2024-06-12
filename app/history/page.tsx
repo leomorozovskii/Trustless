@@ -23,6 +23,7 @@ const OffersTemplate = createOffersTemplate({
     OfferColumns.Rate,
     OfferColumns.TxHash,
     OfferColumns.Status,
+    OfferColumns.Receiver,
     OfferColumns.Date,
   ],
 });

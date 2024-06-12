@@ -1,18 +1,16 @@
 import { create } from 'zustand';
 
-import { OfferColumns, OfferFilter, OfferGrouping, OffersStore } from './types';
+import { OfferColumns, OfferFilter, OffersStore } from './types';
 
 type CreateUseOffersStoreParams = {
   limit: number;
   filters: OfferFilter[];
-  grouping: OfferGrouping[] | null;
 };
 
-const createUseOffersStore = ({ limit, filters, grouping }: CreateUseOffersStoreParams) =>
+const createUseOffersStore = ({ limit, filters }: CreateUseOffersStoreParams) =>
   create<OffersStore>()((set) => ({
     selection: null,
     sorting: { order: 'desc', field: OfferColumns.Date },
-    grouping,
     filters,
     searchFilter: '',
     filter: 'all',

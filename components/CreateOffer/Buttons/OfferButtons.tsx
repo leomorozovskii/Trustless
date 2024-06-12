@@ -25,7 +25,7 @@ const OfferButtons = () => {
     } else {
       setActiveStep(OfferProgress.None);
     }
-  }, [approveButtonDisabled]);
+  }, [approveButtonDisabled, setActiveStep]);
 
   return (
     <div className={s.createContainer}>
@@ -34,6 +34,7 @@ const OfferButtons = () => {
         <div className={s.buttonContainer}>
           {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created && (
             <TxButton
+              size="lg"
               type="button"
               onReceipt={onCreateApproveReceipt}
               disabled={approveButtonDisabled}
@@ -44,6 +45,7 @@ const OfferButtons = () => {
             </TxButton>
           )}
           <TxButton
+            size="lg"
             type="button"
             onReceipt={(receipt) => onCreateReceipt(receipt)}
             disabled={createButtonDisabled}

@@ -53,6 +53,11 @@ const OffersTableShareHeading: React.FC = () => {
   return <OffersTableCell>{t('offers.table.headings.share')}</OffersTableCell>;
 };
 
+const OffersTableReceiverHeading: React.FC = () => {
+  const { t } = useTranslation();
+  return <OffersTableCell>{t('offers.table.headings.receiver')}</OffersTableCell>;
+};
+
 export {
   OffersTableIdHeading,
   OffersTableAssetFromHeading,
@@ -64,4 +69,5 @@ export {
   OffersTableStatusHeading,
   OffersTableShareHeading,
   OffersTableDateHeading,
+  OffersTableReceiverHeading,
 };
