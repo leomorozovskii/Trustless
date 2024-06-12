@@ -1,17 +1,24 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
 
-.container {
+.wrapper {
   display: flex;
-  flex-direction: row;
-  padding: $s $m;
-  align-items: center;
-  gap: $xxs;
+  flex-direction: column;
+  padding: $m;
+  gap: $m;
 
   background: $base-white;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $xxs;
+}
+
 .label {
+  line-height: normal;
   font-size: 14px;
   color: $base-black;
   font-weight: 400;

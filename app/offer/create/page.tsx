@@ -2,6 +2,7 @@
 
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
@@ -27,7 +28,7 @@ const CreateOfferPageContent: React.FC = () => {
   return (
     <Sidebar>
       <Header />
-      <div className={s.container}>
+      <div className={cn(s.container, { [s.created]: activeStep === OfferProgress.Created })}>
         <h2 className={s.title}>
           {activeStep === OfferProgress.Created ? t('offer.created') : t('offer.create.offer')}
         </h2>

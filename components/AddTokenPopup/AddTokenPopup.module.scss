@@ -10,12 +10,19 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   max-width: 540px;
-  padding: $m $lg;
+  min-height: 548px;
   background: $base-white;
+  padding: $m $lg;
   border: none;
   border-radius: $s;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
   gap: $lg;
 }
 
@@ -65,8 +72,8 @@
 
 .warnText {
   color: $base-black;
-
-  @include font-m-flat;
+  font-size: 14px;
+  line-height: normal;
 }
 
 .buttonContainer {

@@ -1,11 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { AccountIcon } from '@assets/icons';
 import { Button } from '@components/Button';
 
-import { useTranslation } from 'react-i18next';
 import s from './ConnectWallet.module.scss';
 
 const ConnectWallet = () => {

@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: $xs;
+  gap: 7px;
   width: 100%;
 }
 
@@ -39,7 +39,7 @@
   height: 30px;
   font-weight: 700;
   font-size: 14px;
-  line-height: 16px;
+  line-height: normal;
   color: $additional-gray-pre-middle;
   background-color: $base-white;
   border: 2px solid $additional-gray-pre-middle;
@@ -49,13 +49,13 @@
 .label {
   font-weight: 400;
   font-size: 14px;
-  line-height: 16px;
+  line-height: normal;
   font-style: normal;
 }
 
 .active .label,
 .complete .label {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .active .step {
@@ -66,7 +66,7 @@
 
 .active::before,
 .complete::before {
-  background-color: #333;
+  background-color: $base-gray;
 }
 
 .complete .step {
