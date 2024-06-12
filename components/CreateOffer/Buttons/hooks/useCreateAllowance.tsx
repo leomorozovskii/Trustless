@@ -17,7 +17,7 @@ export const useCreateAllowance = () => {
   const {
     data: createOfferAllowance,
     isLoading: isGettingAllowance,
-    refetch: getAllowance,
+    refetch: refetchAllowance,
   } = useReadContract({
     address: tokenFromAddress,
     abi: erc20Abi,
@@ -56,7 +56,7 @@ export const useCreateAllowance = () => {
     }
   }, [
     isGettingAllowance,
-    getAllowance,
+    refetchAllowance,
     createOfferAllowance,
     tokenFromDecimals,
     tokenFromAddress,
@@ -70,6 +70,6 @@ export const useCreateAllowance = () => {
   ]);
 
   return {
-    getAllowance,
+    refetchAllowance,
   };
 };

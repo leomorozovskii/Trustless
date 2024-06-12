@@ -26,7 +26,7 @@ export const useCreateApprove = () => {
     tokenAmount: offerFromState.amount,
   });
 
-  const { getAllowance } = useCreateAllowance();
+  const { refetchAllowance } = useCreateAllowance();
 
   const { writeContractAsync: approveContract } = useWriteContract();
 
@@ -35,7 +35,7 @@ export const useCreateApprove = () => {
   }, [address, setInputsDisabled]);
 
   const onCreateApproveReceipt = async () => {
-    await getAllowance();
+    await refetchAllowance();
     setInputsDisabled(true);
     handleAddItem({ title: t('success.message'), text: t('success.approved'), type: 'success' });
     setActiveStep(OfferProgress.Approved);
