@@ -57,7 +57,7 @@ const OfferFrom = () => {
         label={
           <div className={s.amountContainer}>
             <p className={s.amountText}>Amount</p>
-            <button onClick={handleSetMaxBalance} className={s.amountButton}>
+            <button disabled={inputsDisabled} onClick={handleSetMaxBalance} className={s.amountButton}>
               Max
             </button>
           </div>

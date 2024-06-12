@@ -6,10 +6,11 @@ import { useGetFee } from '@components/AcceptOffer/hooks/useGetFee';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 
 import { Checkbox } from '@components/Checkbox';
+import { OfferProgress } from '@lib/constants';
 import s from './IncludeFee.module.scss';
 
 const IncludeFee = () => {
-  const { offerFromState, setOfferFromState } = useOfferCreateContext();
+  const { offerFromState, setOfferFromState, activeStep } = useOfferCreateContext();
   const { calculatedFee } = useGetFee();
   const { tokenName } = useTokenInfo({
     address: offerFromState.from as Address,
@@ -38,7 +39,13 @@ const IncludeFee = () => {
           )}
         </h2>
       </div>
-      <Checkbox label="Infinite approve" onCheckedChange={(checked) => setOfferFromState({ isInfinite: checked })} />
+      {activeStep === OfferProgress.Filled ||
+        (activeStep === OfferProgress.None && (
+          <Checkbox
+            label="Infinite approve"
+            onCheckedChange={(checked) => setOfferFromState({ isInfinite: checked })}
+          />
+        ))}
     </div>
   );
 };

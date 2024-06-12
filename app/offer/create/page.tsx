@@ -2,6 +2,7 @@
 
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 import { ProgressOfferBar } from 'components/ProgressOfferBar';
 import { ShareOfferContainer } from '@components/ShareOfferContainer';
@@ -15,7 +16,6 @@ import { OfferButtons } from 'components/CreateOffer/Buttons';
 import { useGetUserTokens } from '@components/SelectTokenPopup/hooks/useGetUserTokens';
 import { OfferCreateProvider, useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
-import cn from 'classnames';
 
 import s from './CreateOffer.module.scss';
 
