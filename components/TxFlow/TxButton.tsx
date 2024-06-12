@@ -95,13 +95,7 @@ const TxButton: React.FC<Props> = ({ writeContract, onError, onReceipt, children
     return children;
   };
   return (
-    <Button
-      {...props}
-      size={props.size}
-      disabled={!isWrongNetwork && disabled}
-      onClick={handleClick}
-      loading={isLoading}
-    >
+    <Button {...props} disabled={!isWrongNetwork && disabled} onClick={handleClick} loading={isLoading}>
       {getContent()}
     </Button>
   );
