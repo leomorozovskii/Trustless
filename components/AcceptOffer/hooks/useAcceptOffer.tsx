@@ -1,5 +1,6 @@
+import { useMemo } from 'react';
 import { formatUnits, TransactionReceipt } from 'viem';
-import { useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
@@ -16,6 +17,7 @@ export const useAcceptOffer = () => {
 
   const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
   const { tokenDecimals } = useTokenInfo({ address: tokenTo });
+  const { address } = useAccount();
 
   const { isGreater } = useGetBalanceGreater({
     tokenAddress: tokenTo,
@@ -23,6 +25,18 @@ export const useAcceptOffer = () => {
   });
 
   const { writeContractAsync: acceptContract } = useWriteContract();
+
+  const memoizedAcceptTrade = useMemo(() => {
+    if (!acceptId || !address) return;
+
+    return {
+      address: environment.contractAddress,
+      abi: trustlessOtcAbi,
+      functionName: 'take',
+      args: [BigInt(acceptId)],
+      account: address,
+    };
+  }, [acceptId, address]);
 
   const acceptTrade = async () => {
     if (!acceptId) return;
@@ -50,5 +64,6 @@ export const useAcceptOffer = () => {
   return {
     acceptTrade,
     onAcceptReceipt,
+    memoizedAcceptTrade,
   };
 };

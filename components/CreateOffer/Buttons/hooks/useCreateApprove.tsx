@@ -1,3 +1,4 @@
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, maxUint256, parseUnits } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
@@ -9,16 +10,14 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
-import { useEffect } from 'react';
 
 export const useCreateApprove = () => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
-  const { setInputsDisabled, setActiveStep, setActiveOfferStep, setOfferFromState, offerFromState } =
+  const { setInputsDisabled, setActiveStep, setActiveOfferStep, setOfferFromState, offerFromState, activeStep } =
     useOfferCreateContext();
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
-
   const { address } = useAccount();
 
   const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
@@ -42,6 +41,22 @@ export const useCreateApprove = () => {
     setActiveOfferStep(2);
   };
 
+  const memoizedApproveRequest = useMemo(() => {
+    if (!tokenFromAddress || !offerFromState.amount || !tokenFromDecimals || !address) return;
+
+    const amount = offerFromState.isInfinite
+      ? maxUint256
+      : parseUnits(String(offerFromState.amount), tokenFromDecimals);
+
+    return {
+      address: tokenFromAddress,
+      abi: erc20Abi,
+      functionName: 'approve',
+      args: [environment.contractAddress, amount],
+      account: address,
+    };
+  }, [address, activeStep]);
+
   const createApproveHandler = async () => {
     if (!isValid) return;
     if (isCreateApproveGreater() && !offerFromState.isInfinite) {
@@ -63,5 +78,6 @@ export const useCreateApprove = () => {
   return {
     createApproveHandler,
     onCreateApproveReceipt,
+    memoizedApproveRequest,
   };
 };

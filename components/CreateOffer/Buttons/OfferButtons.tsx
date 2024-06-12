@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { GasIcon } from '@assets/icons';
 import { ProgressBar } from '@components/ProgressBar';
 import { TxButton } from '@components/TxFlow';
 import { useButtonsDisabled } from '@components/CreateOffer/Buttons/hooks/useButtonsDisabled';
+import { useGetMinFee } from '@components/CreateOffer/Buttons/hooks/useGetMinFee';
 import { useCreateTrade } from '@components/CreateOffer/Buttons/hooks/useCreateTrade';
 import { useCreateApprove } from '@components/CreateOffer/Buttons/hooks/useCreateApprove';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
@@ -16,8 +18,23 @@ const OfferButtons = () => {
   const { activeStep, setActiveStep } = useOfferCreateContext();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
 
-  const { onCreateApproveReceipt, createApproveHandler } = useCreateApprove();
-  const { onCreateReceipt, createTrade } = useCreateTrade();
+  const { onCreateApproveReceipt, createApproveHandler, memoizedApproveRequest } = useCreateApprove();
+  const { onCreateReceipt, createTrade, memoizedTradeRequest } = useCreateTrade();
+  const { minFee: minApproveFee } = useGetMinFee({
+    data: memoizedApproveRequest,
+    active: activeStep === OfferProgress.Filled,
+  });
+
+  const { minFee: minCreateFee } = useGetMinFee({
+    data: memoizedTradeRequest,
+    active: activeStep === OfferProgress.Approved,
+  });
+
+  const memoizedFee = useMemo(() => {
+    if (activeStep === OfferProgress.None || activeStep === OfferProgress.Created) return;
+    if (activeStep === OfferProgress.Filled) return minApproveFee;
+    return minCreateFee;
+  }, [minApproveFee, minCreateFee, activeStep]);
 
   useEffect(() => {
     if (!approveButtonDisabled) {
@@ -58,16 +75,15 @@ const OfferButtons = () => {
         <ProgressBar currentStep={activeStep} />
       </div>
       {/* TODO change gas price */}
-      {/* {activeStep !== OfferProgress.None && ( */}
-      {/*   <div className={s.serviceContainer}> */}
-      {/*     <p className={s.feeLabel}>Gas fee</p> */}
-      {/*     <div className={s.feeContainer}> */}
-      {/*       <GasIcon /> */}
-      {/*       /!* TODO: calculate a real number *!/ */}
-      {/*       <p className={s.feeLabel}>11.43%</p> */}
-      {/*     </div> */}
-      {/*   </div> */}
-      {/* )} */}
+      {activeStep !== OfferProgress.None && activeStep !== OfferProgress.Created && (
+        <div className={s.serviceContainer}>
+          <p className={s.feeLabel}>Min gas price</p>
+          <div className={s.feeContainer}>
+            <GasIcon />
+            <p className={s.feeLabel}>~ ${memoizedFee}</p>
+          </div>
+        </div>
+      )}
       <p className={s.terms}>
         {t('offer.create.acceptTerms')} <span className={s.conditions}>{t('offer.create.termsConditions')}</span>
       </p>

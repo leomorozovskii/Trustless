@@ -1,19 +1,20 @@
-import { useWriteContract } from 'wagmi';
-import { erc20Abi, formatUnits } from 'viem';
+import { useMemo } from 'react';
+import { useAccount, useWriteContract } from 'wagmi';
+import { erc20Abi, formatUnits, maxUint256 } from 'viem';
 
 import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
 import { useGetOfferDetails } from '@components/AcceptOffer/hooks/useGetOfferDetails';
 import { useTokenInfo } from '@components/AcceptOffer/hooks/useTokenInfo';
 import { useAcceptAllowance } from '@components/AcceptOffer/hooks/useAcceptAllowance';
+import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
-import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
 
 export const useAcceptApprove = () => {
   const { handleAddItem } = useToastifyContext();
-  const { setActiveAcceptStep, acceptId } = useOfferAcceptContext();
-
+  const { setActiveAcceptStep, acceptId, isInfinite } = useOfferAcceptContext();
+  const { address } = useAccount();
   const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
   const { tokenDecimals } = useTokenInfo({ address: tokenTo });
 
@@ -32,6 +33,20 @@ export const useAcceptApprove = () => {
     setActiveAcceptStep(OfferProgress.Approved);
   };
 
+  const memoizedApproveRequest = useMemo(() => {
+    if (!address || !tokenTo || !amountTo) return;
+
+    const amount = isInfinite ? maxUint256 : amountTo;
+
+    return {
+      address: tokenTo,
+      abi: erc20Abi,
+      functionName: 'approve',
+      args: [environment.contractAddress, amount],
+      account: address,
+    };
+  }, [tokenTo, amountTo, address, isInfinite]);
+
   const acceptApproveHandler = async () => {
     if (isReceiver === false) {
       throw new Error('You are not the receiver. Change your wallet');
@@ -39,16 +54,20 @@ export const useAcceptApprove = () => {
     if (isGreater()) {
       throw new Error('Insufficient balance');
     }
+
+    const amount = isInfinite ? maxUint256 : amountTo;
+
     return approveContract({
       address: tokenTo,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [environment.contractAddress, amountTo],
+      args: [environment.contractAddress, amount],
     });
   };
 
   return {
     acceptApproveHandler,
     onAcceptApproveReceipt,
+    memoizedApproveRequest,
   };
 };

@@ -1,6 +1,7 @@
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createPublicClient, parseAbiItem, parseUnits, TransactionReceipt } from 'viem';
-import { http, useWriteContract } from 'wagmi';
+import { http, useAccount, useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@assets/abis/trustlessOtcAbi';
 import { checkAddress } from '@components/CreateOffer/Buttons/utils/utils';
@@ -15,8 +16,10 @@ import { network } from '@lib/wagmiConfig';
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
   const { t } = useTranslation();
-  const { setActiveStep, setActiveOfferStep, setOfferId, offerToState, offerFromState } = useOfferCreateContext();
+  const { setActiveStep, setActiveOfferStep, setOfferId, offerToState, offerFromState, activeStep } =
+    useOfferCreateContext();
   const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
+  const { address } = useAccount();
 
   const { writeContractAsync: tradeContract } = useWriteContract();
   const { isGreater: isCreateGreater } = useGetBalanceGreater({
@@ -53,6 +56,34 @@ export const useCreateTrade = () => {
     getOfferId();
   };
 
+  const memoizedTradeRequest = useMemo(() => {
+    if (
+      !isValid ||
+      !tokenFromAddress ||
+      !tokenToAddress ||
+      !offerFromState.amount ||
+      !offerToState.amount ||
+      !address ||
+      !tokenFromDecimals ||
+      !tokenToDecimals
+    )
+      return;
+
+    return {
+      address: environment.contractAddress,
+      abi: trustlessOtcAbi,
+      functionName: 'initiateTrade',
+      args: [
+        tokenFromAddress,
+        tokenToAddress,
+        parseUnits(String(offerFromState.amount), tokenFromDecimals),
+        parseUnits(String(offerToState.amount), tokenToDecimals),
+        checkAddress(offerToState.receiver),
+      ],
+      account: address,
+    };
+  }, [activeStep, address]);
+
   const createTrade = async () => {
     if (!isValid) return;
     if (isCreateGreater()) {
@@ -75,5 +106,6 @@ export const useCreateTrade = () => {
   return {
     onCreateReceipt,
     createTrade,
+    memoizedTradeRequest,
   };
 };

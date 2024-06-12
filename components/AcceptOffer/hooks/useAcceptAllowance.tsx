@@ -8,7 +8,7 @@ import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
 
 export const useAcceptAllowance = () => {
-  const { setActiveAcceptStep, acceptId } = useOfferAcceptContext();
+  const { setActiveAcceptStep, acceptId, activeAcceptStep } = useOfferAcceptContext();
 
   const { address: userAddress } = useAccount();
   const { amountTo, tokenTo } = useGetOfferDetails({ id: acceptId });
@@ -25,7 +25,7 @@ export const useAcceptAllowance = () => {
   });
 
   useEffect(() => {
-    if (isGettingAllowance) return;
+    if (isGettingAllowance || !amountTo) return;
     let allowance: bigint | number;
     if (acceptOfferAllowance) {
       allowance = acceptOfferAllowance;
@@ -33,12 +33,15 @@ export const useAcceptAllowance = () => {
       allowance = 0;
     }
 
-    if (allowance >= amountTo) {
+    const filled = activeAcceptStep === OfferProgress.Filled;
+    const approved = activeAcceptStep === OfferProgress.Approved;
+
+    if (allowance >= amountTo && filled) {
       setActiveAcceptStep(OfferProgress.Approved);
-    } else {
+    } else if (allowance < amountTo && approved) {
       setActiveAcceptStep(OfferProgress.Filled);
     }
-  }, [acceptOfferAllowance, amountTo, setActiveAcceptStep, isGettingAllowance, userAddress]);
+  }, [acceptOfferAllowance, amountTo, setActiveAcceptStep, isGettingAllowance, userAddress, activeAcceptStep]);
 
   return {
     refetchAllowance,
