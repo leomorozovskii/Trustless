@@ -28,8 +28,8 @@ const OfferFrom = () => {
   }, [offerFromState.amount, offerFromState.amountError]);
 
   const maxBalance = useMemo(() => {
-    if (!offerFromState.from) return '0';
-    const currentToken = userTokens.find((token) => token.address === offerFromState.from);
+    if (!offerFromState.from || !userTokens.tokens) return '0';
+    const currentToken = userTokens.tokens.find((token) => token.address === offerFromState.from);
     if (!currentToken) return '0';
     return currentToken.balance;
   }, [offerFromState.from, userTokens]);

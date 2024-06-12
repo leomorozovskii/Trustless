@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { erc20Abi, parseUnits } from 'viem';
-import { useAccount, useWriteContract } from 'wagmi';
 import { erc20Abi, maxUint256, parseUnits } from 'viem';
-import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
