@@ -39,13 +39,9 @@ const IncludeFee = () => {
           )}
         </h2>
       </div>
-      {activeStep === OfferProgress.Filled ||
-        (activeStep === OfferProgress.None && (
-          <Checkbox
-            label="Infinite approve"
-            onCheckedChange={(checked) => setOfferFromState({ isInfinite: checked })}
-          />
-        ))}
+      {(activeStep === OfferProgress.Filled || activeStep === OfferProgress.None) && (
+        <Checkbox label="Infinite approve" onCheckedChange={(checked) => setOfferFromState({ isInfinite: checked })} />
+      )}
     </div>
   );
 };
