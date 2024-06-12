@@ -60,12 +60,14 @@ const AcceptOfferButtons: React.FC = () => {
 
   return (
     <div className={s.container}>
-      <Checkbox
-        label="Infinite approve"
-        onCheckedChange={(checked) => {
-          setIsInfinite(checked);
-        }}
-      />
+      {activeAcceptStep === OfferProgress.Filled && (
+        <Checkbox
+          label="Infinite approve"
+          onCheckedChange={(checked) => {
+            setIsInfinite(checked);
+          }}
+        />
+      )}
       <p className={s.label}>You will have to sign 2 transactions: Approval of token & Accept Trade</p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
