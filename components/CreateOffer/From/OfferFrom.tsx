@@ -28,8 +28,8 @@ const OfferFrom = () => {
   }, [offerFromState.amount, offerFromState.amountError]);
 
   const maxBalance = useMemo(() => {
-    if (!offerFromState.from) return '0';
-    const currentToken = userTokens.find((token) => token.address === offerFromState.from);
+    if (!offerFromState.from || !userTokens.tokens) return '0';
+    const currentToken = userTokens.tokens.find((token) => token.address === offerFromState.from);
     if (!currentToken) return '0';
     return currentToken.balance;
   }, [offerFromState.from, userTokens]);
@@ -57,7 +57,7 @@ const OfferFrom = () => {
         label={
           <div className={s.amountContainer}>
             <p className={s.amountText}>Amount</p>
-            <button onClick={handleSetMaxBalance} className={s.amountButton}>
+            <button disabled={inputsDisabled} onClick={handleSetMaxBalance} className={s.amountButton}>
               Max
             </button>
           </div>

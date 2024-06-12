@@ -26,15 +26,16 @@
 
 .label {
   color: $base-black;
-
-  @include font-m-flat;
+  line-height: normal;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .terms {
   color: $base-black;
   opacity: 0.5;
-
-  @include font-s-flat;
+  line-height: normal;
+  font-size: 12px;
 }
 
 .conditions {

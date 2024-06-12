@@ -115,62 +115,64 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   return (
     <form onSubmit={handleAdd} className={s.wrapper}>
       <div className={s.container} ref={ref}>
-        <div className={s.titleContainer}>
-          <h2 className={s.title}>{t('offer.create.addToken')}</h2>
-          <InputCross onClick={() => setOpened(false)} className={s.cross} />
-        </div>
-        <div className={s.warnContainer}>
-          <div className={s.warning}>
-            <WarningIcon width={32} height={32} />
+        <div className={s.content}>
+          <div className={s.titleContainer}>
+            <h2 className={s.title}>{t('offer.create.addToken')}</h2>
+            <InputCross onClick={() => setOpened(false)} className={s.cross} />
           </div>
-          <p className={s.warnText}>{t('offer.warn.addToken')}</p>
-        </div>
-        {step === 1 ? (
-          <>
-            <Input
-              label={t('token.address')}
-              size="lg"
-              id="token address input"
-              classInput={s.addressInput}
-              error={
-                (tokenState.address && !isAddress(tokenState.address)) || isInvalidAddress
-                  ? t('token.invalid.address')
-                  : ''
-              }
-              value={tokenState.address}
-              onChange={({ target }) => changeAddressHandler(target.value)}
-            />
-            <Input
-              label={t('token.name')}
-              size="lg"
-              disabled
-              id="token name input"
-              value={tokenState.name}
-              onChange={({ target }) => setTokenState({ name: target.value })}
-            />
-            <Input
-              label={t('token.decimal')}
-              size="lg"
-              disabled
-              classWrapper={s.decimalWrapper}
-              id="token decimal input"
-              value={tokenState.decimal ? tokenState.decimal.toString() : ''}
-              onChange={({ target }) => setTokenState({ decimal: +target.value })}
-            />
-          </>
-        ) : (
-          <div className={s.tokenWrapper}>
-            <div className={s.tokenContainer}>
-              <TokenLogo className={s.tokenLogo} />
-              <div className={s.balanceContainer}>
-                <h2 className={s.tokenTitle}>{tokenState.name}</h2>
-                <h2 className={s.tokenBalance}>
-                  {balance?.formatted} {tokenState.name}
-                </h2>
+          <div className={s.warnContainer}>
+            <div className={s.warning}>
+              <WarningIcon width={32} height={32} />
+            </div>
+            <p className={s.warnText}>{t('offer.warn.addToken')}</p>
+          </div>
+          {step === 1 ? (
+            <>
+              <Input
+                label={t('token.address')}
+                size="lg"
+                id="token address input"
+                classInput={s.addressInput}
+                error={
+                  (tokenState.address && !isAddress(tokenState.address)) || isInvalidAddress
+                    ? t('token.invalid.address')
+                    : ''
+                }
+                value={tokenState.address}
+                onChange={({ target }) => changeAddressHandler(target.value)}
+              />
+              <Input
+                label={t('token.name')}
+                size="lg"
+                disabled
+                id="token name input"
+                value={tokenState.name}
+                onChange={({ target }) => setTokenState({ name: target.value })}
+              />
+              <Input
+                label={t('token.decimal')}
+                size="lg"
+                disabled
+                classWrapper={s.decimalWrapper}
+                id="token decimal input"
+                value={tokenState.decimal ? tokenState.decimal.toString() : ''}
+                onChange={({ target }) => setTokenState({ decimal: +target.value })}
+              />
+            </>
+          ) : (
+            <div className={s.tokenWrapper}>
+              <div className={s.tokenContainer}>
+                <TokenLogo className={s.tokenLogo} />
+                <div className={s.balanceContainer}>
+                  <h2 className={s.tokenTitle}>{tokenState.name}</h2>
+                  <h2 className={s.tokenBalance}>
+                    {balance?.formatted} {tokenState.name}
+                  </h2>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
         <div className={s.buttonContainer}>
           <Button type="button" onClick={() => (step === 1 ? setOpened(false) : setStep(1))}>
             {t('token.add.back')}

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { erc20Abi, parseUnits } from 'viem';
+import { erc20Abi, maxUint256, parseUnits } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
@@ -44,16 +44,19 @@ export const useCreateApprove = () => {
 
   const createApproveHandler = async () => {
     if (!isValid) return;
-    if (isCreateApproveGreater()) {
+    if (isCreateApproveGreater() && !offerFromState.isInfinite) {
       setOfferFromState({ amountError: t('error.insufficientBalance') });
       throw new Error('Insufficient balance');
     }
     setOfferFromState({ amountError: '' });
+    const amount = offerFromState.isInfinite
+      ? maxUint256
+      : parseUnits(String(offerFromState.amount), tokenFromDecimals);
     return approveContract({
       address: tokenFromAddress,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [environment.contractAddress, parseUnits(String(offerFromState.amount), tokenFromDecimals)],
+      args: [environment.contractAddress, amount],
     });
   };
 
