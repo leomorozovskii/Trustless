@@ -25,7 +25,7 @@ const IncludeFee = () => {
       <h2 className={s.label}>
         Service fee {calculatedFee && `${calculatedFee}%`}{' '}
         {fee ? <span>({`${fee}${tokenName ? ` ${tokenName}` : ''}`}). </span> : ''}
-        {calculatedFee && Number(offerFromState.amount) > 0 && !offerFromState.amountError && (
+        {calculatedFee && Number(offerFromState.amount) > 0 && (
           <span>
             Receiver will get{' '}
             {Number((Number(offerFromState.amount) - (Number(offerFromState.amount) / 100) * calculatedFee).toFixed(9))}{' '}

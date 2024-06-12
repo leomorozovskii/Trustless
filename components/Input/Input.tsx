@@ -12,10 +12,11 @@ export interface IInput extends HTMLAttributes<HTMLInputElement> {
   classWrapper?: string;
   classInput?: string;
   error?: string;
+  subtext?: string | React.ReactNode;
   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg';
   icon?: React.ReactNode;
-  label?: string;
+  label?: string | React.ReactNode;
 }
 
 const Input: React.FC<IInput> = ({
@@ -27,6 +28,7 @@ const Input: React.FC<IInput> = ({
   classWrapper = '',
   classInput = '',
   error = '',
+  subtext = '',
   disabled = false,
   icon,
   label = '',
@@ -56,7 +58,7 @@ const Input: React.FC<IInput> = ({
       >
         {icon && <TextField.Slot>{icon}</TextField.Slot>}
       </TextField.Root>
-      {error && <p className={s.errorLabel}>{error}</p>}
+      {error ? <p className={s.errorLabel}>{error}</p> : subtext}
     </div>
   );
 };
