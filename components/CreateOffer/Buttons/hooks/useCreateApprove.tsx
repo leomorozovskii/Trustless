@@ -42,7 +42,7 @@ export const useCreateApprove = () => {
   };
 
   const memoizedApproveRequest = useMemo(() => {
-    if (!tokenFromAddress || !offerFromState.amount || !address || !isValid) return;
+    if (!tokenFromAddress || !offerFromState.amount || !address) return;
     if (isCreateApproveGreater() && !offerFromState.isInfinite) return;
 
     let amount;
@@ -64,7 +64,6 @@ export const useCreateApprove = () => {
     offerFromState.amount,
     offerFromState.isInfinite,
     address,
-    isValid,
     isCreateApproveGreater,
     tokenFromDecimals,
   ]);
