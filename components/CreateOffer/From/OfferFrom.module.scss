@@ -62,6 +62,10 @@
 
   border-radius: $s;
   background: $bg-gray;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .balanceContainer {

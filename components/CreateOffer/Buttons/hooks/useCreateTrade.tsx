@@ -43,7 +43,7 @@ export const useCreateTrade = () => {
         blockHash: receipt?.blockHash,
       });
 
-      const logIndex = receipt?.logs[receipt?.logs.length === 2 ? 1 : 2]?.logIndex;
+      const logIndex = receipt?.logs[receipt?.logs.length - 1]?.logIndex;
       const result = logs.find((item) => item.logIndex === logIndex);
 
       if (result && result.args.tradeID) {
