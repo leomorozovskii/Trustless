@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, parseUnits } from 'viem';
-import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 
 import { useTokenData } from '@components/CreateOffer/Buttons/hooks/useTokenData';
 import { useGetBalanceGreater } from '@components/CreateOffer/Buttons/hooks/useGetBalanceGreater';
@@ -9,6 +9,7 @@ import { useToastifyContext } from '@context/toastify/ToastifyProvider';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
 import { OfferProgress } from '@lib/constants';
 import { environment } from '@lib/environment';
+import { useEffect } from 'react';
 
 export const useCreateApprove = () => {
   const { t } = useTranslation();
@@ -18,17 +19,23 @@ export const useCreateApprove = () => {
 
   const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
 
+  const { address } = useAccount();
+
   const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
     tokenAddress: tokenFromAddress,
     tokenAmount: offerFromState.amount,
   });
 
-  const { data: approveHash, writeContractAsync: approveContract } = useWriteContract();
-  const { data: approveReceipt } = useWaitForTransactionReceipt({ hash: approveHash });
+  const { refetchAllowance } = useCreateAllowance();
 
-  useCreateAllowance({ approveReceipt });
+  const { writeContractAsync: approveContract } = useWriteContract();
 
-  const onCreateApproveReceipt = () => {
+  useEffect(() => {
+    setInputsDisabled(false);
+  }, [address, setInputsDisabled]);
+
+  const onCreateApproveReceipt = async () => {
+    await refetchAllowance();
     setInputsDisabled(true);
     handleAddItem({ title: t('success.message'), text: t('success.approved'), type: 'success' });
     setActiveStep(OfferProgress.Approved);

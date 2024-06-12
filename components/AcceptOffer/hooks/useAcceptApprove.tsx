@@ -19,14 +19,15 @@ export const useAcceptApprove = () => {
 
   const { writeContractAsync: approveContract } = useWriteContract();
 
-  useAcceptAllowance();
+  const { refetchAllowance } = useAcceptAllowance();
 
   const { isGreater } = useGetBalanceGreater({
     tokenAddress: tokenTo,
     tokenAmount: formatUnits(amountTo, tokenDecimals),
   });
 
-  const onAcceptApproveReceipt = () => {
+  const onAcceptApproveReceipt = async () => {
+    await refetchAllowance();
     handleAddItem({ title: 'Success', text: 'Tokens have been approved', type: 'success' });
     setActiveAcceptStep(OfferProgress.Approved);
   };
