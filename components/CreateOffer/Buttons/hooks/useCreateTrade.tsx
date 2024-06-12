@@ -34,7 +34,7 @@ export const useCreateTrade = () => {
 
       const client = createPublicClient({
         chain: network,
-        transport: http(environment.apiKey),
+        transport: http(environment.apiUrl),
       });
 
       const logs = await client.getLogs({

@@ -8,8 +8,9 @@ import { useSearchToken } from '@components/SelectTokenPopup/hooks/useSearchToke
 import TokenItem from '@components/SelectTokenPopup/components/TokenItem/TokenItem';
 import { IToken } from '@components/SelectTokenPopup/types/useGetUserTokens.types';
 import { useOfferCreateContext } from '@context/offer/create/OfferCreateContext';
-import { TOKEN_MAP, TokenData } from '@lib/constants';
 import { useClickOutside } from '@lib/hooks/useClickOutside';
+import { TOKEN_MAP } from '@lib/constants';
+import { TokenData } from '@lib/types';
 
 import { Skeleton } from '@components/Skeleton';
 import s from './SelectTokenPopup.module.scss';

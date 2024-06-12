@@ -1,5 +1,6 @@
-import { TokenData } from '@lib/constants';
 import { Hash } from 'viem';
+
+import { TokenData } from '@lib/types';
 
 export type OfferStatus = 'pending' | 'accepted' | 'cancelled';
 

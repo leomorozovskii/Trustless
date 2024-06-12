@@ -65,7 +65,7 @@ export const useGetUserTokens = () => {
       };
 
       try {
-        const response = await fetch(environment.apiKey, requestOptions);
+        const response = await fetch(environment.apiUrl, requestOptions);
         const data: IResponseAlchemy = await response.json();
 
         const filteredTokens = data.result.tokenBalances.filter((token) => fromHex(token.tokenBalance, 'number') > 0);
