@@ -13,7 +13,11 @@ export const useAcceptAllowance = () => {
   const { address: userAddress } = useAccount();
   const { amountTo, tokenTo } = useGetOfferDetails({ id: acceptId });
 
-  const { data: acceptOfferAllowance } = useReadContract({
+  const {
+    data: acceptOfferAllowance,
+    isLoading: isGettingAllowance,
+    refetch: refetchAllowance,
+  } = useReadContract({
     address: tokenTo,
     abi: erc20Abi,
     functionName: 'allowance',
@@ -21,11 +25,22 @@ export const useAcceptAllowance = () => {
   });
 
   useEffect(() => {
-    if (!acceptOfferAllowance) return;
-    if (acceptOfferAllowance >= amountTo) {
+    if (isGettingAllowance) return;
+    let allowance: bigint | number;
+    if (acceptOfferAllowance) {
+      allowance = acceptOfferAllowance;
+    } else {
+      allowance = 0;
+    }
+
+    if (allowance >= amountTo) {
       setActiveAcceptStep(OfferProgress.Approved);
     } else {
       setActiveAcceptStep(OfferProgress.Filled);
     }
-  }, [acceptOfferAllowance, amountTo]);
+  }, [acceptOfferAllowance, amountTo, setActiveAcceptStep, isGettingAllowance, userAddress]);
+
+  return {
+    refetchAllowance,
+  };
 };
