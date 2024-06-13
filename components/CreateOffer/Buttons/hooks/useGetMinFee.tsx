@@ -19,6 +19,7 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
   const publicClient = usePublicClient();
 
   const [minFee, setMinFee] = useState<string | null>(null);
+  const [initialCallMade, setInitialCallMade] = useState<boolean>(false);
 
   const calculateMinGasFee = useCallback(async () => {
     if (!publicClient || !data) return;
@@ -41,15 +42,27 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
     }
   }, [publicClient, data]);
 
-  const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 300);
+  const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 60000);
 
   useEffect(() => {
-    if (!address) return;
+    if (!data) return;
+    const initialCall = async () => {
+      await calculateMinGasFee();
+      setInitialCallMade(true);
+    };
+
+    if (!initialCallMade) {
+      initialCall();
+    }
+  }, [initialCallMade, calculateMinGasFee, data, address]);
+
+  useEffect(() => {
+    if (!address || !initialCallMade) return;
 
     debouncedCalculateMinGasFee();
     const interval = setInterval(debouncedCalculateMinGasFee, 30000);
     return () => clearInterval(interval);
-  }, [publicClient, address, data, debouncedCalculateMinGasFee]);
+  }, [publicClient, address, data, debouncedCalculateMinGasFee, initialCallMade]);
 
   return {
     minFee,
