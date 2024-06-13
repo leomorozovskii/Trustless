@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 
@@ -16,18 +16,12 @@ import { OfferProgress } from '@lib/constants';
 import s from './AcceptOffer.module.scss';
 
 const AcceptOfferPageContent = ({ params }: { params: { id: string } }) => {
-  const { activeAcceptStep, setAcceptId } = useOfferAcceptContext();
+  const { activeAcceptStep } = useOfferAcceptContext();
 
   const labelText = useMemo(() => {
     if (activeAcceptStep === OfferProgress.Created) return 'Offer has been successfully accepted!';
     return `Offer ID #${params.id}`;
   }, [activeAcceptStep, params.id]);
-
-  useEffect(() => {
-    if (params.id) {
-      setAcceptId(params.id);
-    }
-  }, [params.id, setAcceptId]);
 
   return (
     <Sidebar>
@@ -56,7 +50,7 @@ const AcceptOfferPageContent = ({ params }: { params: { id: string } }) => {
 
 const AcceptOfferPage = ({ params }: { params: { id: string } }) => {
   return (
-    <OfferAcceptProvider>
+    <OfferAcceptProvider id={params.id}>
       <AcceptOfferPageContent params={params} />
     </OfferAcceptProvider>
   );

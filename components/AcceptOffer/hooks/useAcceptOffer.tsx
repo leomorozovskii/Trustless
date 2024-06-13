@@ -27,7 +27,7 @@ export const useAcceptOffer = () => {
   const { writeContractAsync: acceptContract } = useWriteContract();
 
   const acceptTradeRequest = useMemo(() => {
-    if (!acceptId || !address || isGreater()) return;
+    if (!address || isGreater()) return;
 
     return {
       address: environment.contractAddress,
@@ -39,7 +39,6 @@ export const useAcceptOffer = () => {
   }, [acceptId, address, isGreater]);
 
   const acceptTrade = async () => {
-    if (!acceptId) return;
     if (isReceiver === false) {
       throw new Error('You are not the receiver. Change your wallet');
     }

@@ -5,16 +5,14 @@ import { OfferProgress } from '@lib/constants';
 
 const OfferAcceptContext = createContext<IOfferAcceptValues | null>(null);
 
-export const OfferAcceptProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const OfferAcceptProvider: React.FC<PropsWithChildren & { id: string }> = ({ children, id }) => {
   const [activeAcceptStep, setActiveAcceptStep] = useState<OfferProgress>(OfferProgress.None);
-  const [acceptId, setAcceptId] = useState<string | null>(null);
   const [txHash, setTxHash] = useState<string>('');
   const [isInfinite, setIsInfinite] = useState<boolean>(false);
 
   const values: IOfferAcceptValues = useMemo(
     () => ({
-      acceptId,
-      setAcceptId,
+      acceptId: id,
       activeAcceptStep,
       isInfinite,
       setIsInfinite,
@@ -22,7 +20,7 @@ export const OfferAcceptProvider: React.FC<PropsWithChildren> = ({ children }) =
       txHash,
       setTxHash,
     }),
-    [acceptId, activeAcceptStep, isInfinite, txHash],
+    [id, activeAcceptStep, isInfinite, txHash],
   );
 
   return <OfferAcceptContext.Provider value={values}>{children}</OfferAcceptContext.Provider>;
