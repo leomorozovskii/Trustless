@@ -47,7 +47,7 @@ export const useCreateApprove = () => {
 
     let amount;
     try {
-      amount = offerFromState.isInfinite ? maxUint256 : parseUnits(String(offerFromState.amount), tokenFromDecimals);
+      amount = offerFromState.isInfinite ? maxUint256 : parseUnits(offerFromState.amount, tokenFromDecimals);
     } catch (e) {
       amount = BigInt(0);
     }
