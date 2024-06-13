@@ -19,7 +19,6 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
   const publicClient = usePublicClient();
 
   const [minFee, setMinFee] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const calculateMinGasFee = useCallback(async () => {
     if (!publicClient || !data) return;
@@ -33,11 +32,11 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
       if (result.result.ethusd) {
         setMinFee((Number(result.result.ethusd) * txPriceinEth).toFixed(2));
       } else {
-        setMinFee(null);
+        throw new Error('Etherscan api error');
       }
     } catch (e) {
       if (e instanceof Error) {
-        setError(e.message);
+        setMinFee(null);
       }
     }
   }, [publicClient, data]);
@@ -54,6 +53,5 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
 
   return {
     minFee,
-    error,
   };
 };
