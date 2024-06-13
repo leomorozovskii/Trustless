@@ -9,7 +9,7 @@ interface IEtherscanResponse {
   result: {
     ethbtc: string;
     ethbtc_timestamp: string;
-    ethusd: string;
+    ethusd?: string;
     ethusd_timestamp: string;
   };
 }
