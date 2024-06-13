@@ -16,7 +16,7 @@ export const useCancelOffer = ({ cancelId }: { cancelId: string }) => {
   const { writeContractAsync: cancelContract } = useWriteContract();
 
   const memoizedCancelRequest = useMemo(() => {
-    if (!cancelId || !isCreator || !address) return;
+    if (!isCreator || !address) return;
 
     return {
       address: environment.contractAddress,
