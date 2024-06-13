@@ -15,7 +15,7 @@ import s from './OfferButtons.module.scss';
 
 const OfferButtons = () => {
   const { t } = useTranslation();
-  const { activeStep, setActiveStep } = useOfferCreateContext();
+  const { activeStep, setActiveStep, setActiveOfferStep } = useOfferCreateContext();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
 
   const { onCreateApproveReceipt, createApproveHandler, createApproveRequest } = useCreateApprove();
@@ -41,6 +41,7 @@ const OfferButtons = () => {
     if (!approveButtonDisabled) {
       setActiveStep(OfferProgress.Filled);
     } else {
+      setActiveOfferStep(1);
       setActiveStep(OfferProgress.None);
     }
   }, [approveButtonDisabled, setActiveStep]);
