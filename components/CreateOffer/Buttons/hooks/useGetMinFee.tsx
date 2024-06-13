@@ -28,7 +28,7 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
       const contractGas = await publicClient.estimateContractGas(data);
       const txPriceInWei = (gasPrice * contractGas) / BigInt(10 ** 9);
       const txPriceinEth = Number(txPriceInWei) / 1_000_000_000;
-      const response = await fetch(environment.ethPriceApiUrl);
+      const response = await fetch(`${environment.etherscanUrl}&module=stats&action=ethprice`);
       const result: IEtherscanResponse = await response.json();
       if (result.result.ethusd) {
         setMinFee((Number(result.result.ethusd) * txPriceinEth).toFixed(2));

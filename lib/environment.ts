@@ -10,5 +10,5 @@ export const environment = {
   subgraphEndpoint: process.env.NEXT_PUBLIC_SUBGRAPH_ENDPOINT as unknown as string,
   network: process.env.NEXT_PUBLIC_NETWORK as unknown as SupportedNetworks,
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL as unknown as string,
-  ethPriceApiUrl: process.env.NEXT_PUBLIC_ETH_PRICE_API_URL as unknown as string,
+  etherscanUrl: process.env.NEXT_PUBLIC_ETHERSCAN_API_URL as unknown as string,
 } as const;
