@@ -9,9 +9,10 @@ import s from './CopyText.module.scss';
 type Props = {
   text: string;
   successMessage: string;
+  children?: React.ReactNode;
 };
 
-const CopyText: React.FC<Props> = ({ text, successMessage }) => {
+const CopyText: React.FC<Props> = ({ text, successMessage, children = <CopyIcon /> }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const handleCopy = async () => {
@@ -20,7 +21,7 @@ const CopyText: React.FC<Props> = ({ text, successMessage }) => {
   };
   return (
     <button aria-label={t('shared.copy')} className={s.button} type="button" onClick={handleCopy}>
-      <CopyIcon />
+      {children}
     </button>
   );
 };

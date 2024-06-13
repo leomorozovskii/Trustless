@@ -14,6 +14,7 @@ import { useIsMounted } from '@lib/hooks/useIsMounted';
 const OffersTemplate = createOffersTemplate({
   filters: ['all', 'pending'],
   actions: ['cancel', 'search'],
+  sorting: { field: OfferColumns.Date, order: 'desc' },
   hideFilters: true,
   columnsToDisplay: [
     OfferColumns.ID,
