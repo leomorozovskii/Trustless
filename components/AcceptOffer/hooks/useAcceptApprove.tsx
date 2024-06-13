@@ -33,7 +33,7 @@ export const useAcceptApprove = () => {
     setActiveAcceptStep(OfferProgress.Approved);
   };
 
-  const memoizedApproveRequest = useMemo(() => {
+  const acceptApproveRequest = useMemo(() => {
     if (!address || !tokenTo || !amountTo || isGreater()) return;
 
     const amount = isInfinite ? maxUint256 : amountTo;
@@ -68,6 +68,6 @@ export const useAcceptApprove = () => {
   return {
     acceptApproveHandler,
     onAcceptApproveReceipt,
-    memoizedApproveRequest,
+    acceptApproveRequest,
   };
 };

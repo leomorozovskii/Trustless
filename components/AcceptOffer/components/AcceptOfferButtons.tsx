@@ -27,15 +27,15 @@ const AcceptOfferButtons: React.FC = () => {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
-  const { onAcceptApproveReceipt, acceptApproveHandler, memoizedApproveRequest } = useAcceptApprove();
-  const { acceptTrade, onAcceptReceipt, memoizedAcceptTrade } = useAcceptOffer();
+  const { onAcceptApproveReceipt, acceptApproveHandler, acceptApproveRequest } = useAcceptApprove();
+  const { acceptTrade, onAcceptReceipt, acceptTradeRequest } = useAcceptOffer();
 
   const { minFee: minApproveFee } = useGetMinFee({
-    data: memoizedApproveRequest,
+    data: acceptApproveRequest,
   });
 
   const { minFee: minAcceptFee } = useGetMinFee({
-    data: memoizedAcceptTrade,
+    data: acceptTradeRequest,
   });
 
   const memoizedFee = useMemo(() => {

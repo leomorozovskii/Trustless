@@ -55,7 +55,7 @@ export const useCreateTrade = () => {
     getOfferId();
   };
 
-  const memoizedTradeRequest = useMemo(() => {
+  const createTradeRequest = useMemo(() => {
     if (!tokenFromAddress || !tokenToAddress || !offerFromState.amount || !offerToState.amount || !address) return;
 
     if (isCreateGreater()) return;
@@ -115,6 +115,6 @@ export const useCreateTrade = () => {
   return {
     onCreateReceipt,
     createTrade,
-    memoizedTradeRequest,
+    createTradeRequest,
   };
 };

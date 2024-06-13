@@ -26,7 +26,7 @@ export const useAcceptOffer = () => {
 
   const { writeContractAsync: acceptContract } = useWriteContract();
 
-  const memoizedAcceptTrade = useMemo(() => {
+  const acceptTradeRequest = useMemo(() => {
     if (!acceptId || !address || isGreater()) return;
 
     return {
@@ -64,6 +64,6 @@ export const useAcceptOffer = () => {
   return {
     acceptTrade,
     onAcceptReceipt,
-    memoizedAcceptTrade,
+    acceptTradeRequest,
   };
 };

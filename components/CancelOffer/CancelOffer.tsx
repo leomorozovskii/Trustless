@@ -11,8 +11,8 @@ import s from './CancelOffer.module.scss';
 const CancelOffer = ({ cancelId }: { cancelId: string }) => {
   const { isCreator } = useGetOfferDetails({ id: cancelId });
 
-  const { cancelOffer, onCancelReceipt, memoizedCancelRequest } = useCancelOffer({ cancelId });
-  const { minFee } = useGetMinFee({ data: memoizedCancelRequest });
+  const { cancelOffer, onCancelReceipt, cancelRequest } = useCancelOffer({ cancelId });
+  const { minFee } = useGetMinFee({ data: cancelRequest });
 
   return (
     <div className={s.container}>

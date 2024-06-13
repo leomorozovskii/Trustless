@@ -15,7 +15,7 @@ export const useCancelOffer = ({ cancelId }: { cancelId: string }) => {
 
   const { writeContractAsync: cancelContract } = useWriteContract();
 
-  const memoizedCancelRequest = useMemo(() => {
+  const cancelRequest = useMemo(() => {
     if (!isCreator || !address) return;
 
     return {
@@ -45,6 +45,6 @@ export const useCancelOffer = ({ cancelId }: { cancelId: string }) => {
   return {
     cancelOffer,
     onCancelReceipt,
-    memoizedCancelRequest,
+    cancelRequest,
   };
 };

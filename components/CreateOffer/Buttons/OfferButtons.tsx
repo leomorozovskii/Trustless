@@ -18,15 +18,15 @@ const OfferButtons = () => {
   const { activeStep, setActiveStep } = useOfferCreateContext();
   const { approveButtonDisabled, createButtonDisabled } = useButtonsDisabled();
 
-  const { onCreateApproveReceipt, createApproveHandler, memoizedApproveRequest } = useCreateApprove();
-  const { onCreateReceipt, createTrade, memoizedTradeRequest } = useCreateTrade();
+  const { onCreateApproveReceipt, createApproveHandler, createApproveRequest } = useCreateApprove();
+  const { onCreateReceipt, createTrade, createTradeRequest } = useCreateTrade();
 
   const { minFee: minApproveFee } = useGetMinFee({
-    data: memoizedApproveRequest,
+    data: createApproveRequest,
   });
 
   const { minFee: minCreateFee } = useGetMinFee({
-    data: memoizedTradeRequest,
+    data: createTradeRequest,
   });
 
   const memoizedFee = useMemo(() => {

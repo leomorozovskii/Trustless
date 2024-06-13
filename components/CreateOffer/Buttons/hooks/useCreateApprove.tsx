@@ -41,7 +41,7 @@ export const useCreateApprove = () => {
     setActiveOfferStep(2);
   };
 
-  const memoizedApproveRequest = useMemo(() => {
+  const createApproveRequest = useMemo(() => {
     if (!tokenFromAddress || !offerFromState.amount || !address) return;
     if (isCreateApproveGreater() && !offerFromState.isInfinite) return;
 
@@ -89,6 +89,6 @@ export const useCreateApprove = () => {
   return {
     createApproveHandler,
     onCreateApproveReceipt,
-    memoizedApproveRequest,
+    createApproveRequest,
   };
 };
