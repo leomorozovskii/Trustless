@@ -14,7 +14,13 @@ interface IEtherscanResponse {
   };
 }
 
-export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | undefined }) => {
+export const useGetMinFee = ({
+  data,
+  active,
+}: {
+  data: EstimateContractGasParameters | undefined;
+  active: boolean;
+}) => {
   const { address } = useAccount();
   const publicClient = usePublicClient();
 
@@ -45,16 +51,16 @@ export const useGetMinFee = ({ data }: { data: EstimateContractGasParameters | u
   const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 60000);
 
   useEffect(() => {
-    if (!data) return;
+    if (!data || !active) return;
     const initialCall = async () => {
-      await calculateMinGasFee();
       setInitialCallMade(true);
+      await calculateMinGasFee();
     };
 
     if (!initialCallMade) {
       initialCall();
     }
-  }, [initialCallMade, calculateMinGasFee, data, address]);
+  }, [initialCallMade, calculateMinGasFee, data, address, active]);
 
   useEffect(() => {
     if (!address || !initialCallMade) return;

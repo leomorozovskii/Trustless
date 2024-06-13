@@ -32,10 +32,12 @@ const AcceptOfferButtons: React.FC = () => {
 
   const { minFee: minApproveFee } = useGetMinFee({
     data: acceptApproveRequest,
+    active: activeAcceptStep === OfferProgress.Filled && isMounted,
   });
 
   const { minFee: minAcceptFee } = useGetMinFee({
     data: acceptTradeRequest,
+    active: activeAcceptStep === OfferProgress.Approved && isMounted,
   });
 
   const memoizedFee = useMemo(() => {

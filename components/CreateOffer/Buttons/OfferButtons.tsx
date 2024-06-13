@@ -23,10 +23,12 @@ const OfferButtons = () => {
 
   const { minFee: minApproveFee } = useGetMinFee({
     data: createApproveRequest,
+    active: activeStep === OfferProgress.Filled,
   });
 
   const { minFee: minCreateFee } = useGetMinFee({
     data: createTradeRequest,
+    active: activeStep === OfferProgress.Approved,
   });
 
   const memoizedFee = useMemo(() => {

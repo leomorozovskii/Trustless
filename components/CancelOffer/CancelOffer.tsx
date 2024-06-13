@@ -12,7 +12,7 @@ const CancelOffer = ({ cancelId }: { cancelId: string }) => {
   const { isCreator } = useGetOfferDetails({ id: cancelId });
 
   const { cancelOffer, onCancelReceipt, cancelRequest } = useCancelOffer({ cancelId });
-  const { minFee } = useGetMinFee({ data: cancelRequest });
+  const { minFee } = useGetMinFee({ data: cancelRequest, active: true });
 
   return (
     <div className={s.container}>
