@@ -37,7 +37,7 @@ export const useAcceptAllowance = () => {
       const allowance = acceptOfferAllowance ?? 0;
       setIsSufficient(allowance >= amountTo);
     }
-  }, [acceptOfferAllowance, amountTo, isGettingAllowance]);
+  }, [acceptOfferAllowance, amountTo, isGettingAllowance, userAddress]);
 
   useEffect(() => {
     if (isSufficient === true) {
@@ -45,7 +45,7 @@ export const useAcceptAllowance = () => {
     } else if (isSufficient === false) {
       setActiveAcceptStep(OfferProgress.Filled);
     }
-  }, [isSufficient, setActiveAcceptStep]);
+  }, [isSufficient, setActiveAcceptStep, userAddress]);
 
   return {
     refetchAllowance,
