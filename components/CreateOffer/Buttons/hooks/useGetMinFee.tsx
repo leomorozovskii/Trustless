@@ -7,10 +7,10 @@ import { useDebounce } from '@lib/hooks/useDebounce';
 
 interface IEtherscanResponse {
   result: {
-    ethbtc: string;
-    ethbtc_timestamp: string;
+    ethbtc?: string;
+    ethbtc_timestamp?: string;
     ethusd?: string;
-    ethusd_timestamp: string;
+    ethusd_timestamp?: string;
   };
 }
 
