@@ -46,10 +46,10 @@ const AcceptOfferButtons: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && !active && isMounted) {
-      handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
+      handleAddItem({ title: t('error.message'), text: 'error.acceptedOrClosed', type: 'error' });
       router.push('/offer/create');
     }
-  }, [active, handleAddItem, isLoading, isMounted, router]);
+  }, [active, handleAddItem, isLoading, isMounted, router, t]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -62,7 +62,7 @@ const AcceptOfferButtons: React.FC = () => {
       <Skeleton loading={!isMounted}>
         {activeAcceptStep === OfferProgress.Filled && (
           <Checkbox
-            label="Infinite approve"
+            label={t('offer.infinite')}
             onCheckedChange={(checked) => {
               setIsInfinite(checked);
             }}
@@ -89,14 +89,14 @@ const AcceptOfferButtons: React.FC = () => {
               onReceipt={(receipt) => onAcceptReceipt(receipt)}
               writeContract={acceptTrade}
             >
-              {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('Accepting Trade') : t('Accept Trade'))}
+              {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('token.accepting') : t('token.accept'))}
             </TxButton>
           </div>
           <ProgressBar currentStep={activeAcceptStep} />
         </div>
         <GasPrice minFee={memoizedFee} />
         <p className={s.terms}>
-          By continuing, you accept <span className={s.conditions}>Terms & Conditions</span>
+          {t('offer.create.acceptTerms')} <span className={s.conditions}>{t('offer.create.termsConditions')}</span>
         </p>
       </Skeleton>
     </div>

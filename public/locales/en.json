@@ -66,6 +66,7 @@
       "termsConditions": "Terms & Conditions",
       "fee": "Service Fee"
     },
+    "infinite": "Infinite approve",
     "created": "New offer has been created!",
     "warn": {
       "addToken": "Anyone can create a token, including creating fake versions of existing tokens. Be aware of scams and security risks"
@@ -86,6 +87,8 @@
     "invalid.address": "Invalid address",
     "approve": "Approve token",
     "approving": "Approving token",
+    "accept": "Accept Trade",
+    "accepting": "Accepting Trade",
     "create": "Create Trade",
     "creating": "Creating Trade",
     "select": "Select a token",
@@ -101,6 +104,7 @@
     "approve": "Approve error",
     "offer": "Offer error",
     "cancel": "Cancel error",
+    "acceptedOrClosed": "The offer was accepted or closed",
     "transaction": "Transaction error",
     "denied": "User denied the transaction",
     "somethingWrong": "Something went wrong",
