@@ -119,7 +119,8 @@
     "codeCopied": "Code has been copied",
     "addressCopied": "Address has been copied",
     "txLinkCopied": "Tx link has been copied",
-    "offerCancelled": "Offer has been cancelled"
+    "offerCancelled": "Offer has been cancelled",
+    "offerLinkCopied": "Offer link has been copied"
   },
   "shared": {
     "copy": "Copy",

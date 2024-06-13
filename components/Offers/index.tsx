@@ -1,6 +1,6 @@
 'use client';
 
-import { OfferColumns, OfferFilter } from './types';
+import { OfferColumns, OfferFilter, OfferSorting } from './types';
 
 import { createOffersView } from './view';
 import { createUseOffersStore } from './store';
@@ -12,6 +12,7 @@ type OffersTemplateActions = 'cancel' | 'search' | 're-open';
 type CreateOffersParams = {
   filters?: OfferFilter[];
   hideFilters?: boolean;
+  sorting?: OfferSorting | null;
   actions: OffersTemplateActions[];
   columnsToDisplay?: OfferColumns[];
 };
@@ -23,6 +24,7 @@ type OffersProps = {
 export const createOffersTemplate = ({
   filters = [],
   actions,
+  sorting = null,
   hideFilters = false,
   columnsToDisplay = [
     OfferColumns.ID,
@@ -39,6 +41,7 @@ export const createOffersTemplate = ({
   const useOffersStore = createUseOffersStore({
     limit: 100,
     filters,
+    sorting,
   });
   const OffersView = createOffersView(useOffersStore, { columnsToDisplay });
 
