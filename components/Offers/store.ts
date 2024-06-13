@@ -1,16 +1,17 @@
 import { create } from 'zustand';
 
-import { OfferColumns, OfferFilter, OffersStore } from './types';
+import { OfferFilter, OfferSorting, OffersStore } from './types';
 
 type CreateUseOffersStoreParams = {
   limit: number;
   filters: OfferFilter[];
+  sorting?: OfferSorting | null;
 };
 
-const createUseOffersStore = ({ limit, filters }: CreateUseOffersStoreParams) =>
+const createUseOffersStore = ({ limit, sorting = null, filters }: CreateUseOffersStoreParams) =>
   create<OffersStore>()((set) => ({
     selection: null,
-    sorting: { order: 'desc', field: OfferColumns.Date },
+    sorting,
     filters,
     searchFilter: '',
     filter: 'all',
@@ -19,7 +20,7 @@ const createUseOffersStore = ({ limit, filters }: CreateUseOffersStoreParams) =>
       limit,
     },
     setSelection: (selection) => set({ selection }),
-    setSorting: (sorting) => set({ sorting }),
+    setSorting: (newSorting) => set({ sorting: newSorting }),
     setSearchFilter: (searchFilter) =>
       set((state) => ({ searchFilter, selection: null, pagination: { ...state.pagination, offset: 0 } })),
     setFilter: (filter) =>

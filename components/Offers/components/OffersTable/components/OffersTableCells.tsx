@@ -6,12 +6,12 @@ import { CopyText } from '@components/CopyText';
 import { useTranslation } from 'react-i18next';
 import FormattedNumber from '@components/FormattedAmount/FormattedAmount';
 import { ShareIcon } from '@assets/icons';
-import Link from 'next/link';
 import { TxLink } from '@components/TxLink';
 import { Hash } from 'viem';
 import { links } from '@lib/constants';
 import dayjs from 'dayjs';
 import { isEmptyAddress } from '@components/AcceptOffer/utils/isEmptyAddress';
+import { environment } from '@lib/environment';
 import { OffersTableCell } from './OffersTableCell';
 import s from './OffersTableCell.module.scss';
 
@@ -129,11 +129,12 @@ type OffersTableShareProps = {
 };
 
 const OffersTableShare: React.FC<OffersTableShareProps> = ({ id }) => {
+  const { t } = useTranslation();
   return (
     <OffersTableCell>
-      <Link href={`/share/${id}`}>
+      <CopyText text={`${environment.siteUrl}/offers/${id}`} successMessage={t(`success.offerLinkCopied`)}>
         <ShareIcon />
-      </Link>
+      </CopyText>
     </OffersTableCell>
   );
 };

@@ -29,7 +29,9 @@ const OffersTable: React.FC<OffersTableProps> = ({
   onSortingChange,
   onRowSelectionChange,
 }) => {
-  const [sortingState, setSortingState] = React.useState<SortingState>([]);
+  const [sortingState, setSortingState] = React.useState<SortingState>(
+    sorting ? [{ id: sorting.field, desc: sorting.order === 'desc' }] : [],
+  );
   const [rowSelectionState, setRowSelectionState] = React.useState<RowSelectionState>({});
   const filteredColumns = React.useMemo(
     () => columns.filter((column) => !!column.id && columnsToDisplay.includes(column.id as OfferColumns)),
@@ -42,6 +44,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
       sorting: sortingState,
       rowSelection: rowSelectionState,
     },
+    enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     enableColumnResizing: false,
     enableMultiRowSelection: false,
@@ -51,15 +54,21 @@ const OffersTable: React.FC<OffersTableProps> = ({
     onRowSelectionChange: setRowSelectionState,
   });
   React.useEffect(() => {
-    if (sortingState.length === 0 && sorting !== null) {
-      onSortingChange(null);
-    } else if (sortingState.length !== 0) {
-      const newSorting = {
-        field: sortingState[0].id as OfferColumns,
-        order: sortingState[0].desc ? 'desc' : 'asc',
-      } as const;
-      onSortingChange(newSorting);
+    let newSorting: OfferSorting | null = null;
+    if (sortingState.length === 0) {
+      if (sorting) {
+        newSorting = {
+          field: sorting.field,
+          order: sorting.order === 'asc' ? 'desc' : 'asc',
+        };
+      } else {
+        newSorting = null;
+      }
+    } else {
+      const [{ id, desc }] = sortingState;
+      newSorting = { field: id as OfferColumns, order: desc ? 'desc' : 'asc' };
     }
+    onSortingChange(newSorting);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortingState, onSortingChange]);
   React.useEffect(() => {
