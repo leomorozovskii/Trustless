@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
 import { EstimateContractGasParameters } from 'viem';
 import { useAccount, usePublicClient } from 'wagmi';
@@ -14,6 +15,15 @@ interface IEtherscanResponse {
   };
 }
 
+const fetchEthUsdPrice = async () => {
+  const response = await fetch(`${environment.etherscanUrl}&module=stats&action=ethprice`);
+  const result: IEtherscanResponse = await response.json();
+
+  return result;
+};
+
+const ETH_USD_PRICE_KEY = 'ETH_USD_PRICE';
+
 export const useGetMinFee = ({
   data,
   active,
@@ -21,54 +31,43 @@ export const useGetMinFee = ({
   data: EstimateContractGasParameters | undefined;
   active: boolean;
 }) => {
+  const { data: ethUsdPrice, isError } = useQuery({
+    queryKey: [ETH_USD_PRICE_KEY],
+    queryFn: fetchEthUsdPrice,
+    refetchInterval: 60000,
+  });
   const { address } = useAccount();
   const publicClient = usePublicClient();
 
   const [minFee, setMinFee] = useState<string | null>(null);
-  const [initialCallMade, setInitialCallMade] = useState<boolean>(false);
-
   const calculateMinGasFee = useCallback(async () => {
-    if (!publicClient || !data) return;
+    if (!publicClient || !data || !ethUsdPrice) return;
     try {
+      if (isError) throw new Error('Etherscan api error');
+
       const gasPrice = await publicClient.getGasPrice();
       const contractGas = await publicClient.estimateContractGas(data);
       const txPriceInWei = (gasPrice * contractGas) / BigInt(10 ** 9);
       const txPriceinEth = Number(txPriceInWei) / 1_000_000_000;
-      const response = await fetch(`${environment.etherscanUrl}&module=stats&action=ethprice`);
-      const result: IEtherscanResponse = await response.json();
-      if (result.result.ethusd) {
-        setMinFee((Number(result.result.ethusd) * txPriceinEth).toFixed(2));
+      if (ethUsdPrice.result.ethusd) {
+        setMinFee((Number(ethUsdPrice.result.ethusd) * txPriceinEth).toFixed(2));
       } else {
         throw new Error('Etherscan api error');
       }
     } catch (e) {
-      if (e instanceof Error) {
-        setMinFee(null);
-      }
+      setMinFee(null);
     }
-  }, [publicClient, data]);
+  }, [publicClient, data, ethUsdPrice, isError]);
 
-  const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 60000);
+  const debouncedCalculateMinGasFee = useDebounce(calculateMinGasFee, 1000);
 
   useEffect(() => {
-    if (!data || !active) return;
-    const initialCall = async () => {
-      setInitialCallMade(true);
-      await calculateMinGasFee();
-    };
-
-    if (!initialCallMade) {
-      initialCall();
-    }
-  }, [initialCallMade, calculateMinGasFee, data, address, active]);
-
-  useEffect(() => {
-    if (!address || !initialCallMade) return;
+    if (!address || !active) return;
 
     debouncedCalculateMinGasFee();
     const interval = setInterval(debouncedCalculateMinGasFee, 30000);
     return () => clearInterval(interval);
-  }, [publicClient, address, data, debouncedCalculateMinGasFee, initialCallMade]);
+  }, [address, active, debouncedCalculateMinGasFee]);
 
   return {
     minFee,
