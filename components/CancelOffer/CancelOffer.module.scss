@@ -25,24 +25,3 @@
   text-decoration-line: underline;
   cursor: pointer;
 }
-
-.serviceContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.feeLabel {
-  color: $base-black;
-
-  @include font-s-flat;
-}
-
-.feeContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  align-items: center;
-}

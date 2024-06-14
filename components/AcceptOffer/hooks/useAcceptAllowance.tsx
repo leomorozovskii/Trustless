@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount, useReadContract } from 'wagmi';
 import { Address, erc20Abi } from 'viem';
 
@@ -24,21 +24,28 @@ export const useAcceptAllowance = () => {
     args: [userAddress as Address, environment.contractAddress],
   });
 
-  useEffect(() => {
-    if (isGettingAllowance) return;
-    let allowance: bigint | number;
-    if (acceptOfferAllowance) {
-      allowance = acceptOfferAllowance;
-    } else {
-      allowance = 0;
-    }
+  const [isSufficient, setIsSufficient] = useState<boolean | null>(null);
 
-    if (allowance >= amountTo) {
-      setActiveAcceptStep(OfferProgress.Approved);
+  useEffect(() => {
+    setActiveAcceptStep(OfferProgress.None);
+  }, [setActiveAcceptStep, userAddress]);
+
+  useEffect(() => {
+    if (isGettingAllowance || !amountTo || acceptOfferAllowance === null) {
+      setIsSufficient(null);
     } else {
+      const allowance = acceptOfferAllowance ?? 0;
+      setIsSufficient(allowance >= amountTo);
+    }
+  }, [acceptOfferAllowance, amountTo, isGettingAllowance, userAddress]);
+
+  useEffect(() => {
+    if (isSufficient === true) {
+      setActiveAcceptStep(OfferProgress.Approved);
+    } else if (isSufficient === false) {
       setActiveAcceptStep(OfferProgress.Filled);
     }
-  }, [acceptOfferAllowance, amountTo, setActiveAcceptStep, isGettingAllowance, userAddress]);
+  }, [isSufficient, setActiveAcceptStep, userAddress]);
 
   return {
     refetchAllowance,
