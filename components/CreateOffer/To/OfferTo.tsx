@@ -49,7 +49,7 @@ const OfferTo = () => {
         size="lg"
         disabled={inputsDisabled}
         placeholder="0"
-        classWrapper={cn(s.inputWrapper, s.mb)}
+        classWrapper={cn(s.inputWrapper, s.mb, s.gap)}
         value={offerToState.amount ? offerToState.amount.toString() : ''}
         onChange={({ target }) => {
           setOfferToState({ amount: target.value });
