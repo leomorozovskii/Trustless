@@ -1,10 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
 import { EstimateContractGasParameters } from 'viem';
 import { useAccount, usePublicClient } from 'wagmi';
 
 import { environment } from '@lib/environment';
 import { useDebounce } from '@lib/hooks/useDebounce';
-import { useQuery } from '@tanstack/react-query';
 
 interface IEtherscanResponse {
   result: {
