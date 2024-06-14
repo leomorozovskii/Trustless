@@ -84,6 +84,8 @@
 }
 
 .balanceValue {
+  max-width: 115px;
+  word-break: break-word;
   font-size: 12px;
   color: $base-black;
   font-weight: 400;
