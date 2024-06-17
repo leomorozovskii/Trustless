@@ -34,7 +34,7 @@ export const useAcceptApprove = () => {
   };
 
   const acceptApproveRequest = useMemo(() => {
-    if (!address || !tokenTo || !amountTo || isGreater()) return;
+    if (!address || !tokenTo || !amountTo) return;
 
     const amount = isInfinite ? maxUint256 : amountTo;
 
@@ -45,7 +45,7 @@ export const useAcceptApprove = () => {
       args: [environment.contractAddress, amount],
       account: address,
     };
-  }, [address, tokenTo, amountTo, isGreater, isInfinite]);
+  }, [address, tokenTo, amountTo, isInfinite]);
 
   const acceptApproveHandler = async () => {
     if (isReceiver === false) {
