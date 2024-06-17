@@ -43,7 +43,6 @@ export const useCreateApprove = () => {
 
   const createApproveRequest = useMemo(() => {
     if (!tokenFromAddress || !offerFromState.amount || !address) return;
-    if (isCreateApproveGreater() && !offerFromState.isInfinite) return;
 
     let amount;
     try {
@@ -59,14 +58,7 @@ export const useCreateApprove = () => {
       args: [environment.contractAddress, amount],
       account: address,
     };
-  }, [
-    tokenFromAddress,
-    offerFromState.amount,
-    offerFromState.isInfinite,
-    address,
-    isCreateApproveGreater,
-    tokenFromDecimals,
-  ]);
+  }, [tokenFromAddress, offerFromState.amount, offerFromState.isInfinite, address, tokenFromDecimals]);
 
   const createApproveHandler = async () => {
     if (!isValid) return;
