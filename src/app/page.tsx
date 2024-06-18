@@ -4,12 +4,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
-import { createOffersTemplate } from '../src/features/displayOffers';
-import { OfferColumns } from '../src/features/displayOffers/types';
-import { HeaderLayout } from '../src/layouts/HeaderLayout';
-import { TabsLayout } from '../src/layouts/TabsLayout';
-import { NotConnectedMessage } from '../src/shared/components/NotConnectedMessage';
-import { useIsMounted } from '../src/shared/hooks/useIsMounted';
+import { createOffersTemplate } from '../features/displayOffers';
+import { OfferColumns } from '../features/displayOffers/types';
+import { HeaderLayout } from '../layouts/HeaderLayout';
+import { TabsLayout } from '../layouts/TabsLayout';
+import { NotConnectedMessage } from '../shared/components/NotConnectedMessage';
+import { useIsMounted } from '../shared/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
   filters: ['all', 'pending'],

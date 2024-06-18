@@ -9,7 +9,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import '@radix-ui/themes/styles.css';
 
 import Providers from './providers';
-import { ThemeProvider } from '../src/shared/components/ThemeSwitcher';
+import { ThemeProvider } from '../shared/components/ThemeSwitcher';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700'],

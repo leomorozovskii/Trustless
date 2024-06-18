@@ -44,7 +44,7 @@
         "./generated/*"
       ],
       "@common/*": [
-        "./styles/common/*"
+        "./src/styles/common/*"
       ]
     },
     "moduleResolution": "bundler"

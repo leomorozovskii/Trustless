@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
-import { ButtonLink } from '@berezka-dao/shared/ui-kit/Button';
 import pic_no_data from '@public/images/pic_no_data.png';
+
+import { ButtonLink } from '@berezka-dao/shared/ui-kit/Button';
 
 import s from './OffersEmptyState.module.scss';
 

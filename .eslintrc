@@ -198,7 +198,7 @@
         "pathGroups": [
           {
             "group": "parent",
-            "pattern": "@ix-digital/**",
+            "pattern": "@berezka-dao/**",
             "position": "before"
           }
         ]
@@ -217,7 +217,7 @@
   "overrides": [
     {
       "files": [
-        "./app/**/*",
+        "./src/app/**/*",
         "src/**/*.stories.tsx"
       ],
       "rules": {

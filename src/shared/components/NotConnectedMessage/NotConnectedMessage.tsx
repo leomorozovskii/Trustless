@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
+import pic_login from '@public/images/pic_login.png';
+
 import { ConnectWallet } from '@berezka-dao/shared/components/ConnectWallet';
-import pic_login from 'public/images/pic_login.png';
 
 import s from './NotConnectedMessage.module.scss';
 
