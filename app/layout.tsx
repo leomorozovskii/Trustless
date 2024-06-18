@@ -1,13 +1,15 @@
 'use client';
 
+// eslint-disable-next-line import/no-unassigned-import
+import '../styles/globals.scss';
+
+import { Inter } from 'next/font/google';
 import * as React from 'react';
 import '@rainbow-me/rainbowkit/styles.css';
 import '@radix-ui/themes/styles.css';
-import { Inter } from 'next/font/google';
 
-import { ThemeProvider } from '@context/theme/ThemeProvider';
-import Providers from '@/app/providers';
-import '@/styles/globals.scss';
+import Providers from './providers';
+import { ThemeProvider } from '../src/shared/components/ThemeSwitcher';
 
 const inter = Inter({
   weight: ['400', '500', '600', '700'],

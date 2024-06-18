@@ -1,0 +1,38 @@
+@import '@common/typo.scss';
+
+.cell {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 8px;
+
+  &_full {
+    width: 100%;
+  }
+
+  &_uppercase {
+    text-transform: uppercase;
+  }
+
+  &_column {
+    display: inline-grid;
+  }
+
+  &_small {
+    @include font-s-flat;
+  }
+
+  &__secondaryText {
+    @include font-s-flat;
+  }
+}
+
+.token {
+  margin-left: 4px;
+}
+
+.controls {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  column-gap: 8px;
+}

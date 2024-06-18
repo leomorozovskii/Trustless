@@ -1,28 +1,29 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
 import { format as formatDate } from 'date-fns';
 import { enUS } from 'date-fns/locale';
-import en from './public/locales/en.json';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-export const defaultNS = 'translation';
+import en from '@public/locales/en.json';
+
+const defaultNS = 'translation';
 
 /**
  * Supported language options.
  * @enum {string}
  */
-export enum Language {
+enum Language {
   /** English. */
   EN = 'en',
 }
 
-export enum CountryCode {
+enum CountryCode {
   EN = 'en',
 }
 
 const DATE_FORMAT = 'datetime';
 
-export const SUPPORTED_LANGUAGES: string[] = [Language.EN];
-export const resources = {
+const SUPPORTED_LANGUAGES: string[] = [Language.EN];
+const resources = {
   en: {
     translation: {
       ...en,
@@ -33,7 +34,7 @@ export const resources = {
   },
 } as const;
 
-export const DEFAULT_LANGUAGE: keyof typeof resources = Language.EN;
+const DEFAULT_LANGUAGE: keyof typeof resources = Language.EN;
 
 i18n.use(initReactI18next).init({
   lng: DEFAULT_LANGUAGE,
@@ -53,4 +54,6 @@ i18n.use(initReactI18next).init({
   resources,
 });
 
+export { DEFAULT_LANGUAGE, resources, SUPPORTED_LANGUAGES, CountryCode, Language, defaultNS };
+// eslint-disable-next-line import/no-default-export
 export default i18n;

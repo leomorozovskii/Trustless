@@ -1,17 +1,17 @@
 'use client';
 
-import { useMemo } from 'react';
-import Link from 'next/link';
 import cn from 'classnames';
+import Link from 'next/link';
+import { useMemo } from 'react';
 
-import { ClearCross } from '@assets/icons';
-import { AcceptOffer } from '@components/AcceptOffer';
-import { AcceptedOffer } from '@components/AcceptedOffer';
-import { Sidebar } from '@components/Sidebar';
-import { Header } from '@components/Header';
-import AcceptOfferButtons from '@components/AcceptOffer/components/AcceptOfferButtons';
-import { OfferAcceptProvider, useOfferAcceptContext } from '@context/offer/accept/OfferAcceptContext';
-import { OfferProgress } from '@lib/constants';
+import { AcceptedOffer } from '@berezka-dao/features/acceptOffer/components/AcceptedOffer';
+import { AcceptOffer } from '@berezka-dao/features/acceptOffer/components/AcceptOffer';
+import { AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/components/AcceptOfferButtons';
+import { OfferAcceptProvider, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
+import { OfferProgress } from '@berezka-dao/features/createOffer/types';
+import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
+import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { ClearCross } from '@berezka-dao/shared/icons';
 
 import s from './AcceptOffer.module.scss';
 
@@ -24,27 +24,28 @@ const AcceptOfferPageContent = ({ params }: { params: { id: string } }) => {
   }, [activeAcceptStep, params.id]);
 
   return (
-    <Sidebar>
-      <Header />
-      <div className={s.container}>
-        <div className={cn(s.heading, { [s.headingAccepted]: activeAcceptStep === OfferProgress.Created })}>
-          <h2 className={s.label}>{labelText}</h2>
-          {activeAcceptStep === OfferProgress.Created && (
-            <Link href="/">
-              <ClearCross className={s.cross} />
-            </Link>
+    <TabsLayout>
+      <HeaderLayout>
+        <div className={s.container}>
+          <div className={cn(s.heading, { [s.headingAccepted]: activeAcceptStep === OfferProgress.Created })}>
+            <h2 className={s.label}>{labelText}</h2>
+            {activeAcceptStep === OfferProgress.Created && (
+              <Link href="/">
+                <ClearCross className={s.cross} />
+              </Link>
+            )}
+          </div>
+          {activeAcceptStep === OfferProgress.Created ? (
+            <AcceptedOffer />
+          ) : (
+            <>
+              <AcceptOffer />
+              <AcceptOfferButtons />
+            </>
           )}
         </div>
-        {activeAcceptStep === OfferProgress.Created ? (
-          <AcceptedOffer />
-        ) : (
-          <>
-            <AcceptOffer />
-            <AcceptOfferButtons />
-          </>
-        )}
-      </div>
-    </Sidebar>
+      </HeaderLayout>
+    </TabsLayout>
   );
 };
 

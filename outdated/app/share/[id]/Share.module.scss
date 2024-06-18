@@ -1,0 +1,16 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 760px;
+  width: 100%;
+  margin: 18px auto 0;
+  gap: $lg;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 24px;
+}

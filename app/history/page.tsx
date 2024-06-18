@@ -4,12 +4,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
-import { createOffersTemplate } from '@components/Offers';
-import { OfferColumns } from '@components/Offers/types';
-import { Sidebar } from '@components/Sidebar';
-import { Header } from '@components/Header';
-import { NotConnectedMessage } from '@components/NotConnectedMessage';
-import { useIsMounted } from '@lib/hooks/useIsMounted';
+import { createOffersTemplate } from '@berezka-dao/features/displayOffers';
+import { OfferColumns } from '@berezka-dao/features/displayOffers/types';
+import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
+import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { NotConnectedMessage } from '@berezka-dao/shared/components/NotConnectedMessage';
+import { useIsMounted } from '@berezka-dao/shared/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
   filters: ['all', 'accepted', 'cancelled'],
@@ -38,17 +38,17 @@ const HistoryPage: React.FC = () => {
   }
   if (!isConnected) {
     return (
-      <div>
-        <Header />
+      <HeaderLayout>
         <NotConnectedMessage />
-      </div>
+      </HeaderLayout>
     );
   }
   return (
-    <Sidebar contentBg="contrast">
-      <Header />
-      <OffersTemplate title={t('offers.title.history')} />
-    </Sidebar>
+    <TabsLayout>
+      <HeaderLayout>
+        <OffersTemplate title={t('offers.title.history')} />
+      </HeaderLayout>
+    </TabsLayout>
   );
 };
 

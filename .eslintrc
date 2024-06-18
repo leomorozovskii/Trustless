@@ -1,0 +1,236 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/typescript",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
+    "next"
+  ],
+  "rules": {
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/member-ordering": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "import/consistent-type-specifier-style": [
+      "error",
+      "prefer-top-level"
+    ],
+    "import/exports-last": "error",
+    "import/first": "error",
+    "import/group-exports": "error",
+    "import/newline-after-import": "error",
+    "import/no-commonjs": "error",
+    "import/no-cycle": "error",
+    "import/no-deprecated": "warn",
+    "import/no-default-export": "error",
+    "import/no-duplicates": "error",
+    "import/no-empty-named-blocks": "error",
+    "import/no-mutable-exports": "error",
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "basePath": "./src",
+        "zones": [
+          // core
+          {
+            "target": "core",
+            "from": "app/**/*"
+          },
+          {
+            "target": "core",
+            "from": "modules/**/*"
+          },
+          {
+            "target": "core",
+            "from": "layouts/**/*"
+          },
+          {
+            "target": "core",
+            "from": "features/**/*"
+          },
+          {
+            "target": "core",
+            "from": "processes/**/*"
+          },
+          {
+            "target": "core",
+            "from": "services/**/*"
+          },
+          {
+            "target": "core",
+            "from": "shared/**/*"
+          },
+          // shared
+          {
+            "target": "shared",
+            "from": "app/**/*"
+          },
+          {
+            "target": "shared",
+            "from": "modules/**/*"
+          },
+          {
+            "target": "shared",
+            "from": "layouts/**/*"
+          },
+          {
+            "target": "shared",
+            "from": "features/**/*"
+          },
+          {
+            "target": "shared",
+            "from": "processes/**/*"
+          },
+          {
+            "target": "shared",
+            "from": "services/**/*"
+          },
+          // services
+          {
+            "target": "services",
+            "from": "app/**/*"
+          },
+          {
+            "target": "services",
+            "from": "modules/**/*"
+          },
+          {
+            "target": "services",
+            "from": "layouts/**/*"
+          },
+          {
+            "target": "services",
+            "from": "features/**/*"
+          },
+          {
+            "target": "services",
+            "from": "processes/**/*"
+          },
+          // processes
+          {
+            "target": "processes",
+            "from": "app/**/*"
+          },
+          {
+            "target": "processes",
+            "from": "modules/**/*"
+          },
+          {
+            "target": "processes",
+            "from": "layouts/**/*"
+          },
+          {
+            "target": "processes",
+            "from": "features/**/*"
+          },
+          // features
+          {
+            "target": "features",
+            "from": "app/**/*"
+          },
+          {
+            "target": "features",
+            "from": "modules/**/*"
+          },
+          {
+            "target": "features",
+            "from": "layouts/**/*"
+          },
+          // layouts
+          {
+            "target": "layout",
+            "from": "app/**/*"
+          },
+          {
+            "target": "layout",
+            "from": "modules/**/*"
+          },
+          // modules
+          {
+            "target": "modules",
+            "from": "app/**/*"
+          }
+        ]
+      }
+    ],
+    "import/no-self-import": "error",
+    "import/no-unused-modules": "error",
+    "import/no-unassigned-import": [
+      "error",
+      {
+        "allow": [
+          "**/*.css"
+        ]
+      }
+    ],
+    "import/no-useless-path-segments": "error",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "groups": [
+          "external",
+          "internal",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "group": "parent",
+            "pattern": "@ix-digital/**",
+            "position": "before"
+          }
+        ]
+      }
+    ],
+    "@next/next/no-img-element": "off",
+    "react/display-name": "off"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".next",
+    "generated",
+    "*.config.*",
+    "public"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "./app/**/*",
+        "src/**/*.stories.tsx"
+      ],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": [
+        "src/**/index.ts"
+      ],
+      "rules": {
+        "import/no-unused-modules": "off"
+      }
+    }
+  ]
+}

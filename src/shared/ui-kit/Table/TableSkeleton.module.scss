@@ -1,0 +1,21 @@
+.container {
+  display: grid;
+  grid-column: 1 / calc(var(--cols) + 1);
+  grid-template-columns: subgrid;
+  padding: 0 32px;
+}
+
+.row {
+  display: grid;
+  grid-column: 1 / calc(var(--cols) + 1);
+  grid-template-columns: subgrid;
+}
+
+.cell {
+  display: inline-flex;
+  padding: 14px 0;
+}
+
+.selectionCell {
+  width: 24px;
+}
