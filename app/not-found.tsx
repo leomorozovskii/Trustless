@@ -1,8 +1,8 @@
 'use client';
 
-import { HeaderLayout } from '../src/layouts/HeaderLayout';
-import { TabsLayout } from '../src/layouts/TabsLayout';
-import { NotFoundMessage } from '../src/shared/components/NotFoundMessage/NotFoundMessage';
+import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
+import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { NotFoundMessage } from '@berezka-dao/shared/components/NotFoundMessage';
 
 const Page404 = () => {
   return (
