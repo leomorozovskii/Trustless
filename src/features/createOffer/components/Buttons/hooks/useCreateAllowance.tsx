@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import type { Address } from 'viem';
 import { erc20Abi, formatUnits } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
@@ -20,12 +19,14 @@ export const useCreateAllowance = () => {
     data: createOfferAllowance,
     isLoading: isGettingAllowance,
     refetch: refetchAllowance,
-  } = useReadContract({
-    address: tokenFromAddress,
-    abi: erc20Abi,
-    functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress],
-  });
+  } = useReadContract(
+    userAddress && {
+      address: tokenFromAddress,
+      abi: erc20Abi,
+      functionName: 'allowance',
+      args: [userAddress, environment.contractAddress],
+    },
+  );
 
   useEffect(() => {
     if (isGettingAllowance) return;

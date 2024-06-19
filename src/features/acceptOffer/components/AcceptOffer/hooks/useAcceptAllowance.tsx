@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import type { Address } from 'viem';
 import { erc20Abi } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
@@ -18,12 +17,14 @@ export const useAcceptAllowance = () => {
     data: acceptOfferAllowance,
     isLoading: isGettingAllowance,
     refetch: refetchAllowance,
-  } = useReadContract({
-    address: tokenTo,
-    abi: erc20Abi,
-    functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress],
-  });
+  } = useReadContract(
+    userAddress && {
+      address: tokenTo,
+      abi: erc20Abi,
+      functionName: 'allowance',
+      args: [userAddress, environment.contractAddress],
+    },
+  );
 
   const [isSufficient, setIsSufficient] = useState<boolean | null>(null);
 
