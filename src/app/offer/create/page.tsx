@@ -1,7 +1,8 @@
 'use client';
 
 import cn from 'classnames';
-import React, { Suspense } from 'react';
+import type { FC } from 'react';
+import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { OfferButtons } from '@berezka-dao/features/createOffer/components/Buttons';
@@ -19,7 +20,7 @@ import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
 
 import s from './CreateOffer.module.scss';
 
-const CreateOfferPageContent: React.FC = () => {
+const CreateOfferPageContent: FC = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
   const { offerId, activeOfferStep, activeStep, setActiveOfferStep } = useOfferCreateContext();
@@ -56,7 +57,7 @@ const CreateOfferPageContent: React.FC = () => {
   );
 };
 
-const CreateOfferPage: React.FC = () => (
+const CreateOfferPage: FC = () => (
   <OfferCreateProvider>
     <CreateOfferPageContent />
   </OfferCreateProvider>

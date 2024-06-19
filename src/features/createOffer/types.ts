@@ -1,4 +1,4 @@
-import type React from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import type { Address } from 'viem';
 
 interface IToken {
@@ -25,14 +25,14 @@ interface IOfferCreateValues {
   customTokenName: string;
   inputsDisabled: boolean;
   userTokens: ITokensReducer;
-  setUserTokens: React.Dispatch<Partial<ITokensReducer>>;
-  setInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
-  setCustomTokenName: React.Dispatch<React.SetStateAction<string>>;
-  setOfferId: React.Dispatch<React.SetStateAction<number | null>>;
-  setOfferFromState: React.Dispatch<Partial<IOfferFrom>>;
-  setOfferToState: React.Dispatch<Partial<IOfferTo>>;
-  setActiveOfferStep: React.Dispatch<React.SetStateAction<number>>;
-  setActiveStep: React.Dispatch<React.SetStateAction<OfferProgress>>;
+  setUserTokens: Dispatch<Partial<ITokensReducer>>;
+  setInputsDisabled: Dispatch<SetStateAction<boolean>>;
+  setCustomTokenName: Dispatch<SetStateAction<string>>;
+  setOfferId: Dispatch<SetStateAction<number | null>>;
+  setOfferFromState: Dispatch<Partial<IOfferFrom>>;
+  setOfferToState: Dispatch<Partial<IOfferTo>>;
+  setActiveOfferStep: Dispatch<SetStateAction<number>>;
+  setActiveStep: Dispatch<SetStateAction<OfferProgress>>;
 }
 
 interface IOfferFrom {

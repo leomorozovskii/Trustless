@@ -1,4 +1,5 @@
-import React, { useMemo, useRef, useState } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
@@ -16,12 +17,12 @@ import s from './SelectTokenPopup.module.scss';
 import type { IToken } from './types';
 
 interface ISelectTokenPopup {
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpened: Dispatch<SetStateAction<boolean>>;
   type?: 'from' | 'to' | 'default';
   handleSelectToken(tokenAddress: string): void;
 }
 
-const SelectTokenPopup: React.FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken, type = 'default' }) => {
+const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken, type = 'default' }) => {
   const { t } = useTranslation();
   const { userTokens } = useOfferCreateContext();
 

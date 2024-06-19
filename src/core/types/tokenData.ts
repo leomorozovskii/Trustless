@@ -1,4 +1,4 @@
-import type React from 'react';
+import type { ComponentProps, FC } from 'react';
 import type { Address } from 'viem';
 
 // eslint-disable-next-line import/no-restricted-paths
@@ -7,7 +7,7 @@ import type { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 interface TokenData {
   address: Address;
   name: string;
-  logo: React.FC<React.ComponentProps<typeof UnknownIcon>>;
+  logo: FC<ComponentProps<typeof UnknownIcon>>;
   decimals: number;
 }
 

@@ -1,7 +1,6 @@
 'use client';
 
 import cn from 'classnames';
-import React from 'react';
 
 import { TableBody } from './components/TableBody';
 import { TableCell } from './components/TableCell';

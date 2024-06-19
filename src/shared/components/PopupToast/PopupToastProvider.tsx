@@ -1,12 +1,12 @@
-import type { PropsWithChildren } from 'react';
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import type { FC, PropsWithChildren } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 import { PopupToast } from './PopupToast';
 import type { IToastifyItem, IToastifyValues } from './types';
 
 const ToastifyContext = createContext<IToastifyValues | undefined>(undefined);
 
-const ToastifyProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const ToastifyProvider: FC<PropsWithChildren> = ({ children }) => {
   const [items, setItems] = useState<IToastifyItem[]>([]);
 
   const handleAddItem = useCallback((item: Omit<IToastifyItem, 'id'>) => {

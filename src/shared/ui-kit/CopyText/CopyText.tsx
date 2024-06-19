@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
@@ -10,10 +11,10 @@ import s from './CopyText.module.scss';
 type Props = {
   text: string;
   successMessage: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
-const CopyText: React.FC<Props> = ({ text, successMessage, children = <CopyIcon /> }) => {
+const CopyText: FC<Props> = ({ text, successMessage, children = <CopyIcon /> }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const handleCopy = async () => {

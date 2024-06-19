@@ -1,4 +1,5 @@
-import React from 'react';
+import type { FC } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface FormattedNumberProps {
@@ -12,7 +13,7 @@ interface FormattedNumberProps {
   formatValue?: (value: string) => string;
 }
 
-const FormattedNumber: React.FC<FormattedNumberProps> = ({
+const FormattedNumber: FC<FormattedNumberProps> = ({
   value,
   minimumFractionDigits = 2,
   maximumFractionDigits = 2,
@@ -24,7 +25,7 @@ const FormattedNumber: React.FC<FormattedNumberProps> = ({
 }) => {
   const { i18n } = useTranslation(undefined, { useSuspense: false });
 
-  const formatter = React.useMemo(
+  const formatter = useMemo(
     () =>
       new Intl.NumberFormat(i18n.language, {
         minimumFractionDigits,

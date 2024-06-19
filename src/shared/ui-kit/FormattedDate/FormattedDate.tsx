@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 
 import { formatCustomDate } from '@berezka-dao/shared/utils/handleDate';
 
@@ -6,7 +6,7 @@ type FormattedDateProps = {
   date: string | Date;
 };
 
-const FormattedDate: React.FC<FormattedDateProps> = ({ date }) => {
+const FormattedDate: FC<FormattedDateProps> = ({ date }) => {
   const parsedDate = new Date(date);
 
   if (Number.isNaN(parsedDate.getTime())) {

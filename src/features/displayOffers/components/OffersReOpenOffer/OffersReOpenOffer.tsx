@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { OfferTrade } from '@berezka-dao/features/displayOffers/types';
@@ -11,7 +12,7 @@ type OfferReOpenOfferProps = {
   offer: OfferTrade | null;
 };
 
-const OfferReOpenOffer: React.FC<OfferReOpenOfferProps> = ({ offer }) => {
+const OfferReOpenOffer: FC<OfferReOpenOfferProps> = ({ offer }) => {
   const { t } = useTranslation();
   const getReOpenOfferUrl = () => {
     const searchParams = new URLSearchParams();

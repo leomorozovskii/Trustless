@@ -4,7 +4,7 @@
 import '../styles/globals.scss';
 
 import { Inter } from 'next/font/google';
-import * as React from 'react';
+import type { ReactNode } from 'react';
 import '@rainbow-me/rainbowkit/styles.css';
 import '@radix-ui/themes/styles.css';
 
@@ -20,7 +20,7 @@ const inter = Inter({
 const RootLayout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) => {
   return (
     <html lang="en">

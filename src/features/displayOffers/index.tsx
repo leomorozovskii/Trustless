@@ -1,5 +1,7 @@
 'use client';
 
+import type { FC } from 'react';
+
 import s from './OffersTemplate.module.scss';
 import { createUseOffersStore } from './store';
 import type { OfferFilter, OfferSorting } from './types';
@@ -44,7 +46,7 @@ export const createOffersTemplate = ({
   });
   const OffersView = createOffersView(useOffersStore, { columnsToDisplay });
 
-  const actionsMap: Record<OffersTemplateActions, React.FC> = {
+  const actionsMap: Record<OffersTemplateActions, FC> = {
     cancel: OffersView.CancelSelectedOrder,
     search: OffersView.SearchFilter,
     're-open': OffersView.ReOpenOrder,

@@ -1,6 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from 'next/image';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AccountIcon } from '@berezka-dao/shared/icons';

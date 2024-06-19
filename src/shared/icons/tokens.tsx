@@ -1,5 +1,4 @@
-import type { SyntheticEvent } from 'react';
-import React from 'react';
+import type { FC, SyntheticEvent } from 'react';
 
 type IconProps = {
   onClick?: (evt?: SyntheticEvent) => void;
@@ -14,7 +13,7 @@ type IconProps = {
   role?: string;
 };
 
-const UnknownIcon: React.FC<IconProps> = (props) => {
+const UnknownIcon: FC<IconProps> = (props) => {
   return (
     <svg
       width="20"
@@ -46,7 +45,7 @@ const UnknownIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const UsdcIcon: React.FC<IconProps> = (props) => {
+const UsdcIcon: FC<IconProps> = (props) => {
   return (
     <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -80,7 +79,7 @@ const UsdcIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const UsdtIcon: React.FC<IconProps> = (props) => {
+const UsdtIcon: FC<IconProps> = (props) => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -103,7 +102,7 @@ const UsdtIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const StETHIcon: React.FC<IconProps> = (props) => {
+const StETHIcon: FC<IconProps> = (props) => {
   return (
     <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10" fill="url(#paint0_linear_62_5883)" />
@@ -172,7 +171,7 @@ const StETHIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ShibIcon: React.FC<IconProps> = (props) => {
+const ShibIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +198,7 @@ const ShibIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const XrpIcon: React.FC<IconProps> = (props) => {
+const XrpIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +225,7 @@ const XrpIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ToncoinIcon: React.FC<IconProps> = (props) => {
+const ToncoinIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +252,7 @@ const ToncoinIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const WethIcon: React.FC<IconProps> = (props) => {
+const WethIcon: FC<IconProps> = (props) => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <ellipse cx="9.0115" cy="9.30219" rx="9.0115" ry="9.30219" fill="black" />
@@ -278,7 +277,7 @@ const WethIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const WbtcIcon: React.FC<IconProps> = (props) => {
+const WbtcIcon: FC<IconProps> = (props) => {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle cx="11" cy="11" r="10" fill="white" stroke="#BDBDBD" />
@@ -305,7 +304,7 @@ const WbtcIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const LinkIcon: React.FC<IconProps> = (props) => {
+const LinkIcon: FC<IconProps> = (props) => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -324,7 +323,7 @@ const LinkIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const UniIcon: React.FC<IconProps> = (props) => {
+const UniIcon: FC<IconProps> = (props) => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -410,7 +409,7 @@ const UniIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const NearIcon: React.FC<IconProps> = (props) => {
+const NearIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -437,7 +436,7 @@ const NearIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const WeethIcon: React.FC<IconProps> = (props) => {
+const WeethIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -464,7 +463,7 @@ const WeethIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const LeoIcon: React.FC<IconProps> = (props) => {
+const LeoIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -491,7 +490,7 @@ const LeoIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const PepeIcon: React.FC<IconProps> = (props) => {
+const PepeIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -519,7 +518,7 @@ const PepeIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const DaiIcon: React.FC<IconProps> = (props) => {
+const DaiIcon: FC<IconProps> = (props) => {
   return (
     <svg {...props} width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -549,7 +548,7 @@ const DaiIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const BnbIcon: React.FC<IconProps> = (props) => {
+const BnbIcon: FC<IconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

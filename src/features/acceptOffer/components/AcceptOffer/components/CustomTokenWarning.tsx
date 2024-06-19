@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import type { FC } from 'react';
 
 import { links } from '@berezka-dao/core/constants';
 import { NewWindowIcon, WarningIcon } from '@berezka-dao/shared/icons';
@@ -11,7 +11,7 @@ interface ICustomTokenWarning {
   address: string;
 }
 
-const CustomTokenWarning: React.FC<ICustomTokenWarning> = ({ name, address }) => {
+const CustomTokenWarning: FC<ICustomTokenWarning> = ({ name, address }) => {
   return (
     <div className={s.warnContainer}>
       <div className={s.warning}>

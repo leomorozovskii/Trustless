@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import type { Address } from 'viem';
 
 import { AcceptOfferIcon } from '@berezka-dao/shared/icons';
@@ -9,7 +9,7 @@ type ReceiverContainerProps = {
   receiver: Address;
 };
 
-const ReceiverContainer: React.FC<ReceiverContainerProps> = ({ receiver }) => {
+const ReceiverContainer: FC<ReceiverContainerProps> = ({ receiver }) => {
   return (
     <div className={s.arrowContainer}>
       <AcceptOfferIcon />

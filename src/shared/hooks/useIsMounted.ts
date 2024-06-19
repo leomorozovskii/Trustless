@@ -1,14 +1,15 @@
-import React from 'react';
+import type { FC, PropsWithChildren } from 'react';
+import { useEffect } from 'react';
 
 import { useGlobalStore } from '@berezka-dao/core/store';
 
-const IsMountedProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+const IsMountedProvider: FC<PropsWithChildren> = ({ children }) => {
   const { isMounted, mount } = useGlobalStore((state) => ({
     isMounted: state.isMounted,
     mount: state.mount,
   }));
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isMounted) mount();
   }, [isMounted, mount]);
 

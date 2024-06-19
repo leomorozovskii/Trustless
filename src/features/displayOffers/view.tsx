@@ -1,6 +1,4 @@
 'use client';
-
-import React from 'react';
 import type { Mutate, StoreApi, UseBoundStore } from 'zustand';
 
 import { OffersCancelOffer } from './components/OffersCancelOffer/OffersCancelOffer';

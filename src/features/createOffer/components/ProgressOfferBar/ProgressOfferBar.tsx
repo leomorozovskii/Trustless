@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import type { FC } from 'react';
+import { useMemo } from 'react';
 
 import { CheckmarkIcon } from '@berezka-dao/shared/icons';
 
@@ -9,7 +10,7 @@ type ProgressOfferBarProps = {
   steps: string[];
 };
 
-const ProgressOfferBar: React.FC<ProgressOfferBarProps> = ({ currentStep, steps }) => {
+const ProgressOfferBar: FC<ProgressOfferBarProps> = ({ currentStep, steps }) => {
   const isComplete = useMemo(() => {
     return currentStep === steps.length + 1;
   }, [currentStep, steps]);

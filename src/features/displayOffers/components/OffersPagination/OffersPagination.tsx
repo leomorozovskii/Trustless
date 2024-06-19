@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PaginationArrowLeftIcon, PaginationArrowRightIcon } from '@berezka-dao/shared/icons';
@@ -17,7 +17,7 @@ type OffersPaginationProps = {
   onPrevPage: () => void;
 };
 
-const OffersPagination: React.FC<OffersPaginationProps> = ({
+const OffersPagination: FC<OffersPaginationProps> = ({
   offset,
   limit,
   total = 0,

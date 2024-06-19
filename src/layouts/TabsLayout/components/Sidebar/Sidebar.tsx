@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import type { FC, PropsWithChildren } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -9,11 +10,11 @@ import { ButtonPlus, HistoryIcon, OfferIcon } from '@berezka-dao/shared/icons';
 import s from './Sidebar.module.scss';
 import { MenuTab } from '../MenuTab';
 
-type SidebarProps = React.PropsWithChildren<{
+type SidebarProps = PropsWithChildren<{
   contentBg?: 'contrast' | 'default';
 }>;
 
-const Sidebar: React.FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
+const Sidebar: FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
   const { t } = useTranslation();
   const pathname = usePathname();
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { AddCustomToken } from '@berezka-dao/features/createOffer/components/AddCustomToken';
 import { checkValidAmount } from '@berezka-dao/features/createOffer/components/Buttons/utils';

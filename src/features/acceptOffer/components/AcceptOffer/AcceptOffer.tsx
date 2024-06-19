@@ -2,7 +2,7 @@
 
 import { Skeleton } from '@radix-ui/themes';
 import cn from 'classnames';
-import React from 'react';
+import type { FC } from 'react';
 
 import s from './AcceptOffer.module.scss';
 import { CustomTokenWarning } from './components/CustomTokenWarning';
@@ -13,7 +13,7 @@ import { useTokenInfo } from './hooks/useTokenInfo';
 import { isEmptyAddress } from './utils/isEmptyAddress';
 import { useOfferAcceptContext } from '../../store';
 
-const AcceptOffer: React.FC = () => {
+const AcceptOffer: FC = () => {
   const { acceptId } = useOfferAcceptContext();
   const { isTokenFromCustom, tokenFrom, isLoading, receiver } = useGetOfferDetails({ id: acceptId });
   const { tokenName } = useTokenInfo({ address: tokenFrom });

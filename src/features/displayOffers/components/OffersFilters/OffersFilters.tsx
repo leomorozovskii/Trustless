@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TabsSkeleton, Tabs } from '@berezka-dao/shared/ui-kit/Tabs';
@@ -15,7 +15,7 @@ type OffersFiltersProps = {
   onValueChange: (value: OfferFilter) => void;
 };
 
-const OffersFilters: React.FC<OffersFiltersProps> = ({ filters, value, offersStats, isLoading, onValueChange }) => {
+const OffersFilters: FC<OffersFiltersProps> = ({ filters, value, offersStats, isLoading, onValueChange }) => {
   const { t } = useTranslation();
   if (isLoading) {
     <TabsSkeleton count={filters.length} />;

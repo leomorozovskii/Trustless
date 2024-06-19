@@ -1,4 +1,5 @@
 import type { Table, RowData } from '@tanstack/react-table';
+import type { ReactNode } from 'react';
 
 declare module '@tanstack/table-core' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,6 +20,6 @@ export interface TableProps<TData> {
   subtitle?: string;
   showHeader?: boolean;
   isLoading?: boolean;
-  emptyState?: React.ReactNode;
+  emptyState?: ReactNode;
   disableRowSelection?: boolean;
 }

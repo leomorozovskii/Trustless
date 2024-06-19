@@ -1,6 +1,8 @@
+import type { FC, PropsWithChildren } from 'react';
+
 import { Header } from './components/Header';
 
-const HeaderLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
+const HeaderLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Header />

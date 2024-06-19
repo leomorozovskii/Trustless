@@ -1,5 +1,4 @@
-import type { SyntheticEvent } from 'react';
-import React from 'react';
+import type { FC, SyntheticEvent } from 'react';
 
 type IconProps = {
   onClick?: (evt?: SyntheticEvent) => void;
@@ -14,7 +13,7 @@ type IconProps = {
   role?: string;
 };
 
-const OfferIcon: React.FC<IconProps> = (props) => {
+const OfferIcon: FC<IconProps> = (props) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -27,7 +26,7 @@ const OfferIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const AcceptOfferIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const AcceptOfferIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +49,7 @@ const AcceptOfferIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const SuccessAcceptIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const SuccessAcceptIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +66,7 @@ const SuccessAcceptIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const InfoIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const InfoIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +87,7 @@ const InfoIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const SmallArrow: React.FC<IconProps> = ({ className, ...props }) => {
+const SmallArrow: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +106,7 @@ const SmallArrow: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const ClearCross: React.FC<IconProps> = ({ className, ...props }) => {
+const ClearCross: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +123,7 @@ const ClearCross: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const SelectIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const SelectIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +145,7 @@ const SelectIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const HistoryIcon: React.FC<IconProps> = (props) => {
+const HistoryIcon: FC<IconProps> = (props) => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -161,7 +160,7 @@ const HistoryIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const InputCross: React.FC<IconProps> = ({ className, ...props }) => {
+const InputCross: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +177,7 @@ const InputCross: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const InputError: React.FC<IconProps> = ({ className, ...props }) => {
+const InputError: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       width="16"
@@ -199,7 +198,7 @@ const InputError: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const InputSearch: React.FC<IconProps> = ({ className, ...props }) => {
+const InputSearch: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +215,7 @@ const InputSearch: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const CheckboxCheck: React.FC<IconProps> = ({ className, ...props }) => {
+const CheckboxCheck: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +231,7 @@ const CheckboxCheck: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const ButtonPlus: React.FC<IconProps> = ({ className, ...props }) => {
+const ButtonPlus: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +248,7 @@ const ButtonPlus: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const CopyIcon: React.FC<IconProps> = (props) => {
+const CopyIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -260,7 +259,7 @@ const CopyIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const DayIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const DayIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +280,7 @@ const DayIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const NightIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const NightIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -302,7 +301,7 @@ const NightIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const NewWindowIcon: React.FC<IconProps> = (props) => {
+const NewWindowIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect opacity="0.01" width="16" height="16" fill="black" />
@@ -321,7 +320,7 @@ const NewWindowIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ShareIcon: React.FC<IconProps> = (props) => {
+const ShareIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect opacity="0.01" width="16" height="16" fill="white" />
@@ -335,7 +334,7 @@ const ShareIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const SortingIcon: React.FC<IconProps> = (props) => {
+const SortingIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -346,7 +345,7 @@ const SortingIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const SearchIcon: React.FC<IconProps> = (props) => {
+const SearchIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle cx="7" cy="7" r="4.25" stroke="black" strokeWidth="1.5" />
@@ -355,7 +354,7 @@ const SearchIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const CheckmarkIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const CheckmarkIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -377,7 +376,7 @@ const CheckmarkIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const CloseIcon: React.FC<IconProps> = (props) => {
+const CloseIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M4 4L12 12" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -386,7 +385,7 @@ const CloseIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ArrowRightIcon: React.FC<IconProps> = (props) => {
+const ArrowRightIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M2 8H13.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -395,7 +394,7 @@ const ArrowRightIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ArrowDownIcon: React.FC<IconProps> = (props) => {
+const ArrowDownIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -409,7 +408,7 @@ const ArrowDownIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const AccountIcon: React.FC<IconProps> = ({ className, ...props }) => {
+const AccountIcon: FC<IconProps> = ({ className, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -437,7 +436,7 @@ const AccountIcon: React.FC<IconProps> = ({ className, ...props }) => {
   );
 };
 
-const ArrowUpIcon: React.FC<IconProps> = (props) => {
+const ArrowUpIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -451,7 +450,7 @@ const ArrowUpIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ArrowRightBoldIcon: React.FC<IconProps> = (props) => {
+const ArrowRightBoldIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M2 8H13.5" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -460,7 +459,7 @@ const ArrowRightBoldIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const GasIcon: React.FC<IconProps> = (props) => {
+const GasIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -471,7 +470,7 @@ const GasIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const CheckIcon: React.FC<IconProps> = (props) => {
+const CheckIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -485,7 +484,7 @@ const CheckIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const PlusIcon: React.FC<IconProps> = (props) => {
+const PlusIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M8 3.5V12.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" />
@@ -494,7 +493,7 @@ const PlusIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const ErrorIcon: React.FC<IconProps> = (props) => {
+const ErrorIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -507,7 +506,7 @@ const ErrorIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const WarningIcon: React.FC<IconProps> = ({ width, height, ...props }) => {
+const WarningIcon: FC<IconProps> = ({ width, height, ...props }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -518,7 +517,7 @@ const WarningIcon: React.FC<IconProps> = ({ width, height, ...props }) => {
   );
 };
 
-const QrUknownTokenIcon: React.FC<IconProps> = (props) => {
+const QrUknownTokenIcon: FC<IconProps> = (props) => {
   return (
     <svg
       width="16"
@@ -551,7 +550,7 @@ const QrUknownTokenIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const PaginationArrowRightIcon: React.FC<IconProps> = (props) => {
+const PaginationArrowRightIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g id="icon_right">
@@ -568,7 +567,7 @@ const PaginationArrowRightIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const PaginationArrowLeftIcon: React.FC<IconProps> = (props) => {
+const PaginationArrowLeftIcon: FC<IconProps> = (props) => {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g id="icon_left">
@@ -585,7 +584,7 @@ const PaginationArrowLeftIcon: React.FC<IconProps> = (props) => {
   );
 };
 
-const EtherscanIcon: React.FC<IconProps> = (props) => {
+const EtherscanIcon: FC<IconProps> = (props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none" {...props}>
       <path

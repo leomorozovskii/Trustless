@@ -1,11 +1,12 @@
 import cn from 'classnames';
 import Link from 'next/link';
-import React, { useMemo } from 'react';
+import type { FC, HTMLAttributes, ReactNode } from 'react';
+import { isValidElement, useMemo } from 'react';
 
 import s from './Button.module.scss';
 
-interface ButtonLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  children: React.ReactNode;
+interface ButtonLinkProps extends HTMLAttributes<HTMLAnchorElement> {
+  children: ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'ghost';
   onClick?: () => void;
@@ -14,7 +15,7 @@ interface ButtonLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   disabled?: boolean;
 }
 
-const ButtonLink: React.FC<ButtonLinkProps> = ({
+const ButtonLink: FC<ButtonLinkProps> = ({
   children,
   variant = 'primary',
   type = 'button',
@@ -25,7 +26,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   ...props
 }) => {
   const isIcon = useMemo(() => {
-    return React.isValidElement(children) && children.type === 'svg';
+    return isValidElement(children) && children.type === 'svg';
   }, [children]);
 
   return (

@@ -1,13 +1,13 @@
 'use client';
 
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
-import React from 'react';
+import type { FC, HTMLAttributes } from 'react';
 
 import { CheckboxCheck } from '@berezka-dao/shared/icons';
 
 import s from './Checkbox.module.scss';
 
-type CheckboxProps = React.HTMLAttributes<HTMLInputElement> & {
+type CheckboxProps = HTMLAttributes<HTMLInputElement> & {
   label?: string;
   checked?: boolean;
   defaultChecked?: boolean;
@@ -15,7 +15,7 @@ type CheckboxProps = React.HTMLAttributes<HTMLInputElement> & {
   onCheckedChange?: (checked: boolean) => void;
 };
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, checked, defaultChecked, onCheckedChange, disabled, ...props }) => {
+const Checkbox: FC<CheckboxProps> = ({ label, checked, defaultChecked, onCheckedChange, disabled, ...props }) => {
   return (
     <div className={s.wrapper}>
       <RadixCheckbox.Root

@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 import { CancelOffer } from '@berezka-dao/features/cancelOffer';
 import { CancelInfo } from '@berezka-dao/features/cancelOffer/components/CancelInfo/CancelInfo';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';

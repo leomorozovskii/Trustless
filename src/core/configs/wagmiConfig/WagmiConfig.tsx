@@ -7,7 +7,7 @@ import {
   rainbowWallet,
   coinbaseWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import React from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import type { Chain } from 'wagmi/chains';
 import { mainnet, sepolia, arbitrum } from 'wagmi/chains';
@@ -60,7 +60,7 @@ const wagmiConfig = createConfig({
   ssr: true,
 });
 
-const WagmiConfigProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+const WagmiConfigProvider: FC<PropsWithChildren> = ({ children }) => {
   return <WagmiProvider config={wagmiConfig}>{children}</WagmiProvider>;
 };
 

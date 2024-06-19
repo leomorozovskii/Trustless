@@ -1,26 +1,25 @@
 import { TextField } from '@radix-ui/themes';
 import cn from 'classnames';
-import type { HTMLAttributes } from 'react';
-import React from 'react';
+import type { ChangeEvent, FC, HTMLAttributes, ReactNode } from 'react';
 
 import s from './Input.module.scss';
 
 interface IInput extends HTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: 'number' | 'text';
   classWrapper?: string;
   classInput?: string;
   error?: string;
-  subtext?: string | React.ReactNode;
+  subtext?: string | ReactNode;
   disabled?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  icon?: React.ReactNode;
-  label?: string | React.ReactNode;
+  icon?: ReactNode;
+  label?: string | ReactNode;
 }
 
-const Input: React.FC<IInput> = ({
+const Input: FC<IInput> = ({
   type = 'text',
   size = 'md',
   placeholder = '',

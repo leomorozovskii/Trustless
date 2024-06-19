@@ -1,24 +1,18 @@
 import cn from 'classnames';
+import type { FC, ReactNode } from 'react';
 
 import s from './OffersTableCell.module.scss';
 
 type OffersTableCellProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   full?: boolean;
   uppercase?: boolean;
   column?: boolean;
-  secondaryText?: React.ReactNode;
+  secondaryText?: ReactNode;
   small?: boolean;
 };
 
-const OffersTableCell: React.FC<OffersTableCellProps> = ({
-  children,
-  full,
-  uppercase,
-  column,
-  secondaryText,
-  small,
-}) => {
+const OffersTableCell: FC<OffersTableCellProps> = ({ children, full, uppercase, column, secondaryText, small }) => {
   return (
     <span
       className={cn(s.cell, {

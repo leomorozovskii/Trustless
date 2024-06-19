@@ -1,12 +1,12 @@
 import cn from 'classnames';
-import React from 'react';
+import type { FC } from 'react';
 
 import { DayIcon, NightIcon } from '@berezka-dao/shared/icons';
 
 import { useTheme } from './ThemeProvider';
 import s from './ThemeSwitcher.module.scss';
 
-const ThemeSwitcher: React.FC = () => {
+const ThemeSwitcher: FC = () => {
   const { toggleTheme } = useTheme();
 
   return (

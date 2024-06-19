@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { environment } from '@berezka-dao/core/environment';
@@ -11,10 +12,10 @@ import s from './ShareOfferContainer.module.scss';
 
 interface IShareOfferContainer {
   offerId: number | null | string;
-  setActiveOfferStep?: React.Dispatch<React.SetStateAction<number>>;
+  setActiveOfferStep?: Dispatch<SetStateAction<number>>;
 }
 
-const ShareOfferContainer: React.FC<IShareOfferContainer> = ({ offerId, setActiveOfferStep }) => {
+const ShareOfferContainer: FC<IShareOfferContainer> = ({ offerId, setActiveOfferStep }) => {
   const { t } = useTranslation();
   const [copied, setCopied] = useState<boolean>(false);
   const { handleAddItem } = useToastifyContext();

@@ -1,19 +1,19 @@
 import cn from 'classnames';
 import type { LinkProps as NextLinkProps } from 'next/link';
 import NextLink from 'next/link';
-import React from 'react';
+import type { FC, HTMLAttributes, ReactNode } from 'react';
 
 import s from './Link.module.scss';
 
 type LinkProps = NextLinkProps &
-  React.HTMLAttributes<HTMLAnchorElement> & {
+  HTMLAttributes<HTMLAnchorElement> & {
     className?: string;
 
-    children: React.ReactNode;
+    children: ReactNode;
     variant?: 'default' | 'underline';
   };
 
-const Link: React.FC<LinkProps> = ({ children, className, variant = 'default', ...rest }) => {
+const Link: FC<LinkProps> = ({ children, className, variant = 'default', ...rest }) => {
   return (
     <NextLink
       {...rest}

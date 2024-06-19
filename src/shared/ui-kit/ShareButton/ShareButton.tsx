@@ -1,5 +1,6 @@
 'use client';
 
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ShareIcon } from '@berezka-dao/shared/icons';
@@ -11,7 +12,7 @@ type ShareButtonProps = {
   title: string;
 };
 
-const ShareButton: React.FC<ShareButtonProps> = ({ url, title }) => {
+const ShareButton: FC<ShareButtonProps> = ({ url, title }) => {
   const { t } = useTranslation();
   const handleClick = () => {
     window.navigator.share({ title, url });

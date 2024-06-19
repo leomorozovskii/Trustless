@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import i18n from '@berezka-dao/../i18n';
@@ -8,7 +8,7 @@ import { ConnectWalletProvider } from '@berezka-dao/shared/components/ConnectWal
 import { ToastifyProvider } from '@berezka-dao/shared/components/PopupToast';
 import { IsMountedProvider } from '@berezka-dao/shared/hooks/useIsMounted';
 
-const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
+const Providers: FC<PropsWithChildren> = ({ children }) => {
   return (
     <WagmiConfigProvider>
       <QueryClientProvider>
