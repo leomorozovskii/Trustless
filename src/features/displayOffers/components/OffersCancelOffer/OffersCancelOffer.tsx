@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ButtonLink } from '@berezka-dao/shared/ui-kit/Button';
@@ -11,7 +11,7 @@ type OffersCancelOfferProps = {
   offerId: string | null;
 };
 
-const OffersCancelOffer: React.FC<OffersCancelOfferProps> = ({ offerId }) => {
+const OffersCancelOffer: FC<OffersCancelOfferProps> = ({ offerId }) => {
   const { t } = useTranslation();
   return (
     <ButtonLink href={`/offer/cancel/${offerId}`} className={s.container} disabled={!offerId}>

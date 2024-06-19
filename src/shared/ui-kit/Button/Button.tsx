@@ -1,10 +1,11 @@
 import cn from 'classnames';
-import React, { useMemo } from 'react';
+import type { FC, HTMLAttributes, ReactNode } from 'react';
+import { isValidElement, useMemo } from 'react';
 
 import s from './Button.module.scss';
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
@@ -13,7 +14,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button: FC<ButtonProps> = ({
   children,
   variant = 'primary',
   type = 'button',
@@ -25,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const isIcon = useMemo(() => {
-    return React.isValidElement(children) && children.type === 'svg';
+    return isValidElement(children) && children.type === 'svg';
   }, [children]);
 
   return (

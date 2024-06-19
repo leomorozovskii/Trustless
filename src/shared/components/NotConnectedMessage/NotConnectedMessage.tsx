@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import pic_login from '@public/images/pic_login.png';
@@ -7,7 +8,7 @@ import { ConnectWallet } from '@berezka-dao/shared/components/ConnectWallet';
 
 import s from './NotConnectedMessage.module.scss';
 
-const NotConnectedMessage: React.FC = () => {
+const NotConnectedMessage: FC = () => {
   const { t } = useTranslation();
   return (
     <div className={s.container}>

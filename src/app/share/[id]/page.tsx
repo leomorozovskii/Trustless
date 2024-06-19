@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 import { ShareOfferContainer } from '@berezka-dao/features/shareOffer/components/ShareOfferContainer';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';

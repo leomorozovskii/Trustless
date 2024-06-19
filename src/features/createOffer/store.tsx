@@ -1,12 +1,12 @@
-import type { PropsWithChildren } from 'react';
-import React, { createContext, useContext, useMemo, useReducer, useState } from 'react';
+import type { FC, PropsWithChildren } from 'react';
+import { createContext, useContext, useMemo, useReducer, useState } from 'react';
 
 import { OfferProgress } from './types';
 import type { IOfferFrom, IOfferTo, IOfferCreateValues, ITokensReducer } from './types';
 
 const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
 
-const OfferCreateProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   const [offerFromState, setOfferFromState] = useReducer(
     (oldState: IOfferFrom, newState: Partial<IOfferFrom>): IOfferFrom => ({
       ...oldState,

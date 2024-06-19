@@ -1,7 +1,9 @@
+import type { FC } from 'react';
+
 import s from './NotFoundMessage.module.scss';
 import { ButtonLink } from '../../ui-kit/Button';
 
-const NotFoundMessage: React.FC = () => {
+const NotFoundMessage: FC = () => {
   return (
     <div className={s.container}>
       <h1 className={s.title}>404</h1>

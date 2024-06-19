@@ -1,10 +1,11 @@
 'use client';
 
 import { RainbowKitProvider, darkTheme, lightTheme } from '@rainbow-me/rainbowkit';
+import type { FC, PropsWithChildren } from 'react';
 
 import { useTheme } from '../ThemeSwitcher';
 
-const ConnectWalletProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+const ConnectWalletProvider: FC<PropsWithChildren> = ({ children }) => {
   const { theme } = useTheme();
   return (
     <RainbowKitProvider modalSize="compact" theme={theme === 'light' ? lightTheme() : darkTheme()}>

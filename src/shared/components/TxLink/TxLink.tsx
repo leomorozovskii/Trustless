@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import type { Hash } from 'viem';
 
 import { links } from '@berezka-dao/core/constants';
@@ -9,7 +10,7 @@ type TxLinkProps = {
   hash: Hash;
 };
 
-const TxLink: React.FC<TxLinkProps> = ({ hash }) => {
+const TxLink: FC<TxLinkProps> = ({ hash }) => {
   return (
     <a
       aria-label="Transaction hash"

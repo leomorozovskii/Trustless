@@ -2,20 +2,20 @@
 
 import cn from 'classnames';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { Link } from '@berezka-dao/shared/ui-kit/Link';
 
 import s from './MenuTab.module.scss';
 
-type MenuTabProps = React.PropsWithChildren<{
-  icon: React.ReactNode;
+type MenuTabProps = PropsWithChildren<{
+  icon: ReactNode;
   active?: boolean;
   disabled?: boolean;
   href: string;
 }>;
 
-const MenuTab: React.FC<MenuTabProps> = ({ children, icon, active = false, disabled = false, href }) => {
+const MenuTab: FC<MenuTabProps> = ({ children, icon, active = false, disabled = false, href }) => {
   const pathname = usePathname();
   const isActive = pathname === href || active;
 

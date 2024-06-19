@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import pic_no_data from '@public/images/pic_no_data.png';
@@ -9,7 +10,7 @@ import { ButtonLink } from '@berezka-dao/shared/ui-kit/Button';
 
 import s from './OffersEmptyState.module.scss';
 
-const OffersEmptyState: React.FC = () => {
+const OffersEmptyState: FC = () => {
   const { t } = useTranslation();
 
   return (

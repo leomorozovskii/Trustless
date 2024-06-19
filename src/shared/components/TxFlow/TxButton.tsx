@@ -1,7 +1,8 @@
 'use client';
 
 import { useChainModal } from '@rainbow-me/rainbowkit';
-import React from 'react';
+import type { ComponentProps, FC, ReactNode } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Hash, TransactionReceipt } from 'viem';
 import { TransactionReceiptNotFoundError } from 'viem';
@@ -16,16 +17,16 @@ type TxState = {
   isLoading: boolean;
 };
 
-type Props = Omit<React.ComponentProps<typeof Button>, 'onClick' | 'loading' | 'children'> & {
-  children: React.ReactNode | ((txState: TxState) => React.ReactNode);
+type Props = Omit<ComponentProps<typeof Button>, 'onClick' | 'loading' | 'children'> & {
+  children: ReactNode | ((txState: TxState) => ReactNode);
   errorTitle?: string;
   writeContract: () => Promise<Hash | undefined>;
   onReceipt?: (receipt: TransactionReceipt) => void;
   onError?: (e: unknown) => void;
 };
 
-const TxButton: React.FC<Props> = ({ writeContract, onError, onReceipt, children, disabled, errorTitle, ...props }) => {
-  const [isLoading, setIsLoading] = React.useState(false);
+const TxButton: FC<Props> = ({ writeContract, onError, onReceipt, children, disabled, errorTitle, ...props }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const wagmiConfig = useConfig();
   const { handleAddItem } = useToastifyContext();
   const isWrongNetwork = useIsWrongNetwork();

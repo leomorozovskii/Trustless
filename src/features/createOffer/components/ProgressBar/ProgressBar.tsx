@@ -1,5 +1,6 @@
 import cn from 'classnames';
-import React, { useMemo } from 'react';
+import type { FC } from 'react';
+import { useMemo } from 'react';
 
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { CheckmarkIcon } from '@berezka-dao/shared/icons';
@@ -10,7 +11,7 @@ interface IProgressBar {
   currentStep: OfferProgress;
 }
 
-const ProgressBar: React.FC<IProgressBar> = ({ currentStep }) => {
+const ProgressBar: FC<IProgressBar> = ({ currentStep }) => {
   const isComplete = useMemo(() => {
     return currentStep === OfferProgress.Created;
   }, [currentStep]);

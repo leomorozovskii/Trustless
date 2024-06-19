@@ -1,14 +1,14 @@
 import * as RadixTabs from '@radix-ui/react-tabs';
-import React from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
 import s from './TabItem.module.scss';
 
-interface TabItemProps extends React.PropsWithChildren {
+interface TabItemProps extends PropsWithChildren {
   value: string;
   badge?: string;
 }
 
-const TabItem: React.FC<TabItemProps> = ({ value, children, badge }) => {
+const TabItem: FC<TabItemProps> = ({ value, children, badge }) => {
   return (
     <RadixTabs.Trigger value={value} asChild>
       <button type="button" className={s.container}>

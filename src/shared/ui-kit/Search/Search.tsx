@@ -1,7 +1,7 @@
 import { TextField } from '@radix-ui/themes';
 import cn from 'classnames';
-import type { HTMLAttributes } from 'react';
-import React, { useMemo } from 'react';
+import type { ChangeEvent, FC, HTMLAttributes } from 'react';
+import { useMemo } from 'react';
 
 import { InputCross, InputError, InputSearch } from '@berezka-dao/shared/icons';
 
@@ -11,13 +11,13 @@ type SearchProps = HTMLAttributes<HTMLInputElement> & {
   type?: 'text' | 'number';
   placeholder?: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   classWrapper?: string;
   error?: string;
   disabled?: boolean;
 };
 
-const Search: React.FC<SearchProps> = ({
+const Search: FC<SearchProps> = ({
   type = 'text',
   placeholder = '',
   value,
@@ -32,7 +32,7 @@ const Search: React.FC<SearchProps> = ({
   }, [value]);
 
   const handleClear = () => {
-    onChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>);
+    onChange({ target: { value: '' } } as ChangeEvent<HTMLInputElement>);
   };
 
   return (

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 import { useGetMinFee } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetMinFee';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';

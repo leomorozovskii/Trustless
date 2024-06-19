@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import type { Address } from 'viem';
 
 import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
@@ -11,7 +11,7 @@ interface ITokenEntity {
   type: 'pay' | 'get';
 }
 
-const TokenEntity: React.FC<ITokenEntity> = ({ address, amount, type }) => {
+const TokenEntity: FC<ITokenEntity> = ({ address, amount, type }) => {
   const { TokenLogo, tokenName, tokenValue } = useTokenInfo({
     address,
     amount,

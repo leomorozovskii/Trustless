@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import type { FC } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
@@ -12,7 +13,7 @@ interface IAddCustomToken {
   type: 'from' | 'to';
 }
 
-const AddCustomToken: React.FC<IAddCustomToken> = ({ type }) => {
+const AddCustomToken: FC<IAddCustomToken> = ({ type }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const { inputsDisabled } = useOfferCreateContext();

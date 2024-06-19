@@ -1,5 +1,6 @@
 'use client';
 
+import type { ChangeEvent, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SearchIcon } from '@berezka-dao/shared/icons';
@@ -12,9 +13,9 @@ type OffersSearchFilterProps = {
   onValueChange: (searchFilter: string) => void;
 };
 
-const OffersSearchFilter = ({ value, onValueChange }: OffersSearchFilterProps) => {
+const OffersSearchFilter: FC<OffersSearchFilterProps> = ({ value, onValueChange }) => {
   const { t } = useTranslation();
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     onValueChange(e.target.value);
   };
   return (

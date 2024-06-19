@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
@@ -29,7 +29,7 @@ const OffersTemplate = createOffersTemplate({
   ],
 });
 
-const HistoryPage: React.FC = () => {
+const HistoryPage: FC = () => {
   const { t } = useTranslation();
   const { isConnected } = useAccount();
   const isMounted = useIsMounted();

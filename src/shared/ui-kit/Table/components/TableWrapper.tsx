@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
 import s from '../Table.module.scss';
 
-const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => <table className={s.table}>{children}</table>;
+const TableWrapper: FC<PropsWithChildren> = ({ children }) => <table className={s.table}>{children}</table>;
 
 export { TableWrapper };

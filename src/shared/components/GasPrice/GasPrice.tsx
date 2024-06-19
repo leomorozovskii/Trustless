@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { Tooltip } from 'react-tooltip';
 
 import { GasIcon, InfoIcon } from '@berezka-dao/shared/icons';
@@ -9,7 +9,7 @@ interface IGasPrice {
   minFee: string | null;
 }
 
-const GasPrice: React.FC<IGasPrice> = ({ minFee }) => {
+const GasPrice: FC<IGasPrice> = ({ minFee }) => {
   return (
     <div className={s.serviceContainer}>
       <p className={s.feeLabel}>Min gas price</p>

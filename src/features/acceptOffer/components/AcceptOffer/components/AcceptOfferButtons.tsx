@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useMemo, useState } from 'react';
+import type { FC } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAcceptApprove } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptApprove';
@@ -18,7 +19,7 @@ import { TxButton } from '@berezka-dao/shared/components/TxFlow';
 import { Checkbox } from '@berezka-dao/shared/ui-kit/Checkbox';
 import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 
-const AcceptOfferButtons: React.FC = () => {
+const AcceptOfferButtons: FC = () => {
   const router = useRouter();
   const { handleAddItem } = useToastifyContext();
   const { activeAcceptStep, acceptId, setIsInfinite } = useOfferAcceptContext();

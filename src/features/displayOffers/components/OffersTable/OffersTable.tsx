@@ -2,7 +2,8 @@
 
 import type { RowSelectionState, SortingState } from '@tanstack/react-table';
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import React from 'react';
+import type { FC } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import type { OfferSorting, OfferColumns, OfferTrade } from '@berezka-dao/features/displayOffers/types';
 import { Table } from '@berezka-dao/shared/ui-kit/Table';
@@ -21,7 +22,7 @@ type OffersTableProps = {
 
 const defaultOffers: OfferTrade[] = [];
 
-const OffersTable: React.FC<OffersTableProps> = ({
+const OffersTable: FC<OffersTableProps> = ({
   offers = defaultOffers,
   isLoading,
   sorting,
@@ -30,11 +31,11 @@ const OffersTable: React.FC<OffersTableProps> = ({
   onSortingChange,
   onRowSelectionChange,
 }) => {
-  const [sortingState, setSortingState] = React.useState<SortingState>(
+  const [sortingState, setSortingState] = useState<SortingState>(
     sorting ? [{ id: sorting.field, desc: sorting.order === 'desc' }] : [],
   );
-  const [rowSelectionState, setRowSelectionState] = React.useState<RowSelectionState>({});
-  const filteredColumns = React.useMemo(
+  const [rowSelectionState, setRowSelectionState] = useState<RowSelectionState>({});
+  const filteredColumns = useMemo(
     () => columns.filter((column) => !!column.id && columnsToDisplay.includes(column.id as OfferColumns)),
     [columnsToDisplay],
   );
@@ -54,7 +55,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
     onSortingChange: setSortingState,
     onRowSelectionChange: setRowSelectionState,
   });
-  React.useEffect(() => {
+  useEffect(() => {
     let newSorting: OfferSorting | null = null;
     if (sortingState.length === 0) {
       if (sorting) {
@@ -72,7 +73,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
     onSortingChange(newSorting);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortingState, onSortingChange]);
-  React.useEffect(() => {
+  useEffect(() => {
     const selectedRowId = Object.entries(rowSelectionState).find(([, selected]) => selected)?.[0];
     if (!selectedRowId) {
       onRowSelectionChange(null);
@@ -82,7 +83,7 @@ const OffersTable: React.FC<OffersTableProps> = ({
       onRowSelectionChange(selectedId);
     }
   }, [rowSelectionState, offersTable, onRowSelectionChange]);
-  React.useEffect(() => {
+  useEffect(() => {
     setRowSelectionState({});
   }, [offers]);
   if (!isLoading && offers.length === 0) {

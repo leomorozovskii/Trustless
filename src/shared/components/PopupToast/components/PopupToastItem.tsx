@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import type { FC } from 'react';
 import { useEffect } from 'react';
 
 import { ClearCross } from '@berezka-dao/shared/icons';
@@ -11,7 +12,7 @@ interface PopupToastItemProps {
   handleRemoveItem: (id: number) => void;
 }
 
-const PopupToastItem: React.FC<PopupToastItemProps> = ({ item, handleRemoveItem }) => {
+const PopupToastItem: FC<PopupToastItemProps> = ({ item, handleRemoveItem }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       handleRemoveItem(item.id);

@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 
 import { RateContainer } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/components/RateContainer';
 import { TokenEntity } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/components/TokenEntity';
@@ -8,7 +8,7 @@ import { AcceptOfferIcon } from '@berezka-dao/shared/icons';
 
 import s from '../AcceptOffer.module.scss';
 
-const TokensContainer: React.FC = () => {
+const TokensContainer: FC = () => {
   const { acceptId } = useOfferAcceptContext();
   const { tokenFrom, amountFrom, tokenTo, amountTo, rateToFrom } = useGetOfferDetails({ id: acceptId });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 
 import { PopupToastItem } from './components/PopupToastItem';
 import s from './PopupToast.module.scss';
@@ -9,7 +9,7 @@ interface IPopupToast {
   handleRemoveItem: (id: number) => void;
 }
 
-const PopupToast: React.FC<IPopupToast> = ({ items, handleRemoveItem }) => {
+const PopupToast: FC<IPopupToast> = ({ items, handleRemoveItem }) => {
   return (
     <div className={s.wrapper}>
       {items.length > 0 &&

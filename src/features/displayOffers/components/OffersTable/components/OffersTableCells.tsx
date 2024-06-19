@@ -1,6 +1,7 @@
 'use client';
 
 import dayjs from 'dayjs';
+import type { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Hash } from 'viem';
 
@@ -20,16 +21,16 @@ type OffersTableIdProps = {
   id: string;
 };
 
-const OffersTableId: React.FC<OffersTableIdProps> = ({ id }) => {
+const OffersTableId: FC<OffersTableIdProps> = ({ id }) => {
   return <OffersTableCell>{id}</OffersTableCell>;
 };
 
 type OffersTableAssetProps = {
   name: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
 };
 
-const OffersTableAsset: React.FC<OffersTableAssetProps> = ({ name, icon }) => {
+const OffersTableAsset: FC<OffersTableAssetProps> = ({ name, icon }) => {
   return (
     <OffersTableCell>
       {icon}
@@ -43,7 +44,7 @@ type OffersTableAmountFromProps = {
   amountWithFee: number;
 };
 
-const OffersTableAmountFrom: React.FC<OffersTableAmountFromProps> = ({ amount, amountWithFee }) => {
+const OffersTableAmountFrom: FC<OffersTableAmountFromProps> = ({ amount, amountWithFee }) => {
   const { t } = useTranslation();
   return (
     <OffersTableCell
@@ -67,7 +68,7 @@ type OffersTableAmountToProps = {
   amount: number;
 };
 
-const OffersTableAmountTo: React.FC<OffersTableAmountToProps> = ({ amount }) => {
+const OffersTableAmountTo: FC<OffersTableAmountToProps> = ({ amount }) => {
   return (
     <OffersTableCell>
       <FormattedNumber value={amount} />
@@ -79,7 +80,7 @@ type OffersTableRateProps = {
   rate: number;
 };
 
-const OffersTableRate: React.FC<OffersTableRateProps> = ({ rate }) => {
+const OffersTableRate: FC<OffersTableRateProps> = ({ rate }) => {
   return (
     <OffersTableCell>
       <FormattedNumber value={rate} minimumFractionDigits={0} />
@@ -91,7 +92,7 @@ type OffersTableTxHashProps = {
   hash: Hash;
 };
 
-const OffersTableTxHash: React.FC<OffersTableTxHashProps> = ({ hash }) => {
+const OffersTableTxHash: FC<OffersTableTxHashProps> = ({ hash }) => {
   const { t } = useTranslation();
   return (
     <OffersTableCell full>
@@ -108,7 +109,7 @@ type OffersTableStatusProps = {
   status: OfferStatus;
 };
 
-const OffersTableStatus: React.FC<OffersTableStatusProps> = ({ status }) => {
+const OffersTableStatus: FC<OffersTableStatusProps> = ({ status }) => {
   const { t } = useTranslation();
   return <OffersTableCell>{t(`offers.table.status.${status}`)}</OffersTableCell>;
 };
@@ -117,7 +118,7 @@ type OffersTableDateProps = {
   unixTimestamp: number;
 };
 
-const OffersTableDate: React.FC<OffersTableDateProps> = ({ unixTimestamp }) => {
+const OffersTableDate: FC<OffersTableDateProps> = ({ unixTimestamp }) => {
   return (
     <OffersTableCell uppercase small>
       {dayjs.unix(unixTimestamp).format('DD MMM YYYY HH:mm')}
@@ -129,7 +130,7 @@ type OffersTableShareProps = {
   id: string;
 };
 
-const OffersTableShare: React.FC<OffersTableShareProps> = ({ id }) => {
+const OffersTableShare: FC<OffersTableShareProps> = ({ id }) => {
   const { t } = useTranslation();
   return (
     <OffersTableCell>
@@ -140,7 +141,7 @@ const OffersTableShare: React.FC<OffersTableShareProps> = ({ id }) => {
   );
 };
 
-const OffersTableReceiver: React.FC<{ receiver: string }> = ({ receiver }) => {
+const OffersTableReceiver: FC<{ receiver: string }> = ({ receiver }) => {
   const { t } = useTranslation();
   return (
     <OffersTableCell>

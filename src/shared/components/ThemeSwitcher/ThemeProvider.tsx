@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from 'react';
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import type { FC, PropsWithChildren } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 const ThemeContext = createContext<IThemeValues | undefined>(undefined);
 
@@ -8,7 +8,7 @@ interface IThemeValues {
   toggleTheme(theme: 'light' | 'dark'): void;
 }
 
-const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') || 'light';

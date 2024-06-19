@@ -1,7 +1,8 @@
 // TODO :: remove deprecated import
 /* eslint-disable import/no-deprecated */
 import cn from 'classnames';
-import React, { useMemo, useState } from 'react';
+import type { ComponentProps, FC } from 'react';
+import { useMemo, useState } from 'react';
 import type { Address } from 'viem';
 import { useToken } from 'wagmi';
 
@@ -21,7 +22,7 @@ interface ISelect {
   type?: 'from' | 'to' | 'default';
 }
 
-const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
+const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
   const [opened, setOpened] = useState<boolean>(false);
   const { customTokenName } = useOfferCreateContext();
   const { userTokens } = useOfferCreateContext();
@@ -35,7 +36,7 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
     address: value as Address,
   });
 
-  const IconComponent: React.FC<React.ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
+  const IconComponent: FC<ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
     if (!value) return;
     const item = TOKEN_MAP[value as Address];
     if (type === 'from' && userTokens.tokens && item) return item.logo;

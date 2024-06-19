@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import type { FC } from 'react';
 
 import { links } from '@berezka-dao/core/constants';
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
@@ -11,7 +11,7 @@ import { NewWindowIcon, SmallArrow, SuccessAcceptIcon } from '@berezka-dao/share
 
 import s from './AcceptedOffer.module.scss';
 
-const AcceptedOffer: React.FC = () => {
+const AcceptedOffer: FC = () => {
   const { txHash, acceptId } = useOfferAcceptContext();
   const { tokenFrom, tokenTo, amountTo, amountFrom, rateToFrom } = useGetOfferDetails({ id: acceptId });
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
