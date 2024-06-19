@@ -174,7 +174,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                 classWrapper={s.decimalWrapper}
                 id="token decimal input"
                 value={tokenState.decimal ? tokenState.decimal.toString() : ''}
-                onChange={({ target }) => setTokenState({ decimal: +target.value })}
+                onChange={({ target }) => setTokenState({ decimal: Number(target.value) })}
               />
             </>
           ) : (
