@@ -8,8 +8,8 @@ import { OffersPagination } from './components/OffersPagination';
 import { OfferReOpenOffer } from './components/OffersReOpenOffer/OffersReOpenOffer';
 import { OffersSearchFilter } from './components/OffersSearchFilter';
 import { OffersTable } from './components/OffersTable';
-import { useOffersDetailsQuery } from './hooks/useOffersDetailsQuery';
-import { useOffersStatsQuery } from './hooks/useOffersStatsQuery';
+import { useOffersDetails } from './hooks/useOffersDetails';
+import { useOffersStats } from './hooks/useOffersStats';
 import type { OfferColumns, OffersStore } from './types';
 
 type CreateOffersView = {
@@ -36,7 +36,7 @@ const createOffersView = (
         sorting: state.sorting,
         filters: state.filters,
       }));
-      const offerDetails = useOffersDetailsQuery({
+      const offerDetails = useOffersDetails({
         filter,
         limit: pagination.limit,
         offset: pagination.offset,
@@ -59,7 +59,7 @@ const createOffersView = (
           filters: state.filters,
         }),
       );
-      const offerDetails = useOffersDetailsQuery({
+      const offerDetails = useOffersDetails({
         filter,
         filters,
         limit: pagination.limit,
@@ -88,7 +88,7 @@ const createOffersView = (
         setFilter: state.setFilter,
         searchFilter: state.searchFilter,
       }));
-      const offersStats = useOffersStatsQuery({ searchFilter, filters });
+      const offersStats = useOffersStats({ searchFilter, filters });
       return (
         <OffersFilters
           filters={filters}
@@ -114,7 +114,7 @@ const createOffersView = (
         prevPage: state.prevPage,
         filters: state.filters,
       }));
-      const offerStats = useOffersStatsQuery({ searchFilter, filters });
+      const offerStats = useOffersStats({ searchFilter, filters });
       return (
         <OffersPagination
           total={offerStats.data?.total}
