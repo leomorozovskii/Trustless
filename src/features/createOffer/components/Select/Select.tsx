@@ -15,14 +15,14 @@ import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 import s from './Select.module.scss';
 
 interface ISelect {
-  value: string;
+  value?: Address;
   placeholder: string;
   disabled?: boolean;
   onChange: (value: string) => void;
   type?: 'from' | 'to' | 'default';
 }
 
-const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
+const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
   const [opened, setOpened] = useState<boolean>(false);
   const { customTokenName } = useOfferCreateContext();
   const { userTokens } = useOfferCreateContext();
@@ -33,12 +33,12 @@ const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'd
   };
 
   const result = useToken({
-    address: value as Address,
+    address: value,
   });
 
   const IconComponent: FC<ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
     if (!value) return;
-    const item = TOKEN_MAP[value as Address];
+    const item = TOKEN_MAP[value];
     if (type === 'from' && userTokens.tokens && item) return item.logo;
     if (!item) return UnknownIcon;
     return item.logo;
@@ -48,10 +48,10 @@ const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'd
     if (!value) return;
     const walletToken = userTokens.tokens?.find((el) => el.address === value)?.symbol;
     if (type === 'from' && value && walletToken) return walletToken;
-    const notImported = TOKEN_MAP[value as Address]?.name;
+    const notImported = TOKEN_MAP[value]?.name;
     if (!notImported && !result.data) return customTokenName;
     if (!notImported && result.data) return result.data.symbol;
-    return TOKEN_MAP[value as Address].name;
+    return TOKEN_MAP[value].name;
   }, [value, userTokens.tokens, type, result.data, customTokenName]);
 
   const handleOpen = () => {
