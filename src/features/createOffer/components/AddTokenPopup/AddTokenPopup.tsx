@@ -16,17 +16,17 @@ import { Input } from '@berezka-dao/shared/ui-kit/Input';
 import s from './AddTokenPopup.module.scss';
 
 interface IAddTokenPopupState {
-  address?: Address;
   name: string;
   decimal: number;
+  address?: Address;
 }
 
-interface IAddTokenPopup {
-  setOpened: Dispatch<SetStateAction<boolean>>;
+type Props = {
   type: 'from' | 'to';
-}
+  setOpened: Dispatch<SetStateAction<boolean>>;
+};
 
-const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
+const AddTokenPopup: FC<Props> = ({ setOpened, type }) => {
   const { t } = useTranslation();
   const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
   const [localAddress, setLocalAddress] = useState<string>('');
@@ -72,7 +72,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
   );
 
   const balance = useMemo(() => {
-    if (!balanceOf || !decimals) return;
+    if (!balanceOf || !decimals) return '0';
     return formatUnits(balanceOf, decimals);
   }, [balanceOf, decimals]);
 

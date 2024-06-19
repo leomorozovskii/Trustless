@@ -6,11 +6,11 @@ import { AcceptOfferIcon } from '@berezka-dao/shared/icons';
 
 import s from '../AcceptOffer.module.scss';
 
-type ReceiverContainerProps = {
+type Props = {
   receiver?: Address;
 };
 
-const ReceiverContainer: FC<ReceiverContainerProps> = ({ receiver }) => {
+const ReceiverContainer: FC<Props> = ({ receiver }) => {
   const { t } = useTranslation();
 
   return (

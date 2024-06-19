@@ -8,12 +8,12 @@ import { NewWindowIcon, WarningIcon } from '@berezka-dao/shared/icons';
 
 import s from '../AcceptOffer.module.scss';
 
-interface ICustomTokenWarning {
+type Props = {
   name: string | undefined;
   address?: Address;
-}
+};
 
-const CustomTokenWarning: FC<ICustomTokenWarning> = ({ name, address }) => {
+const CustomTokenWarning: FC<Props> = ({ name, address }) => {
   const { t } = useTranslation();
 
   return (

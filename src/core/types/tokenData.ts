@@ -6,7 +6,7 @@ import type { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 interface TokenData {
   address: Address;
-  name: string;
+  symbol: string;
   logo: FC<ComponentProps<typeof UnknownIcon>>;
   decimals: number;
 }

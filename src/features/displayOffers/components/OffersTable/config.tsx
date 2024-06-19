@@ -49,8 +49,8 @@ const columns = [
     },
     enableSorting: false,
     cell: (info) => {
-      const { name, logo: Logo } = info.getValue();
-      return <OffersTableAsset icon={<Logo width={20} height={20} />} name={name} />;
+      const { symbol, logo: Logo } = info.getValue();
+      return <OffersTableAsset icon={<Logo width={20} height={20} />} name={symbol} />;
     },
     header: () => <OffersTableAssetFromHeading />,
   }),
@@ -62,8 +62,8 @@ const columns = [
     },
     enableSorting: false,
     cell: (info) => {
-      const { name, logo: Logo } = info.getValue();
-      return <OffersTableAsset icon={<Logo width={20} height={20} />} name={name} />;
+      const { symbol, logo: Logo } = info.getValue();
+      return <OffersTableAsset icon={<Logo width={20} height={20} />} name={symbol} />;
     },
     header: () => <OffersTableAssetToHeading />,
   }),

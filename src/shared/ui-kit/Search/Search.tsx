@@ -32,7 +32,7 @@ const Search: FC<SearchProps> = ({
   }, [value]);
 
   const handleClear = () => {
-    onChange({ target: { value: '' } } as ChangeEvent<HTMLInputElement>);
+    onChange({ currentTarget: { value: '' } } as ChangeEvent<HTMLInputElement>);
   };
 
   return (

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAddress, isAddress } from 'viem';
 
+import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { AddCustomToken } from '@berezka-dao/features/createOffer/components/AddCustomToken';
 import { checkValidAmount } from '@berezka-dao/features/createOffer/components/Buttons/utils';
 import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/components/From/hooks/useCalculateAmountValue';
@@ -29,10 +30,11 @@ const OfferTo = () => {
       <div className={cn(s.selectContainer, s.inputWrapper)}>
         <h2 className={s.selectLabel}>{t('token.to')}</h2>
         <Select
+          tokens={Object.values(TOKEN_MAP)}
           value={offerToState.to}
           placeholder="Select token"
           disabled={inputsDisabled}
-          onChange={(value, decimals) => setOfferToState({ to: getAddress(value), decimals })}
+          onSelect={(value, decimals) => setOfferToState({ to: getAddress(value), decimals })}
         />
         <AddCustomToken type="to" />
       </div>

@@ -46,11 +46,11 @@ const OfferFrom = () => {
       <div className={s.selectContainer}>
         <h2 className={s.selectLabel}>From</h2>
         <Select
-          type="from"
+          tokens={userTokens.tokens}
           value={offerFromState.from}
           placeholder="Select token"
           disabled={inputsDisabled}
-          onChange={(value, decimals) => setOfferFromState({ from: getAddress(value), decimals })}
+          onSelect={(value, decimals) => setOfferFromState({ from: getAddress(value), decimals })}
         />
         <AddCustomToken type="from" />
       </div>

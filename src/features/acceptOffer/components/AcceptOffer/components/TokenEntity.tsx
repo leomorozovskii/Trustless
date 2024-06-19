@@ -5,13 +5,13 @@ import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/Accep
 
 import s from '../AcceptOffer.module.scss';
 
-interface ITokenEntity {
+type Props = {
+  type: 'pay' | 'get';
   address?: Address;
   amount?: bigint;
-  type: 'pay' | 'get';
-}
+};
 
-const TokenEntity: FC<ITokenEntity> = ({ address, amount, type }) => {
+const TokenEntity: FC<Props> = ({ address, amount, type }) => {
   const { TokenLogo, tokenName, tokenValue } = useTokenInfo({
     address,
     amount,

@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 
 import s from '../AcceptOffer.module.scss';
 
-interface IRateProps {
+type Props = {
   value: string | undefined;
-}
+};
 
-const RateContainer: FC<IRateProps> = ({ value }) => {
+const RateContainer: FC<Props> = ({ value }) => {
   const { t } = useTranslation();
 
   return (

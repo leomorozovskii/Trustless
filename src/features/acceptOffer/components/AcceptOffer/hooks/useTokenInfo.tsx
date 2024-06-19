@@ -9,14 +9,14 @@ import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { useGetFee } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetFee';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
-interface IUseTokenInfo {
+type Props = {
   address?: Address;
   amount?: bigint;
   withFee?: boolean;
-}
+};
 
-export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
-  const { data: [decimals, name] = [] } = useReadContracts({
+export const useTokenInfo = ({ address, amount, withFee }: Props) => {
+  const { data: [decimals, symbol] = [] } = useReadContracts({
     allowFailure: false,
     contracts: [
       {
@@ -37,11 +37,11 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
   const token = useMemo(() => {
     if (!address) return;
     const localToken = TOKEN_MAP[address];
-    if (!localToken && decimals && name) {
-      return { decimals, name };
+    if (!localToken && decimals && symbol) {
+      return { decimals, symbol };
     }
     return localToken;
-  }, [address, decimals, name]);
+  }, [address, decimals, symbol]);
 
   const isCustom = useMemo(() => {
     if (!address) return;
@@ -58,7 +58,7 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
 
   const tokenName = useMemo(() => {
     if (!token) return;
-    return token.name;
+    return token.symbol;
   }, [token]);
 
   const tokenDecimals = useMemo(() => {

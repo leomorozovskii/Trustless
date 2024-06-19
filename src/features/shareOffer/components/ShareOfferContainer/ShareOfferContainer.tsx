@@ -10,12 +10,12 @@ import { Button } from '@berezka-dao/shared/ui-kit/Button';
 
 import s from './ShareOfferContainer.module.scss';
 
-interface IShareOfferContainer {
+type Props = {
   offerId: number | null | string;
   setActiveOfferStep?: Dispatch<SetStateAction<number>>;
-}
+};
 
-const ShareOfferContainer: FC<IShareOfferContainer> = ({ offerId, setActiveOfferStep }) => {
+const ShareOfferContainer: FC<Props> = ({ offerId, setActiveOfferStep }) => {
   const { t } = useTranslation();
   const [copied, setCopied] = useState<boolean>(false);
   const { handleAddItem } = useToastifyContext();

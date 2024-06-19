@@ -1,10 +1,9 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
 import { InputCross } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
@@ -16,38 +15,31 @@ import { useSearchToken } from './hooks/useSearchToken';
 import s from './SelectTokenPopup.module.scss';
 import type { IToken } from './types';
 
-interface ISelectTokenPopup {
-  setOpened: Dispatch<SetStateAction<boolean>>;
-  type?: 'from' | 'to' | 'default';
-  handleSelectToken(tokenAddress: string, decimals: number): void;
-}
+type Props = {
+  tokens: IToken[] | TokenData[] | null;
+  isLoading?: boolean;
+  onClose(): void;
+  onSelect(tokenAddress: string, decimals: number): void;
+};
 
-const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken, type = 'default' }) => {
+const SelectTokenPopup: FC<Props> = ({ isLoading = false, tokens, onClose, onSelect }) => {
   const { t } = useTranslation();
-  const { userTokens } = useOfferCreateContext();
 
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const { searchedData } = useSearchToken({ query: searchQuery, type });
-
-  const pinnedTokens = useMemo(() => {
-    if (type !== 'from') return Object.values(TOKEN_MAP).slice(0, 7);
-    if (!userTokens.tokens && type === 'from') return;
-    return userTokens.tokens?.slice(0, 7);
-  }, [userTokens.tokens, type]);
-
-  const pinnedTokenAddresses = useMemo(() => {
-    return new Set(pinnedTokens?.map((token) => token.address));
-  }, [pinnedTokens]);
+  const { searchedData } = useSearchToken({ query: searchQuery, tokens });
 
   const filteredSearchedData = useMemo(() => {
+    if (!tokens || !searchedData) return;
+    const pinnedTokenAddresses = new Set(tokens.slice(0, 7).map((token) => token.address));
     return searchedData.filter((token) => !pinnedTokenAddresses.has(token.address));
-  }, [searchedData, pinnedTokenAddresses]);
+  }, [searchedData, tokens]);
 
   useClickOutside(ref, (ev) => {
-    if (!ref.current?.contains(ev.currentTarget as Node)) {
-      setOpened(false);
+    if (!ref.current) return;
+    if (ev.target instanceof Node && !ref.current.contains(ev.target)) {
+      onClose();
     }
   });
 
@@ -57,18 +49,13 @@ const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken,
     return item.logo;
   };
 
-  const withTokensList = useMemo(() => {
-    if (type === 'from' && userTokens.tokens && userTokens.tokens.length > 7) return true;
-    return type !== 'from' && Object.entries(TOKEN_MAP).length > 7;
-  }, [userTokens.tokens, type]);
-
   return (
     <div className={s.wrapper}>
       <div className={s.container} ref={ref}>
         <div className={s.header}>
           <div className={s.titleContainer}>
             <h2 className={s.title}>{t('token.select')}</h2>
-            <InputCross onClick={() => setOpened(false)} className={s.cross} />
+            <InputCross onClick={onClose} className={s.cross} />
           </div>
           <Search
             type="text"
@@ -77,45 +64,34 @@ const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken,
             onChange={({ currentTarget }) => setSearchQuery(currentTarget.value)}
             id="token search"
           />
-          {userTokens.tokens?.length === 0 && type === 'from' && (
-            <Skeleton loading={userTokens.isLoading}>
+          {tokens?.length === 0 && (
+            <Skeleton loading={isLoading}>
               <p>{`You don't have tokens`}</p>
             </Skeleton>
           )}
-          <Skeleton loading={userTokens.isLoading}>
+          <Skeleton loading={isLoading}>
             <div className={s.pinnedTokens}>
-              {type === 'from'
-                ? userTokens.tokens
-                    ?.slice(0, 7)
-                    .map((token, idx) => (
-                      <TokenItem
-                        onClick={() => handleSelectToken(token.address, token.decimals)}
-                        key={idx}
-                        title={token.symbol}
-                        IconComponent={getTokenIcon(token)}
-                      />
-                    ))
-                : Object.entries(TOKEN_MAP)
-                    .slice(0, 7)
-                    .map(([address, token], idx) => (
-                      <TokenItem
-                        onClick={() => handleSelectToken(address, token.decimals)}
-                        key={idx}
-                        title={token.name}
-                        IconComponent={getTokenIcon(token)}
-                      />
-                    ))}
+              {tokens
+                ?.slice(0, 7)
+                .map((token, idx) => (
+                  <TokenItem
+                    onClick={() => onSelect(token.address, token.decimals)}
+                    key={idx}
+                    title={token.symbol}
+                    IconComponent={getTokenIcon(token)}
+                  />
+                ))}
             </div>
           </Skeleton>
         </div>
-        {withTokensList && (
-          <Skeleton loading={userTokens.isLoading}>
+        {tokens && tokens?.length > 7 && (
+          <Skeleton loading={isLoading}>
             <div className={s.body}>
               {filteredSearchedData?.map((el) => (
-                <button key={el.address} onClick={() => handleSelectToken(el.address, el.decimals)}>
+                <button key={el.address} onClick={() => onSelect(el.address, el.decimals)}>
                   <div className={s.item}>
                     {'logo' in el ? <el.logo width={20} height={20} /> : <UnknownIcon />}
-                    <p className={s.label}>{el.name}</p>
+                    <p className={s.label}>{el.symbol}</p>
                   </div>
                 </button>
               ))}

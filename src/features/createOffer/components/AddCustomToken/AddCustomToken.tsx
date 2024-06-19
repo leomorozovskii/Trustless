@@ -9,11 +9,11 @@ import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 
 import s from './AddCustomToken.module.scss';
 
-interface IAddCustomToken {
+type Props = {
   type: 'from' | 'to';
-}
+};
 
-const AddCustomToken: FC<IAddCustomToken> = ({ type }) => {
+const AddCustomToken: FC<Props> = ({ type }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const { inputsDisabled } = useOfferCreateContext();
