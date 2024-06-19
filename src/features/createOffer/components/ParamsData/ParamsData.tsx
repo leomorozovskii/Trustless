@@ -1,5 +1,6 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import type { Address } from 'viem';
 import { getAddress } from 'viem';
 
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
@@ -15,15 +16,15 @@ const ParamsData = () => {
     const receiverParam = searchParams.get('receiver');
     const amountFromParam = searchParams.get('amountFrom');
 
-    let validatedTokenFrom = '';
-    let validatedTokenTo = '';
+    let validatedTokenFrom: Address | undefined;
+    let validatedTokenTo: Address | undefined;
     let validatedReceiver = '';
 
     if (tokenFromParam) {
       try {
         validatedTokenFrom = getAddress(tokenFromParam);
       } catch (error) {
-        validatedTokenFrom = '';
+        validatedTokenFrom = undefined;
       }
     }
 
@@ -31,7 +32,7 @@ const ParamsData = () => {
       try {
         validatedTokenTo = getAddress(tokenToParam);
       } catch (error) {
-        validatedTokenTo = '';
+        validatedTokenTo = undefined;
       }
     }
 
