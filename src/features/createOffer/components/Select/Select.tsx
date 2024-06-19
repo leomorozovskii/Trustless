@@ -1,5 +1,3 @@
-// TODO :: remove deprecated import
-/* eslint-disable import/no-deprecated */
 import cn from 'classnames';
 import type { ComponentProps, FC } from 'react';
 import { useMemo, useState } from 'react';

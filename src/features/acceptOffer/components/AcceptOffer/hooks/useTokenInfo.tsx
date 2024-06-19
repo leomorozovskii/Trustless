@@ -1,5 +1,3 @@
-// TODO :: remove deprecated import
-/* eslint-disable import/no-deprecated */
 'use client';
 
 import { useMemo } from 'react';

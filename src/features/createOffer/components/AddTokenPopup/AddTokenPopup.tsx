@@ -1,5 +1,3 @@
-// TODO :: Remove deprecated
-/* eslint-disable import/no-deprecated */
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, formatUnits, getAddress, isAddress } from 'viem';
