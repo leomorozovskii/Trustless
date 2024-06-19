@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 import { useGetMinFee } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetMinFee';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';
@@ -7,6 +9,7 @@ import s from './CancelOffer.module.scss';
 import { useCancelOffer } from './hooks/useCancelOffer';
 
 const CancelOffer = ({ cancelId }: { cancelId: string }) => {
+  const { t } = useTranslation();
   const { isCreator } = useGetOfferDetails({ id: cancelId });
 
   const { cancelOffer, onCancelReceipt, cancelRequest } = useCancelOffer({ cancelId });
@@ -17,11 +20,11 @@ const CancelOffer = ({ cancelId }: { cancelId: string }) => {
       <TxButton
         type="button"
         disabled={!isCreator}
-        errorTitle="Cancel error"
+        errorTitle={t('error.cancel')}
         onReceipt={onCancelReceipt}
         writeContract={cancelOffer}
       >
-        {({ isLoading: isButtonLoading }) => (isButtonLoading ? 'Canceling Trade' : 'Cancel Trade')}
+        {({ isLoading: isButtonLoading }) => (isButtonLoading ? t('token.canceling') : t('token.cancel'))}
       </TxButton>
       <GasPrice minFee={minFee} />
       <p className={s.terms}>

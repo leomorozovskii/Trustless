@@ -4,22 +4,34 @@
 
 import { useMemo } from 'react';
 import type { Address } from 'viem';
-import { formatUnits } from 'viem';
-import { useToken } from 'wagmi';
+import { formatUnits, erc20Abi } from 'viem';
+import { useReadContracts } from 'wagmi';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { useGetFee } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetFee';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 interface IUseTokenInfo {
-  address: Address;
+  address?: Address;
   amount?: bigint;
   withFee?: boolean;
 }
 
 export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
-  const result = useToken({
-    address,
+  const { data: result } = useReadContracts({
+    allowFailure: false,
+    contracts: [
+      {
+        address,
+        abi: erc20Abi,
+        functionName: 'decimals',
+      },
+      {
+        address,
+        abi: erc20Abi,
+        functionName: 'symbol',
+      },
+    ],
   });
 
   const { calculatedFee } = useGetFee();
@@ -34,6 +46,8 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
   }, [address, result]);
 
   const isCustom = useMemo(() => {
+    if (!address) return;
+
     return !TOKEN_MAP[address];
   }, [address]);
 
@@ -47,13 +61,13 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
   const tokenName = useMemo(() => {
     if (!token) return;
     if ('name' in token) return token.name;
-    return token.data?.symbol;
+    return token[1];
   }, [token]);
 
   const tokenDecimals = useMemo(() => {
     if (!token) return;
     if ('decimals' in token) return token.decimals;
-    return token.data?.decimals;
+    return token[0];
   }, [token]);
 
   const tokenValue = useMemo(() => {

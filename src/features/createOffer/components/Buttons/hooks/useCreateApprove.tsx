@@ -10,7 +10,6 @@ import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 
 import { useCreateAllowance } from './useCreateAllowance';
 import { useGetBalanceGreater } from './useGetBalanceGreater';
-import { useTokenData } from './useTokenData';
 
 export const useCreateApprove = () => {
   const { t } = useTranslation();
@@ -18,11 +17,10 @@ export const useCreateApprove = () => {
   const { setInputsDisabled, setActiveStep, setActiveOfferStep, setOfferFromState, offerFromState } =
     useOfferCreateContext();
 
-  const { isValid, tokenFromAddress, tokenFromDecimals } = useTokenData();
   const { address } = useAccount();
 
   const { isGreater: isCreateApproveGreater } = useGetBalanceGreater({
-    tokenAddress: tokenFromAddress,
+    tokenAddress: offerFromState.from,
     tokenAmount: offerFromState.amount,
   });
 
@@ -43,26 +41,34 @@ export const useCreateApprove = () => {
   };
 
   const createApproveRequest = useMemo(() => {
-    if (!tokenFromAddress || !offerFromState.amount || !address) return;
+    if (!address || !offerFromState.from || !offerFromState.amount || !offerFromState.decimals) return;
+    if (isCreateApproveGreater() && !offerFromState.isInfinite) return;
 
     let amount;
     try {
-      amount = offerFromState.isInfinite ? maxUint256 : parseUnits(offerFromState.amount, tokenFromDecimals);
+      amount = offerFromState.isInfinite ? maxUint256 : parseUnits(offerFromState.amount, offerFromState.decimals);
     } catch (e) {
       amount = BigInt(0);
     }
 
     return {
-      address: tokenFromAddress,
+      address: offerFromState.from,
       abi: erc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],
       account: address,
     };
-  }, [tokenFromAddress, offerFromState.amount, offerFromState.isInfinite, address, tokenFromDecimals]);
+  }, [
+    address,
+    offerFromState.from,
+    offerFromState.amount,
+    offerFromState.decimals,
+    offerFromState.isInfinite,
+    isCreateApproveGreater,
+  ]);
 
   const createApproveHandler = async () => {
-    if (!isValid) return;
+    if (!offerFromState.from || !offerFromState.decimals) return;
     if (isCreateApproveGreater() && !offerFromState.isInfinite) {
       setOfferFromState({ amountError: t('error.insufficientBalance') });
       throw new Error('Insufficient balance');
@@ -70,9 +76,10 @@ export const useCreateApprove = () => {
     setOfferFromState({ amountError: '' });
     const amount = offerFromState.isInfinite
       ? maxUint256
-      : parseUnits(String(offerFromState.amount), tokenFromDecimals);
+      : parseUnits(String(offerFromState.amount), offerFromState.decimals);
+
     return approveContract({
-      address: tokenFromAddress,
+      address: offerFromState.from,
       abi: erc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],

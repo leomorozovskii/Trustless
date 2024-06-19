@@ -44,7 +44,7 @@ const OfferButtons = () => {
       setActiveOfferStep(1);
       setActiveStep(OfferProgress.None);
     }
-  }, [approveButtonDisabled, setActiveStep]);
+  }, [approveButtonDisabled, setActiveOfferStep, setActiveStep]);
 
   return (
     <div className={s.createContainer}>

@@ -1,7 +1,8 @@
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
 // TODO :: move to shared
+import { useTranslation } from 'react-i18next';
+
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 // TODO :: move to shared
 import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
@@ -11,13 +12,12 @@ import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 import s from './CancelInfo.module.scss';
 
 const CancelInfo = ({ cancelId }: { cancelId: string }) => {
-  const router = useRouter();
+  const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
-
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const router = useRouter();
 
   const { tokenFrom, amountFrom, tokenTo, amountTo, isLoading, active, isCreator } = useGetOfferDetails({
-    id: String(cancelId),
+    id: cancelId,
   });
 
   const { tokenName: tokenFromName, tokenValue: tokenFromValue } = useTokenInfo({
@@ -31,31 +31,29 @@ const CancelInfo = ({ cancelId }: { cancelId: string }) => {
   });
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted || isLoading) return;
+    if (isLoading) return;
 
     if (!active) {
-      handleAddItem({ title: 'Error', text: 'The offer was accepted or closed', type: 'error' });
+      handleAddItem({ title: t('error.message'), text: t('error.acceptedOrClosed'), type: 'error' });
       router.push('/offer/create');
     } else if (isCreator === false) {
-      handleAddItem({ title: 'Error', text: 'This is not your offer', type: 'error' });
+      handleAddItem({ title: t('error.message'), text: t('error.notYour'), type: 'error' });
       router.push('/offer/create');
     }
-  }, [active, isLoading, isCreator, isMounted]);
+  }, [active, isLoading, isCreator, handleAddItem, router, t]);
 
   return (
     <Skeleton loading={isLoading}>
       <div className={s.container}>
         <p className={s.text}>
-          You are about to cancel the following offer:{' '}
+          {t('offer.cancel.aboutTo')}:{' '}
           <span className={s.bold}>
             {tokenToValue} {tokenToName} to {tokenFromValue} {tokenFromName}.
           </span>
         </p>
-        <p className={s.text}>After cancelling, {tokenFromName} tokens will be send back to your wallet.</p>
+        <p className={s.text}>
+          {t('offer.cancel.after')}, {tokenFromName} {t('offer.cancel.tokensWillBeSend')}
+        </p>
       </div>
     </Skeleton>
   );

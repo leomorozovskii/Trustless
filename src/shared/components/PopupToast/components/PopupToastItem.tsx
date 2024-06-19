@@ -21,7 +21,7 @@ const PopupToastItem: FC<PopupToastItemProps> = ({ item, handleRemoveItem }) => 
     return () => {
       clearTimeout(timer);
     };
-  }, [item]);
+  }, [handleRemoveItem, item]);
 
   return (
     <div className={cn(s.item, { [s.success]: item.type === 'success', [s.error]: item.type === 'error' })}>

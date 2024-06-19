@@ -17,8 +17,9 @@ const AddCustomToken: FC<IAddCustomToken> = ({ type }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const { inputsDisabled } = useOfferCreateContext();
-  const [opened, setOpened] = useState<boolean>(false);
   const { address } = useAccount();
+
+  const [opened, setOpened] = useState<boolean>(false);
 
   const openModal = useCallback(() => {
     if (!address) {

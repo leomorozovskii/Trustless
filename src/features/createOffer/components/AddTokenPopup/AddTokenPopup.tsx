@@ -2,9 +2,9 @@
 /* eslint-disable import/no-deprecated */
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getAddress, isAddress } from 'viem';
+import { erc20Abi, formatUnits, getAddress, isAddress } from 'viem';
 import type { Address } from 'viem';
-import { useAccount, useBalance, useToken } from 'wagmi';
+import { useAccount, useReadContracts } from 'wagmi';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
@@ -48,9 +48,34 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     },
   );
 
-  const result = useToken({
-    address: tokenState.address,
-  });
+  const { data: result } = useReadContracts(
+    userAddress && {
+      allowFailure: false,
+      contracts: [
+        {
+          address: tokenState.address,
+          abi: erc20Abi,
+          functionName: 'decimals',
+        },
+        {
+          address: tokenState.address,
+          abi: erc20Abi,
+          functionName: 'symbol',
+        },
+        {
+          address: tokenState.address,
+          abi: erc20Abi,
+          functionName: 'balanceOf',
+          args: [userAddress],
+        },
+      ],
+    },
+  );
+
+  const balance = useMemo(() => {
+    if (!result) return;
+    return formatUnits(result[2], result[0]);
+  }, [result]);
 
   const TokenLogo = useMemo(() => {
     if (!tokenState.address) return UnknownIcon;
@@ -59,20 +84,15 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     return data.logo;
   }, [tokenState.address]);
 
-  const { data: balance } = useBalance({
-    address: userAddress,
-    token: tokenState.address,
-  });
-
   useEffect(() => {
-    if (result.data) {
-      setTokenState({ name: result.data.symbol });
-      setTokenState({ decimal: result.data.decimals });
+    if (result) {
+      setTokenState({ name: result[1] });
+      setTokenState({ decimal: result[0] });
     } else {
       setTokenState({ name: '' });
       setTokenState({ decimal: 0 });
     }
-  }, [result.data]);
+  }, [result]);
 
   const stepHandler = () => {
     if (type === 'to') {
@@ -165,7 +185,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
                 <div className={s.balanceContainer}>
                   <h2 className={s.tokenTitle}>{tokenState.name}</h2>
                   <h2 className={s.tokenBalance}>
-                    {balance?.formatted} {tokenState.name}
+                    {balance} {tokenState.name}
                   </h2>
                 </div>
               </div>

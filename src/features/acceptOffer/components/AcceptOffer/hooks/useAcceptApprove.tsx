@@ -24,7 +24,7 @@ export const useAcceptApprove = () => {
 
   const { isGreater } = useGetBalanceGreater({
     tokenAddress: tokenTo,
-    tokenAmount: formatUnits(amountTo, tokenDecimals),
+    tokenAmount: formatUnits(amountTo || BigInt(0), tokenDecimals),
   });
 
   const onAcceptApproveReceipt = async () => {
@@ -56,6 +56,8 @@ export const useAcceptApprove = () => {
     }
 
     const amount = isInfinite ? maxUint256 : amountTo;
+
+    if (!tokenTo || !amount) return;
 
     return approveContract({
       address: tokenTo,

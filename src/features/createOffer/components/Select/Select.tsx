@@ -3,8 +3,9 @@
 import cn from 'classnames';
 import type { ComponentProps, FC } from 'react';
 import { useMemo, useState } from 'react';
+import { erc20Abi } from 'viem';
 import type { Address } from 'viem';
-import { useToken } from 'wagmi';
+import { useReadContracts } from 'wagmi';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { SelectTokenPopup } from '@berezka-dao/features/createOffer/components/SelectTokenPopup';
@@ -18,7 +19,7 @@ interface ISelect {
   value?: Address;
   placeholder: string;
   disabled?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: string, decimals: number) => void;
   type?: 'from' | 'to' | 'default';
 }
 
@@ -27,13 +28,20 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
   const { customTokenName } = useOfferCreateContext();
   const { userTokens } = useOfferCreateContext();
 
-  const handleSelectToken = (tokenAddress: string) => {
-    onChange(tokenAddress);
+  const handleSelectToken = (tokenAddress: string, decimals: number) => {
+    onChange(tokenAddress, decimals);
     setOpened(false);
   };
 
-  const result = useToken({
-    address: value,
+  const { data: result } = useReadContracts({
+    allowFailure: false,
+    contracts: [
+      {
+        address: value,
+        abi: erc20Abi,
+        functionName: 'symbol',
+      },
+    ],
   });
 
   const IconComponent: FC<ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
@@ -49,10 +57,10 @@ const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, typ
     const walletToken = userTokens.tokens?.find((el) => el.address === value)?.symbol;
     if (type === 'from' && value && walletToken) return walletToken;
     const notImported = TOKEN_MAP[value]?.name;
-    if (!notImported && !result.data) return customTokenName;
-    if (!notImported && result.data) return result.data.symbol;
+    if (!notImported && !result) return customTokenName;
+    if (!notImported && result) return result[0];
     return TOKEN_MAP[value].name;
-  }, [value, userTokens.tokens, type, result.data, customTokenName]);
+  }, [value, userTokens.tokens, type, result, customTokenName]);
 
   const handleOpen = () => {
     if (disabled) return;

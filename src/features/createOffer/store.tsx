@@ -13,7 +13,6 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
       ...newState,
     }),
     {
-      from: '',
       amount: '',
       amountError: '',
       isInfinite: false,
@@ -28,7 +27,6 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
       ...newState,
     }),
     {
-      to: '',
       amount: '',
       amountError: '',
       decimals: 0,

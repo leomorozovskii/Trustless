@@ -10,12 +10,12 @@ import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/Accep
 import { isEmptyAddress } from '../utils/isEmptyAddress';
 
 interface OfferDetails {
-  tokenFrom: Address;
-  tokenTo: Address;
+  tokenFrom?: Address;
+  tokenTo?: Address;
   amountFrom: bigint;
   amountTo: bigint;
-  creator: Address;
-  receiver: Address;
+  creator?: Address;
+  receiver?: Address;
   fee: bigint;
   active: boolean;
   completed: boolean;
@@ -122,20 +122,8 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   });
   const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details.tokenTo.id : '0x' });
 
-  const offerDetails: OfferDetails = useMemo(() => {
-    if (!details) {
-      return {
-        tokenFrom: '' as Address,
-        tokenTo: '' as Address,
-        amountFrom: BigInt(0),
-        amountTo: BigInt(0),
-        creator: '' as Address,
-        receiver: '' as Address,
-        fee: BigInt(0),
-        active: false,
-        completed: false,
-      };
-    }
+  const offerDetails: OfferDetails | undefined = useMemo(() => {
+    if (!details) return;
 
     return {
       tokenFrom: details.tokenFrom.id,
@@ -151,13 +139,13 @@ export const useGetOfferDetails = ({ id }: { id: string | null }) => {
   }, [details]);
 
   useEffect(() => {
-    if (!address || !offerDetails.creator) return;
+    if (!address || !offerDetails?.creator) return;
     try {
       setIsCreator(getAddress(address) === getAddress(offerDetails.creator));
     } catch (e) {
       setIsCreator(false);
     }
-  }, [address, offerDetails.creator]);
+  }, [address, offerDetails?.creator]);
 
   useEffect(() => {
     if (!address || !details || !details.receiver) return;

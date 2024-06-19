@@ -19,7 +19,7 @@ import type { IToken } from './types';
 interface ISelectTokenPopup {
   setOpened: Dispatch<SetStateAction<boolean>>;
   type?: 'from' | 'to' | 'default';
-  handleSelectToken(tokenAddress: string): void;
+  handleSelectToken(tokenAddress: string, decimals: number): void;
 }
 
 const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken, type = 'default' }) => {
@@ -89,7 +89,7 @@ const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken,
                     ?.slice(0, 7)
                     .map((token, idx) => (
                       <TokenItem
-                        onClick={() => handleSelectToken(token.address)}
+                        onClick={() => handleSelectToken(token.address, token.decimals)}
                         key={idx}
                         title={token.symbol}
                         IconComponent={getTokenIcon(token)}
@@ -99,7 +99,7 @@ const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken,
                     .slice(0, 7)
                     .map(([address, token], idx) => (
                       <TokenItem
-                        onClick={() => handleSelectToken(address)}
+                        onClick={() => handleSelectToken(address, token.decimals)}
                         key={idx}
                         title={token.name}
                         IconComponent={getTokenIcon(token)}
@@ -112,7 +112,7 @@ const SelectTokenPopup: FC<ISelectTokenPopup> = ({ setOpened, handleSelectToken,
           <Skeleton loading={userTokens.isLoading}>
             <div className={s.body}>
               {filteredSearchedData?.map((el) => (
-                <button key={el.address} onClick={() => handleSelectToken(el.address)}>
+                <button key={el.address} onClick={() => handleSelectToken(el.address, el.decimals)}>
                   <div className={s.item}>
                     {'logo' in el ? <el.logo width={20} height={20} /> : <UnknownIcon />}
                     <p className={s.label}>{el.name}</p>

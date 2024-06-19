@@ -6,8 +6,8 @@ import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/Accep
 import s from '../AcceptOffer.module.scss';
 
 interface ITokenEntity {
-  address: Address;
-  amount: bigint;
+  address?: Address;
+  amount?: bigint;
   type: 'pay' | 'get';
 }
 

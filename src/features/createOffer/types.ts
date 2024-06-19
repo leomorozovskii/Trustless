@@ -36,7 +36,7 @@ interface IOfferCreateValues {
 }
 
 interface IOfferFrom {
-  from: string;
+  from?: Address;
   amount: string;
   amountError?: string;
   isInfinite: boolean;
@@ -50,7 +50,7 @@ interface ITokensReducer {
 }
 
 type IOfferTo = Omit<IOfferFrom, 'from' | 'rate' | 'isInfinite'> & {
-  to: string;
+  to?: Address;
   receiver?: string;
 };
 

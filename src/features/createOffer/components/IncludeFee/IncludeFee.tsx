@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import type { Address } from 'viem';
 
 import { useGetFee } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetFee';
 import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
@@ -13,7 +12,7 @@ const IncludeFee = () => {
   const { offerFromState, setOfferFromState, activeStep } = useOfferCreateContext();
   const { calculatedFee } = useGetFee();
   const { tokenName } = useTokenInfo({
-    address: offerFromState.from as Address,
+    address: offerFromState.from,
     withFee: true,
   });
 

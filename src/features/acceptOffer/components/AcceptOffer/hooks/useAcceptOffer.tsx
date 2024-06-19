@@ -22,7 +22,7 @@ export const useAcceptOffer = () => {
 
   const { isGreater } = useGetBalanceGreater({
     tokenAddress: tokenTo,
-    tokenAmount: formatUnits(amountTo, tokenDecimals),
+    tokenAmount: formatUnits(amountTo || BigInt(0), tokenDecimals),
   });
 
   const { writeContractAsync: acceptContract } = useWriteContract();

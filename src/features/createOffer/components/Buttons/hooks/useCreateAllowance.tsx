@@ -6,14 +6,11 @@ import { environment } from '@berezka-dao/core/environment';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 
-import { useTokenData } from './useTokenData';
-
 export const useCreateAllowance = () => {
   const { offerFromState, activeStep, setActiveOfferStep, setActiveStep, setInputsDisabled, setOfferFromState } =
     useOfferCreateContext();
 
   const { address: userAddress } = useAccount();
-  const { tokenFromAddress, tokenFromDecimals } = useTokenData();
 
   const {
     data: createOfferAllowance,
@@ -21,7 +18,7 @@ export const useCreateAllowance = () => {
     refetch: refetchAllowance,
   } = useReadContract(
     userAddress && {
-      address: tokenFromAddress,
+      address: offerFromState.from,
       abi: erc20Abi,
       functionName: 'allowance',
       args: [userAddress, environment.contractAddress],
@@ -29,15 +26,10 @@ export const useCreateAllowance = () => {
   );
 
   useEffect(() => {
-    if (isGettingAllowance) return;
-    let allowance: bigint | number;
-    if (createOfferAllowance) {
-      allowance = createOfferAllowance;
-    } else {
-      allowance = 0;
-    }
+    if (isGettingAllowance || !offerFromState.decimals) return;
+    const allowance: bigint | number = createOfferAllowance || 0;
 
-    const allowanceValue = parseFloat(formatUnits(BigInt(allowance), tokenFromDecimals));
+    const allowanceValue = parseFloat(formatUnits(BigInt(allowance), offerFromState.decimals));
     const offerAmount = parseFloat(String(offerFromState.amount));
 
     if (Number.isNaN(allowanceValue) || Number.isNaN(offerAmount)) {
@@ -58,18 +50,18 @@ export const useCreateAllowance = () => {
       setInputsDisabled(false);
     }
   }, [
-    isGettingAllowance,
-    refetchAllowance,
-    createOfferAllowance,
-    tokenFromDecimals,
-    tokenFromAddress,
-    offerFromState.amount,
     activeStep,
     setActiveStep,
     setActiveOfferStep,
     setInputsDisabled,
-    userAddress,
     setOfferFromState,
+    offerFromState.from,
+    offerFromState.amount,
+    offerFromState.decimals,
+    userAddress,
+    refetchAllowance,
+    createOfferAllowance,
+    isGettingAllowance,
   ]);
 
   return {
