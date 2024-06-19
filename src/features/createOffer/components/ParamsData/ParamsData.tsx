@@ -59,7 +59,7 @@ const ParamsData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { data: tokenDecimals } = useReadContracts(
+  const { data: [tokenFromDecimals, tokenToDecimals] = [] } = useReadContracts(
     offerToState.to && {
       allowFailure: false,
       contracts: [
@@ -78,14 +78,14 @@ const ParamsData = () => {
   );
 
   useEffect(() => {
-    if (!tokenDecimals) return;
-    setOfferFromState({ decimals: tokenDecimals[0] });
-  }, [setOfferFromState, tokenDecimals]);
+    if (!tokenFromDecimals) return;
+    setOfferFromState({ decimals: tokenFromDecimals });
+  }, [setOfferFromState, tokenFromDecimals]);
 
   useEffect(() => {
-    if (!tokenDecimals) return;
-    setOfferToState({ decimals: tokenDecimals[1] });
-  }, [setOfferToState, tokenDecimals]);
+    if (!tokenToDecimals) return;
+    setOfferToState({ decimals: tokenToDecimals });
+  }, [setOfferToState, tokenToDecimals]);
 
   return null;
 };

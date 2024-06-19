@@ -16,7 +16,7 @@ interface IUseTokenInfo {
 }
 
 export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
-  const { data: result } = useReadContracts({
+  const { data: [decimals, name] = [] } = useReadContracts({
     allowFailure: false,
     contracts: [
       {
@@ -37,11 +37,11 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
   const token = useMemo(() => {
     if (!address) return;
     const localToken = TOKEN_MAP[address];
-    if (!localToken && result) {
-      return result;
+    if (!localToken && decimals && name) {
+      return { decimals, name };
     }
     return localToken;
-  }, [address, result]);
+  }, [address, decimals, name]);
 
   const isCustom = useMemo(() => {
     if (!address) return;
@@ -58,14 +58,12 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
 
   const tokenName = useMemo(() => {
     if (!token) return;
-    if ('name' in token) return token.name;
-    return token[1];
+    return token.name;
   }, [token]);
 
   const tokenDecimals = useMemo(() => {
     if (!token) return;
-    if ('decimals' in token) return token.decimals;
-    return token[0];
+    return token.decimals;
   }, [token]);
 
   const tokenValue = useMemo(() => {

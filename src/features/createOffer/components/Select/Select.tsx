@@ -31,7 +31,7 @@ const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'd
     setOpened(false);
   };
 
-  const { data: result } = useReadContracts({
+  const { data: [symbol] = [] } = useReadContracts({
     allowFailure: false,
     contracts: [
       {
@@ -55,10 +55,10 @@ const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'd
     const walletToken = userTokens.tokens?.find((el) => el.address === value)?.symbol;
     if (type === 'from' && value && walletToken) return walletToken;
     const notImported = TOKEN_MAP[value]?.name;
-    if (!notImported && !result) return customTokenName;
-    if (!notImported && result) return result[0];
+    if (!notImported && !symbol) return customTokenName;
+    if (!notImported && symbol) return symbol;
     return TOKEN_MAP[value].name;
-  }, [value, userTokens.tokens, type, result, customTokenName]);
+  }, [value, userTokens.tokens, type, symbol, customTokenName]);
 
   const handleOpen = () => {
     if (disabled) return;

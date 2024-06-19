@@ -47,7 +47,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
     },
   );
 
-  const { data: result } = useReadContracts(
+  const { data: [decimals, symbol, balanceOf] = [] } = useReadContracts(
     userAddress && {
       allowFailure: false,
       contracts: [
@@ -72,9 +72,9 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
   );
 
   const balance = useMemo(() => {
-    if (!result) return;
-    return formatUnits(result[2], result[0]);
-  }, [result]);
+    if (!balanceOf || !decimals) return;
+    return formatUnits(balanceOf, decimals);
+  }, [balanceOf, decimals]);
 
   const TokenLogo = useMemo(() => {
     if (!tokenState.address) return UnknownIcon;
@@ -84,14 +84,14 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
   }, [tokenState.address]);
 
   useEffect(() => {
-    if (result) {
-      setTokenState({ name: result[1] });
-      setTokenState({ decimal: result[0] });
+    if (symbol && decimals) {
+      setTokenState({ name: symbol });
+      setTokenState({ decimal: decimals });
     } else {
       setTokenState({ name: '' });
       setTokenState({ decimal: 0 });
     }
-  }, [result]);
+  }, [decimals, symbol]);
 
   const stepHandler = () => {
     if (type === 'to') {

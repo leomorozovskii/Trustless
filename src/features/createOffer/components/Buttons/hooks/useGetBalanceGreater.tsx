@@ -11,7 +11,7 @@ interface IUseGetBalanceGreater {
 export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: IUseGetBalanceGreater) => {
   const { address: userAddress } = useAccount();
 
-  const { data: result } = useReadContracts(
+  const { data: [decimals, balanceOf] = [] } = useReadContracts(
     userAddress && {
       allowFailure: false,
       contracts: [
@@ -31,9 +31,9 @@ export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: IUseGetBalan
   );
 
   const isGreater = useCallback(() => {
-    if (!result) return;
-    return Number(tokenAmount) > Number(formatUnits(result[1], result[0]));
-  }, [result, tokenAmount]);
+    if (!decimals || !balanceOf) return;
+    return Number(tokenAmount) > Number(formatUnits(balanceOf, decimals));
+  }, [decimals, balanceOf, tokenAmount]);
   return {
     isGreater,
   };
