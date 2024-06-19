@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Address } from 'viem';
-import { getAddress } from 'viem';
+import { formatUnits, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
 
 import { subgraphClient } from '@berezka-dao/core/configs';
@@ -52,9 +52,17 @@ type OfferDetailsQueryRaw = {
       decimals: string;
     };
     amountFrom: string;
+    formattedAmountFrom: string;
     amountFromWithFee: string;
     amountTo: string;
+    formattedAmountTo: string;
     creator: Address;
+    isCreator: boolean | undefined;
+    receiver: Address;
+    isReceiver: boolean | undefined;
+    fee: bigint;
+    rateToFrom: number;
+    isTokenFromCustom: boolean;
     active: boolean;
     optionalTaker: Address;
     completed: boolean;
@@ -73,6 +81,14 @@ export const useGetOfferDetails = ({ id }: { id: string }) => {
       return subgraphClient.request<OfferDetailsQueryRaw>(OFFER_DETAILS_QUERY, { id: id }).then((data) => {
         const amountFrom = BigInt(data.tradeOffer.amountFrom);
         const amountTo = BigInt(data.tradeOffer.amountTo);
+        const formattedAmountFrom = formatUnits(
+          BigInt(data.tradeOffer.amountFromWithFee),
+          Number(data.tradeOffer.tokenFrom.decimals),
+        );
+        const formattedAmountTo = formatUnits(
+          BigInt(data.tradeOffer.amountTo),
+          Number(data.tradeOffer.tokenTo.decimals),
+        );
         const fee = amountFrom - BigInt(data.tradeOffer.amountFromWithFee);
 
         const isTokenFromCustom = getIsTokenCustom(getAddress(data.tradeOffer.tokenFrom.id));
@@ -96,7 +112,9 @@ export const useGetOfferDetails = ({ id }: { id: string }) => {
             id: getAddress(data.tradeOffer.tokenTo.id),
           },
           amountFrom,
+          formattedAmountFrom,
           amountTo,
+          formattedAmountTo,
           creator: getAddress(data.tradeOffer.creator),
           receiver: getAddress(data.tradeOffer.optionalTaker),
           fee,

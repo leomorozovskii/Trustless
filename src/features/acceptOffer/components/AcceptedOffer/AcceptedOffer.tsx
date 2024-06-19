@@ -14,18 +14,20 @@ import s from './AcceptedOffer.module.scss';
 const AcceptedOffer: FC = () => {
   const { t } = useTranslation();
   const { txHash, acceptId } = useOfferAcceptContext();
-  const { tokenFrom, tokenTo, amountTo, amountFrom, rateToFrom } = useGetOfferDetails({ id: acceptId });
+  const { tokenFrom, tokenTo, formattedAmountTo, formattedAmountFrom, rateToFrom } = useGetOfferDetails({
+    id: acceptId,
+  });
 
   return (
     <div className={s.wrapper}>
       <SuccessAcceptIcon />
       <div className={s.labelContainer}>
         <h2 className={s.label}>
-          {tokenTo?.symbol} {amountTo}
+          {tokenTo?.symbol} {formattedAmountTo}
         </h2>
         <SmallArrow />
         <h2 className={s.label}>
-          {tokenFrom?.symbol} {amountFrom}
+          {tokenFrom?.symbol} {formattedAmountFrom}
         </h2>
         <h2 className={s.label}>
           {t('offer.accept.rate')} {rateToFrom}

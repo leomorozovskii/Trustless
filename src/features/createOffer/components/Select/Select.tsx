@@ -2,6 +2,8 @@ import cn from 'classnames';
 import type { ComponentProps, FC } from 'react';
 import { useMemo, useState } from 'react';
 import type { Address } from 'viem';
+import { erc20Abi } from 'viem';
+import { useReadContract } from 'wagmi';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
@@ -31,6 +33,12 @@ const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, on
     setOpened(false);
   };
 
+  const { data: symbol } = useReadContract({
+    address: value,
+    abi: erc20Abi,
+    functionName: 'symbol',
+  });
+
   const IconComponent: FC<ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
     if (!value) return;
     const item = TOKEN_MAP[value];
@@ -43,9 +51,10 @@ const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, on
     const walletToken = tokens?.find((el) => el.address === value)?.symbol;
     if (walletToken) return walletToken;
     const notImported = TOKEN_MAP[value]?.symbol;
-    if (!notImported) return customTokenName;
+    if (!notImported && !symbol) return customTokenName;
+    if (!notImported && symbol) return symbol;
     return TOKEN_MAP[value].symbol;
-  }, [value, tokens, customTokenName]);
+  }, [value, tokens, symbol, customTokenName]);
 
   const handleOpen = () => {
     if (disabled) return;

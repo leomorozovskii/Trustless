@@ -12,26 +12,27 @@ export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: IUseGetBalan
   const { address: userAddress } = useAccount();
 
   const { data: [decimals, balanceOf] = [] } = useReadContracts(
-    userAddress && {
-      allowFailure: false,
-      contracts: [
-        {
-          address: tokenAddress,
-          abi: erc20Abi,
-          functionName: 'decimals',
-        },
-        {
-          address: tokenAddress,
-          abi: erc20Abi,
-          functionName: 'balanceOf',
-          args: [userAddress],
-        },
-      ],
-    },
+    userAddress &&
+      tokenAddress && {
+        allowFailure: false,
+        contracts: [
+          {
+            address: tokenAddress,
+            abi: erc20Abi,
+            functionName: 'decimals',
+          },
+          {
+            address: tokenAddress,
+            abi: erc20Abi,
+            functionName: 'balanceOf',
+            args: [userAddress],
+          },
+        ],
+      },
   );
 
   const isGreater = useCallback(() => {
-    if (!decimals || !balanceOf) return;
+    if (!decimals || balanceOf === undefined) return;
     return Number(tokenAmount) > Number(formatUnits(balanceOf, decimals));
   }, [decimals, balanceOf, tokenAmount]);
   return {

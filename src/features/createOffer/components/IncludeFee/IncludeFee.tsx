@@ -13,7 +13,6 @@ const IncludeFee = () => {
   const { calculatedFee } = useGetFee();
   const { tokenName } = useTokenInfo({
     address: offerFromState.from,
-    withFee: true,
   });
 
   const fee = useMemo(() => {

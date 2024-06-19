@@ -27,13 +27,17 @@ const ShareOfferContainer: FC<Props> = ({ offerId, setActiveOfferStep }) => {
 
   const handleCopy = () => {
     if (!link) return;
-    navigator.clipboard.writeText(link);
-    if (setActiveOfferStep) setActiveOfferStep(4);
-    setCopied(true);
-    if (!copied) {
-      handleAddItem({ title: 'Link copied successfully', type: 'success' });
+    try {
+      navigator.clipboard.writeText(link);
+      if (setActiveOfferStep) setActiveOfferStep(4);
+      setCopied(true);
+      if (!copied) {
+        handleAddItem({ title: 'Link copied successfully', type: 'success' });
+      }
+      setTimeout(() => setCopied(false), 5000);
+    } catch (e) {
+      handleAddItem({ title: 'Error while copying link ', type: 'error' });
     }
-    setTimeout(() => setCopied(false), 5000);
   };
 
   if (!link) return;

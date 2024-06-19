@@ -49,7 +49,7 @@ export const useAcceptApprove = () => {
     if (isReceiver === false) {
       throw new Error('You are not the receiver. Change your wallet');
     }
-    if (isGreater()) {
+    if (isGreater() && !isInfinite) {
       throw new Error('Insufficient balance');
     }
 
