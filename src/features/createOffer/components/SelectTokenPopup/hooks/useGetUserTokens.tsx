@@ -1,7 +1,7 @@
-import { readContracts } from '@wagmi/core';
 import { useEffect } from 'react';
 import { erc20Abi, formatUnits, fromHex, getAddress } from 'viem';
 import { useAccount, useConfig } from 'wagmi';
+import { readContracts } from 'wagmi/actions';
 
 import { environment } from '@berezka-dao/core/environment';
 import type {

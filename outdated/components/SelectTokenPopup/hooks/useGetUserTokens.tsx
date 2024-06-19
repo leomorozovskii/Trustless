@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { erc20Abi, formatUnits, fromHex, getAddress } from 'viem';
 import { useAccount, useConfig } from 'wagmi';
-import { readContracts } from '@wagmi/core';
+import { readContracts } from 'wagmi/actions';
 
 import {
   IContractTokens,
