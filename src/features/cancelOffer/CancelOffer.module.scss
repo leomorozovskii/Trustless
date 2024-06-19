@@ -1,0 +1,27 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: $m $lg;
+  background: $base-white;
+  gap: $m;
+  border-bottom-right-radius: $s;
+  border-bottom-left-radius: $s;
+}
+
+.terms {
+  color: $base-black;
+  opacity: 0.5;
+
+  @include font-s-flat;
+}
+
+.conditions {
+  text-decoration-line: underline;
+  cursor: pointer;
+}

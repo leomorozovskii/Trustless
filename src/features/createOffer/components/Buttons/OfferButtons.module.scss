@@ -1,0 +1,58 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+@mixin buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: $m $lg;
+  background: $base-white;
+  gap: $m;
+  border-bottom-right-radius: $s;
+  border-bottom-left-radius: $s;
+}
+
+.createContainer {
+  @include buttons-container;
+
+  padding: $m;
+}
+
+.container {
+  @include buttons-container;
+}
+
+.label {
+  color: $base-black;
+  line-height: normal;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.terms {
+  color: $base-black;
+  opacity: 0.5;
+  line-height: normal;
+  font-size: 12px;
+}
+
+.conditions {
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: $m;
+}

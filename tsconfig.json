@@ -34,39 +34,23 @@
       }
     ],
     "paths": {
-      "@assets/*": [
-        "./assets/*"
+      "@berezka-dao/*": [
+        "./src/*"
+      ],
+      "@public/*": [
+        "./public/*"
       ],
       "@common/*": [
-        "./styles/common/*"
-      ],
-      "@context/*": [
-        "./context/*"
-      ],
-      "@components/*": [
-        "./components/*"
-      ],
-      "@styles/*": [
-        "./styles/*"
-      ],
-      "@containers/*": [
-        "./containers/*"
-      ],
-      "@lib/*": [
-        "./lib/*"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ],
-      "@~/*": [
-        "./"
-      ],
-      "@/*": [
-        "./*"
-      ],
+        "./src/styles/common/*"
+      ]
     },
     "moduleResolution": "bundler"
   },
+  "plugins": [
+    {
+      "name": "typescript-plugin-css-modules"
+    }
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -74,23 +58,16 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
-  ],
-  "plugins": [
-    {
-      "name": "typescript-plugin-css-modules"
-    }
+    ".next/types/**/*.ts",
+    ".env.d.ts"
   ],
   "exclude": [
     "node_modules",
     "./node_modules",
     "./node_modules/*",
     "./node_modules/@types/node/index.d.ts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts",
-    "**/*.stories.ts",
-    "**/*.stories.js",
-    "**/*.stories.jsx",
-    "**/*.stories.tsx"
+    "outdated",
+    "./outdated",
+    "./outdated/*",
   ]
 }

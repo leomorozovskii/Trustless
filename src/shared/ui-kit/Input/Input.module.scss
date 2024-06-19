@@ -1,0 +1,115 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+@import '@common/typo.scss';
+
+@mixin input-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: $s;
+}
+
+.label {
+  color: $base-black;
+
+  @include input-label;
+}
+
+.errorLabel {
+  color: $additional-error;
+
+  @include input-label;
+}
+
+.input {
+  --text-field-border-width: 0px;
+
+  width: 100%;
+  height: $xxl;
+  padding: 0 $s;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: $xxl;
+  color: $additional-gray-dark;
+  font-style: normal;
+  border: 1px solid $base-gray;
+  border-radius: $xxs;
+  outline: none;
+
+  & svg {
+    margin-right: 6px;
+  }
+
+  &::placeholder {
+    color: $additional-gray-dark;
+  }
+
+  &:focus-within {
+    padding: 0 7px;
+    color: $base-black;
+    border: 2px solid $base-black;
+  }
+
+  &.disabledInput {
+    color: $additional-gray-pre-middle;
+    background: $base-white;
+    border: 1px solid $additional-gray-pre-middle;
+    cursor: not-allowed;
+  }
+
+  &:not(.errorInput, :focus-within, .disabledInput):hover {
+    color: $base-black;
+    border: 1px solid $base-black;
+    transition: all 200ms ease-in-out;
+  }
+
+  &.errorInput {
+    padding: 0 7px;
+    color: $additional-error;
+    border: 2px solid $additional-error;
+  }
+}
+
+[data-theme='dark'] {
+  .input {
+    color: $base-white;
+
+    &::placeholder {
+      color: $additional-gray-middle;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.sm {
+  height: 24px;
+
+  @include font-s-flat;
+}
+
+.md {
+  height: 36px;
+
+  @include font-m-flat;
+}
+
+.lg {
+  height: 48px;
+  border: 1px solid $base-black;
+  border-radius: $s !important;
+
+  @include font-3xl;
+}

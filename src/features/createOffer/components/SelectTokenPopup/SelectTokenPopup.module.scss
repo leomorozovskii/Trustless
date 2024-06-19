@@ -1,0 +1,80 @@
+@import '@common/colors.scss';
+@import '@common/variables.scss';
+@import '@common/typo.scss';
+@import '@common/mixins.scss';
+
+.wrapper {
+  @include popup-wrapper;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 370px;
+  background: $base-white;
+  border: 1px solid $additional-gray-pre-middle;
+  border-radius: $xxs;
+  box-shadow: 0 0 25px 0 rgb(0 0 0 / 15%);
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cross {
+  cursor: pointer;
+}
+
+.cross path {
+  stroke: $base-black;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 14px;
+  color: $base-black;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: $lg;
+  background: $bg-gray;
+  border-top-left-radius: $xxs;
+  border-top-right-radius: $xxs;
+  gap: $m;
+}
+
+.pinnedTokens {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  gap: $s;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 288px;
+  max-height: 288px;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: $s $lg;
+  gap: $xxs;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    background: $bg-gray;
+  }
+}

@@ -1,0 +1,28 @@
+@import '@common/variables.scss';
+@import '@common/colors.scss';
+
+.serviceContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.feeLabel {
+  color: $base-black;
+  line-height: normal;
+  font-size: 12px;
+}
+
+.feeContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+.info {
+  opacity: 0.5;
+  display: flex;
+}
