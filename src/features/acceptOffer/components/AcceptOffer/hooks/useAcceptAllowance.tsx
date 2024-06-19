@@ -19,7 +19,7 @@ export const useAcceptAllowance = () => {
     refetch: refetchAllowance,
   } = useReadContract(
     userAddress && {
-      address: tokenTo,
+      address: tokenTo?.id,
       abi: erc20Abi,
       functionName: 'allowance',
       args: [userAddress, environment.contractAddress],

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import s from '../AcceptOffer.module.scss';
 
 type Props = {
-  value: string | undefined;
+  value: number | undefined;
 };
 
 const RateContainer: FC<Props> = ({ value }) => {

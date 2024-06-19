@@ -6,7 +6,6 @@ import { useAccount, useWriteContract } from 'wagmi';
 import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
 import { environment } from '@berezka-dao/core/environment';
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { useGetBalanceGreater } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetBalanceGreater';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
@@ -17,12 +16,11 @@ export const useAcceptOffer = () => {
   const { setActiveAcceptStep, setTxHash, acceptId } = useOfferAcceptContext();
 
   const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
-  const { tokenDecimals } = useTokenInfo({ address: tokenTo });
   const { address } = useAccount();
 
   const { isGreater } = useGetBalanceGreater({
-    tokenAddress: tokenTo,
-    tokenAmount: formatUnits(amountTo || BigInt(0), tokenDecimals),
+    tokenAddress: tokenTo?.id,
+    tokenAmount: formatUnits(amountTo || BigInt(0), Number(tokenTo?.decimals)),
   });
 
   const { writeContractAsync: acceptContract } = useWriteContract();

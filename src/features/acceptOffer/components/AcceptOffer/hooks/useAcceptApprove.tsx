@@ -5,7 +5,6 @@ import { useAccount, useWriteContract } from 'wagmi';
 import { environment } from '@berezka-dao/core/environment';
 import { useAcceptAllowance } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptAllowance';
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { useGetBalanceGreater } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetBalanceGreater';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
@@ -16,15 +15,14 @@ export const useAcceptApprove = () => {
   const { setActiveAcceptStep, acceptId, isInfinite } = useOfferAcceptContext();
   const { address } = useAccount();
   const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
-  const { tokenDecimals } = useTokenInfo({ address: tokenTo });
 
   const { writeContractAsync: approveContract } = useWriteContract();
 
   const { refetchAllowance } = useAcceptAllowance();
 
   const { isGreater } = useGetBalanceGreater({
-    tokenAddress: tokenTo,
-    tokenAmount: formatUnits(amountTo || BigInt(0), tokenDecimals),
+    tokenAddress: tokenTo?.id,
+    tokenAmount: formatUnits(amountTo || BigInt(0), Number(tokenTo?.decimals)),
   });
 
   const onAcceptApproveReceipt = async () => {
@@ -39,7 +37,7 @@ export const useAcceptApprove = () => {
     const amount = isInfinite ? maxUint256 : amountTo;
 
     return {
-      address: tokenTo,
+      address: tokenTo?.id,
       abi: erc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],
@@ -60,7 +58,7 @@ export const useAcceptApprove = () => {
     if (!tokenTo || !amount) return;
 
     return approveContract({
-      address: tokenTo,
+      address: tokenTo?.id,
       abi: erc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],

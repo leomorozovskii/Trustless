@@ -15,9 +15,9 @@ const TokensContainer: FC = () => {
   return (
     <div className={s.offerWrapper}>
       <div className={s.arrowContainer}>
-        <TokenEntity type="pay" address={tokenTo} amount={amountTo} />
+        <TokenEntity type="pay" address={tokenTo?.id} amount={amountTo} />
         <AcceptOfferIcon />
-        <TokenEntity type="get" address={tokenFrom} amount={amountFrom} />
+        <TokenEntity type="get" address={tokenFrom?.id} amount={amountFrom} />
       </div>
       <RateContainer value={rateToFrom} />
     </div>
