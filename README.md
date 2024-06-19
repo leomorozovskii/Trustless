@@ -1,41 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About the project
 
-## Stack
-- https://nextjs.org/docs/getting-started/installation (next js)
-- https://orm.drizzle.team/docs/get-started-postgresql (postgresql driver drizzle)
-- https://github.com/electric-sql/pglite (pg lite)
+The project was created on Next.js. `yarn v1+` is used to manage dependencies.
 
-## Getting Started
+`yarn dev` - start dev server. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result..
 
-First, run the development server:
+`yarn build` - build project for production.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`yarn start` - start production server after build.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project uses environment variables from the `.env` file. After downloading the project, you need to create a `.env` file in the project root and fill it with the appropriate variables. An example of filling can be found in the `.env.example` file. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `NEXT_PUBLIC_APP_NAME` - your application name.
 
-## Learn More
+- `NEXT_PUBLIC_PROJECT_ID` - projectId from [WalletConnect Cloud](https://cloud.walletconnect.com) for WalletConnect.
 
-To learn more about Next.js, take a look at the following resources:
+- `NEXT_PUBLIC_CONTRACT_ADDRESS` - TrustlessOTC contract address.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_ALCHEMY_API_URL` - Alchemy API URL from [Alchemy Dashboard](https://dashboard.alchemy.com).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `NEXT_PUBLIC_SUBGRAPH_ENDPOINT` - endpoint for queries to the subgraph.
 
-## Deploy on Vercel
+- `NEXT_PUBLIC_NETWORK` - one of the supported networks. `mainnet`, `arbitrum` and `sepolia` are currently supported.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `NEXT_PUBLIC_SITE_URL` - url of your site. To display links to created offers.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `NEXT_PUBLIC_ETHERSCAN_API_URL` - etherscan API URL. For request for current eth_usd price.
