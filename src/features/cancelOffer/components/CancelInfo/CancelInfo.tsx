@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-// TODO :: move to shared
 import { useTranslation } from 'react-i18next';
 
+// TODO :: move to shared
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 // TODO :: move to shared
 import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';

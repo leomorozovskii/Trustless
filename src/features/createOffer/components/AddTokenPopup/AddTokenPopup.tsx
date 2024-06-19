@@ -1,3 +1,4 @@
+import type { Dispatch, FC, FormEvent, SetStateAction } from 'react';
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { erc20Abi, formatUnits, getAddress, isAddress } from 'viem';
@@ -21,11 +22,11 @@ interface IAddTokenPopupState {
 }
 
 interface IAddTokenPopup {
-  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpened: Dispatch<SetStateAction<boolean>>;
   type: 'from' | 'to';
 }
 
-const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
+const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const { t } = useTranslation();
   const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
   const [localAddress, setLocalAddress] = useState<string>('');
@@ -102,7 +103,7 @@ const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
     }
   };
 
-  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 1) {
       setStep(2);

@@ -21,7 +21,7 @@ interface ISelect {
   type?: 'from' | 'to' | 'default';
 }
 
-const Select: React.FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
+const Select: FC<ISelect> = ({ placeholder, value, onChange, disabled, type = 'default' }) => {
   const [opened, setOpened] = useState<boolean>(false);
   const { customTokenName } = useOfferCreateContext();
   const { userTokens } = useOfferCreateContext();
