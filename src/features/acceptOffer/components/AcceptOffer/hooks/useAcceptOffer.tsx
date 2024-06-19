@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import type { TransactionReceipt } from 'viem';
-import { formatUnits } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
@@ -15,12 +14,12 @@ export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();
   const { setActiveAcceptStep, setTxHash, acceptId } = useOfferAcceptContext();
 
-  const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
+  const { tokenTo, formattedAmountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
   const { address } = useAccount();
 
   const { isGreater } = useGetBalanceGreater({
     tokenAddress: tokenTo?.id,
-    tokenAmount: formatUnits(amountTo || BigInt(0), Number(tokenTo?.decimals)),
+    tokenAmount: formattedAmountTo,
   });
 
   const { writeContractAsync: acceptContract } = useWriteContract();

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { erc20Abi, formatUnits, maxUint256 } from 'viem';
+import { erc20Abi, maxUint256 } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import { environment } from '@berezka-dao/core/environment';
@@ -14,7 +14,7 @@ export const useAcceptApprove = () => {
   const { handleAddItem } = useToastifyContext();
   const { setActiveAcceptStep, acceptId, isInfinite } = useOfferAcceptContext();
   const { address } = useAccount();
-  const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
+  const { tokenTo, amountTo, formattedAmountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
 
   const { writeContractAsync: approveContract } = useWriteContract();
 
@@ -22,7 +22,7 @@ export const useAcceptApprove = () => {
 
   const { isGreater } = useGetBalanceGreater({
     tokenAddress: tokenTo?.id,
-    tokenAmount: formatUnits(amountTo || BigInt(0), Number(tokenTo?.decimals)),
+    tokenAmount: formattedAmountTo,
   });
 
   const onAcceptApproveReceipt = async () => {
