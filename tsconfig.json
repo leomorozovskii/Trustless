@@ -40,9 +40,6 @@
       "@public/*": [
         "./public/*"
       ],
-      "@generated/*": [
-        "./generated/*"
-      ],
       "@common/*": [
         "./src/styles/common/*"
       ]
