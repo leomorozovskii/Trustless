@@ -1,6 +1,5 @@
 // TODO :: Remove deprecated
 /* eslint-disable import/no-deprecated */
-import type { Dispatch, FC, FormEvent, SetStateAction } from 'react';
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAddress, isAddress } from 'viem';
@@ -18,19 +17,20 @@ import { Input } from '@berezka-dao/shared/ui-kit/Input';
 import s from './AddTokenPopup.module.scss';
 
 interface IAddTokenPopupState {
-  address: string;
+  address?: Address;
   name: string;
   decimal: number;
 }
 
 interface IAddTokenPopup {
-  setOpened: Dispatch<SetStateAction<boolean>>;
+  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
   type: 'from' | 'to';
 }
 
-const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
+const AddTokenPopup: React.FC<IAddTokenPopup> = ({ setOpened, type }) => {
   const { t } = useTranslation();
   const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
+  const [localAddress, setLocalAddress] = useState<string>('');
   const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferCreateContext();
   const { address: userAddress } = useAccount();
 
@@ -43,26 +43,25 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
       ...newState,
     }),
     {
-      address: '',
       name: '',
       decimal: 0,
     },
   );
 
   const result = useToken({
-    address: tokenState.address as Address,
+    address: tokenState.address,
   });
 
   const TokenLogo = useMemo(() => {
     if (!tokenState.address) return UnknownIcon;
-    const data = TOKEN_MAP[tokenState.address as Address];
+    const data = TOKEN_MAP[tokenState.address];
     if (!data) return UnknownIcon;
     return data.logo;
   }, [tokenState.address]);
 
   const { data: balance } = useBalance({
     address: userAddress,
-    token: tokenState.address as Address,
+    token: tokenState.address,
   });
 
   useEffect(() => {
@@ -85,7 +84,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
     }
   };
 
-  const handleAdd = (e: FormEvent<HTMLFormElement>) => {
+  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 1) {
       setStep(2);
@@ -96,22 +95,18 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
   };
 
   useClickOutside(ref, (ev) => {
-    if (!ref.current?.contains(ev.currentTarget as Node)) {
+    if (!ref.current?.contains(ev.target as Node)) {
       setOpened(false);
     }
   });
 
   const changeAddressHandler = (value: string) => {
-    try {
-      if (value && isAddress(value)) {
-        setTokenState({ address: getAddress(value) });
-      } else if (value) {
-        setTokenState({ address: value });
-      } else {
-        setTokenState({ address: '' });
-      }
+    setLocalAddress(value);
+    if (isAddress(value)) {
+      setTokenState({ address: getAddress(value) });
       setIsInvalidAddress(false);
-    } catch {
+    } else {
+      setTokenState({ address: undefined });
       setIsInvalidAddress(true);
     }
   };
@@ -142,8 +137,8 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                     ? t('token.invalid.address')
                     : ''
                 }
-                value={tokenState.address}
-                onChange={({ currentTarget }) => changeAddressHandler(currentTarget.value)}
+                value={localAddress}
+                onChange={({ target }) => changeAddressHandler(target.value)}
               />
               <Input
                 label={t('token.name')}
@@ -151,7 +146,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                 disabled
                 id="token name input"
                 value={tokenState.name}
-                onChange={({ currentTarget }) => setTokenState({ name: currentTarget.value })}
+                onChange={({ target }) => setTokenState({ name: target.value })}
               />
               <Input
                 label={t('token.decimal')}
@@ -160,7 +155,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                 classWrapper={s.decimalWrapper}
                 id="token decimal input"
                 value={tokenState.decimal ? tokenState.decimal.toString() : ''}
-                onChange={({ currentTarget }) => setTokenState({ decimal: +currentTarget.value })}
+                onChange={({ target }) => setTokenState({ decimal: +target.value })}
               />
             </>
           ) : (
