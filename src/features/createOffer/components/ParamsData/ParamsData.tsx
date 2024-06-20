@@ -5,7 +5,8 @@ import { getAddress } from 'viem';
 import { useReadContracts } from 'wagmi';
 
 import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
+
+import { useOfferCreateContext } from '../../store';
 
 const ParamsData = () => {
   const searchParams = useSearchParams();

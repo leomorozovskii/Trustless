@@ -5,11 +5,11 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { links } from '@berezka-dao/core/constants';
-import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
 import { NewWindowIcon, SmallArrow, SuccessAcceptIcon } from '@berezka-dao/shared/icons';
 import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
 import s from './AcceptedOffer.module.scss';
+import { useOfferAcceptContext } from '../../store';
 
 const AcceptedOffer: FC = () => {
   const { t } = useTranslation();

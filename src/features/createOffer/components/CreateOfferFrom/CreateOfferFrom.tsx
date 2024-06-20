@@ -1,16 +1,16 @@
 import { useEffect, useMemo } from 'react';
 import { getAddress } from 'viem';
 
-import { checkValidAmount } from '@berezka-dao/features/createOffer';
-import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/hooks';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
-import s from './OfferFrom.module.scss';
+import s from './CreateOfferFrom.module.scss';
+import { useCalculateAmountValue } from '../../hooks';
+import { useOfferCreateContext } from '../../store';
+import { checkValidAmount } from '../../utils';
 import { AddCustomToken } from '../AddCustomToken';
 import { Select } from '../Select';
 
-const OfferFrom = () => {
+const CreateOfferFrom = () => {
   const { setOfferFromState, offerFromState, offerToState, inputsDisabled, userTokens } = useOfferCreateContext();
   const { calculateRateValue } = useCalculateAmountValue();
 
@@ -101,4 +101,4 @@ const OfferFrom = () => {
   );
 };
 
-export { OfferFrom };
+export { CreateOfferFrom };

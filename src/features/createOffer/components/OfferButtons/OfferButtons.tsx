@@ -1,14 +1,14 @@
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useButtonsDisabled, useCreateApprove, useCreateTrade } from '@berezka-dao/features/createOffer/hooks';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';
 import { OfferProgress, ProgressBar } from '@berezka-dao/shared/components/ProgressBar';
 import { TxButton } from '@berezka-dao/shared/components/TxFlow';
 import { useGetMinFee } from '@berezka-dao/shared/hooks/useGetMinFee';
 
 import s from './OfferButtons.module.scss';
+import { useButtonsDisabled, useCreateApprove, useCreateTrade } from '../../hooks';
+import { useOfferCreateContext } from '../../store';
 
 const OfferButtons = () => {
   const { t } = useTranslation();

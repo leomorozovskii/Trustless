@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
+import { useOfferCreateContext } from '../store';
 
 export const useCalculateAmountValue = () => {
   const { offerFromState, offerToState, setOfferToState, setOfferFromState } = useOfferCreateContext();

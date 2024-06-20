@@ -7,11 +7,11 @@ import { useReadContract } from 'wagmi';
 import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
-import type { Token } from '@berezka-dao/features/createOffer/types';
 import { SelectIcon } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 import s from './Select.module.scss';
+import type { Token } from '../../types';
 import { SelectTokenPopup } from '../SelectTokenPopup';
 
 type Props = {

@@ -5,8 +5,6 @@ import type { FC } from 'react';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAcceptApprove, useAcceptOffer, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
-import s from '@berezka-dao/features/createOffer/components/OfferButtons/OfferButtons.module.scss';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { ProgressBar, OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
@@ -15,6 +13,10 @@ import { useGetMinFee } from '@berezka-dao/shared/hooks/useGetMinFee';
 import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 import { Checkbox } from '@berezka-dao/shared/ui-kit/Checkbox';
 import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
+
+import s from './AcceptOfferButtons.module.scss';
+import { useAcceptApprove, useAcceptOffer } from '../../hooks';
+import { useOfferAcceptContext } from '../../store';
 
 const AcceptOfferButtons: FC = () => {
   const router = useRouter();

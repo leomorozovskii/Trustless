@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 
-import { OfferCreateProvider } from '@berezka-dao/features/createOffer/store';
+import { OfferCreateProvider } from '@berezka-dao/features/createOffer';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
 import { CreateOfferTemplate } from '@berezka-dao/modules/CreateOfferTemplate';
