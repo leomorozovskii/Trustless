@@ -47,7 +47,6 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
   const [offerId, setOfferId] = useState<number | null>(null);
-  const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
@@ -58,19 +57,17 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
       activeOfferStep,
       activeStep,
       offerId,
-      customTokenName,
       inputsDisabled,
       userTokens,
       setUserTokens,
       setInputsDisabled,
-      setCustomTokenName,
       setOfferId,
       setOfferFromState,
       setOfferToState,
       setActiveOfferStep,
       setActiveStep,
     }),
-    [activeOfferStep, activeStep, customTokenName, inputsDisabled, offerFromState, offerId, offerToState, userTokens],
+    [activeOfferStep, activeStep, inputsDisabled, offerFromState, offerId, offerToState, userTokens],
   );
 
   return <OfferCreateContext.Provider value={values}>{children}</OfferCreateContext.Provider>;

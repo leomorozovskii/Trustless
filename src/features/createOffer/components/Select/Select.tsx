@@ -2,13 +2,10 @@ import cn from 'classnames';
 import type { ComponentProps, FC } from 'react';
 import { useMemo, useState } from 'react';
 import type { Address } from 'viem';
-import { erc20Abi } from 'viem';
-import { useReadContract } from 'wagmi';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
 import { SelectTokenPopup } from '@berezka-dao/features/createOffer/components/SelectTokenPopup';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import type { IToken } from '@berezka-dao/features/createOffer/types';
 import { SelectIcon } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
@@ -21,23 +18,17 @@ type Props = {
   disabled?: boolean;
   isLoading?: boolean;
   value?: Address;
+  customTokenName?: string;
   onSelect(value: string, decimals: number): void;
 };
 
-const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, onSelect }) => {
+const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, onSelect, customTokenName }) => {
   const [opened, setOpened] = useState<boolean>(false);
-  const { customTokenName } = useOfferCreateContext();
 
   const handleSelectToken = (tokenAddress: string, decimals: number) => {
     onSelect(tokenAddress, decimals);
     setOpened(false);
   };
-
-  const { data: symbol } = useReadContract({
-    address: value,
-    abi: erc20Abi,
-    functionName: 'symbol',
-  });
 
   const IconComponent: FC<ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
     if (!value) return;
@@ -51,10 +42,9 @@ const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, on
     const walletToken = tokens?.find((el) => el.address === value)?.symbol;
     if (walletToken) return walletToken;
     const notImported = TOKEN_MAP[value]?.symbol;
-    if (!notImported && !symbol) return customTokenName;
-    if (!notImported && symbol) return symbol;
+    if (!notImported) return customTokenName;
     return TOKEN_MAP[value].symbol;
-  }, [value, tokens, symbol, customTokenName]);
+  }, [value, tokens, customTokenName]);
 
   const handleOpen = () => {
     if (disabled) return;

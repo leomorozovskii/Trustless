@@ -22,12 +22,10 @@ interface IOfferCreateValues {
   activeOfferStep: number;
   activeStep: OfferProgress;
   offerId: number | null;
-  customTokenName: string;
   inputsDisabled: boolean;
   userTokens: ITokensReducer;
   setUserTokens: Dispatch<Partial<ITokensReducer>>;
   setInputsDisabled: Dispatch<SetStateAction<boolean>>;
-  setCustomTokenName: Dispatch<SetStateAction<string>>;
   setOfferId: Dispatch<SetStateAction<number | null>>;
   setOfferFromState: Dispatch<Partial<IOfferFrom>>;
   setOfferToState: Dispatch<Partial<IOfferTo>>;
@@ -39,6 +37,7 @@ interface IOfferFrom {
   from?: Address;
   amount: string;
   amountError?: string;
+  customTokenName?: string;
   isInfinite: boolean;
   decimals?: number;
   rate: string;

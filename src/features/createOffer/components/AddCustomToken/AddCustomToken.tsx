@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { Address } from 'viem';
 import { useAccount } from 'wagmi';
 
 import { AddTokenPopup } from '@berezka-dao/features/createOffer/components/AddTokenPopup';
@@ -10,10 +11,10 @@ import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import s from './AddCustomToken.module.scss';
 
 type Props = {
-  type: 'from' | 'to';
+  onProceed(decimals: number, address?: Address, symbol?: string): void;
 };
 
-const AddCustomToken: FC<Props> = ({ type }) => {
+const AddCustomToken: FC<Props> = ({ onProceed }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const { inputsDisabled } = useOfferCreateContext();
@@ -39,7 +40,7 @@ const AddCustomToken: FC<Props> = ({ type }) => {
       <button onClick={handleOpen}>
         <p className={s.label}>+ {t('offer.create.addToken')}</p>
       </button>
-      {opened && <AddTokenPopup setOpened={setOpened} type={type} />}
+      {opened && <AddTokenPopup onClose={() => setOpened(false)} onProceed={onProceed} />}
     </div>
   );
 };

@@ -31,12 +31,17 @@ const OfferTo = () => {
         <h2 className={s.selectLabel}>{t('token.to')}</h2>
         <Select
           tokens={Object.values(TOKEN_MAP)}
-          value={offerToState.to}
           placeholder="Select token"
+          value={offerToState.to}
+          customTokenName={offerToState.customTokenName}
           disabled={inputsDisabled}
           onSelect={(value, decimals) => setOfferToState({ to: getAddress(value), decimals })}
         />
-        <AddCustomToken type="to" />
+        <AddCustomToken
+          onProceed={(decimal, address, symbol) =>
+            setOfferToState({ to: address, decimals: decimal, customTokenName: symbol })
+          }
+        />
       </div>
       <Input
         id="to amount input"

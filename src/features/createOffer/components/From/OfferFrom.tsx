@@ -47,12 +47,17 @@ const OfferFrom = () => {
         <h2 className={s.selectLabel}>From</h2>
         <Select
           tokens={userTokens.tokens}
-          value={offerFromState.from}
           placeholder="Select token"
+          value={offerFromState.from}
+          customTokenName={offerFromState.customTokenName}
           disabled={inputsDisabled}
           onSelect={(value, decimals) => setOfferFromState({ from: getAddress(value), decimals })}
         />
-        <AddCustomToken type="from" />
+        <AddCustomToken
+          onProceed={(decimal, address, symbol) =>
+            setOfferFromState({ from: address, decimals: decimal, customTokenName: symbol })
+          }
+        />
       </div>
       <Input
         id="from amount input"
