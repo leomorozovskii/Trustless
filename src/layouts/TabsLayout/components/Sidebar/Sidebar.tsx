@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { FC, PropsWithChildren } from 'react';
@@ -13,6 +14,8 @@ import { MenuTab } from '../MenuTab';
 type SidebarProps = PropsWithChildren<{
   contentBg?: 'contrast' | 'default';
 }>;
+
+const currentYear = dayjs().year();
 
 const Sidebar: FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
   const { t } = useTranslation();
@@ -47,7 +50,7 @@ const Sidebar: FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
             </MenuTab>
           </div>
         </div>
-        <p className={s.rightsLabel}>© 2024 Berezka DAO</p>
+        <p className={s.rightsLabel}>© {currentYear} Berezka DAO</p>
       </aside>
       <div
         className={cn(s.content, {
