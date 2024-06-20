@@ -3,7 +3,7 @@
 @import '@common/typo.scss';
 
 .wrapper {
-  position: absolute;
+  position: fixed;
   top: 32px;
   right: 0;
   left: 0;
@@ -12,14 +12,15 @@
   align-items: center;
   max-width: 340px;
   margin: 0 auto;
+  z-index: 100;
   transition:
-    top 0.5s ease,
-    opacity 0.5s ease;
+  top 0.5s ease,
+  opacity 0.5s ease;
   gap: $sm;
 }
 
 .item {
-  z-index: 11;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
