@@ -5,8 +5,7 @@ import type { FC } from 'react';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAcceptApprove } from '@berezka-dao/features/acceptOffer/hooks/useAcceptApprove';
-import { useAcceptOffer } from '@berezka-dao/features/acceptOffer/hooks/useAcceptOffer';
+import { useAcceptApprove, useAcceptOffer } from '@berezka-dao/features/acceptOffer/hooks';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import s from '@berezka-dao/features/createOffer/components/OfferButtons/OfferButtons.module.scss';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';

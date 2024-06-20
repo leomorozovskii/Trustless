@@ -5,12 +5,13 @@ import { getAddress, isAddress } from 'viem';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { checkValidAmount } from '@berezka-dao/features/createOffer';
-import { AddCustomToken } from '@berezka-dao/features/createOffer/components/AddCustomToken';
-import s from '@berezka-dao/features/createOffer/components/OfferFrom/OfferFrom.module.scss';
-import { Select } from '@berezka-dao/features/createOffer/components/Select';
-import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/hooks/useCalculateAmountValue';
+import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/hooks';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
+
+import { AddCustomToken } from '../AddCustomToken';
+import s from '../OfferFrom/OfferFrom.module.scss';
+import { Select } from '../Select';
 
 const OfferTo = () => {
   const { setOfferToState, offerToState, offerFromState, inputsDisabled } = useOfferCreateContext();

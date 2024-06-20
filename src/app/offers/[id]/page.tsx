@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 
 import { AcceptOffer, OfferAcceptProvider, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
-import { AcceptedOffer } from '@berezka-dao/features/acceptOffer/components/AcceptedOffer';
-import { AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components/AcceptOfferButtons';
+import { AcceptedOffer, AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
 import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';

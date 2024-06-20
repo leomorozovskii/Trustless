@@ -1,9 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useButtonsDisabled } from '@berezka-dao/features/createOffer/hooks/useButtonsDisabled';
-import { useCreateApprove } from '@berezka-dao/features/createOffer/hooks/useCreateApprove';
-import { useCreateTrade } from '@berezka-dao/features/createOffer/hooks/useCreateTrade';
+import { useButtonsDisabled, useCreateApprove, useCreateTrade } from '@berezka-dao/features/createOffer/hooks';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';
 import { OfferProgress, ProgressBar } from '@berezka-dao/shared/components/ProgressBar';
