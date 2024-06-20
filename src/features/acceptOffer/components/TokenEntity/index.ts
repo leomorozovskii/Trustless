@@ -1,1 +1,1 @@
-export * from './TokenEntity';
+export { TokenEntity } from './TokenEntity';

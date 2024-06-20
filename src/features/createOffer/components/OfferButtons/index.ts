@@ -1,1 +1,1 @@
-export * from './OfferButtons';
+export { OfferButtons } from './OfferButtons';

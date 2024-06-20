@@ -1,1 +1,1 @@
-export * from './TokensContainer';
+export { TokensContainer } from './TokensContainer';

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { RateContainer } from '@berezka-dao/features/acceptOffer/components/RateContainer/RateContainer';
-import { TokenEntity } from '@berezka-dao/features/acceptOffer/components/TokenEntity/TokenEntity';
+import { RateContainer } from '@berezka-dao/features/acceptOffer/components/RateContainer';
+import { TokenEntity } from '@berezka-dao/features/acceptOffer/components/TokenEntity';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { AcceptOfferIcon } from '@berezka-dao/shared/icons';
 import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';

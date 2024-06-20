@@ -1,1 +1,1 @@
-export * from './RateContainer';
+export { RateContainer } from './RateContainer';

@@ -1,1 +1,1 @@
-export * from './OfferFrom';
+export { OfferFrom } from './OfferFrom';

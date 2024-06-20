@@ -1,1 +1,1 @@
-export * from './ReceiverContainer';
+export { ReceiverContainer } from './ReceiverContainer';

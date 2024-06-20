@@ -1,1 +1,1 @@
-export * from './TokenWarning';
+export { TokenWarning } from './TokenWarning';
