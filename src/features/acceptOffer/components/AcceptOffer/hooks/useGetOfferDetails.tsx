@@ -121,7 +121,7 @@ export const useGetOfferDetails = ({ id }: { id: string }) => {
           isCreator,
           isReceiver,
           rateToFrom,
-          isTokenFromCustom: isTokenFromCustom,
+          isTokenFromCustom,
           active: data.tradeOffer.active,
           completed: data.tradeOffer.completed,
         };
