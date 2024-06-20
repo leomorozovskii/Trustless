@@ -19,14 +19,7 @@ const useOffersQuery = <TData = OffersQuery>({
     queryKey: [useOffersQueryKey, variables],
     refetchInterval: 1000 * 30,
     queryFn: async () => {
-      const { filters, first, skip } = variables;
-      const offers = await subgraphClient.request<OffersQuery>(OFFERS_QUERY, {
-        filters: {
-          filters,
-          first,
-          skip,
-        },
-      });
+      const offers = await subgraphClient.request<OffersQuery, OffersQueryVariables>(OFFERS_QUERY, variables);
       return offers;
     },
     select,
