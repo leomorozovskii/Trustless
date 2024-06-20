@@ -4,10 +4,9 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
-import { createOffersTemplate } from '@berezka-dao/features/displayOffers';
-import { OfferColumns } from '@berezka-dao/features/displayOffers/types';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { OfferColumns, createOffersTemplate } from '@berezka-dao/modules/OffersTemplate';
 import { NotConnectedMessage } from '@berezka-dao/shared/components/NotConnectedMessage';
 import { useIsMounted } from '@berezka-dao/shared/hooks/useIsMounted';
 

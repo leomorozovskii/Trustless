@@ -1,13 +1,13 @@
-import { useOffersDetailsQuery } from './useOffersDetailsQuery';
+import { useOffersDetails } from './useOffersDetails';
 import type { OfferFilter } from '../types';
 
-type UseOffersStatsQueryParams = {
+type UseOffersStatsParams = {
   searchFilter: string;
   filters: OfferFilter[];
 };
 
-const useOffersStatsQuery = ({ searchFilter, filters }: UseOffersStatsQueryParams) => {
-  const offers = useOffersDetailsQuery({
+const useOffersStats = ({ searchFilter, filters }: UseOffersStatsParams) => {
+  const offers = useOffersDetails({
     searchFilter,
     filters,
   });
@@ -41,4 +41,4 @@ const useOffersStatsQuery = ({ searchFilter, filters }: UseOffersStatsQueryParam
   };
 };
 
-export { useOffersStatsQuery };
+export { useOffersStats };

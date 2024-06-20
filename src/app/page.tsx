@@ -4,8 +4,8 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
 
-import { createOffersTemplate } from '../features/displayOffers';
-import { OfferColumns } from '../features/displayOffers/types';
+import { OfferColumns, createOffersTemplate } from '@berezka-dao/modules/OffersTemplate';
+
 import { HeaderLayout } from '../layouts/HeaderLayout';
 import { TabsLayout } from '../layouts/TabsLayout';
 import { NotConnectedMessage } from '../shared/components/NotConnectedMessage';

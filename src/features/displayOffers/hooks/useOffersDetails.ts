@@ -1,17 +1,16 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { gql } from 'graphql-request';
 import { formatUnits, getAddress } from 'viem';
-import type { Address, Hash } from 'viem';
+import type { Hash } from 'viem';
 import { useAccount } from 'wagmi';
 
-import { subgraphClient } from '@berezka-dao/core/configs';
 import { TOKEN_MAP, dayUnix } from '@berezka-dao/core/constants';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
+import type { OffersQuery } from '@berezka-dao/shared/retrieve-data/useOffersQuery';
+import { useOffersQuery, useOffersQueryKey } from '@berezka-dao/shared/retrieve-data/useOffersQuery';
 
 import type { OfferTrade, OfferStatus, OfferFilter, OfferSorting } from '../types';
 
-type UseOffersDetailsQueryOptions = {
+type UseOffersDetailsParams = {
   filter?: OfferFilter;
   searchFilter?: string;
   filters?: OfferFilter[];
@@ -20,71 +19,7 @@ type UseOffersDetailsQueryOptions = {
   sorting?: OfferSorting | null;
 };
 
-type OffersDetailsRawTokenFragment = {
-  decimals: string;
-  symbol: string;
-  id: Address;
-};
-
-type OffersDetailsRawQuery = {
-  tradeOffers: {
-    creationHash: Hash;
-    creationTimestamp: number;
-    cancelTimestamp: number;
-    cancelHash: Hash;
-    completed: boolean;
-    amountTo: string;
-    amountFrom: string;
-    amountFromWithFee: string;
-    active: boolean;
-    optionalTaker: Address;
-    takenHash: Hash;
-    takenTimestamp: number;
-    tokenFrom: OffersDetailsRawTokenFragment;
-    tokenTo: OffersDetailsRawTokenFragment;
-    tradeID: string;
-  }[];
-};
-
-const OFFERS_DETAILS_QUERY = gql`
-  query OffersDetails(
-    $filters: TradeOffer_filter
-    $skip: Int
-    $first: Int
-    $orderBy: TradeOffer_orderBy
-    $orderDirection: OrderDirection
-  ) {
-    tradeOffers(where: $filters, skip: $skip, first: $first, orderBy: $orderBy, orderDirection: $orderDirection) {
-      optionalTaker
-      creationHash
-      creationTimestamp
-      cancelTimestamp
-      cancelHash
-      completed
-      amountTo
-      amountFrom
-      amountFromWithFee
-      active
-      takenHash
-      takenTimestamp
-      tokenFrom {
-        ...TokenFragment
-      }
-      tokenTo {
-        ...TokenFragment
-      }
-      tradeID
-    }
-  }
-
-  fragment TokenFragment on Token {
-    decimals
-    symbol
-    id
-  }
-`;
-
-const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): OfferTrade[] => {
+const transformOffersQueryData = ({ tradeOffers }: OffersQuery): OfferTrade[] => {
   return tradeOffers.map(
     ({
       creationHash,
@@ -173,7 +108,7 @@ const transformOfferDetailsRawData = ({ tradeOffers }: OffersDetailsRawQuery): O
   );
 };
 
-const sortData = (data: OfferTrade[], sorting?: OfferSorting | null) => {
+const sortOffers = (data: OfferTrade[], sorting?: OfferSorting | null) => {
   return data.sort((offer_a, offer_b) => {
     if (!sorting) {
       return 0;
@@ -217,7 +152,7 @@ const sortData = (data: OfferTrade[], sorting?: OfferSorting | null) => {
   });
 };
 
-const filterData = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFilter, searchFilter?: string) => {
+const filterOffers = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFilter, searchFilter?: string) => {
   return data
     .filter((offer) => {
       if (filter === 'all') {
@@ -245,46 +180,35 @@ const filterData = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFil
     });
 };
 
-const paginateData = (data: OfferTrade[], offset?: number, limit?: number) => {
+const paginateOffers = (data: OfferTrade[], offset?: number, limit?: number) => {
   return offset && limit ? data.slice(offset, offset + limit) : data;
 };
 
-const UseOffersDetailsQueryKey = 'offersDetails';
+const useOffersDetailsQueryKey = useOffersQueryKey;
 
-const useOffersDetailsQuery = ({
+const useOffersDetails = ({
   filter = 'all',
   filters = ['all'],
   offset,
   limit,
   searchFilter,
   sorting,
-}: UseOffersDetailsQueryOptions) => {
+}: UseOffersDetailsParams) => {
   const account = useAccount();
-  return useQuery({
-    placeholderData: keepPreviousData,
-    queryKey: [UseOffersDetailsQueryKey, account.address],
-    refetchInterval: 1000 * 30,
-    queryFn: async () => {
-      if (!account.address) {
-        return [];
-      }
-
-      const offers = await subgraphClient
-        .request<OffersDetailsRawQuery>(OFFERS_DETAILS_QUERY, {
-          filters: {
-            creator: account.address,
-          },
-        })
-        .then(transformOfferDetailsRawData);
-      return offers;
+  return useOffersQuery({
+    variables: {
+      filters: {
+        creator: account.address,
+      },
     },
-    select: (offers) => {
-      const filteredOffers = filterData(offers, filters, filter, searchFilter);
-      const sortedOffers = sortData(filteredOffers, sorting);
-      const paginatedOffers = paginateData(sortedOffers, offset, limit);
+    select: (data) => {
+      const offers = transformOffersQueryData(data);
+      const filteredOffers = filterOffers(offers, filters, filter, searchFilter);
+      const sortedOffers = sortOffers(filteredOffers, sorting);
+      const paginatedOffers = paginateOffers(sortedOffers, offset, limit);
       return paginatedOffers;
     },
   });
 };
 
-export { useOffersDetailsQuery, UseOffersDetailsQueryKey };
+export { useOffersDetails, useOffersDetailsQueryKey };
