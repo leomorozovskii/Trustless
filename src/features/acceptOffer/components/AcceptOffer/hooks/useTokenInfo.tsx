@@ -2,9 +2,10 @@
 
 import { useMemo } from 'react';
 import type { Address } from 'viem';
-import { formatUnits, erc20Abi } from 'viem';
+import { formatUnits } from 'viem';
 import { useReadContract, useReadContracts } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
@@ -19,12 +20,12 @@ export const useTokenInfo = ({ address, userAddress }: Props) => {
     contracts: [
       {
         address,
-        abi: erc20Abi,
+        abi: customErc20Abi,
         functionName: 'decimals',
       },
       {
         address,
-        abi: erc20Abi,
+        abi: customErc20Abi,
         functionName: 'symbol',
       },
     ],
@@ -33,7 +34,7 @@ export const useTokenInfo = ({ address, userAddress }: Props) => {
   const { data: balanceOf } = useReadContract(
     userAddress && {
       address,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'balanceOf',
       args: [userAddress],
     },

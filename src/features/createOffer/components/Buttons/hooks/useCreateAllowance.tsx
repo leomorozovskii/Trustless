@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { erc20Abi, formatUnits } from 'viem';
+import { formatUnits } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
@@ -19,7 +20,7 @@ export const useCreateAllowance = () => {
   } = useReadContract(
     userAddress && {
       address: offerFromState.from,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'allowance',
       args: [userAddress, environment.contractAddress],
     },

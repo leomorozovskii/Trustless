@@ -1,9 +1,10 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import type { Address } from 'viem';
-import { erc20Abi, getAddress } from 'viem';
+import { getAddress } from 'viem';
 import { useReadContracts } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 
 const ParamsData = () => {
@@ -65,12 +66,12 @@ const ParamsData = () => {
       contracts: [
         {
           address: offerFromState.from,
-          abi: erc20Abi,
+          abi: customErc20Abi,
           functionName: 'decimals',
         },
         {
           address: offerToState.to,
-          abi: erc20Abi,
+          abi: customErc20Abi,
           functionName: 'decimals',
         },
       ],

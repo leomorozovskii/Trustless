@@ -1,13 +1,13 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Address } from 'viem';
 
-interface IToken {
+type Token = {
   address: Address;
   name: string;
   symbol: string;
   balance: string;
   decimals: number;
-}
+};
 
 enum OfferProgress {
   None = 'none',
@@ -16,24 +16,24 @@ enum OfferProgress {
   Created = 'created',
 }
 
-interface IOfferCreateValues {
-  offerFromState: IOfferFrom;
-  offerToState: IOfferTo;
+type OfferCreateValues = {
+  offerFromState: OfferFrom;
+  offerToState: OfferTo;
   activeOfferStep: number;
   activeStep: OfferProgress;
   offerId: number | null;
   inputsDisabled: boolean;
-  userTokens: ITokensReducer;
-  setUserTokens: Dispatch<Partial<ITokensReducer>>;
+  userTokens: TokensReducer;
+  setUserTokens: Dispatch<Partial<TokensReducer>>;
   setInputsDisabled: Dispatch<SetStateAction<boolean>>;
   setOfferId: Dispatch<SetStateAction<number | null>>;
-  setOfferFromState: Dispatch<Partial<IOfferFrom>>;
-  setOfferToState: Dispatch<Partial<IOfferTo>>;
+  setOfferFromState: Dispatch<Partial<OfferFrom>>;
+  setOfferToState: Dispatch<Partial<OfferTo>>;
   setActiveOfferStep: Dispatch<SetStateAction<number>>;
   setActiveStep: Dispatch<SetStateAction<OfferProgress>>;
-}
+};
 
-interface IOfferFrom {
+type OfferFrom = {
   from?: Address;
   amount: string;
   amountError?: string;
@@ -41,17 +41,17 @@ interface IOfferFrom {
   isInfinite: boolean;
   decimals?: number;
   rate: string;
-}
+};
 
-interface ITokensReducer {
-  tokens: IToken[] | null;
+type TokensReducer = {
+  tokens: Token[] | null;
   isLoading: boolean;
-}
+};
 
-type IOfferTo = Omit<IOfferFrom, 'from' | 'rate' | 'isInfinite'> & {
+type OfferTo = Omit<OfferFrom, 'from' | 'rate' | 'isInfinite'> & {
   to?: Address;
   receiver?: string;
 };
 
-export type { IOfferCreateValues, IOfferFrom, IOfferTo, ITokensReducer, IToken };
+export type { OfferCreateValues, OfferFrom, OfferTo, TokensReducer, Token };
 export { OfferProgress };

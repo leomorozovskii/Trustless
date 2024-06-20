@@ -4,12 +4,12 @@ import type { Address } from 'viem';
 // eslint-disable-next-line import/no-restricted-paths
 import type { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
-interface TokenData {
+type TokenData = {
   address: Address;
   symbol: string;
   logo: FC<ComponentProps<typeof UnknownIcon>>;
   decimals: number;
-}
+};
 
 type TokenMap = Record<Address, TokenData>;
 

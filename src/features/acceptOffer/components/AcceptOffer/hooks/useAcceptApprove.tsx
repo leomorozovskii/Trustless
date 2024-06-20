@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { erc20Abi, maxUint256 } from 'viem';
+import { maxUint256 } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
 import { useAcceptAllowance } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptAllowance';
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
@@ -38,7 +39,7 @@ export const useAcceptApprove = () => {
 
     return {
       address: tokenTo?.address,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],
       account: address,
@@ -59,7 +60,7 @@ export const useAcceptApprove = () => {
 
     return approveContract({
       address: tokenTo?.address,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],
     });

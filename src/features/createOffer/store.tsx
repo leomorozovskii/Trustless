@@ -2,13 +2,13 @@ import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo, useReducer, useState } from 'react';
 
 import { OfferProgress } from './types';
-import type { IOfferFrom, IOfferTo, IOfferCreateValues, ITokensReducer } from './types';
+import type { OfferFrom, OfferTo, OfferCreateValues, TokensReducer } from './types';
 
-const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
+const OfferCreateContext = createContext<OfferCreateValues | null>(null);
 
 const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   const [offerFromState, setOfferFromState] = useReducer(
-    (oldState: IOfferFrom, newState: Partial<IOfferFrom>): IOfferFrom => ({
+    (oldState: OfferFrom, newState: Partial<OfferFrom>): OfferFrom => ({
       ...oldState,
       ...newState,
     }),
@@ -22,7 +22,7 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [offerToState, setOfferToState] = useReducer(
-    (oldState: IOfferTo, newState: Partial<IOfferTo>): IOfferTo => ({
+    (oldState: OfferTo, newState: Partial<OfferTo>): OfferTo => ({
       ...oldState,
       ...newState,
     }),
@@ -35,7 +35,7 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [userTokens, setUserTokens] = useReducer(
-    (oldState: ITokensReducer, newState: Partial<ITokensReducer>): ITokensReducer => ({
+    (oldState: TokensReducer, newState: Partial<TokensReducer>): TokensReducer => ({
       ...oldState,
       ...newState,
     }),
@@ -50,7 +50,7 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
-  const values: IOfferCreateValues = useMemo(
+  const values: OfferCreateValues = useMemo(
     () => ({
       offerFromState,
       offerToState,

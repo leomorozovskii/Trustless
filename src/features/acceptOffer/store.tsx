@@ -3,7 +3,7 @@ import { createContext, useContext, useMemo, useState } from 'react';
 
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 
-interface IOfferAcceptValues {
+type OfferAcceptValues = {
   acceptId: string;
   activeAcceptStep: OfferProgress;
   isInfinite: boolean;
@@ -11,16 +11,16 @@ interface IOfferAcceptValues {
   setActiveAcceptStep: Dispatch<SetStateAction<OfferProgress>>;
   txHash: string;
   setTxHash: Dispatch<SetStateAction<string>>;
-}
+};
 
-const OfferAcceptContext = createContext<IOfferAcceptValues | null>(null);
+const OfferAcceptContext = createContext<OfferAcceptValues | null>(null);
 
 const OfferAcceptProvider: FC<PropsWithChildren & { id: string }> = ({ children, id }) => {
   const [activeAcceptStep, setActiveAcceptStep] = useState<OfferProgress>(OfferProgress.None);
   const [txHash, setTxHash] = useState<string>('');
   const [isInfinite, setIsInfinite] = useState<boolean>(false);
 
-  const values: IOfferAcceptValues = useMemo(
+  const values: OfferAcceptValues = useMemo(
     () => ({
       acceptId: id,
       activeAcceptStep,

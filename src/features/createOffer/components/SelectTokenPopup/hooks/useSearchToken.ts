@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 
 import type { TokenData } from '@berezka-dao/core/types';
-import type { IToken } from '@berezka-dao/features/createOffer/components/SelectTokenPopup/types';
+import type { Token } from '@berezka-dao/features/createOffer/types';
 
 type Props = {
   query: string;
-  tokens: IToken[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | null;
 };
 
 export const useSearchToken = ({ query, tokens }: Props) => {
-  const [searchedData, setSearchedData] = useState<TokenData[] | IToken[] | null>(null);
+  const [searchedData, setSearchedData] = useState<TokenData[] | Token[] | null>(null);
 
-  const isTokenData = (item: IToken | TokenData): item is TokenData => {
+  const isTokenData = (item: Token | TokenData): item is TokenData => {
     return 'logo' in item;
   };
 
@@ -31,7 +31,7 @@ export const useSearchToken = ({ query, tokens }: Props) => {
       });
       setSearchedData(result);
     } else {
-      const result: IToken[] = tokens.filter((token) => {
+      const result: Token[] = tokens.filter((token) => {
         const matchesName = token.name.toLowerCase().includes(lowerCaseQuery);
         const matchesAddress = token.address.toLowerCase() === lowerCaseQuery;
         const matchesSymbol = token.symbol.toLowerCase().includes(lowerCaseQuery);

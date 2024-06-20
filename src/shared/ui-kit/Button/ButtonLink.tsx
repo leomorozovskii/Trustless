@@ -5,7 +5,7 @@ import { isValidElement, useMemo } from 'react';
 
 import s from './Button.module.scss';
 
-interface ButtonLinkProps extends HTMLAttributes<HTMLAnchorElement> {
+type Props = HTMLAttributes<HTMLAnchorElement> & {
   children: ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'ghost';
@@ -13,9 +13,9 @@ interface ButtonLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
   loading?: boolean;
   disabled?: boolean;
-}
+};
 
-const ButtonLink: FC<ButtonLinkProps> = ({
+const ButtonLink: FC<Props> = ({
   children,
   variant = 'primary',
   type = 'button',

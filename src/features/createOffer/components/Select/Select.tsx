@@ -6,14 +6,14 @@ import type { Address } from 'viem';
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
 import { SelectTokenPopup } from '@berezka-dao/features/createOffer/components/SelectTokenPopup';
-import type { IToken } from '@berezka-dao/features/createOffer/types';
+import type { Token } from '@berezka-dao/features/createOffer/types';
 import { SelectIcon } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 import s from './Select.module.scss';
 
 type Props = {
-  tokens: IToken[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | null;
   placeholder: string;
   disabled?: boolean;
   isLoading?: boolean;

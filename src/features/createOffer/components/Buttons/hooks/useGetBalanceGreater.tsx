@@ -1,7 +1,9 @@
 import { useCallback } from 'react';
-import { erc20Abi, formatUnits } from 'viem';
+import { formatUnits } from 'viem';
 import type { Address } from 'viem';
 import { useAccount, useReadContracts } from 'wagmi';
+
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 
 type Props = {
   tokenAddress?: Address;
@@ -18,12 +20,12 @@ export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: Props) => {
         contracts: [
           {
             address: tokenAddress,
-            abi: erc20Abi,
+            abi: customErc20Abi,
             functionName: 'decimals',
           },
           {
             address: tokenAddress,
-            abi: erc20Abi,
+            abi: customErc20Abi,
             functionName: 'balanceOf',
             args: [userAddress],
           },

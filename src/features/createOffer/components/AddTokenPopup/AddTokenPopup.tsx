@@ -13,7 +13,7 @@ import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
 import s from './AddTokenPopup.module.scss';
 
-type IAddTokenPopupState = {
+type AddTokenPopupState = {
   symbol?: string;
   decimal: number;
   address?: Address;
@@ -34,7 +34,7 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
 
   const [step, setStep] = useState<number>(1);
   const [tokenState, setTokenState] = useReducer(
-    (oldState: IAddTokenPopupState, newState: Partial<IAddTokenPopupState>): IAddTokenPopupState => ({
+    (oldState: AddTokenPopupState, newState: Partial<AddTokenPopupState>): AddTokenPopupState => ({
       ...oldState,
       ...newState,
     }),
@@ -112,7 +112,7 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
                     : ''
                 }
                 value={localAddress}
-                onChange={({ target }) => changeAddressHandler(target.value)}
+                onChange={({ currentTarget }) => changeAddressHandler(currentTarget.value)}
               />
               <Input
                 label={t('token.name')}
@@ -120,7 +120,7 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
                 disabled
                 id="token name input"
                 value={tokenState.symbol || ''}
-                onChange={({ target }) => setTokenState({ symbol: target.value })}
+                onChange={({ currentTarget }) => setTokenState({ symbol: currentTarget.value })}
               />
               <Input
                 label={t('token.decimal')}
@@ -129,7 +129,7 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
                 classWrapper={s.decimalWrapper}
                 id="token decimal input"
                 value={tokenState.decimal ? tokenState.decimal.toString() : ''}
-                onChange={({ target }) => setTokenState({ decimal: Number(target.value) })}
+                onChange={({ currentTarget }) => setTokenState({ decimal: Number(currentTarget.value) })}
               />
             </>
           ) : (

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
+import type { Token } from '@berezka-dao/features/createOffer/types';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
 import { InputCross } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
@@ -13,10 +14,9 @@ import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 import { TokenItem } from './components/TokenItem';
 import { useSearchToken } from './hooks/useSearchToken';
 import s from './SelectTokenPopup.module.scss';
-import type { IToken } from './types';
 
 type Props = {
-  tokens: IToken[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | null;
   isLoading?: boolean;
   onClose(): void;
   onSelect(tokenAddress: string, decimals: number): void;
@@ -43,7 +43,7 @@ const SelectTokenPopup: FC<Props> = ({ isLoading = false, tokens, onClose, onSel
     }
   });
 
-  const getTokenIcon = (token: IToken | TokenData) => {
+  const getTokenIcon = (token: Token | TokenData) => {
     const item = TOKEN_MAP[token.address];
     if (!item) return UnknownIcon;
     return item.logo;

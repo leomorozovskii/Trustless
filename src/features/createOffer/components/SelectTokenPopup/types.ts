@@ -1,31 +1,25 @@
-import type { Address, erc20Abi } from 'viem';
+import type { Address } from 'viem';
 
-interface IToken {
-  address: Address;
-  name: string;
-  symbol: string;
-  balance: string;
-  decimals: number;
-}
+import type { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 
-interface IContractTokens {
+type ContractTokens = {
   address: Address;
-  abi: typeof erc20Abi;
+  abi: typeof customErc20Abi;
   functionName: string;
-}
+};
 
-interface IWalletTokens {
+type WalletTokens = {
   address: Address;
-  tokenBalances: IResponseToken[];
-}
+  tokenBalances: ResponseToken[];
+};
 
-interface IResponseAlchemy {
-  result: IWalletTokens;
-}
+type ResponseAlchemy = {
+  result: WalletTokens;
+};
 
-interface IResponseToken {
+type ResponseToken = {
   contractAddress: Address;
   tokenBalance: Address;
-}
+};
 
-export type { IToken, IContractTokens, IResponseToken, IResponseAlchemy, IWalletTokens };
+export type { ContractTokens, WalletTokens, ResponseAlchemy, ResponseToken };

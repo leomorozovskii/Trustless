@@ -2,14 +2,14 @@ import type { FC } from 'react';
 
 import { PopupToastItem } from './components/PopupToastItem';
 import s from './PopupToast.module.scss';
-import type { IToastifyItem } from './types';
+import type { ToastifyItem } from './types';
 
-interface IPopupToast {
-  items: IToastifyItem[];
+type Props = {
+  items: ToastifyItem[];
   handleRemoveItem: (id: number) => void;
-}
+};
 
-const PopupToast: FC<IPopupToast> = ({ items, handleRemoveItem }) => {
+const PopupToast: FC<Props> = ({ items, handleRemoveItem }) => {
   return (
     <div className={s.wrapper}>
       {items.length > 0 &&
