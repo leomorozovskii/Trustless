@@ -5,7 +5,7 @@ import { useAccount, useReadContract } from 'wagmi';
 import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 
 export const useCreateAllowance = () => {
   const { offerFromState, activeStep, setActiveOfferStep, setActiveStep, setInputsDisabled, setOfferFromState } =

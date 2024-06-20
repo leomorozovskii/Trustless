@@ -8,10 +8,10 @@ import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
 import { network } from '@berezka-dao/core/configs';
 import { environment } from '@berezka-dao/core/environment';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
+import { useGetBalanceGreater } from '@berezka-dao/shared/hooks/useGetBalanceGreater';
 
-import { useGetBalanceGreater } from './useGetBalanceGreater';
 import { checkAddress } from '../utils';
 
 export const useCreateTrade = () => {

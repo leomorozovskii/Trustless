@@ -1,1 +1,1 @@
-export { IncludeFee } from './IncludeFee';
+export * from './IncludeFee';

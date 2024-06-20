@@ -2,7 +2,7 @@ import { useMemo, useEffect, useState } from 'react';
 import { isAddress } from 'viem';
 
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 
 export const useButtonsDisabled = () => {
   const { activeStep, offerFromState, offerToState } = useOfferCreateContext();

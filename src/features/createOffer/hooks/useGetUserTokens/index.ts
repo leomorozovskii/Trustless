@@ -5,15 +5,12 @@ import { readContracts } from 'wagmi/actions';
 
 import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
-import type {
-  ContractTokens,
-  ResponseToken,
-  ResponseAlchemy,
-} from '@berezka-dao/features/createOffer/components/SelectTokenPopup/types';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
-import type { Token } from '@berezka-dao/features/createOffer/types';
+import type { Token } from '@berezka-dao/features/createOffer';
+import { useOfferCreateContext } from '@berezka-dao/features/createOffer';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { notUndefined } from '@berezka-dao/shared/utils/notUndefined';
+
+import type { ContractTokens, ResponseAlchemy, ResponseToken } from './types';
 
 const getRawTokens = (responseTokens: ResponseToken[]) => {
   const contractTokens: ContractTokens[] = [];

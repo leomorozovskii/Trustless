@@ -5,18 +5,18 @@ import type { FC } from 'react';
 import { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { OfferButtons } from '@berezka-dao/features/createOffer/components/Buttons';
-import { OfferFrom } from '@berezka-dao/features/createOffer/components/From';
 import { IncludeFee } from '@berezka-dao/features/createOffer/components/IncludeFee';
+import { OfferButtons } from '@berezka-dao/features/createOffer/components/OfferButtons';
+import { OfferFrom } from '@berezka-dao/features/createOffer/components/OfferFrom';
+import { OfferTo } from '@berezka-dao/features/createOffer/components/OfferTo';
 import { ParamsData } from '@berezka-dao/features/createOffer/components/ParamsData';
 import { ProgressOfferBar } from '@berezka-dao/features/createOffer/components/ProgressOfferBar';
-import { useGetUserTokens } from '@berezka-dao/features/createOffer/components/SelectTokenPopup/hooks/useGetUserTokens';
-import { OfferTo } from '@berezka-dao/features/createOffer/components/To';
+import { useGetUserTokens } from '@berezka-dao/features/createOffer/hooks/useGetUserTokens';
 import { OfferCreateProvider, useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { ShareOfferContainer } from '@berezka-dao/features/shareOffer/components/ShareOfferContainer';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 
 import s from './CreateOffer.module.scss';
 

@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { getAddress, isAddress } from 'viem';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
+import { checkValidAmount } from '@berezka-dao/features/createOffer';
 import { AddCustomToken } from '@berezka-dao/features/createOffer/components/AddCustomToken';
-import { checkValidAmount } from '@berezka-dao/features/createOffer/components/Buttons/utils';
-import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/components/From/hooks/useCalculateAmountValue';
-import s from '@berezka-dao/features/createOffer/components/From/OfferFrom.module.scss';
+import s from '@berezka-dao/features/createOffer/components/OfferFrom/OfferFrom.module.scss';
 import { Select } from '@berezka-dao/features/createOffer/components/Select';
+import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/hooks/useCalculateAmountValue';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
 

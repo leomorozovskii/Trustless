@@ -5,9 +5,9 @@ import { useAccount, useWriteContract } from 'wagmi';
 import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
 import { environment } from '@berezka-dao/core/environment';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
-import { useGetBalanceGreater } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetBalanceGreater';
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
+import { useGetBalanceGreater } from '@berezka-dao/shared/hooks/useGetBalanceGreater';
 import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
 export const useAcceptOffer = () => {

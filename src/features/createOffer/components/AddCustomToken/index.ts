@@ -1,1 +1,1 @@
-export { AddCustomToken } from './AddCustomToken';
+export * from './AddCustomToken';

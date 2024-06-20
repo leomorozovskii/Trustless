@@ -2,10 +2,10 @@ import cn from 'classnames';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { CheckmarkIcon } from '@berezka-dao/shared/icons';
 
 import s from './ProgressBar.module.scss';
+import { OfferProgress } from './types';
 
 type Props = {
   currentStep: OfferProgress;

@@ -7,9 +7,9 @@ import { useMemo } from 'react';
 import { AcceptOffer, OfferAcceptProvider, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
 import { AcceptedOffer } from '@berezka-dao/features/acceptOffer/components/AcceptedOffer';
 import { AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components/AcceptOfferButtons';
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 import { ClearCross } from '@berezka-dao/shared/icons';
 
 import s from './AcceptOffer.module.scss';
