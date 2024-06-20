@@ -1,1 +1,1 @@
-export { AcceptedOffer } from './AcceptedOffer';
+export * from './AcceptedOffer';
