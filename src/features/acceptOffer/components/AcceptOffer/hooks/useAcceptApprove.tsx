@@ -21,7 +21,7 @@ export const useAcceptApprove = () => {
   const { refetchAllowance } = useAcceptAllowance();
 
   const { isGreater } = useGetBalanceGreater({
-    tokenAddress: tokenTo?.id,
+    tokenAddress: tokenTo?.address,
     tokenAmount: formattedAmountTo,
   });
 
@@ -37,7 +37,7 @@ export const useAcceptApprove = () => {
     const amount = isInfinite ? maxUint256 : amountTo;
 
     return {
-      address: tokenTo?.id,
+      address: tokenTo?.address,
       abi: erc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],
@@ -58,7 +58,7 @@ export const useAcceptApprove = () => {
     if (!tokenTo || !amount) return;
 
     return approveContract({
-      address: tokenTo?.id,
+      address: tokenTo?.address,
       abi: erc20Abi,
       functionName: 'approve',
       args: [environment.contractAddress, amount],

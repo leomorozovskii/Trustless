@@ -18,7 +18,7 @@ export const useAcceptOffer = () => {
   const { address } = useAccount();
 
   const { isGreater } = useGetBalanceGreater({
-    tokenAddress: tokenTo?.id,
+    tokenAddress: tokenTo?.address,
     tokenAmount: formattedAmountTo,
   });
 

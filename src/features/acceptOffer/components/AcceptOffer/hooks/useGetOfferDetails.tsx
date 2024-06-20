@@ -51,22 +51,41 @@ type OfferDetailsQueryRaw = {
       symbol: string;
       decimals: string;
     };
-    amountFrom: string;
-    formattedAmountFrom: string;
-    amountFromWithFee: string;
-    amountTo: string;
-    formattedAmountTo: string;
+    amountFromWithFee: bigint;
+    amountFrom: bigint;
+    amountTo: bigint;
     creator: Address;
-    isCreator: boolean | undefined;
-    receiver: Address;
-    isReceiver: boolean | undefined;
-    fee: bigint;
-    rateToFrom: number;
-    isTokenFromCustom: boolean;
     active: boolean;
     optionalTaker: Address;
     completed: boolean;
   };
+};
+
+type OfferDetails = {
+  tokenFrom: {
+    address: Address;
+    symbol: string;
+    decimals: string;
+  };
+  tokenTo: {
+    address: Address;
+    symbol: string;
+    decimals: string;
+  };
+  amountFromWithFee: bigint;
+  amountFrom: bigint;
+  amountTo: bigint;
+  creator: Address;
+  active: boolean;
+  optionalTaker: Address;
+  completed: boolean;
+  formattedAmountTo: string;
+  formattedAmountFrom: string;
+  isCreator: boolean | undefined;
+  isReceiver: boolean | undefined;
+  fee: bigint;
+  rateToFrom: number;
+  isTokenFromCustom: boolean;
 };
 
 export const useGetOfferDetails = ({ id }: { id: string }) => {
@@ -77,55 +96,61 @@ export const useGetOfferDetails = ({ id }: { id: string }) => {
     error,
   } = useQuery({
     queryKey: [GET_OFFER_DETAILS_QUERY_KEY, id, address],
-    queryFn: async () => {
-      return subgraphClient.request<OfferDetailsQueryRaw>(OFFER_DETAILS_QUERY, { id: id }).then((data) => {
-        const amountFrom = BigInt(data.tradeOffer.amountFrom);
-        const amountTo = BigInt(data.tradeOffer.amountTo);
-        const formattedAmountFrom = formatUnits(
-          BigInt(data.tradeOffer.amountFromWithFee),
-          Number(data.tradeOffer.tokenFrom.decimals),
-        );
-        const formattedAmountTo = formatUnits(
-          BigInt(data.tradeOffer.amountTo),
-          Number(data.tradeOffer.tokenTo.decimals),
-        );
-        const fee = amountFrom - BigInt(data.tradeOffer.amountFromWithFee);
+    queryFn: async (): Promise<OfferDetails> => {
+      const subgraphData = await subgraphClient
+        .request<OfferDetailsQueryRaw>(OFFER_DETAILS_QUERY, { id: id })
+        .then((data) => {
+          const amountFrom = BigInt(data.tradeOffer.amountFrom);
+          const amountTo = BigInt(data.tradeOffer.amountTo);
+          const amountFromWithFee = BigInt(data.tradeOffer.amountFromWithFee);
 
-        const isTokenFromCustom = getIsTokenCustom(getAddress(data.tradeOffer.tokenFrom.id));
-        const isCreator = getIsCreator(address, data.tradeOffer.creator);
-        const isReceiver = getIsReceiver(address, data.tradeOffer.optionalTaker);
+          return {
+            tokenFrom: {
+              ...data.tradeOffer.tokenFrom,
+              address: getAddress(data.tradeOffer.tokenFrom.id),
+            },
+            tokenTo: {
+              ...data.tradeOffer.tokenTo,
+              address: getAddress(data.tradeOffer.tokenTo.id),
+            },
+            amountFromWithFee,
+            amountFrom,
+            amountTo,
+            creator: getAddress(data.tradeOffer.creator),
+            optionalTaker: getAddress(data.tradeOffer.optionalTaker),
+            active: data.tradeOffer.active,
+            completed: data.tradeOffer.completed,
+          };
+        });
 
-        const rateToFrom = getRateToFrom(
-          data.tradeOffer.amountFromWithFee,
-          data.tradeOffer.amountTo,
-          data.tradeOffer.tokenTo.decimals,
-          data.tradeOffer.tokenFrom.decimals,
-        );
+      const formattedAmountFrom = formatUnits(
+        BigInt(subgraphData.amountFromWithFee),
+        Number(subgraphData.tokenFrom.decimals),
+      );
+      const formattedAmountTo = formatUnits(BigInt(subgraphData.amountTo), Number(subgraphData.tokenTo.decimals));
+      const fee = subgraphData.amountFrom - BigInt(subgraphData.amountFromWithFee);
 
-        return {
-          tokenFrom: {
-            ...data.tradeOffer.tokenFrom,
-            id: getAddress(data.tradeOffer.tokenFrom.id),
-          },
-          tokenTo: {
-            ...data.tradeOffer.tokenTo,
-            id: getAddress(data.tradeOffer.tokenTo.id),
-          },
-          amountFrom,
-          formattedAmountFrom,
-          amountTo,
-          formattedAmountTo,
-          creator: getAddress(data.tradeOffer.creator),
-          receiver: getAddress(data.tradeOffer.optionalTaker),
-          fee,
-          isCreator,
-          isReceiver,
-          rateToFrom,
-          isTokenFromCustom,
-          active: data.tradeOffer.active,
-          completed: data.tradeOffer.completed,
-        };
-      });
+      const isTokenFromCustom = getIsTokenCustom(getAddress(subgraphData.tokenFrom.address));
+      const isCreator = address && getIsCreator(address, subgraphData.creator);
+      const isReceiver = address && getIsReceiver(address, subgraphData.optionalTaker);
+
+      const rateToFrom = getRateToFrom(
+        subgraphData.amountFromWithFee,
+        subgraphData.amountTo,
+        subgraphData.tokenTo.decimals,
+        subgraphData.tokenFrom.decimals,
+      );
+
+      return {
+        ...subgraphData,
+        formattedAmountFrom,
+        formattedAmountTo,
+        isTokenFromCustom,
+        isCreator,
+        isReceiver,
+        rateToFrom,
+        fee,
+      };
     },
   });
 

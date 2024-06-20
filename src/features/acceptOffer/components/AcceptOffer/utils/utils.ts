@@ -11,19 +11,17 @@ const getIsTokenCustom = (address: Address) => {
   return !TOKEN_MAP[address];
 };
 
-const getIsReceiver = (userAddress: Address | undefined, receiverAddress: Address) => {
-  if (!userAddress) return;
+const getIsReceiver = (userAddress: Address, receiverAddress: Address) => {
   return getAddress(userAddress) === getAddress(receiverAddress) || isEmptyAddress(receiverAddress);
 };
 
-const getIsCreator = (userAddress: Address | undefined, creatorAddress: Address) => {
-  if (!userAddress) return;
+const getIsCreator = (userAddress: Address, creatorAddress: Address) => {
   return getAddress(userAddress) === getAddress(creatorAddress);
 };
 
-const getRateToFrom = (amountFrom: string, amountTo: string, decimalsFrom: string, decimalsTo: string) => {
-  const amountToFormatted = formatUnits(BigInt(amountTo), Number(decimalsFrom));
-  const amountFromFormatted = formatUnits(BigInt(amountFrom), Number(decimalsTo));
+const getRateToFrom = (amountFrom: bigint, amountTo: bigint, decimalsFrom: string, decimalsTo: string) => {
+  const amountToFormatted = formatUnits(amountTo, Number(decimalsFrom));
+  const amountFromFormatted = formatUnits(amountFrom, Number(decimalsTo));
   const result = Number(amountFromFormatted) / Number(amountToFormatted);
   return Number(result.toFixed(5));
 };

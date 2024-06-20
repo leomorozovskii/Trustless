@@ -15,14 +15,14 @@ import { useOfferAcceptContext } from '../../store';
 
 const AcceptOffer: FC = () => {
   const { acceptId } = useOfferAcceptContext();
-  const { isTokenFromCustom, tokenFrom, isLoading, receiver } = useGetOfferDetails({ id: acceptId });
+  const { isTokenFromCustom, tokenFrom, isLoading, optionalTaker } = useGetOfferDetails({ id: acceptId });
 
   return (
     <Skeleton loading={isLoading}>
       <div className={cn(s.container, { [s.paddingLg]: isTokenFromCustom })}>
         <TokensContainer />
-        {!isEmptyAddress(receiver) && <ReceiverContainer receiver={receiver} />}
-        {isTokenFromCustom && <CustomTokenWarning address={tokenFrom?.id} name={tokenFrom?.symbol} />}
+        {!isEmptyAddress(optionalTaker) && <ReceiverContainer receiver={optionalTaker} />}
+        {isTokenFromCustom && <CustomTokenWarning address={tokenFrom?.address} name={tokenFrom?.symbol} />}
       </div>
     </Skeleton>
   );
