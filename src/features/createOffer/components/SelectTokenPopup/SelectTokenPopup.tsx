@@ -87,14 +87,17 @@ const SelectTokenPopup: FC<Props> = ({ isLoading = false, tokens, onClose, onSel
         {tokens && tokens?.length > 7 && (
           <Skeleton loading={isLoading}>
             <div className={s.body}>
-              {filteredSearchedData?.map((el) => (
-                <button key={el.address} onClick={() => onSelect(el.address, el.decimals)}>
-                  <div className={s.item}>
-                    {'logo' in el ? <el.logo width={20} height={20} /> : <UnknownIcon />}
-                    <p className={s.label}>{el.symbol}</p>
-                  </div>
-                </button>
-              ))}
+              {filteredSearchedData?.map((el) => {
+                const IconComponent = getTokenIcon(el);
+                return (
+                  <button key={el.address} onClick={() => onSelect(el.address, el.decimals)}>
+                    <div className={s.item}>
+                      <IconComponent width={20} height={20} />
+                      <p className={s.label}>{el.symbol}</p>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </Skeleton>
         )}
