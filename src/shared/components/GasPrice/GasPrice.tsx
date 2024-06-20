@@ -5,11 +5,11 @@ import { GasIcon, InfoIcon } from '@berezka-dao/shared/icons';
 
 import s from './GasPrice.module.scss';
 
-interface IGasPrice {
+type Props = {
   minFee: string | null;
-}
+};
 
-const GasPrice: FC<IGasPrice> = ({ minFee }) => {
+const GasPrice: FC<Props> = ({ minFee }) => {
   return (
     <div className={s.serviceContainer}>
       <p className={s.feeLabel}>Min gas price</p>

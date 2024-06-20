@@ -1,41 +1,53 @@
-// TODO :: remove deprecated import
-/* eslint-disable import/no-deprecated */
 'use client';
 
 import { useMemo } from 'react';
 import type { Address } from 'viem';
 import { formatUnits } from 'viem';
-import { useToken } from 'wagmi';
+import { useReadContract, useReadContracts } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
-import { useGetFee } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetFee';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
-interface IUseTokenInfo {
-  address: Address;
-  amount?: bigint;
-  withFee?: boolean;
-}
+type Props = {
+  address?: Address;
+  userAddress?: Address;
+};
 
-export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
-  const result = useToken({
-    address,
+export const useTokenInfo = ({ address, userAddress }: Props) => {
+  const { data: [decimals, symbol] = [] } = useReadContracts({
+    allowFailure: false,
+    contracts: [
+      {
+        address,
+        abi: customErc20Abi,
+        functionName: 'decimals',
+      },
+      {
+        address,
+        abi: customErc20Abi,
+        functionName: 'symbol',
+      },
+    ],
   });
 
-  const { calculatedFee } = useGetFee();
+  const { data: balanceOf } = useReadContract(
+    userAddress && {
+      address,
+      abi: customErc20Abi,
+      functionName: 'balanceOf',
+      args: [userAddress],
+    },
+  );
 
   const token = useMemo(() => {
     if (!address) return;
     const localToken = TOKEN_MAP[address];
-    if (!localToken && result) {
-      return result;
+    if (!localToken && decimals && symbol) {
+      return { decimals, symbol };
     }
     return localToken;
-  }, [address, result]);
-
-  const isCustom = useMemo(() => {
-    return !TOKEN_MAP[address];
-  }, [address]);
+  }, [address, decimals, symbol]);
 
   const TokenLogo = useMemo(() => {
     if (token && 'logo' in token) {
@@ -46,34 +58,18 @@ export const useTokenInfo = ({ address, amount, withFee }: IUseTokenInfo) => {
 
   const tokenName = useMemo(() => {
     if (!token) return;
-    if ('name' in token) return token.name;
-    return token.data?.symbol;
+    return token.symbol;
   }, [token]);
 
-  const tokenDecimals = useMemo(() => {
-    if (!token) return;
-    if ('decimals' in token) return token.decimals;
-    return token.data?.decimals;
-  }, [token]);
-
-  const tokenValue = useMemo(() => {
-    if (!tokenDecimals || !amount) return;
-    return formatUnits(amount, tokenDecimals);
-  }, [amount, tokenDecimals]);
-
-  const tokenFeeValue = useMemo(() => {
-    if (!tokenDecimals || !withFee || !calculatedFee) return;
-    if (amount) {
-      const value = formatUnits(amount, tokenDecimals);
-      return Number((Number(value) - (Number(value) / 100) * calculatedFee).toFixed(9));
-    }
-  }, [amount, tokenDecimals, calculatedFee, withFee]);
+  const balance = useMemo(() => {
+    if (!balanceOf || !decimals) return '0';
+    return formatUnits(balanceOf, decimals);
+  }, [balanceOf, decimals]);
 
   return {
     TokenLogo,
     tokenName,
-    tokenValue: withFee ? tokenFeeValue : tokenValue,
-    isCustom,
-    tokenDecimals: tokenDecimals || 0,
+    tokenDecimals: decimals,
+    tokenDisplayBalance: balance,
   };
 };

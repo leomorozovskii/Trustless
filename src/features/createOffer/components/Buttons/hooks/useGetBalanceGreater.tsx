@@ -1,25 +1,42 @@
 import { useCallback } from 'react';
+import { formatUnits } from 'viem';
 import type { Address } from 'viem';
-import { useAccount, useBalance } from 'wagmi';
+import { useAccount, useReadContracts } from 'wagmi';
 
-interface IUseGetBalanceGreater {
-  tokenAddress: Address;
-  tokenAmount: string;
-}
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 
-export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: IUseGetBalanceGreater) => {
+type Props = {
+  tokenAddress?: Address;
+  tokenAmount?: string;
+};
+
+export const useGetBalanceGreater = ({ tokenAddress, tokenAmount }: Props) => {
   const { address: userAddress } = useAccount();
 
-  const { data: balance } = useBalance({
-    address: userAddress,
-    token: tokenAddress,
-  });
+  const { data: [decimals, balanceOf] = [] } = useReadContracts(
+    userAddress &&
+      tokenAddress && {
+        allowFailure: false,
+        contracts: [
+          {
+            address: tokenAddress,
+            abi: customErc20Abi,
+            functionName: 'decimals',
+          },
+          {
+            address: tokenAddress,
+            abi: customErc20Abi,
+            functionName: 'balanceOf',
+            args: [userAddress],
+          },
+        ],
+      },
+  );
 
   const isGreater = useCallback(() => {
-    if (!balance) return;
-    return Number(tokenAmount) > Number(balance.formatted);
-  }, [balance, tokenAmount]);
-
+    if (!decimals || balanceOf === undefined || !tokenAmount) return;
+    return Number(tokenAmount) > Number(formatUnits(balanceOf, decimals));
+  }, [decimals, balanceOf, tokenAmount]);
   return {
     isGreater,
   };

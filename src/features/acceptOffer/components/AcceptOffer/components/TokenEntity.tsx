@@ -1,30 +1,34 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import type { Address } from 'viem';
 
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
+import { TOKEN_MAP } from '@berezka-dao/core/constants';
+import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 import s from '../AcceptOffer.module.scss';
 
-interface ITokenEntity {
-  address: Address;
-  amount: bigint;
+type Props = {
   type: 'pay' | 'get';
-}
+  address?: Address;
+  amount?: string;
+  name?: string;
+};
 
-const TokenEntity: FC<ITokenEntity> = ({ address, amount, type }) => {
-  const { TokenLogo, tokenName, tokenValue } = useTokenInfo({
-    address,
-    amount,
-    withFee: type === 'get',
-  });
+const TokenEntity: FC<Props> = ({ address, amount, name, type }) => {
+  const TokenLogo = useMemo(() => {
+    if (!address) return UnknownIcon;
+    const logo = TOKEN_MAP[address]?.logo;
+    if (!logo) return UnknownIcon;
+    return logo;
+  }, [address]);
 
   return (
     <div className={s.tokenWrapper}>
       <TokenLogo className={s.logo} />
       <div className={s.tokenContainer}>
-        <h2 className={s.tokenSum}>{tokenValue}</h2>
+        <h2 className={s.tokenSum}>{amount}</h2>
         <p className={s.tokenName}>
-          You {type} {tokenName}
+          You {type} {name}
         </p>
       </div>
     </div>

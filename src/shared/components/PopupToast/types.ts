@@ -1,14 +1,14 @@
-interface IToastifyItem {
+type ToastifyItem = {
   id: number;
   title: string;
   text?: string;
   type: 'error' | 'success';
-}
+};
 
-interface IToastifyValues {
-  items: IToastifyItem[];
-  handleAddItem: (item: Omit<IToastifyItem, 'id'>) => void;
+type ToastifyValues = {
+  items: ToastifyItem[];
+  handleAddItem: (item: Omit<ToastifyItem, 'id'>) => void;
   handleRemoveItem: (id: number) => void;
-}
+};
 
-export type { IToastifyItem, IToastifyValues };
+export type { ToastifyItem, ToastifyValues };

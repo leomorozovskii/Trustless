@@ -46,7 +46,7 @@ const transformOffersQueryData = ({ tradeOffers }: OffersQuery): OfferTrade[] =>
       if (!tokenFromDetails) {
         tokenFromDetails = {
           address: normalizedAddressFrom,
-          name: tokenFrom.symbol,
+          symbol: tokenFrom.symbol,
           decimals: Number(tokenFrom.decimals),
           logo: UnknownIcon,
         };
@@ -55,7 +55,7 @@ const transformOffersQueryData = ({ tradeOffers }: OffersQuery): OfferTrade[] =>
       if (!tokenToDetails) {
         tokenToDetails = {
           address: normalizedAddressTo,
-          name: tokenTo.symbol,
+          symbol: tokenTo.symbol,
           decimals: Number(tokenTo.decimals),
           logo: UnknownIcon,
         };
@@ -118,12 +118,12 @@ const sortOffers = (data: OfferTrade[], sorting?: OfferSorting | null) => {
         return sorting.order === 'asc' ? offer_a.id.localeCompare(offer_b.id) : offer_b.id.localeCompare(offer_a.id);
       case 'AssetFrom':
         return sorting.order === 'asc'
-          ? offer_a.tokenFromDetails.name.localeCompare(offer_b.tokenFromDetails.name)
-          : offer_b.tokenFromDetails.name.localeCompare(offer_a.tokenFromDetails.name);
+          ? offer_a.tokenFromDetails.symbol.localeCompare(offer_b.tokenFromDetails.symbol)
+          : offer_b.tokenFromDetails.symbol.localeCompare(offer_a.tokenFromDetails.symbol);
       case 'AssetTo':
         return sorting.order === 'asc'
-          ? offer_a.tokenToDetails.name.localeCompare(offer_b.tokenToDetails.name)
-          : offer_b.tokenToDetails.name.localeCompare(offer_a.tokenToDetails.name);
+          ? offer_a.tokenToDetails.symbol.localeCompare(offer_b.tokenToDetails.symbol)
+          : offer_b.tokenToDetails.symbol.localeCompare(offer_a.tokenToDetails.symbol);
       case 'AmountFrom':
         return sorting.order === 'asc'
           ? offer_a.amountFrom - offer_b.amountFrom
@@ -166,8 +166,8 @@ const filterOffers = (data: OfferTrade[], filters: OfferFilter[], filter: OfferF
     .filter((offer) => {
       const {
         id,
-        tokenFromDetails: { name: tokenFromName },
-        tokenToDetails: { name: tokenToName },
+        tokenFromDetails: { symbol: tokenFromName },
+        tokenToDetails: { symbol: tokenToName },
       } = offer;
       if (!searchFilter) {
         return true;

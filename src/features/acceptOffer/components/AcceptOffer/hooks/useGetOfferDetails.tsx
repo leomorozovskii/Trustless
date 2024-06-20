@@ -1,25 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
 import type { Address } from 'viem';
 import { formatUnits, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
 
 import { subgraphClient } from '@berezka-dao/core/configs';
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
+import {
+  getIsCreator,
+  getIsReceiver,
+  getIsTokenCustom,
+  getRateToFrom,
+} from '@berezka-dao/features/acceptOffer/components/AcceptOffer/utils/utils';
 
-import { isEmptyAddress } from '../utils/isEmptyAddress';
-
-interface OfferDetails {
-  tokenFrom: Address;
-  tokenTo: Address;
-  amountFrom: bigint;
-  amountTo: bigint;
-  creator: Address;
-  receiver: Address;
-  fee: bigint;
-  active: boolean;
-  completed: boolean;
-}
 const OFFER_DETAILS_QUERY = `
   query OfferDetails($id: BigInt!) {
     tradeOffer(id: $id) {
@@ -60,9 +51,9 @@ type OfferDetailsQueryRaw = {
       symbol: string;
       decimals: string;
     };
-    amountFrom: string;
-    amountFromWithFee: string;
-    amountTo: string;
+    amountFromWithFee: bigint;
+    amountFrom: bigint;
+    amountTo: bigint;
     creator: Address;
     active: boolean;
     optionalTaker: Address;
@@ -70,124 +61,102 @@ type OfferDetailsQueryRaw = {
   };
 };
 
-export const useGetOfferDetails = ({ id }: { id: string | null }) => {
-  const memoizedId = useMemo(() => {
-    if (!id) return '0';
-    return id;
-  }, [id]);
+type OfferDetails = {
+  tokenFrom: {
+    address: Address;
+    symbol: string;
+    decimals: string;
+  };
+  tokenTo: {
+    address: Address;
+    symbol: string;
+    decimals: string;
+  };
+  amountFromWithFee: bigint;
+  amountFrom: bigint;
+  amountTo: bigint;
+  creator: Address;
+  active: boolean;
+  optionalTaker: Address;
+  completed: boolean;
+  formattedAmountTo: string;
+  formattedAmountFrom: string;
+  isCreator: boolean | undefined;
+  isReceiver: boolean | undefined;
+  fee: bigint;
+  rateToFrom: number;
+  isTokenFromCustom: boolean;
+};
 
+export const useGetOfferDetails = ({ id }: { id: string }) => {
+  const { address } = useAccount();
   const {
     data: details,
     isLoading,
     error,
   } = useQuery({
-    queryKey: [GET_OFFER_DETAILS_QUERY_KEY, memoizedId],
-    queryFn: async () => {
-      return subgraphClient.request<OfferDetailsQueryRaw>(OFFER_DETAILS_QUERY, { id: memoizedId }).then((data) => {
-        const amountFrom = BigInt(data.tradeOffer.amountFrom);
-        const amountTo = BigInt(data.tradeOffer.amountTo);
-        const fee = amountFrom - BigInt(data.tradeOffer.amountFromWithFee);
-        return {
-          tokenFrom: {
-            ...data.tradeOffer.tokenFrom,
-            id: getAddress(data.tradeOffer.tokenFrom.id),
-          },
-          tokenTo: {
-            ...data.tradeOffer.tokenTo,
-            id: getAddress(data.tradeOffer.tokenTo.id),
-          },
-          amountFrom,
-          amountTo,
-          creator: getAddress(data.tradeOffer.creator),
-          receiver: getAddress(data.tradeOffer.optionalTaker),
-          fee,
-          active: data.tradeOffer.active,
-          completed: data.tradeOffer.completed,
-        };
-      });
+    queryKey: [GET_OFFER_DETAILS_QUERY_KEY, id, address],
+    queryFn: async (): Promise<OfferDetails> => {
+      const subgraphData = await subgraphClient
+        .request<OfferDetailsQueryRaw>(OFFER_DETAILS_QUERY, { id: id })
+        .then((data) => {
+          const amountFrom = BigInt(data.tradeOffer.amountFrom);
+          const amountTo = BigInt(data.tradeOffer.amountTo);
+          const amountFromWithFee = BigInt(data.tradeOffer.amountFromWithFee);
+
+          return {
+            tokenFrom: {
+              ...data.tradeOffer.tokenFrom,
+              address: getAddress(data.tradeOffer.tokenFrom.id),
+            },
+            tokenTo: {
+              ...data.tradeOffer.tokenTo,
+              address: getAddress(data.tradeOffer.tokenTo.id),
+            },
+            amountFromWithFee,
+            amountFrom,
+            amountTo,
+            creator: getAddress(data.tradeOffer.creator),
+            optionalTaker: getAddress(data.tradeOffer.optionalTaker),
+            active: data.tradeOffer.active,
+            completed: data.tradeOffer.completed,
+          };
+        });
+
+      const formattedAmountFrom = formatUnits(
+        BigInt(subgraphData.amountFromWithFee),
+        Number(subgraphData.tokenFrom.decimals),
+      );
+      const formattedAmountTo = formatUnits(BigInt(subgraphData.amountTo), Number(subgraphData.tokenTo.decimals));
+      const fee = subgraphData.amountFrom - BigInt(subgraphData.amountFromWithFee);
+
+      const isTokenFromCustom = getIsTokenCustom(getAddress(subgraphData.tokenFrom.address));
+      const isCreator = address && getIsCreator(address, subgraphData.creator);
+      const isReceiver = address && getIsReceiver(address, subgraphData.optionalTaker);
+
+      const rateToFrom = getRateToFrom(
+        subgraphData.amountFromWithFee,
+        subgraphData.amountTo,
+        subgraphData.tokenTo.decimals,
+        subgraphData.tokenFrom.decimals,
+      );
+
+      return {
+        ...subgraphData,
+        formattedAmountFrom,
+        formattedAmountTo,
+        isTokenFromCustom,
+        isCreator,
+        isReceiver,
+        rateToFrom,
+        fee,
+      };
     },
   });
 
-  const { address } = useAccount();
-  const [isCreator, setIsCreator] = useState<boolean | null>(null);
-  const [isReceiver, setIsReceiver] = useState<boolean | null>(null);
-  const {
-    tokenDecimals: tokenFromDecimals,
-    isCustom,
-    tokenValue,
-  } = useTokenInfo({
-    address: details ? details.tokenFrom.id : '0x',
-    amount: details ? details.amountFrom : BigInt(0),
-    withFee: true,
-  });
-  const { tokenDecimals: tokenToDecimals } = useTokenInfo({ address: details ? details.tokenTo.id : '0x' });
-
-  const offerDetails: OfferDetails = useMemo(() => {
-    if (!details) {
-      return {
-        tokenFrom: '' as Address,
-        tokenTo: '' as Address,
-        amountFrom: BigInt(0),
-        amountTo: BigInt(0),
-        creator: '' as Address,
-        receiver: '' as Address,
-        fee: BigInt(0),
-        active: false,
-        completed: false,
-      };
-    }
-
-    return {
-      tokenFrom: details.tokenFrom.id,
-      tokenTo: details.tokenTo.id,
-      amountFrom: details.amountFrom,
-      amountTo: details.amountTo,
-      creator: details.creator,
-      fee: details.fee,
-      active: details.active,
-      receiver: details.receiver,
-      completed: details.completed,
-    };
-  }, [details]);
-
-  useEffect(() => {
-    if (!address || !offerDetails.creator) return;
-    try {
-      setIsCreator(getAddress(address) === getAddress(offerDetails.creator));
-    } catch (e) {
-      setIsCreator(false);
-    }
-  }, [address, offerDetails.creator]);
-
-  useEffect(() => {
-    if (!address || !details || !details.receiver) return;
-    try {
-      const isReceiverFromDetails =
-        getAddress(address) === getAddress(details.receiver) || isEmptyAddress(details.receiver);
-      setIsReceiver(isReceiverFromDetails);
-    } catch (e) {
-      setIsReceiver(false);
-    }
-  }, [address, details]);
-
-  const rateToFrom = useMemo(() => {
-    if (!details || !tokenValue) return;
-    if (!tokenFromDecimals) return;
-    const amountFrom = tokenValue;
-    if (!tokenToDecimals) return;
-    const amountTo = formatUnits(details.amountTo, tokenToDecimals);
-    const result = Number(amountFrom) / Number(amountTo);
-    if (Number.isNaN(result)) return;
-    return String(Number(result.toFixed(5)));
-  }, [details, tokenToDecimals, tokenFromDecimals, tokenValue]);
-
   return {
-    ...offerDetails,
-    rateToFrom,
+    ...details,
     isLoading,
-    isCreator,
-    isReceiver,
     error,
-    isTokenFromCustom: isCustom,
   };
 };

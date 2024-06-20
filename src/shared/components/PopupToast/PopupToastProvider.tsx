@@ -2,15 +2,15 @@ import type { FC, PropsWithChildren } from 'react';
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 import { PopupToast } from './PopupToast';
-import type { IToastifyItem, IToastifyValues } from './types';
+import type { ToastifyItem, ToastifyValues } from './types';
 
-const ToastifyContext = createContext<IToastifyValues | undefined>(undefined);
+const ToastifyContext = createContext<ToastifyValues | undefined>(undefined);
 
 const ToastifyProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [items, setItems] = useState<IToastifyItem[]>([]);
+  const [items, setItems] = useState<ToastifyItem[]>([]);
 
-  const handleAddItem = useCallback((item: Omit<IToastifyItem, 'id'>) => {
-    const newItem: IToastifyItem = { ...item, id: Date.now() };
+  const handleAddItem = useCallback((item: Omit<ToastifyItem, 'id'>) => {
+    const newItem: ToastifyItem = { ...item, id: Date.now() };
     setItems((prevState) => [...prevState, newItem]);
   }, []);
 
@@ -18,7 +18,7 @@ const ToastifyProvider: FC<PropsWithChildren> = ({ children }) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
   }, []);
 
-  const values: IToastifyValues = useMemo(
+  const values: ToastifyValues = useMemo(
     () => ({
       items,
       handleAddItem,
@@ -35,7 +35,7 @@ const ToastifyProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-const useToastifyContext = (): IToastifyValues => {
+const useToastifyContext = (): ToastifyValues => {
   const context = useContext(ToastifyContext);
   if (!context) {
     throw new Error('useToastifyContext must be used within a ThemeProvider');

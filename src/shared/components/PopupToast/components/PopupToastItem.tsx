@@ -5,14 +5,14 @@ import { useEffect } from 'react';
 import { ClearCross } from '@berezka-dao/shared/icons';
 
 import s from '../PopupToast.module.scss';
-import type { IToastifyItem } from '../types';
+import type { ToastifyItem } from '../types';
 
-interface PopupToastItemProps {
-  item: IToastifyItem;
+type Props = {
+  item: ToastifyItem;
   handleRemoveItem: (id: number) => void;
-}
+};
 
-const PopupToastItem: FC<PopupToastItemProps> = ({ item, handleRemoveItem }) => {
+const PopupToastItem: FC<Props> = ({ item, handleRemoveItem }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       handleRemoveItem(item.id);
@@ -21,7 +21,7 @@ const PopupToastItem: FC<PopupToastItemProps> = ({ item, handleRemoveItem }) => 
     return () => {
       clearTimeout(timer);
     };
-  }, [item]);
+  }, [handleRemoveItem, item]);
 
   return (
     <div className={cn(s.item, { [s.success]: item.type === 'success', [s.error]: item.type === 'error' })}>

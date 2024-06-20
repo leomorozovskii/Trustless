@@ -12,8 +12,4 @@ const checkValidAmount = (value: string) => {
   return Math.sign(Number(value)) === 1;
 };
 
-const isDenied = (text: string) => {
-  return text.toLowerCase().includes('user denied');
-};
-
-export { checkAddress, checkValidAmount, isDenied };
+export { checkAddress, checkValidAmount };

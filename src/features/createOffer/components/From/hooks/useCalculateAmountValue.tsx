@@ -1,9 +1,11 @@
+import { useCallback } from 'react';
+
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 
 export const useCalculateAmountValue = () => {
   const { offerFromState, offerToState, setOfferToState, setOfferFromState } = useOfferCreateContext();
 
-  const calculateAmountToValue = () => {
+  const calculateAmountToValue = useCallback(() => {
     if (
       Number.isNaN(Number(offerFromState.amount)) ||
       Number.isNaN(offerFromState.rate) ||
@@ -20,9 +22,10 @@ export const useCalculateAmountValue = () => {
         setOfferToState({ amount: '' });
       }
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offerFromState.rate, offerFromState.amount, setOfferToState]);
 
-  const calculateRateValue = () => {
+  const calculateRateValue = useCallback(() => {
     if (
       Number.isNaN(Number(offerToState.amount)) ||
       Number.isNaN(Number(offerFromState.amount)) ||
@@ -39,7 +42,8 @@ export const useCalculateAmountValue = () => {
         setOfferFromState({ rate: '0' });
       }
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offerToState.amount, setOfferFromState]);
 
   return {
     calculateAmountToValue,

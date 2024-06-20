@@ -66,6 +66,20 @@
       "termsConditions": "Terms & Conditions",
       "fee": "Service Fee"
     },
+    "accept": {
+      "rate": "Rate",
+      "view": "View transaction",
+      "great": "Great!",
+      "the": "The",
+      "receiver": "Receiver",
+      "youWillHaveTo": "You will have to sign 2 transactions: Approval of token & Accept Trade",
+      "tokenYouReceive": "token you receive is a custom one. Please check the token’s address and make sure it’s correct"
+    },
+    "cancel": {
+      "aboutTo": "You are about to cancel the following offer",
+      "after": "After cancelling",
+      "tokensWillBeSend": "tokens will be send back to your wallet."
+    },
     "infinite": "Infinite approve",
     "created": "New offer has been created!",
     "warn": {
@@ -89,6 +103,8 @@
     "approving": "Approving token",
     "accept": "Accept Trade",
     "accepting": "Accepting Trade",
+    "cancel": "Cancel Trade",
+    "canceling": "Canceling Trade",
     "create": "Create Trade",
     "creating": "Creating Trade",
     "select": "Select a token",
@@ -102,6 +118,7 @@
     "message": "Error",
     "state": "Error state",
     "approve": "Approve error",
+    "notYour": "This is not your offer",
     "offer": "Offer error",
     "cancel": "Cancel error",
     "acceptedOrClosed": "The offer was accepted or closed",

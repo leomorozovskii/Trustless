@@ -1,35 +1,36 @@
 import { useEffect } from 'react';
-import { erc20Abi, formatUnits, fromHex, getAddress } from 'viem';
+import { formatUnits, fromHex, getAddress } from 'viem';
 import { useAccount, useConfig } from 'wagmi';
 import { readContracts } from 'wagmi/actions';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
 import type {
-  IContractTokens,
-  IToken,
-  IResponseToken,
-  IResponseAlchemy,
+  ContractTokens,
+  ResponseToken,
+  ResponseAlchemy,
 } from '@berezka-dao/features/createOffer/components/SelectTokenPopup/types';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
+import type { Token } from '@berezka-dao/features/createOffer/types';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { notUndefined } from '@berezka-dao/shared/utils/notUndefined';
 
-const getRawTokens = (responseTokens: IResponseToken[]) => {
-  const contractTokens: IContractTokens[] = [];
-  responseTokens.forEach((el: IResponseToken) => {
+const getRawTokens = (responseTokens: ResponseToken[]) => {
+  const contractTokens: ContractTokens[] = [];
+  responseTokens.forEach((el: ResponseToken) => {
     contractTokens.push({
       address: el.contractAddress,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'decimals',
     });
     contractTokens.push({
       address: el.contractAddress,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'name',
     });
     contractTokens.push({
       address: el.contractAddress,
-      abi: erc20Abi,
+      abi: customErc20Abi,
       functionName: 'symbol',
     });
   });
@@ -66,7 +67,7 @@ export const useGetUserTokens = () => {
 
       try {
         const response = await fetch(environment.apiUrl, requestOptions);
-        const data: IResponseAlchemy = await response.json();
+        const data: ResponseAlchemy = await response.json();
 
         const filteredTokens = data.result.tokenBalances.filter((token) => fromHex(token.tokenBalance, 'number') > 0);
 
@@ -74,7 +75,7 @@ export const useGetUserTokens = () => {
           contracts: getRawTokens(filteredTokens),
         });
 
-        const userTokens: IToken[] = result
+        const userTokens: Token[] = result
           .map((_, idx) => {
             if (idx % 3 === 0) {
               if (

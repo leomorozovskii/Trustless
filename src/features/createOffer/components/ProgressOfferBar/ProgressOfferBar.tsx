@@ -5,12 +5,12 @@ import { CheckmarkIcon } from '@berezka-dao/shared/icons';
 
 import s from './ProgressOfferBar.module.scss';
 
-type ProgressOfferBarProps = {
+type Props = {
   currentStep: number;
   steps: string[];
 };
 
-const ProgressOfferBar: FC<ProgressOfferBarProps> = ({ currentStep, steps }) => {
+const ProgressOfferBar: FC<Props> = ({ currentStep, steps }) => {
   const isComplete = useMemo(() => {
     return currentStep === steps.length + 1;
   }, [currentStep, steps]);

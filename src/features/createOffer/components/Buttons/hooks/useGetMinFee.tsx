@@ -6,18 +6,18 @@ import { useAccount, usePublicClient } from 'wagmi';
 import { environment } from '@berezka-dao/core/environment';
 import { useDebounce } from '@berezka-dao/shared/hooks/useDebounce';
 
-interface IEtherscanResponse {
+type EtherscanResponse = {
   result: {
     ethbtc?: string;
     ethbtc_timestamp?: string;
     ethusd?: string;
     ethusd_timestamp?: string;
   };
-}
+};
 
 const fetchEthUsdPrice = async () => {
   const response = await fetch(`${environment.etherscanUrl}&module=stats&action=ethprice`);
-  const result: IEtherscanResponse = await response.json();
+  const result: EtherscanResponse = await response.json();
 
   return result;
 };

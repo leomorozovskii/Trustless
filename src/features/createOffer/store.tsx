@@ -2,18 +2,17 @@ import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo, useReducer, useState } from 'react';
 
 import { OfferProgress } from './types';
-import type { IOfferFrom, IOfferTo, IOfferCreateValues, ITokensReducer } from './types';
+import type { OfferFrom, OfferTo, OfferCreateValues, TokensReducer } from './types';
 
-const OfferCreateContext = createContext<IOfferCreateValues | null>(null);
+const OfferCreateContext = createContext<OfferCreateValues | null>(null);
 
 const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   const [offerFromState, setOfferFromState] = useReducer(
-    (oldState: IOfferFrom, newState: Partial<IOfferFrom>): IOfferFrom => ({
+    (oldState: OfferFrom, newState: Partial<OfferFrom>): OfferFrom => ({
       ...oldState,
       ...newState,
     }),
     {
-      from: '',
       amount: '',
       amountError: '',
       isInfinite: false,
@@ -23,12 +22,11 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [offerToState, setOfferToState] = useReducer(
-    (oldState: IOfferTo, newState: Partial<IOfferTo>): IOfferTo => ({
+    (oldState: OfferTo, newState: Partial<OfferTo>): OfferTo => ({
       ...oldState,
       ...newState,
     }),
     {
-      to: '',
       amount: '',
       amountError: '',
       decimals: 0,
@@ -37,7 +35,7 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [userTokens, setUserTokens] = useReducer(
-    (oldState: ITokensReducer, newState: Partial<ITokensReducer>): ITokensReducer => ({
+    (oldState: TokensReducer, newState: Partial<TokensReducer>): TokensReducer => ({
       ...oldState,
       ...newState,
     }),
@@ -49,30 +47,27 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const [activeOfferStep, setActiveOfferStep] = useState<number>(1);
   const [offerId, setOfferId] = useState<number | null>(null);
-  const [customTokenName, setCustomTokenName] = useState<string>('');
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
-  const values: IOfferCreateValues = useMemo(
+  const values: OfferCreateValues = useMemo(
     () => ({
       offerFromState,
       offerToState,
       activeOfferStep,
       activeStep,
       offerId,
-      customTokenName,
       inputsDisabled,
       userTokens,
       setUserTokens,
       setInputsDisabled,
-      setCustomTokenName,
       setOfferId,
       setOfferFromState,
       setOfferToState,
       setActiveOfferStep,
       setActiveStep,
     }),
-    [activeOfferStep, activeStep, customTokenName, inputsDisabled, offerFromState, offerId, offerToState, userTokens],
+    [activeOfferStep, activeStep, inputsDisabled, offerFromState, offerId, offerToState, userTokens],
   );
 
   return <OfferCreateContext.Provider value={values}>{children}</OfferCreateContext.Provider>;

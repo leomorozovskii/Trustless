@@ -7,11 +7,11 @@ import { CheckmarkIcon } from '@berezka-dao/shared/icons';
 
 import s from './ProgressBar.module.scss';
 
-interface IProgressBar {
+type Props = {
   currentStep: OfferProgress;
-}
+};
 
-const ProgressBar: FC<IProgressBar> = ({ currentStep }) => {
+const ProgressBar: FC<Props> = ({ currentStep }) => {
   const isComplete = useMemo(() => {
     return currentStep === OfferProgress.Created;
   }, [currentStep]);

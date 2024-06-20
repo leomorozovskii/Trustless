@@ -29,18 +29,18 @@ const TokenAddressArbitrum: Record<TokenArbitrum, Address> = {
 };
 
 export const TOKEN_MAP_ARBITRUM: TokenMap = {
-  [TokenAddressArbitrum.USDT]: { address: TokenAddressArbitrum.USDT, name: 'USDT', logo: UsdtIcon, decimals: 6 },
-  [TokenAddressArbitrum.USDC]: { address: TokenAddressArbitrum.USDC, name: 'USDC', logo: UsdcIcon, decimals: 6 },
+  [TokenAddressArbitrum.USDT]: { address: TokenAddressArbitrum.USDT, symbol: 'USDT', logo: UsdtIcon, decimals: 6 },
+  [TokenAddressArbitrum.USDC]: { address: TokenAddressArbitrum.USDC, symbol: 'USDC', logo: UsdcIcon, decimals: 6 },
   [TokenAddressArbitrum['USDC.e']]: {
     address: TokenAddressArbitrum['USDC.e'],
-    name: 'USDC.e',
+    symbol: 'USDC.e',
     logo: UsdcIcon,
     decimals: 6,
   },
-  [TokenAddressArbitrum.WBTC]: { address: TokenAddressArbitrum.WBTC, name: 'WBTC', logo: WbtcIcon, decimals: 8 },
-  [TokenAddressArbitrum.LINK]: { address: TokenAddressArbitrum.LINK, name: 'LINK', logo: LinkIcon, decimals: 18 },
-  [TokenAddressArbitrum.UNI]: { address: TokenAddressArbitrum.UNI, name: 'UNI', logo: UniIcon, decimals: 18 },
-  [TokenAddressArbitrum.weETH]: { address: TokenAddressArbitrum.weETH, name: 'weETH', logo: WeethIcon, decimals: 18 },
-  [TokenAddressArbitrum.PEPE]: { address: TokenAddressArbitrum.PEPE, name: 'PEPE', logo: PepeIcon, decimals: 18 },
-  [TokenAddressArbitrum.DAI]: { address: TokenAddressArbitrum.DAI, name: 'DAI', logo: DaiIcon, decimals: 18 },
+  [TokenAddressArbitrum.WBTC]: { address: TokenAddressArbitrum.WBTC, symbol: 'WBTC', logo: WbtcIcon, decimals: 8 },
+  [TokenAddressArbitrum.LINK]: { address: TokenAddressArbitrum.LINK, symbol: 'LINK', logo: LinkIcon, decimals: 18 },
+  [TokenAddressArbitrum.UNI]: { address: TokenAddressArbitrum.UNI, symbol: 'UNI', logo: UniIcon, decimals: 18 },
+  [TokenAddressArbitrum.weETH]: { address: TokenAddressArbitrum.weETH, symbol: 'weETH', logo: WeethIcon, decimals: 18 },
+  [TokenAddressArbitrum.PEPE]: { address: TokenAddressArbitrum.PEPE, symbol: 'PEPE', logo: PepeIcon, decimals: 18 },
+  [TokenAddressArbitrum.DAI]: { address: TokenAddressArbitrum.DAI, symbol: 'DAI', logo: DaiIcon, decimals: 18 },
 };

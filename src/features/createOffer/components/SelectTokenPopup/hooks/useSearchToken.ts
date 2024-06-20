@@ -1,51 +1,45 @@
 import { useEffect, useState } from 'react';
 
-import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
-import type { IToken } from '@berezka-dao/features/createOffer/components/SelectTokenPopup/types';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
+import type { Token } from '@berezka-dao/features/createOffer/types';
 
-interface ISearchProps {
+type Props = {
   query: string;
-  type: 'from' | 'to' | 'default';
-}
+  tokens: Token[] | TokenData[] | null;
+};
 
-export const useSearchToken = ({ query, type }: ISearchProps) => {
-  const [searchedData, setSearchedData] = useState<TokenData[] | IToken[]>([]);
-  const { userTokens } = useOfferCreateContext();
+export const useSearchToken = ({ query, tokens }: Props) => {
+  const [searchedData, setSearchedData] = useState<TokenData[] | Token[] | null>(null);
+
+  const isTokenData = (item: Token | TokenData): item is TokenData => {
+    return 'logo' in item;
+  };
 
   useEffect(() => {
-    const handleSearchFrom = () => {
-      if (!userTokens.tokens) return;
-      if (!query) setSearchedData(userTokens.tokens);
-      const lowerCaseQuery = query.toLowerCase();
-      const result = userTokens.tokens.filter(
-        (token) =>
-          token.address.toLowerCase() === lowerCaseQuery ||
-          token.name.toLowerCase().includes(lowerCaseQuery) ||
-          token.symbol.toLowerCase().includes(lowerCaseQuery),
-      );
-      setSearchedData(result);
-    };
-
-    const handleSearchTo = () => {
-      if (!query) setSearchedData(Object.values(TOKEN_MAP));
-      const lowerCaseQuery = query.toLowerCase();
-      const result = Object.entries(TOKEN_MAP)
-        .filter(
-          ([address, tokenData]) =>
-            address.toLowerCase() === lowerCaseQuery || tokenData.name.toLowerCase().includes(lowerCaseQuery),
-        )
-        .map(([, tokenData]) => tokenData);
-      setSearchedData(result);
-    };
-
-    if (type !== 'from') {
-      handleSearchTo();
-    } else {
-      handleSearchFrom();
+    if (!tokens) return;
+    if (!query) {
+      setSearchedData(tokens);
+      return;
     }
-  }, [query, type, userTokens.tokens]);
+
+    const lowerCaseQuery = query.toLowerCase();
+    if (tokens.every(isTokenData)) {
+      const result: TokenData[] = tokens.filter((token) => {
+        const matchesAddress = token.address.toLowerCase() === lowerCaseQuery;
+        const matchesSymbol = token.symbol.toLowerCase().includes(lowerCaseQuery);
+        return matchesAddress || matchesSymbol;
+      });
+      setSearchedData(result);
+    } else {
+      const result: Token[] = tokens.filter((token) => {
+        const matchesName = token.name.toLowerCase().includes(lowerCaseQuery);
+        const matchesAddress = token.address.toLowerCase() === lowerCaseQuery;
+        const matchesSymbol = token.symbol.toLowerCase().includes(lowerCaseQuery);
+        return matchesAddress || matchesSymbol || matchesName;
+      });
+      setSearchedData(result);
+    }
+  }, [query, tokens]);
 
   return { searchedData };
 };

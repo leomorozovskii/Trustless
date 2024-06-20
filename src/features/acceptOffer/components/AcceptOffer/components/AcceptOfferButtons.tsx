@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import type { FC } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAcceptApprove } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptApprove';
@@ -25,19 +25,18 @@ const AcceptOfferButtons: FC = () => {
   const { activeAcceptStep, acceptId, setIsInfinite } = useOfferAcceptContext();
   const { active, isLoading } = useGetOfferDetails({ id: acceptId });
   const { t } = useTranslation();
-  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   const { onAcceptApproveReceipt, acceptApproveHandler, acceptApproveRequest } = useAcceptApprove();
   const { acceptTrade, onAcceptReceipt, acceptTradeRequest } = useAcceptOffer();
 
   const { minFee: minApproveFee } = useGetMinFee({
     data: acceptApproveRequest,
-    active: activeAcceptStep === OfferProgress.Filled && isMounted,
+    active: activeAcceptStep === OfferProgress.Filled,
   });
 
   const { minFee: minAcceptFee } = useGetMinFee({
     data: acceptTradeRequest,
-    active: activeAcceptStep === OfferProgress.Approved && isMounted,
+    active: activeAcceptStep === OfferProgress.Approved,
   });
 
   const memoizedFee = useMemo(() => {
@@ -47,21 +46,15 @@ const AcceptOfferButtons: FC = () => {
   }, [activeAcceptStep, minApproveFee, minAcceptFee]);
 
   useEffect(() => {
-    if (!isLoading && !active && isMounted) {
+    if (!isLoading && !active) {
       handleAddItem({ title: t('error.message'), text: t('error.acceptedOrClosed'), type: 'error' });
       router.push('/offer/create');
     }
-  }, [active, handleAddItem, isLoading, isMounted, router, t]);
-
-  useEffect(() => {
-    if (!isLoading) {
-      setIsMounted(true);
-    }
-  }, [isLoading]);
+  }, [active, handleAddItem, isLoading, router, t]);
 
   return (
     <div className={s.container}>
-      <Skeleton loading={!isMounted}>
+      <Skeleton loading={isLoading}>
         {activeAcceptStep === OfferProgress.Filled && (
           <Checkbox
             label={t('offer.infinite')}
@@ -70,7 +63,7 @@ const AcceptOfferButtons: FC = () => {
             }}
           />
         )}
-        <p className={s.label}>You will have to sign 2 transactions: Approval of token & Accept Trade</p>
+        <p className={s.label}>{t('offer.accept.youWillHaveTo')}</p>
         <div className={s.buttonWrapper}>
           <div className={s.buttonContainer}>
             {activeAcceptStep !== OfferProgress.Approved && (
