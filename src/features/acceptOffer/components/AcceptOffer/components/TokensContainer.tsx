@@ -10,14 +10,16 @@ import s from '../AcceptOffer.module.scss';
 
 const TokensContainer: FC = () => {
   const { acceptId } = useOfferAcceptContext();
-  const { tokenFrom, amountFrom, tokenTo, amountTo, rateToFrom } = useGetOfferDetails({ id: acceptId });
+  const { tokenFrom, formattedAmountFrom, tokenTo, formattedAmountTo, rateToFrom } = useGetOfferDetails({
+    id: acceptId,
+  });
 
   return (
     <div className={s.offerWrapper}>
       <div className={s.arrowContainer}>
-        <TokenEntity type="pay" address={tokenTo} amount={amountTo} />
+        <TokenEntity type="pay" address={tokenTo?.address} amount={formattedAmountTo} name={tokenTo?.symbol} />
         <AcceptOfferIcon />
-        <TokenEntity type="get" address={tokenFrom} amount={amountFrom} />
+        <TokenEntity type="get" address={tokenFrom?.address} amount={formattedAmountFrom} name={tokenFrom?.symbol} />
       </div>
       <RateContainer value={rateToFrom} />
     </div>

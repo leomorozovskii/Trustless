@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
-import type { Address } from 'viem';
 
+import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { useGetFee } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetFee';
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { Checkbox } from '@berezka-dao/shared/ui-kit/Checkbox';
@@ -12,10 +11,13 @@ import s from './IncludeFee.module.scss';
 const IncludeFee = () => {
   const { offerFromState, setOfferFromState, activeStep } = useOfferCreateContext();
   const { calculatedFee } = useGetFee();
-  const { tokenName } = useTokenInfo({
-    address: offerFromState.from as Address,
-    withFee: true,
-  });
+
+  const tokenName = useMemo(() => {
+    if (!offerFromState.from) return;
+    const tokenSymbol = TOKEN_MAP[offerFromState.from]?.symbol;
+    if (!tokenSymbol) return offerFromState.customTokenName;
+    return tokenSymbol;
+  }, [offerFromState.customTokenName, offerFromState.from]);
 
   const fee = useMemo(() => {
     if (!offerFromState.amount || !calculatedFee || !Number.isFinite(Number(offerFromState.amount))) return;

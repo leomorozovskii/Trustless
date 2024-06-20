@@ -4,13 +4,13 @@ import type { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 import s from './TokenItem.module.scss';
 
-interface ITokenItem {
-  title: string;
+type Props = {
   IconComponent: FC<ComponentProps<typeof UnknownIcon>>;
+  title: string;
   onClick(): void;
-}
+};
 
-const TokenItem: FC<ITokenItem> = ({ title, IconComponent, onClick }) => {
+const TokenItem: FC<Props> = ({ title, IconComponent, onClick }) => {
   return (
     <button className={s.tokenItem} onClick={onClick}>
       <IconComponent width={20} height={20} />

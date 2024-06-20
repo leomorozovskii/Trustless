@@ -1,8 +1,9 @@
 import cn from 'classnames';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { isAddress } from 'viem';
+import { getAddress, isAddress } from 'viem';
 
+import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { AddCustomToken } from '@berezka-dao/features/createOffer/components/AddCustomToken';
 import { checkValidAmount } from '@berezka-dao/features/createOffer/components/Buttons/utils';
 import { useCalculateAmountValue } from '@berezka-dao/features/createOffer/components/From/hooks/useCalculateAmountValue';
@@ -22,23 +23,25 @@ const OfferTo = () => {
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [offerFromState.rate, offerFromState.amount]);
-
-  useEffect(() => {
-    calculateAmountToValue();
-  }, [offerFromState.amount]);
+  }, [offerFromState.rate, offerFromState.amount, calculateAmountToValue]);
 
   return (
     <div className={s.container}>
       <div className={cn(s.selectContainer, s.inputWrapper)}>
         <h2 className={s.selectLabel}>{t('token.to')}</h2>
         <Select
-          value={offerToState.to}
+          tokens={Object.values(TOKEN_MAP)}
           placeholder="Select token"
+          value={offerToState.to}
+          customTokenName={offerToState.customTokenName}
           disabled={inputsDisabled}
-          onChange={(value) => setOfferToState({ to: value })}
+          onSelect={(value, decimals) => setOfferToState({ to: getAddress(value), decimals })}
         />
-        <AddCustomToken type="to" />
+        <AddCustomToken
+          onProceed={(decimal, address, symbol) =>
+            setOfferToState({ to: address, decimals: decimal, customTokenName: symbol })
+          }
+        />
       </div>
       <Input
         id="to amount input"

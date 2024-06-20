@@ -15,8 +15,8 @@ const TokenAddressSepolia: Record<TokenSepolia, Address> = {
 };
 
 export const TOKEN_MAP_SEPOLIA: TokenMap = {
-  [TokenAddressSepolia.USDT]: { address: TokenAddressSepolia.USDT, name: 'USDT', logo: UsdtIcon, decimals: 6 },
-  [TokenAddressSepolia.META]: { address: TokenAddressSepolia.META, name: 'META', logo: UnknownIcon, decimals: 18 },
-  [TokenAddressSepolia.PUCKI]: { address: TokenAddressSepolia.PUCKI, name: 'PUCKI', logo: UnknownIcon, decimals: 18 },
-  [TokenAddressSepolia.USDC]: { address: TokenAddressSepolia.USDC, name: 'USDC', logo: UsdcIcon, decimals: 6 },
+  [TokenAddressSepolia.USDT]: { address: TokenAddressSepolia.USDT, symbol: 'USDT', logo: UsdtIcon, decimals: 6 },
+  [TokenAddressSepolia.META]: { address: TokenAddressSepolia.META, symbol: 'META', logo: UnknownIcon, decimals: 18 },
+  [TokenAddressSepolia.PUCKI]: { address: TokenAddressSepolia.PUCKI, symbol: 'PUCKI', logo: UnknownIcon, decimals: 18 },
+  [TokenAddressSepolia.USDC]: { address: TokenAddressSepolia.USDC, symbol: 'USDC', logo: UsdcIcon, decimals: 6 },
 };

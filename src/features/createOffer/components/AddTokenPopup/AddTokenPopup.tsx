@@ -1,117 +1,86 @@
-// TODO :: Remove deprecated
-/* eslint-disable import/no-deprecated */
-import type { Dispatch, FC, FormEvent, SetStateAction } from 'react';
-import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import type { FC, FormEvent } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAddress, isAddress } from 'viem';
 import type { Address } from 'viem';
-import { useAccount, useBalance, useToken } from 'wagmi';
+import { useAccount } from 'wagmi';
 
-import { TOKEN_MAP } from '@berezka-dao/core/constants';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
+import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
 import { InputCross, WarningIcon } from '@berezka-dao/shared/icons';
-import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 import { Button } from '@berezka-dao/shared/ui-kit/Button';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
 import s from './AddTokenPopup.module.scss';
 
-interface IAddTokenPopupState {
-  address: string;
-  name: string;
+type AddTokenPopupState = {
+  symbol?: string;
   decimal: number;
-}
+  address?: Address;
+};
 
-interface IAddTokenPopup {
-  setOpened: Dispatch<SetStateAction<boolean>>;
-  type: 'from' | 'to';
-}
+type Props = {
+  onClose(): void;
+  onProceed(decimals: number, address?: Address, symbol?: string): void;
+};
 
-const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
+const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
   const { t } = useTranslation();
   const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
-  const { setOfferFromState, setOfferToState, setCustomTokenName } = useOfferCreateContext();
+  const [localAddress, setLocalAddress] = useState<string>('');
   const { address: userAddress } = useAccount();
 
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [step, setStep] = useState<number>(1);
   const [tokenState, setTokenState] = useReducer(
-    (oldState: IAddTokenPopupState, newState: Partial<IAddTokenPopupState>): IAddTokenPopupState => ({
+    (oldState: AddTokenPopupState, newState: Partial<AddTokenPopupState>): AddTokenPopupState => ({
       ...oldState,
       ...newState,
     }),
     {
-      address: '',
-      name: '',
       decimal: 0,
     },
   );
 
-  const result = useToken({
-    address: tokenState.address as Address,
-  });
-
-  const TokenLogo = useMemo(() => {
-    if (!tokenState.address) return UnknownIcon;
-    const data = TOKEN_MAP[tokenState.address as Address];
-    if (!data) return UnknownIcon;
-    return data.logo;
-  }, [tokenState.address]);
-
-  const { data: balance } = useBalance({
-    address: userAddress,
-    token: tokenState.address as Address,
+  const { TokenLogo, tokenName, tokenDecimals, tokenDisplayBalance } = useTokenInfo({
+    address: tokenState.address,
+    userAddress,
   });
 
   useEffect(() => {
-    if (result.data) {
-      setTokenState({ name: result.data.symbol });
-      setTokenState({ decimal: result.data.decimals });
+    if (tokenName && tokenDecimals) {
+      setTokenState({ symbol: tokenName });
+      setTokenState({ decimal: tokenDecimals });
     } else {
-      setTokenState({ name: '' });
+      setTokenState({ symbol: undefined });
       setTokenState({ decimal: 0 });
     }
-  }, [result.data]);
-
-  const stepHandler = () => {
-    if (type === 'to') {
-      setOfferToState({ to: tokenState.address, decimals: tokenState.decimal });
-      setCustomTokenName(tokenState.name);
-    } else if (type === 'from') {
-      setOfferFromState({ from: tokenState.address, decimals: tokenState.decimal });
-      setCustomTokenName(tokenState.name);
-    }
-  };
+  }, [tokenDecimals, tokenName]);
 
   const handleAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 1) {
       setStep(2);
     } else if (step === 2) {
-      stepHandler();
-      setOpened(false);
+      onProceed(tokenState.decimal, tokenState.address, tokenState.symbol);
+      onClose();
     }
   };
 
   useClickOutside(ref, (ev) => {
-    if (!ref.current?.contains(ev.currentTarget as Node)) {
-      setOpened(false);
+    if (!ref.current?.contains(ev.target as Node)) {
+      onClose();
     }
   });
 
   const changeAddressHandler = (value: string) => {
-    try {
-      if (value && isAddress(value)) {
-        setTokenState({ address: getAddress(value) });
-      } else if (value) {
-        setTokenState({ address: value });
-      } else {
-        setTokenState({ address: '' });
-      }
+    setLocalAddress(value);
+    if (isAddress(value)) {
+      setTokenState({ address: getAddress(value) });
       setIsInvalidAddress(false);
-    } catch {
+    } else {
+      setTokenState({ address: undefined });
       setIsInvalidAddress(true);
     }
   };
@@ -122,7 +91,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
         <div className={s.content}>
           <div className={s.titleContainer}>
             <h2 className={s.title}>{t('offer.create.addToken')}</h2>
-            <InputCross onClick={() => setOpened(false)} className={s.cross} />
+            <InputCross onClick={onClose} className={s.cross} />
           </div>
           <div className={s.warnContainer}>
             <div className={s.warning}>
@@ -142,7 +111,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                     ? t('token.invalid.address')
                     : ''
                 }
-                value={tokenState.address}
+                value={localAddress}
                 onChange={({ currentTarget }) => changeAddressHandler(currentTarget.value)}
               />
               <Input
@@ -150,8 +119,8 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                 size="lg"
                 disabled
                 id="token name input"
-                value={tokenState.name}
-                onChange={({ currentTarget }) => setTokenState({ name: currentTarget.value })}
+                value={tokenState.symbol || ''}
+                onChange={({ currentTarget }) => setTokenState({ symbol: currentTarget.value })}
               />
               <Input
                 label={t('token.decimal')}
@@ -160,7 +129,7 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
                 classWrapper={s.decimalWrapper}
                 id="token decimal input"
                 value={tokenState.decimal ? tokenState.decimal.toString() : ''}
-                onChange={({ currentTarget }) => setTokenState({ decimal: +currentTarget.value })}
+                onChange={({ currentTarget }) => setTokenState({ decimal: Number(currentTarget.value) })}
               />
             </>
           ) : (
@@ -168,9 +137,9 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
               <div className={s.tokenContainer}>
                 <TokenLogo className={s.tokenLogo} />
                 <div className={s.balanceContainer}>
-                  <h2 className={s.tokenTitle}>{tokenState.name}</h2>
+                  <h2 className={s.tokenTitle}>{tokenState.symbol}</h2>
                   <h2 className={s.tokenBalance}>
-                    {balance?.formatted} {tokenState.name}
+                    {tokenDisplayBalance} {tokenState.symbol}
                   </h2>
                 </div>
               </div>
@@ -178,10 +147,10 @@ const AddTokenPopup: FC<IAddTokenPopup> = ({ setOpened, type }) => {
           )}
         </div>
         <div className={s.buttonContainer}>
-          <Button type="button" onClick={() => (step === 1 ? setOpened(false) : setStep(1))}>
+          <Button type="button" onClick={() => (step === 1 ? onClose() : setStep(1))}>
             {t('token.add.back')}
           </Button>
-          <Button type="submit" disabled={!tokenState.address || !tokenState.name || !tokenState.decimal}>
+          <Button type="submit" disabled={!tokenState.address || !tokenState.symbol || !tokenState.decimal}>
             {t('token.add.import')}
           </Button>
         </div>

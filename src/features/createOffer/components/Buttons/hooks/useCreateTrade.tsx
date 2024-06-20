@@ -12,19 +12,17 @@ import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 
 import { useGetBalanceGreater } from './useGetBalanceGreater';
-import { useTokenData } from './useTokenData';
 import { checkAddress } from '../utils';
 
 export const useCreateTrade = () => {
   const { handleAddItem } = useToastifyContext();
   const { t } = useTranslation();
   const { setActiveStep, setActiveOfferStep, setOfferId, offerToState, offerFromState } = useOfferCreateContext();
-  const { tokenFromAddress, tokenToAddress, tokenFromDecimals, tokenToDecimals, isValid } = useTokenData();
   const { address } = useAccount();
 
   const { writeContractAsync: tradeContract } = useWriteContract();
   const { isGreater: isCreateGreater } = useGetBalanceGreater({
-    tokenAddress: tokenFromAddress,
+    tokenAddress: offerFromState.from,
     tokenAmount: offerFromState.amount,
   });
 
@@ -58,20 +56,28 @@ export const useCreateTrade = () => {
   };
 
   const createTradeRequest = useMemo(() => {
-    if (!tokenFromAddress || !tokenToAddress || !offerFromState.amount || !offerToState.amount || !address) return;
-
-    if (isCreateGreater()) return;
+    if (
+      !address ||
+      !offerFromState.from ||
+      !offerToState.to ||
+      !offerFromState.amount ||
+      !offerToState.amount ||
+      !offerFromState.decimals ||
+      !offerToState.decimals ||
+      isCreateGreater()
+    )
+      return;
 
     let offerFromAmount;
     try {
-      offerFromAmount = parseUnits(String(offerFromState.amount), tokenFromDecimals);
+      offerFromAmount = parseUnits(String(offerFromState.amount), offerFromState.decimals);
     } catch (e) {
       offerFromAmount = BigInt(0);
     }
 
     let offerToAmount;
     try {
-      offerToAmount = parseUnits(String(offerToState.amount), tokenToDecimals);
+      offerToAmount = parseUnits(String(offerToState.amount), offerToState.decimals);
     } catch (e) {
       offerToAmount = BigInt(0);
     }
@@ -80,23 +86,23 @@ export const useCreateTrade = () => {
       address: environment.contractAddress,
       abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
-      args: [tokenFromAddress, tokenToAddress, offerFromAmount, offerToAmount, checkAddress(offerToState.receiver)],
+      args: [offerFromState.from, offerToState.to, offerFromAmount, offerToAmount, checkAddress(offerToState.receiver)],
       account: address,
     };
   }, [
     address,
-    isCreateGreater,
+    offerFromState.from,
+    offerToState.to,
     offerFromState.amount,
     offerToState.amount,
+    offerFromState.decimals,
+    offerToState.decimals,
     offerToState.receiver,
-    tokenFromAddress,
-    tokenFromDecimals,
-    tokenToAddress,
-    tokenToDecimals,
+    isCreateGreater,
   ]);
 
   const createTrade = async () => {
-    if (!isValid) return;
+    if (!offerFromState.from || !offerToState.to || !offerFromState.decimals || !offerToState.decimals) return;
     if (isCreateGreater()) {
       throw new Error('Insufficient balance');
     }
@@ -105,10 +111,10 @@ export const useCreateTrade = () => {
       abi: trustlessOtcAbi,
       functionName: 'initiateTrade',
       args: [
-        tokenFromAddress,
-        tokenToAddress,
-        parseUnits(String(offerFromState.amount), tokenFromDecimals),
-        parseUnits(String(offerToState.amount), tokenToDecimals),
+        offerFromState.from,
+        offerToState.to,
+        parseUnits(String(offerFromState.amount), offerFromState.decimals),
+        parseUnits(String(offerToState.amount), offerToState.decimals),
         checkAddress(offerToState.receiver),
       ],
     });

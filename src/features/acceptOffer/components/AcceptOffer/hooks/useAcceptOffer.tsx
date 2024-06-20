@@ -1,12 +1,10 @@
 import { useMemo } from 'react';
 import type { TransactionReceipt } from 'viem';
-import { formatUnits } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
 import { environment } from '@berezka-dao/core/environment';
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { useGetBalanceGreater } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetBalanceGreater';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
@@ -16,13 +14,12 @@ export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();
   const { setActiveAcceptStep, setTxHash, acceptId } = useOfferAcceptContext();
 
-  const { tokenTo, amountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
-  const { tokenDecimals } = useTokenInfo({ address: tokenTo });
+  const { tokenTo, formattedAmountTo, isReceiver } = useGetOfferDetails({ id: acceptId });
   const { address } = useAccount();
 
   const { isGreater } = useGetBalanceGreater({
-    tokenAddress: tokenTo,
-    tokenAmount: formatUnits(amountTo, tokenDecimals),
+    tokenAddress: tokenTo?.address,
+    tokenAmount: formattedAmountTo,
   });
 
   const { writeContractAsync: acceptContract } = useWriteContract();

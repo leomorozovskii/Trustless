@@ -1,17 +1,21 @@
 import Link from 'next/link';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { Address } from 'viem';
 
 import { links } from '@berezka-dao/core/constants';
 import { NewWindowIcon, WarningIcon } from '@berezka-dao/shared/icons';
 
 import s from '../AcceptOffer.module.scss';
 
-interface ICustomTokenWarning {
+type Props = {
   name: string | undefined;
-  address: string;
-}
+  address?: Address;
+};
 
-const CustomTokenWarning: FC<ICustomTokenWarning> = ({ name, address }) => {
+const CustomTokenWarning: FC<Props> = ({ name, address }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={s.warnContainer}>
       <div className={s.warning}>
@@ -19,8 +23,7 @@ const CustomTokenWarning: FC<ICustomTokenWarning> = ({ name, address }) => {
       </div>
       <div className={s.warnParagraph}>
         <p className={s.warnText}>
-          The <span className={s.warnTokenName}>{name}</span> token you receive is a custom one. Please check the
-          token’s address and make sure it’s correct
+          {t('offer.accept.the')} <span className={s.warnTokenName}>{name}</span> {t('offer.accept.tokenYouReceive')}
         </p>
         <div className={s.warnShareAddress}>
           <p className={s.warnTokenName}>{address}</p>

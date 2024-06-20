@@ -4,7 +4,7 @@ import type { ChangeEvent, FC, HTMLAttributes, ReactNode } from 'react';
 
 import s from './Input.module.scss';
 
-interface IInput extends HTMLAttributes<HTMLInputElement> {
+type Props = {
   placeholder?: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -17,9 +17,9 @@ interface IInput extends HTMLAttributes<HTMLInputElement> {
   size?: 'sm' | 'md' | 'lg';
   icon?: ReactNode;
   label?: string | ReactNode;
-}
+} & HTMLAttributes<HTMLInputElement>;
 
-const Input: FC<IInput> = ({
+const Input: FC<Props> = ({
   type = 'text',
   size = 'md',
   placeholder = '',

@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react';
+import { getAddress } from 'viem';
 
 import { AddCustomToken } from '@berezka-dao/features/createOffer/components/AddCustomToken';
 import { checkValidAmount } from '@berezka-dao/features/createOffer/components/Buttons/utils';
@@ -15,7 +16,7 @@ const OfferFrom = () => {
 
   useEffect(() => {
     calculateRateValue();
-  }, [offerToState.amount, offerFromState.amount]);
+  }, [offerToState.amount, calculateRateValue]);
 
   const amountError = useMemo(() => {
     if (offerFromState.amount && !checkValidAmount(offerFromState.amount)) {
@@ -36,6 +37,7 @@ const OfferFrom = () => {
 
   const handleSetMaxBalance = () => {
     if (!offerFromState.from) return;
+    setOfferFromState({ amountError: '' });
     setOfferFromState({ amount: maxBalance });
   };
 
@@ -44,13 +46,18 @@ const OfferFrom = () => {
       <div className={s.selectContainer}>
         <h2 className={s.selectLabel}>From</h2>
         <Select
-          type="from"
-          value={offerFromState.from}
+          tokens={userTokens.tokens}
           placeholder="Select token"
+          value={offerFromState.from}
+          customTokenName={offerFromState.customTokenName}
           disabled={inputsDisabled}
-          onChange={(value) => setOfferFromState({ from: value })}
+          onSelect={(value, decimals) => setOfferFromState({ from: getAddress(value), decimals })}
         />
-        <AddCustomToken type="from" />
+        <AddCustomToken
+          onProceed={(decimal, address, symbol) =>
+            setOfferFromState({ from: address, decimals: decimal, customTokenName: symbol })
+          }
+        />
       </div>
       <Input
         id="from amount input"

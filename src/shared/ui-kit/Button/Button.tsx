@@ -4,7 +4,7 @@ import { isValidElement, useMemo } from 'react';
 
 import s from './Button.module.scss';
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+type Props = HTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'ghost';
@@ -12,9 +12,9 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   loading?: boolean;
   disabled?: boolean;
-}
+};
 
-const Button: FC<ButtonProps> = ({
+const Button: FC<Props> = ({
   children,
   variant = 'primary',
   type = 'button',

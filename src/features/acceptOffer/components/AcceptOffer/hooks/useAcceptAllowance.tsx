@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { Address } from 'viem';
-import { erc20Abi } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
 import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
@@ -18,12 +17,14 @@ export const useAcceptAllowance = () => {
     data: acceptOfferAllowance,
     isLoading: isGettingAllowance,
     refetch: refetchAllowance,
-  } = useReadContract({
-    address: tokenTo,
-    abi: erc20Abi,
-    functionName: 'allowance',
-    args: [userAddress as Address, environment.contractAddress],
-  });
+  } = useReadContract(
+    userAddress && {
+      address: tokenTo?.address,
+      abi: customErc20Abi,
+      functionName: 'allowance',
+      args: [userAddress, environment.contractAddress],
+    },
+  );
 
   const [isSufficient, setIsSufficient] = useState<boolean | null>(null);
 
