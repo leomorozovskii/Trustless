@@ -4,10 +4,9 @@ import cn from 'classnames';
 import Link from 'next/link';
 import { useMemo } from 'react';
 
+import { AcceptOffer, OfferAcceptProvider, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
 import { AcceptedOffer } from '@berezka-dao/features/acceptOffer/components/AcceptedOffer';
-import { AcceptOffer } from '@berezka-dao/features/acceptOffer/components/AcceptOffer';
-import { AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/components/AcceptOfferButtons';
-import { OfferAcceptProvider, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
+import { AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components/AcceptOfferButtons';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';

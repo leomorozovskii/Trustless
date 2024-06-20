@@ -4,7 +4,7 @@ import type { Address } from 'viem';
 
 import { AcceptOfferIcon } from '@berezka-dao/shared/icons';
 
-import s from '../AcceptOffer.module.scss';
+import s from './ReceiverContainer.module.scss';
 
 type Props = {
   receiver?: Address;

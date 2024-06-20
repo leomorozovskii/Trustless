@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
-import { useGetFee } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetFee';
 import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
+import { useGetFee } from '@berezka-dao/shared/hooks/useGetFee';
 import { Checkbox } from '@berezka-dao/shared/ui-kit/Checkbox';
 
 import s from './IncludeFee.module.scss';

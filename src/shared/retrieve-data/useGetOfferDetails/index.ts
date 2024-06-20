@@ -1,92 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import type { Address } from 'viem';
 import { formatUnits, getAddress } from 'viem';
 import { useAccount } from 'wagmi';
 
 import { subgraphClient } from '@berezka-dao/core/configs';
-import {
-  getIsCreator,
-  getIsReceiver,
-  getIsTokenCustom,
-  getRateToFrom,
-} from '@berezka-dao/features/acceptOffer/components/AcceptOffer/utils/utils';
 
-const OFFER_DETAILS_QUERY = `
-  query OfferDetails($id: BigInt!) {
-    tradeOffer(id: $id) {
-      tokenFrom {
-        ...TokenFragment
-      }
-      tokenTo {
-        ...TokenFragment
-      }
-      amountFrom
-      amountFromWithFee
-      amountTo
-      creator
-      active
-      optionalTaker
-      completed
-    }
-  }
-
-  fragment TokenFragment on Token {
-    decimals
-    symbol
-    id
-  }
-`;
+import { OFFER_DETAILS_QUERY } from './query';
+import type { OfferDetails, OfferDetailsQueryRaw } from './types';
+import { getIsCreator, getIsReceiver, getIsTokenCustom, getRateToFrom } from './utils';
 
 const GET_OFFER_DETAILS_QUERY_KEY = 'GET_OFFER_DETAILS';
-
-type OfferDetailsQueryRaw = {
-  tradeOffer: {
-    tokenFrom: {
-      id: Address;
-      symbol: string;
-      decimals: string;
-    };
-    tokenTo: {
-      id: Address;
-      symbol: string;
-      decimals: string;
-    };
-    amountFromWithFee: bigint;
-    amountFrom: bigint;
-    amountTo: bigint;
-    creator: Address;
-    active: boolean;
-    optionalTaker: Address;
-    completed: boolean;
-  };
-};
-
-type OfferDetails = {
-  tokenFrom: {
-    address: Address;
-    symbol: string;
-    decimals: string;
-  };
-  tokenTo: {
-    address: Address;
-    symbol: string;
-    decimals: string;
-  };
-  amountFromWithFee: bigint;
-  amountFrom: bigint;
-  amountTo: bigint;
-  creator: Address;
-  active: boolean;
-  optionalTaker: Address;
-  completed: boolean;
-  formattedAmountTo: string;
-  formattedAmountFrom: string;
-  isCreator: boolean | undefined;
-  isReceiver: boolean | undefined;
-  fee: bigint;
-  rateToFrom: number;
-  isTokenFromCustom: boolean;
-};
 
 export const useGetOfferDetails = ({ id }: { id: string }) => {
   const { address } = useAccount();

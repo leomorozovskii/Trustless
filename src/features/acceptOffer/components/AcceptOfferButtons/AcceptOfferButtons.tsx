@@ -5,9 +5,8 @@ import type { FC } from 'react';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAcceptApprove } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptApprove';
-import { useAcceptOffer } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptOffer';
-import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
+import { useAcceptApprove } from '@berezka-dao/features/acceptOffer/hooks/useAcceptApprove';
+import { useAcceptOffer } from '@berezka-dao/features/acceptOffer/hooks/useAcceptOffer';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { useGetMinFee } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetMinFee';
 import s from '@berezka-dao/features/createOffer/components/Buttons/OfferButtons.module.scss';
@@ -16,6 +15,7 @@ import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { TxButton } from '@berezka-dao/shared/components/TxFlow';
+import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 import { Checkbox } from '@berezka-dao/shared/ui-kit/Checkbox';
 import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 

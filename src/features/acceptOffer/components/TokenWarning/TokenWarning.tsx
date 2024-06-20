@@ -6,14 +6,14 @@ import type { Address } from 'viem';
 import { links } from '@berezka-dao/core/constants';
 import { NewWindowIcon, WarningIcon } from '@berezka-dao/shared/icons';
 
-import s from '../AcceptOffer.module.scss';
+import s from './TokenWarning.module.scss';
 
 type Props = {
   name: string | undefined;
   address?: Address;
 };
 
-const CustomTokenWarning: FC<Props> = ({ name, address }) => {
+const TokenWarning: FC<Props> = ({ name, address }) => {
   const { t } = useTranslation();
 
   return (
@@ -36,4 +36,4 @@ const CustomTokenWarning: FC<Props> = ({ name, address }) => {
   );
 };
 
-export { CustomTokenWarning };
+export { TokenWarning };

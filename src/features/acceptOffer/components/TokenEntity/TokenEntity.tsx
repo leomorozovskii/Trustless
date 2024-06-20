@@ -5,7 +5,7 @@ import type { Address } from 'viem';
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
-import s from '../AcceptOffer.module.scss';
+import s from './TokenEntity.module.scss';
 
 type Props = {
   type: 'pay' | 'get';

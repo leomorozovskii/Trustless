@@ -2,10 +2,7 @@ import type { Address } from 'viem';
 import { formatUnits, getAddress } from 'viem';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
-
-const isEmptyAddress = (address?: Address | string): boolean => {
-  return address === '0x0000000000000000000000000000000000000000';
-};
+import { isEmptyAddress } from '@berezka-dao/shared/utils/isEmptyAddress';
 
 const getIsTokenCustom = (address: Address) => {
   return !TOKEN_MAP[address];
@@ -26,4 +23,4 @@ const getRateToFrom = (amountFrom: bigint, amountTo: bigint, decimalsFrom: strin
   return Number(result.toFixed(5));
 };
 
-export { getIsTokenCustom, getIsReceiver, getIsCreator, getRateToFrom, isEmptyAddress };
+export { getIsTokenCustom, getIsReceiver, getIsCreator, getRateToFrom };

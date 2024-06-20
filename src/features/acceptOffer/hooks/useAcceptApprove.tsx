@@ -4,12 +4,12 @@ import { useAccount, useWriteContract } from 'wagmi';
 
 import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { environment } from '@berezka-dao/core/environment';
-import { useAcceptAllowance } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useAcceptAllowance';
-import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
+import { useAcceptAllowance } from '@berezka-dao/features/acceptOffer/hooks/useAcceptAllowance';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { useGetBalanceGreater } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetBalanceGreater';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
+import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
 export const useAcceptApprove = () => {
   const { handleAddItem } = useToastifyContext();

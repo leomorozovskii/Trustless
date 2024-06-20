@@ -4,8 +4,8 @@ import { useAccount, useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
 import { environment } from '@berezka-dao/core/environment';
-import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
+import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
 export const useCancelOffer = ({ cancelId }: { cancelId: string }) => {
   const router = useRouter();

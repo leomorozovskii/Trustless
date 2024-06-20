@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import s from '../AcceptOffer.module.scss';
+import s from './RateContainer.module.scss';
 
 type Props = {
   value: number | undefined;

@@ -4,11 +4,11 @@ import { useAccount, useWriteContract } from 'wagmi';
 
 import { trustlessOtcAbi } from '@berezka-dao/core/abis/trustlessOtcAbi';
 import { environment } from '@berezka-dao/core/environment';
-import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
 import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
 import { useGetBalanceGreater } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetBalanceGreater';
 import { OfferProgress } from '@berezka-dao/features/createOffer/types';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
+import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
 export const useAcceptOffer = () => {
   const { handleAddItem } = useToastifyContext();
