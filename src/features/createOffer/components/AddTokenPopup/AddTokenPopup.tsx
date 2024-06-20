@@ -13,11 +13,11 @@ import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
 import s from './AddTokenPopup.module.scss';
 
-interface IAddTokenPopupState {
+type IAddTokenPopupState = {
   symbol?: string;
   decimal: number;
   address?: Address;
-}
+};
 
 type Props = {
   onClose(): void;
