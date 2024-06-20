@@ -3,8 +3,12 @@ import Link from 'next/link';
 import type { FC } from 'react';
 import { useMemo } from 'react';
 
-import { AcceptOffer, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
-import { AcceptedOffer, AcceptOfferButtons } from '@berezka-dao/features/acceptOffer/components';
+import {
+  AcceptOffer,
+  useOfferAcceptContext,
+  AcceptedOffer,
+  AcceptOfferButtons,
+} from '@berezka-dao/features/acceptOffer';
 import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 import { ClearCross } from '@berezka-dao/shared/icons';
 

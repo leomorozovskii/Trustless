@@ -2,7 +2,7 @@ import { Skeleton } from '@radix-ui/themes';
 import cn from 'classnames';
 import type { FC } from 'react';
 
-import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
+import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
 import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 import { isEmptyAddress } from '@berezka-dao/shared/utils/isEmptyAddress';
 

@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 
-import { RateContainer, TokenEntity } from '@berezka-dao/features/acceptOffer/components';
-import { useOfferAcceptContext } from '@berezka-dao/features/acceptOffer/store';
+import { RateContainer, TokenEntity, useOfferAcceptContext } from '@berezka-dao/features/acceptOffer';
 import { AcceptOfferIcon } from '@berezka-dao/shared/icons';
 import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
