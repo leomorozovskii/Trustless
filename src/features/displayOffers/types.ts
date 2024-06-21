@@ -2,7 +2,7 @@ import type { Hash } from 'viem';
 
 import type { TokenData } from '@berezka-dao/core/types/tokenData';
 
-type OfferStatus = 'pending' | 'accepted' | 'cancelled';
+type OfferStatus = 'pending' | 'accepted' | 'cancelled' | 'forMe' | 'acceptedByMe';
 
 type OfferFilter = OfferStatus | 'all';
 
@@ -20,22 +20,24 @@ enum OfferColumns {
   Share = 'Share',
 }
 
-interface OffersStats {
+type OffersStats = {
   accepted: number;
   cancelled: number;
   pending: number;
+  forMe: number;
+  acceptedByMe: number;
   total: number;
-}
+};
 
 type OfferSortingOrder = 'asc' | 'desc';
 
-interface OfferSorting {
+type OfferSorting = {
   field: OfferColumns;
   order: OfferSortingOrder;
-}
+};
 
-interface OffersState {
-  selection: string | null;
+type OffersState = {
+  selection: OfferTrade | null;
   sorting: OfferSorting | null;
   filter: OfferFilter;
   filters: OfferFilter[];
@@ -44,20 +46,20 @@ interface OffersState {
     offset: number;
     limit: number;
   };
-}
+};
 
-interface OffersActions {
+type OffersActions = {
   setSearchFilter: (searchFilter: string) => void;
   setFilter: (filter: OfferFilter) => void;
   setSorting: (sorting: OfferSorting | null) => void;
-  setSelection: (selectedId: string | null) => void;
+  setSelection: (selected: OfferTrade | null) => void;
   nextPage: () => void;
   prevPage: () => void;
-}
+};
 
-interface OffersStore extends OffersState, OffersActions {}
+type OffersStore = OffersState & OffersActions;
 
-interface OfferTrade {
+type OfferTrade = {
   id: string;
   tokenFromDetails: TokenData;
   tokenToDetails: TokenData;
@@ -69,7 +71,7 @@ interface OfferTrade {
   unixTimestamp: number;
   status: OfferStatus;
   recentlyAccepted: boolean;
-}
+};
 
 export type {
   OfferStatus,

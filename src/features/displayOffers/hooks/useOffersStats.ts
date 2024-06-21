@@ -25,6 +25,12 @@ const useOffersStats = ({ searchFilter, filters }: UseOffersStatsParams) => {
           case 'pending':
             acc.pending += 1;
             break;
+          case 'acceptedByMe':
+            acc.acceptedByMe += 1;
+            break;
+          case 'forMe':
+            acc.forMe += 1;
+            break;
           default:
             break;
         }
@@ -36,6 +42,8 @@ const useOffersStats = ({ searchFilter, filters }: UseOffersStatsParams) => {
         cancelled: 0,
         pending: 0,
         total: 0,
+        acceptedByMe: 0,
+        forMe: 0,
       },
     ),
   };

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface FormattedNumberProps {
+type FormattedNumberProps = {
   value: bigint | string | number | null | undefined;
   minimumFractionDigits?: number;
   maximumFractionDigits?: number;
@@ -11,7 +11,7 @@ interface FormattedNumberProps {
   decimals?: number;
   className?: string;
   formatValue?: (value: string) => string;
-}
+};
 
 const FormattedNumber: FC<FormattedNumberProps> = ({
   value,

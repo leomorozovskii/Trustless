@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { formatUnits, getAddress } from 'viem';
-import type { Hash } from 'viem';
+import type { Address, Hash } from 'viem';
 import { useAccount } from 'wagmi';
 
 import { TOKEN_MAP, dayUnix } from '@berezka-dao/core/constants';
@@ -19,94 +19,107 @@ type UseOffersDetailsParams = {
   sorting?: OfferSorting | null;
 };
 
-const transformOffersQueryData = ({ tradeOffers }: OffersQuery): OfferTrade[] => {
-  return tradeOffers.map(
-    ({
-      creationHash,
-      creationTimestamp,
-      cancelTimestamp,
-      cancelHash,
-      completed,
-      amountTo,
-      amountFrom,
-      amountFromWithFee,
-      optionalTaker,
-      active,
-      takenHash,
-      takenTimestamp,
-      tokenFrom,
-      tokenTo,
-      tradeID,
-    }) => {
-      const normalizedAddressFrom = getAddress(tokenFrom.id);
-      const normalizedAddressTo = getAddress(tokenTo.id);
-      let tokenFromDetails = TOKEN_MAP[normalizedAddressFrom];
-      let tokenToDetails = TOKEN_MAP[normalizedAddressTo];
+const mkTransformOffersQueryData =
+  (creator: Address) =>
+  ({ tradeOffers }: OffersQuery): OfferTrade[] => {
+    return tradeOffers.map(
+      ({
+        creationHash,
+        creationTimestamp,
+        cancelTimestamp,
+        cancelHash,
+        completed,
+        amountTo,
+        amountFrom,
+        amountFromWithFee,
+        optionalTaker,
+        taker,
+        active,
+        takenHash,
+        takenTimestamp,
+        tokenFrom,
+        tokenTo,
+        tradeID,
+      }) => {
+        const normalizedAddressFrom = getAddress(tokenFrom.id);
+        const normalizedAddressTo = getAddress(tokenTo.id);
+        let tokenFromDetails = TOKEN_MAP[normalizedAddressFrom];
+        let tokenToDetails = TOKEN_MAP[normalizedAddressTo];
+        const normalizedReceiver = optionalTaker && getAddress(optionalTaker);
+        const normalizedTaker = taker && getAddress(taker);
 
-      if (!tokenFromDetails) {
-        tokenFromDetails = {
-          address: normalizedAddressFrom,
-          symbol: tokenFrom.symbol,
-          decimals: Number(tokenFrom.decimals),
-          logo: UnknownIcon,
+        if (!tokenFromDetails) {
+          tokenFromDetails = {
+            address: normalizedAddressFrom,
+            symbol: tokenFrom.symbol,
+            decimals: Number(tokenFrom.decimals),
+            logo: UnknownIcon,
+          };
+        }
+
+        if (!tokenToDetails) {
+          tokenToDetails = {
+            address: normalizedAddressTo,
+            symbol: tokenTo.symbol,
+            decimals: Number(tokenTo.decimals),
+            logo: UnknownIcon,
+          };
+        }
+
+        let status: OfferStatus;
+
+        if (active) {
+          if (creator === normalizedReceiver) {
+            status = 'forMe';
+          } else {
+            status = 'pending';
+          }
+        } else if (!completed) {
+          status = 'cancelled';
+        } else {
+          if (creator === normalizedTaker) {
+            status = 'acceptedByMe';
+          } else {
+            status = 'accepted';
+          }
+        }
+
+        let txHash: Hash;
+
+        if (active) {
+          txHash = creationHash;
+        } else if (!completed) {
+          txHash = cancelHash;
+        } else {
+          txHash = takenHash;
+        }
+
+        let unixTimestamp: number;
+
+        if (active) {
+          unixTimestamp = creationTimestamp;
+        } else if (!completed) {
+          unixTimestamp = cancelTimestamp;
+        } else {
+          unixTimestamp = takenTimestamp;
+        }
+
+        return {
+          id: tradeID,
+          tokenFromDetails,
+          tokenToDetails,
+          receiver: normalizedReceiver,
+          amountFrom: Number(formatUnits(BigInt(amountFrom), tokenFromDetails.decimals)),
+          amountTo: Number(formatUnits(BigInt(amountTo), tokenToDetails.decimals)),
+          amountFromWithFee: Number(formatUnits(BigInt(amountFromWithFee), tokenFromDetails.decimals)),
+          txHash,
+          status,
+          unixTimestamp,
+          recentlyAccepted: status === 'accepted' && unixTimestamp > dayjs().unix() - dayUnix,
         };
-      }
-
-      if (!tokenToDetails) {
-        tokenToDetails = {
-          address: normalizedAddressTo,
-          symbol: tokenTo.symbol,
-          decimals: Number(tokenTo.decimals),
-          logo: UnknownIcon,
-        };
-      }
-
-      let status: OfferStatus;
-
-      if (active) {
-        status = 'pending';
-      } else if (!completed) {
-        status = 'cancelled';
-      } else {
-        status = 'accepted';
-      }
-
-      let txHash: Hash;
-
-      if (status === 'pending') {
-        txHash = creationHash;
-      } else if (status === 'cancelled') {
-        txHash = cancelHash;
-      } else {
-        txHash = takenHash;
-      }
-
-      let unixTimestamp: number;
-
-      if (status === 'pending') {
-        unixTimestamp = creationTimestamp;
-      } else if (status === 'cancelled') {
-        unixTimestamp = cancelTimestamp;
-      } else {
-        unixTimestamp = takenTimestamp;
-      }
-
-      return {
-        id: tradeID,
-        tokenFromDetails,
-        tokenToDetails,
-        receiver: optionalTaker,
-        amountFrom: Number(formatUnits(BigInt(amountFrom), tokenFromDetails.decimals)),
-        amountTo: Number(formatUnits(BigInt(amountTo), tokenToDetails.decimals)),
-        amountFromWithFee: Number(formatUnits(BigInt(amountFromWithFee), tokenFromDetails.decimals)),
-        txHash,
-        status,
-        unixTimestamp,
-        recentlyAccepted: status === 'accepted' && unixTimestamp > dayjs().unix() - dayUnix,
-      };
-    },
-  );
-};
+      },
+    );
+  };
 
 const sortOffers = (data: OfferTrade[], sorting?: OfferSorting | null) => {
   return data.sort((offer_a, offer_b) => {
@@ -198,11 +211,24 @@ const useOffersDetails = ({
   return useOffersQuery({
     variables: {
       filters: {
-        creator: account.address,
+        or: [
+          {
+            creator: account.address,
+          },
+          {
+            optionalTaker: account.address,
+          },
+          {
+            taker: account.address,
+          },
+        ],
       },
     },
     select: (data) => {
-      const offers = transformOffersQueryData(data);
+      if (!account.address) {
+        return [];
+      }
+      const offers = mkTransformOffersQueryData(account.address)(data);
       const filteredOffers = filterOffers(offers, filters, filter, searchFilter);
       const sortedOffers = sortOffers(filteredOffers, sorting);
       const paginatedOffers = paginateOffers(sortedOffers, offset, limit);
