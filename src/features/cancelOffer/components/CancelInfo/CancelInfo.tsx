@@ -2,10 +2,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-// TODO :: move to shared
-import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
-// TODO :: move to shared
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
+import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 
 import s from './CancelInfo.module.scss';

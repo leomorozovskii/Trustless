@@ -5,8 +5,8 @@ import { getAddress, isAddress } from 'viem';
 import type { Address } from 'viem';
 import { useAccount } from 'wagmi';
 
-import { useTokenInfo } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useTokenInfo';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
+import { useTokenInfo } from '@berezka-dao/shared/hooks/useTokenInfo';
 import { InputCross, WarningIcon } from '@berezka-dao/shared/icons';
 import { Button } from '@berezka-dao/shared/ui-kit/Button';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';

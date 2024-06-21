@@ -1,7 +1,7 @@
 import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import { createContext, useContext, useMemo, useState } from 'react';
 
-import { OfferProgress } from '@berezka-dao/features/createOffer/types';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 
 type OfferAcceptValues = {
   acceptId: string;

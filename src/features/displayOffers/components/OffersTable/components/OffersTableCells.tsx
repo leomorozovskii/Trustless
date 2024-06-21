@@ -7,13 +7,13 @@ import type { Hash } from 'viem';
 
 import { links } from '@berezka-dao/core/constants';
 import { environment } from '@berezka-dao/core/environment';
-import { isEmptyAddress } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/utils/utils';
 import type { OfferStatus } from '@berezka-dao/features/displayOffers/types';
 import { TxLink } from '@berezka-dao/shared/components/TxLink';
 import { ShareIcon } from '@berezka-dao/shared/icons';
 import { CopyText } from '@berezka-dao/shared/ui-kit/CopyText';
 import { FormattedNumber } from '@berezka-dao/shared/ui-kit/FormattedAmount';
 import { NewWindowLink } from '@berezka-dao/shared/ui-kit/NewWindowLink/NewWindowLink';
+import { isEmptyAddress } from '@berezka-dao/shared/utils/isEmptyAddress';
 
 import { OffersTableCell } from './OffersTableCell';
 import s from './OffersTableCell.module.scss';

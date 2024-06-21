@@ -1,22 +1,17 @@
 'use client';
 
-import { ShareOfferContainer } from '@berezka-dao/features/shareOffer/components/ShareOfferContainer';
 import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
 import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
+import { ShareOfferTemplate } from '@berezka-dao/modules/ShareOfferTemplate';
 
-import s from './Share.module.scss';
-
-const Page = ({ params }: { params: { id: string } }) => {
+const ShareOfferPage = ({ params }: { params: { id: string } }) => {
   return (
     <TabsLayout>
       <HeaderLayout>
-        <div className={s.container}>
-          <h2 className={s.title}>Share your offer</h2>
-          <ShareOfferContainer offerId={params.id} />
-        </div>
+        <ShareOfferTemplate id={params.id} />
       </HeaderLayout>
     </TabsLayout>
   );
 };
 
-export default Page;
+export default ShareOfferPage;

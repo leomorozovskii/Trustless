@@ -1,0 +1,29 @@
+@import '@common/colors';
+@import '@common/variables';
+
+.arrowContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $m;
+}
+
+.tokenContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $xxs;
+}
+
+.receiverAddress {
+  color: $base-black;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.receiver {
+  color: $base-black;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.5;
+}

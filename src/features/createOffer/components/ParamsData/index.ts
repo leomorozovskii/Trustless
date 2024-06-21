@@ -1,1 +1,1 @@
-export * from './ParamsData';
+export { ParamsData } from './ParamsData';

@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import type { Address } from 'viem';
 import { useAccount } from 'wagmi';
 
-import { AddTokenPopup } from '@berezka-dao/features/createOffer/components/AddTokenPopup';
-import { useOfferCreateContext } from '@berezka-dao/features/createOffer/store';
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 
 import s from './AddCustomToken.module.scss';
+import { useOfferCreateContext } from '../../store';
+import { AddTokenPopup } from '../AddTokenPopup';
 
 type Props = {
   onProceed(decimals: number, address?: Address, symbol?: string): void;

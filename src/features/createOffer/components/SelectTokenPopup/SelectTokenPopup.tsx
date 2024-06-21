@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
-import type { Token } from '@berezka-dao/features/createOffer/types';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
 import { InputCross } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
@@ -14,6 +13,7 @@ import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 import { TokenItem } from './components/TokenItem';
 import { useSearchToken } from './hooks/useSearchToken';
 import s from './SelectTokenPopup.module.scss';
+import type { Token } from '../../types';
 
 type Props = {
   tokens: Token[] | TokenData[] | null;
@@ -87,14 +87,17 @@ const SelectTokenPopup: FC<Props> = ({ isLoading = false, tokens, onClose, onSel
         {tokens && tokens?.length > 7 && (
           <Skeleton loading={isLoading}>
             <div className={s.body}>
-              {filteredSearchedData?.map((el) => (
-                <button key={el.address} onClick={() => onSelect(el.address, el.decimals)}>
-                  <div className={s.item}>
-                    {'logo' in el ? <el.logo width={20} height={20} /> : <UnknownIcon />}
-                    <p className={s.label}>{el.symbol}</p>
-                  </div>
-                </button>
-              ))}
+              {filteredSearchedData?.map((el) => {
+                const IconComponent = getTokenIcon(el);
+                return (
+                  <button key={el.address} onClick={() => onSelect(el.address, el.decimals)}>
+                    <div className={s.item}>
+                      <IconComponent width={20} height={20} />
+                      <p className={s.label}>{el.symbol}</p>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </Skeleton>
         )}

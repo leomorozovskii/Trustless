@@ -1,7 +1,8 @@
 import type { FC, PropsWithChildren } from 'react';
 import { createContext, useContext, useMemo, useReducer, useState } from 'react';
 
-import { OfferProgress } from './types';
+import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
+
 import type { OfferFrom, OfferTo, OfferCreateValues, TokensReducer } from './types';
 
 const OfferCreateContext = createContext<OfferCreateValues | null>(null);

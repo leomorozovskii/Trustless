@@ -1,6 +1,8 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Address } from 'viem';
 
+import type { OfferProgress } from '@berezka-dao/shared/components/ProgressBar/types';
+
 type Token = {
   address: Address;
   name: string;
@@ -8,13 +10,6 @@ type Token = {
   balance: string;
   decimals: number;
 };
-
-enum OfferProgress {
-  None = 'none',
-  Filled = 'filled',
-  Approved = 'approved',
-  Created = 'created',
-}
 
 type OfferCreateValues = {
   offerFromState: OfferFrom;
@@ -54,4 +49,3 @@ type OfferTo = Omit<OfferFrom, 'from' | 'rate' | 'isInfinite'> & {
 };
 
 export type { OfferCreateValues, OfferFrom, OfferTo, TokensReducer, Token };
-export { OfferProgress };

@@ -2,15 +2,17 @@ import cn from 'classnames';
 import type { ComponentProps, FC } from 'react';
 import { useMemo, useState } from 'react';
 import type { Address } from 'viem';
+import { useReadContract } from 'wagmi';
 
+import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
 import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
-import { SelectTokenPopup } from '@berezka-dao/features/createOffer/components/SelectTokenPopup';
-import type { Token } from '@berezka-dao/features/createOffer/types';
 import { SelectIcon } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
 
 import s from './Select.module.scss';
+import type { Token } from '../../types';
+import { SelectTokenPopup } from '../SelectTokenPopup';
 
 type Props = {
   tokens: Token[] | TokenData[] | null;
@@ -30,6 +32,12 @@ const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, on
     setOpened(false);
   };
 
+  const { data: symbol } = useReadContract({
+    address: value,
+    abi: customErc20Abi,
+    functionName: 'symbol',
+  });
+
   const IconComponent: FC<ComponentProps<typeof UnknownIcon>> | undefined = useMemo(() => {
     if (!value) return;
     const item = TOKEN_MAP[value];
@@ -42,9 +50,10 @@ const Select: FC<Props> = ({ isLoading, value, placeholder, disabled, tokens, on
     const walletToken = tokens?.find((el) => el.address === value)?.symbol;
     if (walletToken) return walletToken;
     const notImported = TOKEN_MAP[value]?.symbol;
-    if (!notImported) return customTokenName;
+    if (!notImported && !symbol) return customTokenName;
+    if (!notImported && symbol) return symbol;
     return TOKEN_MAP[value].symbol;
-  }, [value, tokens, customTokenName]);
+  }, [value, tokens, symbol, customTokenName]);
 
   const handleOpen = () => {
     if (disabled) return;

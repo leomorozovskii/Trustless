@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
-import { useGetOfferDetails } from '@berezka-dao/features/acceptOffer/components/AcceptOffer/hooks/useGetOfferDetails';
-import { useGetMinFee } from '@berezka-dao/features/createOffer/components/Buttons/hooks/useGetMinFee';
 import { GasPrice } from '@berezka-dao/shared/components/GasPrice';
 import { TxButton } from '@berezka-dao/shared/components/TxFlow';
+import { useGetMinFee } from '@berezka-dao/shared/hooks/useGetMinFee';
+import { useGetOfferDetails } from '@berezka-dao/shared/retrieve-data/useGetOfferDetails';
 
 import s from './CancelOffer.module.scss';
 import { useCancelOffer } from './hooks/useCancelOffer';
