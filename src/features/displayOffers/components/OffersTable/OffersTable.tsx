@@ -17,7 +17,7 @@ type OffersTableProps = {
   isLoading?: boolean;
   sorting: OfferSorting | null;
   onSortingChange: (sorting: OfferSorting | null) => void;
-  onRowSelectionChange: (selectedRowId: string | null) => void;
+  onRowSelectionChange: (selectedRowId: OfferTrade | null) => void;
 };
 
 const defaultOffers: OfferTrade[] = [];
@@ -78,9 +78,8 @@ const OffersTable: FC<OffersTableProps> = ({
     if (!selectedRowId) {
       onRowSelectionChange(null);
     } else {
-      const selectedRow = offersTable.getSelectedRowModel().rowsById[selectedRowId];
-      const selectedId = selectedRow.original.id;
-      onRowSelectionChange(selectedId);
+      const selectedRow = offersTable.getSelectedRowModel().rowsById[selectedRowId].original;
+      onRowSelectionChange(selectedRow || null);
     }
   }, [rowSelectionState, offersTable, onRowSelectionChange]);
   useEffect(() => {

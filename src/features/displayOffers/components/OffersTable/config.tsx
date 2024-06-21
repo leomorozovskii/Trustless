@@ -107,7 +107,7 @@ const columns = [
       columnWidth: 'auto',
       columnMinWidth: '180px',
       columnPaddingLeft: '24px',
-      columnPaddingRight: '8px',
+      columnPaddingRight: '24px',
       columnAlign: 'start',
     },
     enableSorting: false,
@@ -117,16 +117,25 @@ const columns = [
     },
     header: () => <OffersTableTxHashHeading />,
   }),
-  columnHelper.accessor((props) => props.status, {
-    id: OfferColumns.Status,
-    meta: {
-      columnWidth: '90px',
-      columnAlign: 'center',
+  columnHelper.accessor(
+    (props) => ({
+      status: props.status,
+      id: props.id,
+    }),
+    {
+      id: OfferColumns.Status,
+      meta: {
+        columnWidth: '90px',
+        columnAlign: 'start',
+      },
+      enableSorting: false,
+      cell: (info) => {
+        const { status, id } = info.getValue();
+        return <OffersTableStatus id={id} status={status} />;
+      },
+      header: () => <OffersTableStatusHeading />,
     },
-    enableSorting: false,
-    cell: (info) => <OffersTableStatus status={info.getValue()} />,
-    header: () => <OffersTableStatusHeading />,
-  }),
+  ),
   columnHelper.accessor((props) => props.receiver, {
     id: OfferColumns.Receiver,
     meta: {

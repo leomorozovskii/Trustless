@@ -12,10 +12,9 @@ import { NotConnectedMessage } from '../shared/components/NotConnectedMessage';
 import { useIsMounted } from '../shared/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
-  filters: ['all', 'pending'],
+  filters: ['all', 'pending', 'forMe'],
   actions: ['cancel', 'search'],
   sorting: { field: OfferColumns.Date, order: 'desc' },
-  hideFilters: true,
   columnsToDisplay: [
     OfferColumns.ID,
     OfferColumns.AssetFrom,

@@ -16,6 +16,7 @@ const OFFERS_QUERY = gql`
       cancelHash
       completed
       amountTo
+      taker
       amountFrom
       amountFromWithFee
       active

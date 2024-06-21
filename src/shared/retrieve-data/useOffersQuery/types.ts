@@ -3,9 +3,11 @@ import type { Address, Hash } from 'viem';
 type TradeOffer_filter = {
   creator?: Address;
   taker?: Address;
+  optionalTaker?: Address;
   id?: string;
   tokenFrom__symbol?: string;
   tokenTo__symbol?: string;
+  or?: TradeOffer_filter[];
 };
 
 type OffersQueryVariables = {
@@ -31,6 +33,7 @@ type OffersQuery = {
     amountFrom: string;
     amountFromWithFee: string;
     active: boolean;
+    taker: Address;
     optionalTaker: Address;
     takenHash: Hash;
     takenTimestamp: number;

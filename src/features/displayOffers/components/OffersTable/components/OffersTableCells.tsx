@@ -12,6 +12,7 @@ import { TxLink } from '@berezka-dao/shared/components/TxLink';
 import { ShareIcon } from '@berezka-dao/shared/icons';
 import { CopyText } from '@berezka-dao/shared/ui-kit/CopyText';
 import { FormattedNumber } from '@berezka-dao/shared/ui-kit/FormattedAmount';
+import { NewWindowLink } from '@berezka-dao/shared/ui-kit/NewWindowLink/NewWindowLink';
 import { isEmptyAddress } from '@berezka-dao/shared/utils/isEmptyAddress';
 
 import { OffersTableCell } from './OffersTableCell';
@@ -106,12 +107,18 @@ const OffersTableTxHash: FC<OffersTableTxHashProps> = ({ hash }) => {
 };
 
 type OffersTableStatusProps = {
+  id: string;
   status: OfferStatus;
 };
 
-const OffersTableStatus: FC<OffersTableStatusProps> = ({ status }) => {
+const OffersTableStatus: FC<OffersTableStatusProps> = ({ id, status }) => {
   const { t } = useTranslation();
-  return <OffersTableCell>{t(`offers.table.status.${status}`)}</OffersTableCell>;
+  return (
+    <OffersTableCell>
+      {t(`offers.table.status.${status}`)}
+      {status === 'forMe' && <NewWindowLink href={`${environment.siteUrl}/offers/${id}`} />}
+    </OffersTableCell>
+  );
 };
 
 type OffersTableDateProps = {

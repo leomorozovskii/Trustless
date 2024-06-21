@@ -22,10 +22,10 @@ const createOffersView = (
 ) => {
   return {
     CancelSelectedOrder: () => {
-      const { selection } = useOffersStore((state) => ({
-        selection: state.selection,
+      const { offerId } = useOffersStore((state) => ({
+        offerId: state.selection?.status === 'pending' ? state.selection.id : null,
       }));
-      return <OffersCancelOffer offerId={selection} />;
+      return <OffersCancelOffer offerId={offerId} />;
     },
     ReOpenOrder: () => {
       const { filter, searchFilter, pagination, selection, sorting, filters } = useOffersStore((state) => ({
@@ -44,7 +44,7 @@ const createOffersView = (
         sorting,
         filters,
       });
-      const selectedOffer = offerDetails.data?.find((offer) => offer.id === selection) || null;
+      const selectedOffer = offerDetails.data?.find((offer) => offer.id === selection?.id) || null;
       return <OfferReOpenOffer offer={selectedOffer} />;
     },
     Table: () => {

@@ -3,10 +3,10 @@ import type { FC, PropsWithChildren } from 'react';
 
 import s from './TabItem.module.scss';
 
-interface TabItemProps extends PropsWithChildren {
+type TabItemProps = PropsWithChildren<{
   value: string;
   badge?: string;
-}
+}>;
 
 const TabItem: FC<TabItemProps> = ({ value, children, badge }) => {
   return (
