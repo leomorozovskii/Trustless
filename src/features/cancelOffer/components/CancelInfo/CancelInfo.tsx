@@ -13,9 +13,10 @@ const CancelInfo = ({ cancelId }: { cancelId: string }) => {
   const { handleAddItem } = useToastifyContext();
   const router = useRouter();
 
-  const { tokenFrom, amountFrom, tokenTo, amountTo, isLoading, active, isCreator } = useGetOfferDetails({
-    id: cancelId,
-  });
+  const { tokenFrom, formattedAmountFrom, tokenTo, formattedAmountTo, isLoading, active, isCreator } =
+    useGetOfferDetails({
+      id: cancelId,
+    });
 
   useEffect(() => {
     if (isLoading) return;
@@ -35,7 +36,7 @@ const CancelInfo = ({ cancelId }: { cancelId: string }) => {
         <p className={s.text}>
           {t('offer.cancel.aboutTo')}:{' '}
           <span className={s.bold}>
-            {amountTo} {tokenTo?.symbol} to {amountFrom} {tokenFrom?.symbol}.
+            {formattedAmountFrom} {tokenFrom?.symbol} to {formattedAmountTo} {tokenTo?.symbol}.
           </span>
         </p>
         <p className={s.text}>
