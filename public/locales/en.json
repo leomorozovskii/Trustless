@@ -26,7 +26,8 @@
       "accepted": "Accepted",
       "cancelled": "Cancelled",
       "pending": "Pending",
-      "recently-accepted": "Recently accepted"
+      "forMe": "Offers for me",
+      "acceptedByMe": "Accepted by me"
     },
     "grouping": {
       "open": "Open offers",
@@ -40,7 +41,9 @@
         "open": "Open",
         "accepted": "Accepted",
         "cancelled": "Cancelled",
-        "pending": "Pending"
+        "pending": "Pending",
+        "forMe": "For\u00a0me",
+        "acceptedByMe": "Accepted by\u00a0me"
       },
       "headings": {
         "id": "Offer ID",

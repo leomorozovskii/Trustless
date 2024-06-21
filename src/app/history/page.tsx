@@ -11,7 +11,7 @@ import { NotConnectedMessage } from '@berezka-dao/shared/components/NotConnected
 import { useIsMounted } from '@berezka-dao/shared/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
-  filters: ['all', 'accepted', 'cancelled'],
+  filters: ['all', 'accepted', 'cancelled', 'acceptedByMe'],
   actions: ['re-open', 'search'],
   sorting: { field: OfferColumns.Date, order: 'desc' },
   columnsToDisplay: [
@@ -43,7 +43,7 @@ const HistoryPage: FC = () => {
     );
   }
   return (
-    <TabsLayout>
+    <TabsLayout contentBg="contrast">
       <HeaderLayout>
         <OffersTemplate title={t('offers.title.history')} />
       </HeaderLayout>
