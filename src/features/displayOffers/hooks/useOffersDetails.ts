@@ -165,6 +165,12 @@ const sortOffers = (data: OfferTrade[], sorting?: OfferSorting | null) => {
   });
 };
 
+const sanitizeOffers = (data: OfferTrade[]) => {
+  return data.filter(
+    (offer) => offer.tokenFromDetails.symbol !== 'UNKNOWN' && offer.tokenToDetails.symbol !== 'UNKNOWN',
+  );
+};
+
 const filterOffers = (data: OfferTrade[], filters: OfferFilter[], filter: OfferFilter, searchFilter?: string) => {
   return data
     .filter((offer) => {
@@ -229,7 +235,8 @@ const useOffersDetails = ({
         return [];
       }
       const offers = mkTransformOffersQueryData(account.address)(data);
-      const filteredOffers = filterOffers(offers, filters, filter, searchFilter);
+      const sanitizedOffers = sanitizeOffers(offers);
+      const filteredOffers = filterOffers(sanitizedOffers, filters, filter, searchFilter);
       const sortedOffers = sortOffers(filteredOffers, sorting);
       const paginatedOffers = paginateOffers(sortedOffers, offset, limit);
       return paginatedOffers;
