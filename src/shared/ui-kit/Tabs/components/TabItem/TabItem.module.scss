@@ -1,12 +1,18 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   padding: 8px 16px;
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  @include mobile-down {
+    width: max-content;
+    min-width: 100px;
+  }
 
   &:hover {
     background-color: $additional-gray-middle;

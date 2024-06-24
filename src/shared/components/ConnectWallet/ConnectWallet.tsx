@@ -57,7 +57,7 @@ const ConnectWallet = () => {
                         )}
                       </div>
                     )}
-                    {account.displayBalance?.toString()}
+                    <span className={s.balance}>{account.displayBalance?.toString()}</span>
                   </button>
                   <button className={s.accountContainer} onClick={openAccountModal} type="button">
                     <AccountIcon className={s.accountIcon} />

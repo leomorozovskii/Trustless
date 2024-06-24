@@ -1,31 +1,14 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
-@import '@common/breakpoints.scss';
 
 .container {
-  position: relative;
-  display: flex;
-  font-family: var(--font-family-base);
-}
-
-.sidebar {
-  position: sticky;
-  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  min-width: 178px;
-  max-width: 178px;
-  height: 100vh;
   padding: 48px 0 16px;
-  background: $bg-gray;
-  border-right: 1px solid $additional-gray-pre-middle;
-
-  @include mobile-down {
-    display: none;
-  }
+  font-family: var(--font-family-base);
 }
 
 .navigation {

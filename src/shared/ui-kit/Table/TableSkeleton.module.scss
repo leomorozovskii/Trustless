@@ -1,8 +1,17 @@
+@import '@common/breakpoints.scss';
+
 .container {
   display: grid;
   grid-column: 1 / calc(var(--cols) + 1);
   grid-template-columns: subgrid;
-  padding: 0 32px;
+
+  @include mobile-up {
+    padding: 0 32px;
+  }
+
+  @include mobile-down {
+    padding: 0 16px;
+  }
 }
 
 .row {

@@ -1,19 +1,25 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 52px;
-  padding: 16px 16px 0 0;
-}
 
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  gap: 16px;
+  @include mobile-up {
+    justify-content: flex-end;
+    height: 52px;
+    padding: 16px 16px 0 0;
+  }
+
+  @include mobile-down {
+    position: sticky;
+    z-index: 9998;
+    top: 0;
+    justify-content: space-between;
+    height: 97px;
+    padding: $xxl 16px 16px;
+    background-color: $additional-gray-middle;
+  }
 }

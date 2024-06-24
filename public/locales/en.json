@@ -4,6 +4,12 @@
     "myOffers": "My offers",
     "history": "History"
   },
+  "mobileMenu": {
+    "title": "Menu",
+    "createOffer": "Create offer",
+    "myOffers": "My offers",
+    "history": "History"
+  },
   "offers": {
     "title": {
       "myOffers": "My offers",

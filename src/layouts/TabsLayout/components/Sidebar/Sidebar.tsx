@@ -1,4 +1,5 @@
-import cn from 'classnames';
+'use client';
+
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,13 +12,11 @@ import { ButtonPlus, HistoryIcon, OfferIcon } from '@berezka-dao/shared/icons';
 import s from './Sidebar.module.scss';
 import { MenuTab } from '../MenuTab';
 
-type SidebarProps = PropsWithChildren<{
-  contentBg?: 'contrast' | 'default';
-}>;
+type SidebarProps = PropsWithChildren;
 
 const currentYear = dayjs().year();
 
-const Sidebar: FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
+const Sidebar: FC<SidebarProps> = ({ children }) => {
   const { t } = useTranslation();
   const pathname = usePathname();
 
@@ -27,8 +26,8 @@ const Sidebar: FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
   }, [pathname]);
 
   return (
-    <div className={cn(s.container)}>
-      <aside className={cn(s.sidebar)}>
+    <div className={s.container}>
+      <aside className={s.sidebar}>
         <div className={s.navigation}>
           <div className={s.buttonContainer}>
             {isCreateOffer ? (
@@ -52,14 +51,7 @@ const Sidebar: FC<SidebarProps> = ({ children, contentBg = 'default' }) => {
         </div>
         <p className={s.rightsLabel}>© {currentYear} Berezka DAO</p>
       </aside>
-      <div
-        className={cn(s.content, {
-          [s.content_bg_contrast]: contentBg === 'contrast',
-          [s.content_bg_default]: contentBg === 'default',
-        })}
-      >
-        {children}
-      </div>
+      <div className={s.content}>{children}</div>
     </div>
   );
 };

@@ -2,14 +2,8 @@
 
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAccount } from 'wagmi';
 
 import { OfferColumns, createOffersTemplate } from '@berezka-dao/modules/OffersTemplate';
-
-import { HeaderLayout } from '../layouts/HeaderLayout';
-import { TabsLayout } from '../layouts/TabsLayout';
-import { NotConnectedMessage } from '../shared/components/NotConnectedMessage';
-import { useIsMounted } from '../shared/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
   filters: ['all', 'pending', 'forMe'],
@@ -32,25 +26,7 @@ const OffersTemplate = createOffersTemplate({
 
 const OffersPage: FC = () => {
   const { t } = useTranslation();
-  const { isConnected } = useAccount();
-  const isMounted = useIsMounted();
-  if (!isMounted) {
-    return null;
-  }
-  if (!isConnected) {
-    return (
-      <HeaderLayout>
-        <NotConnectedMessage />
-      </HeaderLayout>
-    );
-  }
-  return (
-    <TabsLayout contentBg="contrast">
-      <HeaderLayout>
-        <OffersTemplate title={t('offers.title.myOffers')} />
-      </HeaderLayout>
-    </TabsLayout>
-  );
+  return <OffersTemplate title={t('offers.title.myOffers')} />;
 };
 
 export default OffersPage;

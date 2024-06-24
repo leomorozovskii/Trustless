@@ -1,22 +1,43 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   display: grid;
   grid-auto-rows: max-content;
   justify-items: center;
-  row-gap: $lg;
-  margin: $xl 0 0;
-  padding: $xxl 0;
+
+  @include mobile-up {
+    row-gap: $lg;
+    margin: $xl 0 0;
+    padding: $xxl 0;
+  }
+
+  @include mobile-down {
+    row-gap: $m;
+    padding: $m;
+  }
 }
 
 .title {
   color: $base-black;
 
-  @include font-3xl;
+  @include mobile-up {
+    @include font-3xl;
+  }
+
+  @include mobile-down {
+    @include font-xl;
+  }
 }
 
 .create {
-  width: max-content;
+  @include mobile-up {
+    width: max-content;
+  }
+
+  @include mobile-down {
+    width: 100%;
+  }
 }

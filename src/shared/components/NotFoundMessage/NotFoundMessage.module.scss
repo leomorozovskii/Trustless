@@ -1,27 +1,52 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
+@import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .container {
-  width: 100%;
-  padding: $xxl $lg;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: max-content;
   gap: $lg;
+
+  @include mobile-up {
+    padding: $xxl $lg;
+  }
+
+  @include mobile-down {
+    padding: $lg $m;
+  }
 }
 
 .title {
-  font-size: 34px;
   color: $base-black;
   font-weight: 400;
+
+  @include mobile-up {
+    @include font-4xl;
+  }
+
+  @include mobile-down {
+    @include font-xl;
+  }
 }
 
 .text {
-  font-size: 14px;
   color: $base-black;
   font-weight: 400;
+  text-align: center;
+
+  @include font-m;
 }
 
 .btn {
-  max-width: 115px;
+  @include mobile-up {
+    max-width: 115px;
+  }
+
+  @include mobile-down {
+    width: 100%;
+  }
 }

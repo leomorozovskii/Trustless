@@ -1,6 +1,6 @@
 'use client';
 
-import type { Header } from '@tanstack/react-table';
+import type { Header, Row } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
 import cn from 'classnames';
 
@@ -8,10 +8,17 @@ import { SortingIcon } from '@berezka-dao/shared/icons';
 
 import s from '../Table.module.scss';
 
-const TableHeadingCell = <TData, TValue>({ header }: { header: Header<TData, TValue> }) => {
+type Props<TData, TValue> = {
+  header: Header<TData, TValue>;
+  enableRowSelection: ((row: Row<TData>) => boolean) | boolean | undefined;
+};
+
+const TableHeadingCell = <TData, TValue>({ header, enableRowSelection }: Props<TData, TValue>) => {
   return (
     <th
-      className={s.headingCell}
+      className={cn(s.headingCell, {
+        [s.headingCell_selectable]: enableRowSelection,
+      })}
       onClick={header.column.getToggleSortingHandler()}
       colSpan={header.colSpan}
       style={{
