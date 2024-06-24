@@ -1,26 +1,36 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   position: fixed;
-  top: 32px;
   right: 0;
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 340px;
   margin: 0 auto;
-  z-index: 100;
+  z-index: 10001;
   transition:
   top 0.5s ease,
   opacity 0.5s ease;
   gap: $sm;
+
+  @include mobile-up {
+    top: 32px;
+    max-width: 340px;
+  }
+
+  @include mobile-down {
+    top: 113px;
+    width: 100%;
+    padding: 0 $m; 
+  }
 }
 
 .item {
-  z-index: 100;
+  z-index: 10001;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

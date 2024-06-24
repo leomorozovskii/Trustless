@@ -1,0 +1,15 @@
+@import '@common/colors.scss';
+
+.container {
+  display: grid;
+  grid-template-rows: max-content;
+  min-height: 100vh;
+
+  &_bg_default {
+    background-color: $base-white;
+  }
+
+  &_bg_gray {
+    background-color: $additional-gray-light;
+  }
+}

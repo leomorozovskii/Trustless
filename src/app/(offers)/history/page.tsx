@@ -2,13 +2,8 @@
 
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAccount } from 'wagmi';
 
-import { HeaderLayout } from '@berezka-dao/layouts/HeaderLayout';
-import { TabsLayout } from '@berezka-dao/layouts/TabsLayout';
 import { OfferColumns, createOffersTemplate } from '@berezka-dao/modules/OffersTemplate';
-import { NotConnectedMessage } from '@berezka-dao/shared/components/NotConnectedMessage';
-import { useIsMounted } from '@berezka-dao/shared/hooks/useIsMounted';
 
 const OffersTemplate = createOffersTemplate({
   filters: ['all', 'accepted', 'cancelled', 'acceptedByMe'],
@@ -30,25 +25,7 @@ const OffersTemplate = createOffersTemplate({
 
 const HistoryPage: FC = () => {
   const { t } = useTranslation();
-  const { isConnected } = useAccount();
-  const isMounted = useIsMounted();
-  if (!isMounted) {
-    return null;
-  }
-  if (!isConnected) {
-    return (
-      <HeaderLayout>
-        <NotConnectedMessage />
-      </HeaderLayout>
-    );
-  }
-  return (
-    <TabsLayout contentBg="contrast">
-      <HeaderLayout>
-        <OffersTemplate title={t('offers.title.history')} />
-      </HeaderLayout>
-    </TabsLayout>
-  );
+  return <OffersTemplate title={t('offers.title.history')} />;
 };
 
 export default HistoryPage;

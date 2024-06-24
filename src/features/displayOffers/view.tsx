@@ -1,4 +1,5 @@
 'use client';
+
 import type { Mutate, StoreApi, UseBoundStore } from 'zustand';
 
 import { OffersCancelOffer } from './components/OffersCancelOffer/OffersCancelOffer';

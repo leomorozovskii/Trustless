@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import Link from 'next/link';
-import type { FC, HTMLAttributes, ReactNode } from 'react';
-import { isValidElement, useMemo } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, isValidElement, useMemo } from 'react';
 
 import s from './Button.module.scss';
 
@@ -15,32 +15,29 @@ type Props = HTMLAttributes<HTMLAnchorElement> & {
   disabled?: boolean;
 };
 
-const ButtonLink: FC<Props> = ({
-  children,
-  variant = 'primary',
-  type = 'button',
-  onClick,
-  loading = false,
-  disabled = false,
-  className,
-  ...props
-}) => {
-  const isIcon = useMemo(() => {
-    return isValidElement(children) && children.type === 'svg';
-  }, [children]);
+const ButtonLink = forwardRef<HTMLAnchorElement, Props>(
+  (
+    { children, variant = 'primary', type = 'button', onClick, loading = false, disabled = false, className, ...props },
+    ref,
+  ) => {
+    const isIcon = useMemo(() => {
+      return isValidElement(children) && children.type === 'svg';
+    }, [children]);
 
-  return (
-    <Link
-      id={props.id}
-      type={type}
-      onClick={onClick}
-      className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
-      data-disabled={disabled}
-      {...props}
-    >
-      <span className={cn({ [s.loading]: loading })}>{children}</span>
-    </Link>
-  );
-};
+    return (
+      <Link
+        ref={ref}
+        id={props.id}
+        type={type}
+        onClick={onClick}
+        className={cn(s.button, className, s[variant], { [s.icon]: isIcon })}
+        data-disabled={disabled}
+        {...props}
+      >
+        <span className={cn({ [s.loading]: loading })}>{children}</span>
+      </Link>
+    );
+  },
+);
 
 export { ButtonLink };

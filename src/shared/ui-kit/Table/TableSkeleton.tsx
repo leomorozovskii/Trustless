@@ -17,7 +17,11 @@ const TableSkeleton = <TData,>({ columns, enableRowSelection }: TableSkeletonPro
     <tbody className={s.container}>
       {[...Array(10)].map((_, idx) => (
         <tr className={s.row} key={idx}>
-          {enableRowSelection && <td className={cn(s.cell, s.selectionCell)} />}
+          {enableRowSelection && (
+            <td className={cn(s.cell, s.selectionCell)}>
+              <Skeleton loading width="24px" height="20px" />
+            </td>
+          )}
           {columns.map((column) => (
             <td
               key={column.id}

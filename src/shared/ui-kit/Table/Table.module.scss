@@ -1,6 +1,8 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
+@import '@common/mixins.scss';
 
 .tableContainer {
   @include font-m-flat;
@@ -71,6 +73,14 @@
 
   @include font-s-flat;
 
+  @include mobile-down {
+    &_selectable {
+      &:nth-child(2) {
+        grid-column: span 2;
+      }
+    }
+  }
+
   &:hover {
     .sortingIcon {
       opacity: 1;
@@ -89,7 +99,14 @@
 
 .headingRowSelectionCell {
   display: inline-flex;
-  width: 24px;
+
+  @include mobile-up {
+    width: 24px;
+  }
+
+  @include mobile-down {
+    display: none;
+  }
 
   &__content {
     display: none;
@@ -106,8 +123,11 @@
   display: flex;
   align-items: center;
   width: 24px;
-  opacity: 0;
   transition: opacity 0.2s ease;
+
+  @include supports-hover {
+    opacity: 0;
+  }
 
   &_selected {
     opacity: 1;
@@ -125,7 +145,14 @@
   display: grid;
   grid-column: 1 / calc(var(--cols) + 1);
   grid-template-columns: subgrid;
-  padding: 0 32px;
+
+  @include mobile-up {
+    padding: 0 32px;
+  }
+
+  @include mobile-down {
+    padding: 0 16px;
+  }
 }
 
 .emptyState {
@@ -154,5 +181,7 @@
 }
 
 .headingRow {
-  border-bottom: 1px solid $additional-gray-pre-middle;
+  @include mobile-up {
+    border-bottom: 1px solid $additional-gray-pre-middle;
+  }
 }
