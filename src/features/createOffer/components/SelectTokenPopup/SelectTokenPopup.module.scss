@@ -2,9 +2,14 @@
 @import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/mixins.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   @include popup-wrapper;
+
+  @include medium-mobile-down {
+    z-index: 9998;
+  }
 }
 
 .container {
@@ -16,6 +21,10 @@
   border: 1px solid $additional-gray-pre-middle;
   border-radius: $xxs;
   box-shadow: 0 0 25px 0 rgb(0 0 0 / 15%);
+
+  @include medium-mobile-down {
+    margin: $m;
+  }
 }
 
 .titleContainer {
@@ -54,7 +63,14 @@
   display: flex;
   flex-flow: row wrap;
   width: 100%;
-  gap: $s;
+
+  @include medium-mobile-down {
+    gap: $m;
+  }
+
+  @include medium-mobile-up {
+    gap: $s;
+  }
 }
 
 .body {

@@ -1,6 +1,7 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   display: flex;
@@ -47,15 +48,21 @@
 }
 
 .label {
-  font-weight: 400;
   font-size: 14px;
   line-height: normal;
   font-style: normal;
+  font-weight: 400;
 }
 
 .active .label,
 .complete .label {
-  font-weight: 600;
+  @include medium-mobile-down {
+    font-weight: 700;
+  }
+
+  @include medium-mobile-up {
+    font-weight: 600;
+  }
 }
 
 .active .step {

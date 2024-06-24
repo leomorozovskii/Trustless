@@ -1,13 +1,21 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   display: flex;
   flex-direction: column;
   max-width: 724px;
   width: 100%;
-  margin: 18px auto 0;
   gap: $lg;
+
+  @include medium-mobile-down {
+    padding: $m;
+  }
+
+  @include medium-mobile-up {
+    margin: 18px auto 0;
+  }
 }
 
 .created {
@@ -16,13 +24,26 @@
 
 .title {
   font-weight: 400;
-  font-size: 24px;
   line-height: normal;
+
+  @include medium-mobile-down {
+    font-size: 18px;
+  }
+
+  @include medium-mobile-up {
+    font-size: 24px;
+  }
 }
 
 .fromWrapper {
-  min-width: 200px;
-  max-width: 200px;
+  @include medium-mobile-down {
+    width: 100%;
+  }
+
+  @include medium-mobile-up {
+    min-width: 200px;
+    max-width: 200px;
+  }
 }
 
 .column {
@@ -34,6 +55,13 @@
 
 .row {
   display: flex;
-  flex-direction: row;
   gap: $xxs;
+
+  @include medium-mobile-down {
+    flex-direction: column;
+  }
+
+  @include medium-mobile-up {
+    flex-direction: row;
+  }
 }

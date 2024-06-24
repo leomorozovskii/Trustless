@@ -1,5 +1,6 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   display: flex;
@@ -19,13 +20,29 @@
 
 .container {
   display: flex;
-  flex-direction: row;
   gap: 8px;
-  align-items: center;
+
+  @include medium-mobile-down {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  @include medium-mobile-up {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .link {
   font-weight: 400;
-  font-size: 24px;
   color: $base-black;
+
+  @include medium-mobile-down {
+    font-size: 18px;
+  }
+
+  @include medium-mobile-up {
+    font-size: 24px;
+  }
 }

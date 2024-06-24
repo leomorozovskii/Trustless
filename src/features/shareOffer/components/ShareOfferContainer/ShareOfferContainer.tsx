@@ -2,6 +2,7 @@
 
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useTranslation } from 'react-i18next';
 
 import { environment } from '@berezka-dao/core/environment';
@@ -26,9 +27,7 @@ const ShareOfferContainer: FC<Props> = ({ offerId, setActiveOfferStep }) => {
   }, [offerId]);
 
   const handleCopy = () => {
-    if (!link) return;
     try {
-      navigator.clipboard.writeText(link);
       if (setActiveOfferStep) setActiveOfferStep(4);
       setCopied(true);
       if (!copied) {
@@ -47,9 +46,9 @@ const ShareOfferContainer: FC<Props> = ({ offerId, setActiveOfferStep }) => {
       <h2 className={s.title}>Share link</h2>
       <div className={s.container}>
         <p className={s.link}>{link}</p>
-        <Button type="button" onClick={handleCopy}>
-          {t('offer.share.copy')}
-        </Button>
+        <CopyToClipboard text={link} onCopy={handleCopy}>
+          <Button type="button">{t('offer.share.copy')}</Button>
+        </CopyToClipboard>
       </div>
     </div>
   );

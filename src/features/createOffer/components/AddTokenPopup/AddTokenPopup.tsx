@@ -5,6 +5,7 @@ import { getAddress, isAddress } from 'viem';
 import type { Address } from 'viem';
 import { useAccount } from 'wagmi';
 
+import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
 import { useTokenInfo } from '@berezka-dao/shared/hooks/useTokenInfo';
 import { InputCross, WarningIcon } from '@berezka-dao/shared/icons';
@@ -26,6 +27,7 @@ type Props = {
 
 const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
   const { t } = useTranslation();
+  const { handleAddItem } = useToastifyContext();
   const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
   const [localAddress, setLocalAddress] = useState<string>('');
   const { address: userAddress } = useAccount();
@@ -65,6 +67,11 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
     } else if (step === 2) {
       onProceed(tokenState.decimal, tokenState.address, tokenState.symbol);
       onClose();
+      handleAddItem({
+        title: t('offer.create.tokenImported'),
+        text: `${t('offer.create.successfullyImported')} ${tokenState.symbol}.`,
+        type: 'success',
+      });
     }
   };
 

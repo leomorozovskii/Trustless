@@ -1,6 +1,7 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   display: flex;
@@ -22,9 +23,17 @@
 }
 
 .selectLabel {
-  font-weight: 400;
-  font-size: 24px;
   color: $base-black;
+
+  @include medium-mobile-up {
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  @include medium-mobile-down {
+    font-size: 18px;
+    font-weight: 700;
+  }
 }
 
 .gap {
@@ -32,15 +41,25 @@
 }
 
 .mb {
-  margin-bottom: 22px;
+  @include medium-mobile-up {
+    margin-bottom: 22px;
+  }
 }
 
 .inputWrapper {
-  max-width: 170px !important;
+  @include medium-mobile-up {
+    max-width: 170px !important;
+  }
 }
 
 .receiverInput {
-  font-size: 18px !important;
+  @include medium-mobile-up {
+    font-size: 18px !important;
+  }
+
+  @include medium-mobile-down {
+    font-size: 11px !important;
+  }
 }
 
 .amountContainer {
@@ -62,6 +81,8 @@
   padding: $xxs $s;
   justify-content: center;
   align-items: center;
+  font-size: 12px;
+  line-height: normal;
   gap: $s;
 
   border-radius: $s;
