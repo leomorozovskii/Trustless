@@ -6,10 +6,17 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: $lg;
   background: $base-white;
   border-radius: 10px;
   gap: $s;
+
+  @include mobile-down {
+    padding: $m;
+  }
+
+  @include mobile-up {
+    padding: $lg;
+  }
 }
 
 .title {
