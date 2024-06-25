@@ -23,7 +23,7 @@ const TokenWarning: FC<Props> = ({ name, address }) => {
       </div>
       <div className={s.warnParagraph}>
         <p className={s.warnText}>
-          {t('offer.accept.the')} <span className={s.warnTokenName}>{name}</span> {t('offer.accept.tokenYouReceive')}
+          {t('offer.accept.the')} <span className={s.warnTokenSymbol}>{name}</span> {t('offer.accept.tokenYouReceive')}
         </p>
         <div className={s.warnShareAddress}>
           <p className={s.warnTokenName}>{address}</p>

@@ -1,25 +1,47 @@
 @import '@common/colors';
 @import '@common/variables';
+@import '@common/typo.scss';
+@import '@common/breakpoints';
 
 .warnContainer {
-  display: flex;
   padding: $s;
-  align-items: center;
-  gap: $s;
-
   border-radius: $s;
   background: $additional-warn;
+
+  @include mobile-up {
+    display: flex;
+    align-items: center;
+    gap: $s;
+  }
+
+  @include mobile-down {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: $s;
+    row-gap: 10px;
+  }
 }
 
 .warning {
   display: flex;
+
+  @include mobile-down {
+    grid-column: 1;
+    grid-row: 1;
+  }
 }
 
 .warnParagraph {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: $m;
+  @include mobile-up {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $m;
+  }
+
+  @include mobile-down {
+    display: contents;
+  }
 }
 
 .warn {
@@ -28,20 +50,48 @@
 
 .warnText {
   color: $base-black;
-  font-size: 14px;
   font-weight: 400;
-  line-height: normal;
+
+  @include font-m;
+
+  @include mobile-down {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.warnTokenSymbol {
+  color: $base-black;
+  font-weight: 700;
+
+  @include font-m;
 }
 
 .warnTokenName {
   color: $base-black;
-  font-size: 14px;
   font-weight: 700;
+
+  @include mobile-up {
+    @include font-m;
+  }
+
+  @include mobile-down {
+    @include font-xxs;
+  }
 }
 
 .warnShareAddress {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $s;
+
+  @include mobile-up {
+    gap: $s;
+  }
+
+  @include mobile-down {
+    grid-column: 1/3;
+    grid-row: 2;
+    gap: 2px;
+  }
 }

@@ -11,7 +11,7 @@ const pagesWithGrayBg = ['/offer/cancel', '/offer/create', '/share', '/offers'];
 const OffersLayout: FC<PropsWithChildren> = ({ children }) => {
   const pathname = usePathname();
   const getBg = () => {
-    return pagesWithGrayBg.includes(pathname) ? 'gray' : 'default';
+    return pagesWithGrayBg.some((page) => pathname.includes(page)) ? 'gray' : 'default';
   };
   return (
     <TabsLayout>
