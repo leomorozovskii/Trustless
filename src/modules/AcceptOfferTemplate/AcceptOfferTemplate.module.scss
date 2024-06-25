@@ -1,5 +1,12 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
+@import '@common/breakpoints.scss';
+
+.wrapper {
+  @include mobile-down {
+    padding: $m;
+  }
+}
 
 .container {
   display: flex;
@@ -8,14 +15,24 @@
   width: 100%;
   max-width: 600px;
   height: max-content;
-  margin: 88px auto 0;
+  margin: 0 auto;
   background: $base-white;
   border-radius: $s;
   box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
+
+  @include mobile-up {
+    margin-top: 88px;
+  }
 }
 
 .heading {
-  padding: $m $lg;
+  @include mobile-up {
+    padding: $m $lg;
+  }
+
+  @include mobile-down {
+    padding: $sm $m;
+  }
 }
 
 .headingAccepted {

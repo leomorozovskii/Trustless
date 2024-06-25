@@ -55,12 +55,14 @@ const AcceptOfferButtons: FC = () => {
     <div className={s.container}>
       <Skeleton loading={isLoading}>
         {activeAcceptStep === OfferProgress.Filled && (
-          <Checkbox
-            label={t('offer.infinite')}
-            onCheckedChange={(checked) => {
-              setIsInfinite(checked);
-            }}
-          />
+          <div className={s.infiniteApprove}>
+            <Checkbox
+              label={t('offer.infinite')}
+              onCheckedChange={(checked) => {
+                setIsInfinite(checked);
+              }}
+            />
+          </div>
         )}
         <p className={s.label}>{t('offer.accept.youWillHaveTo')}</p>
         <div className={s.buttonWrapper}>

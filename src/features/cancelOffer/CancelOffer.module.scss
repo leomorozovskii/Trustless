@@ -1,17 +1,25 @@
 @import '@common/variables.scss';
 @import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: $m $lg;
   background: $base-white;
   gap: $m;
   border-bottom-right-radius: $s;
   border-bottom-left-radius: $s;
+
+  @include mobile-up {
+    padding: $m $lg;
+  }
+
+  @include mobile-down {
+    padding: $m;
+  }
 }
 
 .terms {

@@ -1,11 +1,21 @@
 @import '@common/colors';
 @import '@common/variables';
+@import '@common/typo.scss';
+@import '@common/breakpoints';
 
 .arrowContainer {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: $m;
+
+  @include mobile-up {
+    align-items: center;
+    gap: $m;
+  }
+
+  @include mobile-down {
+    align-items: flex-start;
+    gap: $xxs;
+  }
 }
 
 .tokenContainer {
@@ -17,13 +27,21 @@
 
 .receiverAddress {
   color: $base-black;
-  font-size: 18px;
   font-weight: 400;
+
+  @include mobile-up {
+    @include font-xl;
+  }
+
+  @include mobile-down {
+    @include font-xs;
+  }
 }
 
 .receiver {
   color: $base-black;
-  font-size: 14px;
   font-weight: 400;
   opacity: 0.5;
+
+  @include font-m;
 }
