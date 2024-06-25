@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 
 .asset {
   display: flex;
@@ -11,26 +10,26 @@
 
 [data-theme='dark'] .searchAsset path,
 [data-theme='dark'] .searchAsset circle {
-  stroke: $base-white;
+  stroke: var(--base-white);
 }
 
 [data-theme='dark'] .errorAsset path {
-  fill: $base-white;
+  fill: var(--base-white);
 }
 
 .errorInput {
   padding: 0 7px !important;
-  color: $additional-error !important;
-  border: 2px solid $additional-error !important;
+  color: var(--additional-error) !important;
+  border: 2px solid var(--additional-error) !important;
 }
 
 .disabled {
-  background: $additional-gray-pre-middle !important;
+  background: var(--additional-gray-pre-middle) !important;
   cursor: not-allowed;
 }
 
 [data-theme='dark'] .errorInput {
-  color: $base-white !important;
+  color: var(--base-white) !important;
 }
 
 .input {
@@ -42,49 +41,49 @@
   font-weight: 400;
   gap: $xxs;
   font-size: 14px;
-  color: $base-black;
-  border: 1px solid $base-gray;
+  color: var(--base-black);
+  border: 1px solid var(--base-gray);
   border-radius: $xxs;
 
   &:focus-within {
     padding: 0 7px;
-    border: 2px solid $base-black;
+    border: 2px solid var(--base-black);
   }
 
   &:disabled {
-    color: $additional-gray-middle;
-    background-color: $additional-gray-pre-middle;
+    color: var(--additional-gray-middle);
+    background-color: var(--additional-gray-pre-middle);
   }
 
   &::placeholder {
-    color: $additional-gray-dark;
+    color: var(--additional-gray-dark);
   }
 
   &:not(.errorInput, :disabled, :focus-within):hover {
-    color: $base-black;
-    border: 1px solid $base-black;
+    color: var(--base-black);
+    border: 1px solid var(--base-black);
     transition: all 200ms ease-in-out;
   }
 }
 
 [data-theme='dark'] {
   .input {
-    color: $base-white !important;
+    color: var(--base-white) !important;
 
     &:focus-within {
-      border: 1px solid $base-white;
+      border: 1px solid var(--base-white);
     }
 
     &::placeholder {
-      color: $additional-gray-middle !important;
+      color: var(--additional-gray-middle) !important;
     }
 
     &.errorInput {
-      background-color: $additional-black-almost;
+      background-color: var(--additional-black-almost);
     }
 
     &:not(.errorInput, :focus-within):hover {
-      color: $additional-gray-middle !important;
+      color: var(--additional-gray-middle) !important;
     }
   }
 }

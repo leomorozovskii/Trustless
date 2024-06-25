@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 
 .serviceContainer {
   display: flex;
@@ -10,7 +9,7 @@
 }
 
 .feeLabel {
-  color: $base-black;
+  color: var(--base-black);
   line-height: normal;
   font-size: 12px;
 }

@@ -29,13 +29,13 @@
 }
 
 .tokenSum {
-  color: $base-black;
+  color: var(--base-black);
   font-size: 24px;
   font-weight: 400;
 }
 
 .tokenName {
-  color: $base-black;
+  color: var(--base-black);
   font-size: 14px;
   font-weight: 400;
   opacity: 0.5;

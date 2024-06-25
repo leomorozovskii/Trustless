@@ -1,4 +1,3 @@
-@import '@common/colors';
 @import '@common/variables';
 
 .rateContainer {
@@ -13,17 +12,17 @@
   width: max-content;
 
   border-radius: $s;
-  border: 2px solid $base-black;
+  border: 2px solid var(--base-black);
 }
 
 .rate {
-  color: $base-black;
+  color: var(--base-black);
   font-size: 24px;
   font-weight: 400;
 }
 
 .rateLabel {
-  color: $base-black;
+  color: var(--base-black);
   font-size: 14px;
   font-weight: 400;
   opacity: 0.5;

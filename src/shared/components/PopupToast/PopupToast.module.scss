@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
@@ -25,7 +24,7 @@
   @include mobile-down {
     top: 113px;
     width: 100%;
-    padding: 0 $m; 
+    padding: 0 $m;
   }
 }
 
@@ -41,11 +40,11 @@
 }
 
 .success {
-  background: $additional-success;
+  background: var(--additional-success);
 }
 
 .error {
-  background: $additional-error;
+  background: var(--additional-error);
 }
 
 .pointer {
@@ -62,13 +61,13 @@
 .title {
   font-weight: 700;
   font-size: 14px;
-  color: $base-white;
+  color: var(--base-white);
 }
 
 .text {
   font-weight: 400;
   font-size: 14px;
-  color: $base-white;
+  color: var(--base-white);
 }
 
 @keyframes slideDown {

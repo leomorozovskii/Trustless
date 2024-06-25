@@ -1,4 +1,3 @@
-@import '@common/colors.scss';
 @import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
@@ -7,8 +6,8 @@
   display: grid;
   justify-items: center;
   height: max-content;
-  color: $base-black;
-  border-top: 1px solid $additional-gray-pre-middle;
+  color: var(--base-black);
+  border-top: 1px solid var(--additional-gray-pre-middle);
 
   @include mobile-up {
     row-gap: $lg;

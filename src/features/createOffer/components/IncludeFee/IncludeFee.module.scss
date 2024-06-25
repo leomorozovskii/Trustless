@@ -1,4 +1,3 @@
-@import '@common/colors.scss';
 @import '@common/variables.scss';
 
 .wrapper {
@@ -7,7 +6,7 @@
   padding: $m;
   gap: $m;
 
-  background: $base-white;
+  background: var(--base-white);
 }
 
 .container {
@@ -20,7 +19,7 @@
 .label {
   line-height: normal;
   font-size: 14px;
-  color: $base-black;
+  color: var(--base-black);
   font-weight: 400;
 }
 

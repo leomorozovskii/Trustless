@@ -1,4 +1,3 @@
-@import '@common/colors.scss';
 @import '@common/variables.scss';
 
 .wrapper {
@@ -14,19 +13,19 @@
   align-items: center;
   width: $m;
   height: $m;
-  background-color: $base-white;
-  border: 2px solid $additional-gray;
+  background-color: var(--base-white);
+  border: 2px solid var(--additional-gray);
   border-radius: 2px;
   cursor: pointer;
   transition: all 300ms ease-in-out;
 
   &[data-state='checked'] {
-    background-color: $base-black;
-    border: 2px solid $base-black;
+    background-color: var(--base-black);
+    border: 2px solid var(--base-black);
   }
 
   &:not(:disabled):hover {
-    border: 2px solid $base-black;
+    border: 2px solid var(--base-black);
   }
 
   &:disabled {
@@ -34,13 +33,13 @@
   }
 
   &:disabled:not([data-state='checked']) {
-    background-color: $additional-gray-light;
-    border: 2px solid $additional-gray-pre-middle;
+    background-color: var(--additional-gray-light);
+    border: 2px solid var(--additional-gray-pre-middle);
   }
 
   &:disabled[data-state='checked'] {
-    background-color: $additional-gray-pre-middle;
-    border: 2px solid $additional-gray-pre-middle;
+    background-color: var(--additional-gray-pre-middle);
+    border: 2px solid var(--additional-gray-pre-middle);
   }
 }
 
@@ -48,38 +47,38 @@
   font-weight: 400;
   font-size: 14px;
   line-height: normal;
-  color: $base-black;
+  color: var(--base-black);
 }
 
 [data-theme='dark'] {
   .root {
-    background-color: $additional-gray;
-    border: 2px solid $additional-gray-dark;
+    background-color: var(--additional-gray);
+    border: 2px solid var(--additional-gray-dark);
 
     &[data-state='checked'] {
-      background-color: $base-white;
-      border: 2px solid $additional-gray-dark;
+      background-color: var(--base-white);
+      border: 2px solid var(--additional-gray-dark);
 
       .check path {
-        stroke: $additional-gray-dark;
+        stroke: var(--additional-gray-dark);
       }
     }
 
     &:not(:disabled):hover {
-      border: 2px solid $base-white;
+      border: 2px solid var(--base-white);
     }
 
     &:disabled:not([data-state='checked']) {
-      background-color: $additional-gray-light;
-      border: 2px solid $additional-gray-pre-middle;
+      background-color: var(--additional-gray-light);
+      border: 2px solid var(--additional-gray-pre-middle);
     }
 
     &:disabled[data-state='checked'] {
-      background-color: $additional-gray-pre-middle;
-      border: 2px solid $additional-gray-pre-middle;
+      background-color: var(--additional-gray-pre-middle);
+      border: 2px solid var(--additional-gray-pre-middle);
 
       .check path {
-        stroke: $base-white;
+        stroke: var(--base-white);
       }
     }
   }

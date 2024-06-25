@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 
 .wrapper {
   width: 100%;
@@ -14,8 +13,8 @@
   padding: 0 $m;
   font-weight: 400;
   font-size: 16px;
-  background: $base-white;
-  border: 1px solid $base-black;
+  background: var(--base-white);
+  border: 1px solid var(--base-black);
   border-radius: $s;
   cursor: pointer;
 }
@@ -43,5 +42,5 @@
   font-weight: 400;
   font-size: 16px;
   line-height: normal;
-  color: $base-black;
+  color: var(--base-black);
 }

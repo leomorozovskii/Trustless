@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 
 @mixin input-label {
@@ -15,13 +14,13 @@
 }
 
 .label {
-  color: $base-black;
+  color: var(--base-black);
 
   @include input-label;
 }
 
 .errorLabel {
-  color: $additional-error;
+  color: var(--additional-error);
 
   @include input-label;
 }
@@ -35,9 +34,9 @@
   font-weight: 400;
   font-size: 24px;
   line-height: $xxl;
-  color: $additional-gray-dark;
+  color: var(--additional-gray-dark);
   font-style: normal;
-  border: 1px solid $base-gray;
+  border: 1px solid var(--base-gray);
   border-radius: $xxs;
   outline: none;
 
@@ -46,41 +45,41 @@
   }
 
   &::placeholder {
-    color: $additional-gray-dark;
+    color: var(--additional-gray-dark);
   }
 
   &:focus-within {
     padding: 0 7px;
-    color: $base-black;
-    border: 2px solid $base-black;
+    color: var(--base-black);
+    border: 2px solid var(--base-black);
   }
 
   &.disabledInput {
-    color: $additional-gray-pre-middle;
-    background: $base-white;
-    border: 1px solid $additional-gray-pre-middle;
+    color: var(--additional-gray-pre-middle);
+    background: var(--base-white);
+    border: 1px solid var(--additional-gray-pre-middle);
     cursor: not-allowed;
   }
 
   &:not(.errorInput, :focus-within, .disabledInput):hover {
-    color: $base-black;
-    border: 1px solid $base-black;
+    color: var(--base-black);
+    border: 1px solid var(--base-black);
     transition: all 200ms ease-in-out;
   }
 
   &.errorInput {
     padding: 0 7px;
-    color: $additional-error;
-    border: 2px solid $additional-error;
+    color: var(--additional-error);
+    border: 2px solid var(--additional-error);
   }
 }
 
 [data-theme='dark'] {
   .input {
-    color: $base-white;
+    color: var(--base-white);
 
     &::placeholder {
-      color: $additional-gray-middle;
+      color: var(--additional-gray-middle);
     }
   }
 }
@@ -108,7 +107,7 @@
 
 .lg {
   height: 48px;
-  border: 1px solid $base-black;
+  border: 1px solid var(--base-black);
   border-radius: $s !important;
 
   @include font-3xl;

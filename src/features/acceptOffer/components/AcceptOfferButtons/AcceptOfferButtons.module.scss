@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
@@ -8,7 +7,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  background: $base-white;
+  background: var(--base-white);
   gap: $m;
   border-bottom-right-radius: $s;
   border-bottom-left-radius: $s;
@@ -33,14 +32,14 @@
 }
 
 .label {
-  color: $base-black;
+  color: var(--base-black);
   line-height: normal;
   font-size: 14px;
   font-weight: 400;
 }
 
 .terms {
-  color: $base-black;
+  color: var(--base-black);
   opacity: 0.5;
   line-height: normal;
   font-size: 12px;

@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 
 .item {
   display: flex;
@@ -18,44 +17,44 @@
   cursor: pointer;
 
   [data-theme='light'] & {
-    background: $base-white;
-    border: 1px solid $bg-gray;
+    background: var(--base-white);
+    border: 1px solid var(--bg-gray);
 
     .item {
-      background: $base-white;
+      background: var(--base-white);
     }
 
     .darkItem {
-      background: $bg-gray;
+      background: var(--bg-gray);
     }
 
     .icon path {
-      fill: $additional-gray-medium;
+      fill: var(--additional-gray-medium);
     }
 
     .lightItem .icon path {
-      fill: $base-black;
+      fill: var(--base-black);
     }
   }
 
   [data-theme='dark'] & {
-    background: $additional-black-almost;
-    border: 1px solid $base-gray;
+    background: var(--additional-black-almost);
+    border: 1px solid var(--base-gray);
 
     .item {
-      background: $base-gray;
+      background: var(--base-gray);
     }
 
     .darkItem {
-      background: $additional-black-almost;
+      background: var(--additional-black-almost);
     }
 
     .icon path {
-      fill: $additional-gray-pre-middle;
+      fill: var(--additional-gray-pre-middle);
     }
 
     .darkItem .icon path {
-      fill: $base-white;
+      fill: var(--base-white);
     }
   }
 }

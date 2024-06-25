@@ -1,4 +1,3 @@
-@import '@common/colors.scss';
 @import '@common/variables.scss';
 @import '@common/typo.scss';
 
@@ -7,20 +6,20 @@
   flex-direction: row;
   align-items: center;
   padding: $xxs $s;
-  background: $bg-gray;
-  border: 1px solid $additional-gray-pre-middle;
+  background: var(--bg-gray);
+  border: 1px solid var(--additional-gray-pre-middle);
   border-radius: 100px;
   cursor: pointer;
   gap: $xxs;
   transition: all 100ms ease-in-out;
 
   &:hover {
-    background: $base-white;
+    background: var(--base-white);
   }
 }
 
 .title {
-  color: $base-black;
+  color: var(--base-black);
 
   @include font-m-flat;
 }

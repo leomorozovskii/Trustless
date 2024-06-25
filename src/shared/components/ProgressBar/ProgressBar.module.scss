@@ -1,10 +1,9 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 
 @mixin active {
-  color: $base-white;
-  background-color: $base-black;
+  color: var(--base-white);
+  background-color: var(--base-black);
   border: none;
 }
 
@@ -39,7 +38,7 @@
   bottom: 45%;
   width: 100%;
   height: 2px;
-  background-color: $additional-gray-pre-middle;
+  background-color: var(--additional-gray-pre-middle);
   transform: translateY(50%);
 }
 
@@ -55,9 +54,9 @@
   width: $l;
   height: $l;
   font-weight: 500;
-  color: $additional-gray-pre-middle;
-  background-color: $base-white;
-  border: 2px solid #bdbdbd;
+  color: var(--additional-gray-pre-middle);
+  background-color: var(--base-white);
+  border: 2px solid var(--additional-gray-pre-middle);
   border-radius: 9999px;
 
   @include font-s;
@@ -72,26 +71,26 @@
 }
 
 .activeStepItem::before {
-  background-color: $base-black;
+  background-color: var(--base-black);
 }
 
 .active::before,
 .complete::before {
-  background-color: $base-gray;
+  background-color: var(--base-gray);
 }
 
 .complete .step {
-  color: $base-white;
-  background-color: $base-black;
+  color: var(--base-white);
+  background-color: var(--base-black);
   border: none;
 }
 
 .approvedNotComplete::before {
-  background-color: $base-black;
+  background-color: var(--base-black);
 }
 
 .approvedStep {
-  color: $base-black !important;
-  background-color: $base-white !important;
-  border: 2px solid $base-black !important;
+  color: var(--base-black) !important;
+  background-color: var(--base-white) !important;
+  border: 2px solid var(--base-black) !important;
 }

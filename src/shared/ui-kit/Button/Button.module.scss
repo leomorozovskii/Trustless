@@ -1,5 +1,4 @@
 @import '@common/variables.scss';
-@import '@common/colors.scss';
 
 .button {
   display: flex;
@@ -22,7 +21,7 @@
   }
 
   &.primary {
-    background-color: $base-gray;
+    background-color: var(--base-gray);
 
     &.icon {
       justify-content: center;
@@ -39,21 +38,21 @@
 
     &[data-disabled='true'],
     &:disabled {
-      background-color: $additional-gray-pre-middle;
+      background-color: var(--additional-gray-pre-middle);
       cursor: default;
     }
 
     &:not[data-disabled='true']:hover,
     &:not(:disabled):hover {
-      background-color: $base-black;
+      background-color: var(--base-black);
       transition: all 200ms ease-in-out;
     }
   }
 
   &.ghost {
-    color: $base-gray;
+    color: var(--base-gray);
     background-color: transparent;
-    border: 1px solid $base-gray;
+    border: 1px solid var(--base-gray);
   }
 }
 
@@ -71,21 +70,21 @@
 
 [data-theme='dark'] {
   .button {
-    color: $base-black;
+    color: var(--base-black);
 
     &.primary {
-      background-color: $bg-gray;
+      background-color: var(--bg-gray);
 
       &[data-disabled='true'],
       &:disabled {
-        color: $base-white;
-        background-color: $additional-black-almost;
+        color: var(--base-white);
+        background-color: var(--additional-black-almost);
         cursor: not-allowed;
       }
 
       &:not[data-disabled='true']:hover,
       &:not(:disabled):hover {
-        background-color: $base-white;
+        background-color: var(--base-white);
         transition: all 200ms ease-in-out;
       }
     }
