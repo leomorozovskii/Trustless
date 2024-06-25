@@ -1,17 +1,4 @@
 $mobile: 1000px;
-$medium-mobile: 760px;
-
-@mixin medium-mobile-up {
-  @media (min-width: $medium-mobile) {
-    @content;
-  }
-}
-
-@mixin medium-mobile-down {
-  @media (max-width: calc($medium-mobile - 1px)) {
-    @content;
-  }
-}
 
 @mixin mobile-up {
   @media (min-width: $mobile) {

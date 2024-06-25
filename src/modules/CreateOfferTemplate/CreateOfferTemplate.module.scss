@@ -9,11 +9,11 @@
   width: 100%;
   gap: $lg;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     padding: $m;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     margin: 18px auto 0;
   }
 }
@@ -26,21 +26,21 @@
   font-weight: 400;
   line-height: normal;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     font-size: 18px;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     font-size: 24px;
   }
 }
 
 .fromWrapper {
-  @include medium-mobile-down {
+  @include mobile-down {
     width: 100%;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     min-width: 200px;
     max-width: 200px;
   }
@@ -57,11 +57,11 @@
   display: flex;
   gap: $xxs;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     flex-direction: column;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     flex-direction: row;
   }
 }

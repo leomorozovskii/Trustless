@@ -56,11 +56,11 @@
 
 .active .label,
 .complete .label {
-  @include medium-mobile-down {
+  @include mobile-down {
     font-weight: 700;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     font-weight: 600;
   }
 }

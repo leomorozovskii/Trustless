@@ -7,7 +7,7 @@
 .wrapper {
   @include popup-wrapper;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     z-index: 9998;
   }
 }
@@ -22,7 +22,7 @@
   border-radius: $xxs;
   box-shadow: 0 0 25px 0 rgb(0 0 0 / 15%);
 
-  @include medium-mobile-down {
+  @include mobile-down {
     margin: $m;
   }
 }
@@ -64,11 +64,11 @@
   flex-flow: row wrap;
   width: 100%;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     gap: $m;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     gap: $s;
   }
 }

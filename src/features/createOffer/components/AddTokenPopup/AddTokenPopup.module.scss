@@ -7,7 +7,7 @@
 .wrapper {
   @include popup-wrapper;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     z-index: 9998;
   }
 }
@@ -15,7 +15,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   max-width: 540px;
   min-height: 548px;
@@ -24,8 +23,16 @@
   border: none;
   border-radius: $s;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     margin: $m;
+    justify-content: initial;
+    gap: $lg;
+  }
+
+  @include mobile-up {
+    justify-content: space-between;
+    gap: 0;
+    margin: 0;
   }
 }
 
@@ -54,11 +61,11 @@
 .title {
   color: $base-black;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     font-size: 18px;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     font-size: 24px;
   }
 }
@@ -80,11 +87,11 @@
 .addressInput {
   line-height: normal;
 
-  @include medium-mobile-down {
+  @include mobile-down {
     font-size: 14px;
   }
 
-  @include medium-mobile-up {
+  @include mobile-up {
     font-size: 18px;
   }
 }

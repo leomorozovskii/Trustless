@@ -1,5 +1,6 @@
 @import '@common/colors.scss';
 @import '@common/variables.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   display: flex;
@@ -8,9 +9,24 @@
   width: 100%;
   margin: 18px auto 0;
   gap: $lg;
+
+  @include mobile-down {
+    padding: $m;
+  }
+
+  @include mobile-up {
+    padding: 0;
+  }
 }
 
 .title {
   font-weight: 400;
-  font-size: 24px;
+
+  @include mobile-down {
+    font-size: 18px;
+  }
+
+  @include mobile-up {
+    font-size: 24px;
+  }
 }

@@ -25,12 +25,12 @@
 .selectLabel {
   color: $base-black;
 
-  @include medium-mobile-up {
+  @include mobile-up {
     font-size: 24px;
     font-weight: 400;
   }
 
-  @include medium-mobile-down {
+  @include mobile-down {
     font-size: 18px;
     font-weight: 700;
   }
@@ -41,23 +41,23 @@
 }
 
 .mb {
-  @include medium-mobile-up {
+  @include mobile-up {
     margin-bottom: 22px;
   }
 }
 
 .inputWrapper {
-  @include medium-mobile-up {
+  @include mobile-up {
     max-width: 170px !important;
   }
 }
 
 .receiverInput {
-  @include medium-mobile-up {
+  @include mobile-up {
     font-size: 18px !important;
   }
 
-  @include medium-mobile-down {
+  @include mobile-down {
     font-size: 11px !important;
   }
 }
