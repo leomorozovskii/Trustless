@@ -45,7 +45,11 @@ const OfferButtons = () => {
 
   return (
     <div className={s.createContainer}>
-      <p className={s.label}>{t('offer.create.signText')}</p>
+      <p className={s.label}>
+        {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created
+          ? t('offer.create.signText')
+          : t('offer.create.allowanceText')}
+      </p>
       <div className={s.buttonWrapper}>
         <div className={s.buttonContainer}>
           {activeStep !== OfferProgress.Approved && activeStep !== OfferProgress.Created && (

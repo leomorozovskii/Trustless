@@ -12,14 +12,18 @@ type Props = {
   text: string;
   successMessage: string;
   children?: ReactNode;
+  onCopy?(): void;
 };
 
-const CopyText: FC<Props> = ({ text, successMessage, children = <CopyIcon /> }) => {
+const CopyText: FC<Props> = ({ text, successMessage, children = <CopyIcon />, onCopy }) => {
   const { t } = useTranslation();
   const { handleAddItem } = useToastifyContext();
   const handleCopy = async () => {
     await navigator.clipboard.writeText(text);
     handleAddItem({ title: t('success.message'), text: successMessage, type: 'success' });
+    if (onCopy) {
+      onCopy();
+    }
   };
   return (
     <button aria-label={t('shared.copy')} className={s.button} type="button" onClick={handleCopy}>

@@ -2,15 +2,19 @@
 @import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/mixins.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   @include popup-wrapper;
+
+  @include mobile-down {
+    z-index: 9998;
+  }
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   max-width: 540px;
   min-height: 548px;
@@ -18,6 +22,18 @@
   padding: $m $lg;
   border: none;
   border-radius: $s;
+
+  @include mobile-down {
+    margin: $m;
+    justify-content: initial;
+    gap: $lg;
+  }
+
+  @include mobile-up {
+    justify-content: space-between;
+    gap: 0;
+    margin: 0;
+  }
 }
 
 .content {
@@ -45,7 +61,13 @@
 .title {
   color: $base-black;
 
-  @include font-3xl;
+  @include mobile-down {
+    font-size: 18px;
+  }
+
+  @include mobile-up {
+    font-size: 24px;
+  }
 }
 
 .warning {
@@ -63,7 +85,15 @@
 }
 
 .addressInput {
-  font-size: 18px;
+  line-height: normal;
+
+  @include mobile-down {
+    font-size: 14px;
+  }
+
+  @include mobile-up {
+    font-size: 18px;
+  }
 }
 
 .decimalWrapper {
@@ -106,8 +136,8 @@
 
 .tokenTitle {
   font-weight: 400;
-  font-size: 24px;
   color: $base-black;
+  font-size: 24px;
 }
 
 .tokenBalance {

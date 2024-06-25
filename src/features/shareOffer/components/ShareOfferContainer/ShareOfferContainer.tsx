@@ -1,55 +1,38 @@
 'use client';
 
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { environment } from '@berezka-dao/core/environment';
-import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { Button } from '@berezka-dao/shared/ui-kit/Button';
+import { CopyText } from '@berezka-dao/shared/ui-kit/CopyText';
 
 import s from './ShareOfferContainer.module.scss';
 
 type Props = {
-  offerId: number | null | string;
+  offerId: number | string;
   setActiveOfferStep?: Dispatch<SetStateAction<number>>;
 };
 
 const ShareOfferContainer: FC<Props> = ({ offerId, setActiveOfferStep }) => {
   const { t } = useTranslation();
-  const [copied, setCopied] = useState<boolean>(false);
-  const { handleAddItem } = useToastifyContext();
-  const [link, setLink] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    setLink(`${environment.siteUrl}/offers/${offerId}`);
-  }, [offerId]);
 
   const handleCopy = () => {
-    if (!link) return;
-    try {
-      navigator.clipboard.writeText(link);
-      if (setActiveOfferStep) setActiveOfferStep(4);
-      setCopied(true);
-      if (!copied) {
-        handleAddItem({ title: 'Link copied successfully', type: 'success' });
-      }
-      setTimeout(() => setCopied(false), 5000);
-    } catch (e) {
-      handleAddItem({ title: 'Error while copying link ', type: 'error' });
-    }
+    if (setActiveOfferStep) setActiveOfferStep(4);
   };
-
-  if (!link) return;
 
   return (
     <div className={s.wrapper}>
       <h2 className={s.title}>Share link</h2>
       <div className={s.container}>
-        <p className={s.link}>{link}</p>
-        <Button type="button" onClick={handleCopy}>
-          {t('offer.share.copy')}
-        </Button>
+        <p className={s.link}>{`${environment.siteUrl}/offers/${offerId}`}</p>
+        <CopyText
+          text={`${environment.siteUrl}/offers/${offerId}`}
+          successMessage={'Link copied successfully'}
+          onCopy={handleCopy}
+        >
+          <Button type="button">{t('offer.share.copy')}</Button>
+        </CopyText>
       </div>
     </div>
   );
