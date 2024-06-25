@@ -51,6 +51,11 @@
   min-height: 48px;
   background: $base-gray;
   border-radius: $xxs;
+  transition: all 200ms ease-in-out;
+
+  &:not(:disabled):hover {
+    background-color: var(--base-black);
+  }
 }
 
 .button,
