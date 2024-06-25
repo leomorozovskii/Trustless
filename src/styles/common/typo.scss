@@ -1,12 +1,13 @@
-// Миксины для размеров текста
-@mixin font-xxs {
+@mixin font-xxs($weight: normal) {
   font-size: 8px;
-  line-height: 12px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
-@mixin font-xs {
+@mixin font-xs($weight: normal) {
   font-size: 10px;
-  line-height: 14px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-s-flat {
@@ -14,9 +15,10 @@
   line-height: 14px;
 }
 
-@mixin font-s {
+@mixin font-s($weight: normal) {
   font-size: 12px;
-  line-height: 16px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-m-flat {
@@ -24,9 +26,10 @@
   line-height: 16px;
 }
 
-@mixin font-m {
+@mixin font-m($weight: normal) {
   font-size: 14px;
-  line-height: 20px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-l-flat {
@@ -34,9 +37,10 @@
   line-height: 20px;
 }
 
-@mixin font-l {
+@mixin font-l($weight: normal) {
   font-size: 16px;
-  line-height: 22px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-xl-flat {
@@ -44,9 +48,10 @@
   line-height: 22px;
 }
 
-@mixin font-xl {
+@mixin font-xl($weight: normal) {
   font-size: 18px;
-  line-height: 24px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-2xl-flat {
@@ -54,24 +59,28 @@
   line-height: 24px;
 }
 
-@mixin font-2xl {
+@mixin font-2xl($weight: normal) {
   font-size: 20px;
-  line-height: 28px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
-@mixin font-2-5xl {
+@mixin font-2-5xl($weight: normal) {
   font-size: 22px;
-  line-height: 28px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
-@mixin font-3xl {
+@mixin font-3xl($weight: normal) {
   font-size: 24px;
-  line-height: 30px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
-@mixin font-4xl {
+@mixin font-4xl($weight: normal) {
   font-size: 32px;
-  line-height: 34px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-4xl-flat {
@@ -79,14 +88,16 @@
   line-height: 24px;
 }
 
-@mixin font-5xl {
+@mixin font-5xl($weight: normal) {
   font-size: 40px;
-  line-height: 50px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
-@mixin font-6xl {
+@mixin font-6xl($weight: normal) {
   font-size: 68px;
-  line-height: 83px;
+  line-height: normal;
+  font-weight: $weight;
 }
 
 @mixin font-6xl-flat {
@@ -94,7 +105,8 @@
   line-height: 70px;
 }
 
-@mixin font-10xl {
+@mixin font-10xl($weight: normal) {
   font-size: 100px;
-  line-height: 110px;
+  line-height: normal;
+  font-weight: $weight;
 }
