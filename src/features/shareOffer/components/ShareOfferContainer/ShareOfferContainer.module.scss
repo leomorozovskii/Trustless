@@ -1,4 +1,5 @@
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   display: flex;
@@ -18,8 +19,8 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
+  @include font-m(700);
+
   color: var(--base-black);
 }
 
@@ -40,14 +41,13 @@
 }
 
 .link {
-  font-weight: 400;
   color: var(--base-black);
 
   @include mobile-down {
-    font-size: 18px;
+    @include font-xl(400);
   }
 
   @include mobile-up {
-    font-size: 24px;
+    @include font-3xl(400);
   }
 }

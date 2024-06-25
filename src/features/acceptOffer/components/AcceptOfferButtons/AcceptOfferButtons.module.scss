@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 @mixin buttons-container {
   display: flex;
@@ -21,9 +21,9 @@
 }
 
 .createContainer {
-  @include buttons-container;
-
   padding: var(--m);
+
+  @include buttons-container;
 }
 
 .container {
@@ -32,16 +32,15 @@
 
 .label {
   color: var(--base-black);
-  line-height: normal;
-  font-size: 14px;
-  font-weight: 400;
+
+  @include font-m(400);
 }
 
 .terms {
   color: var(--base-black);
   opacity: 0.5;
-  line-height: normal;
-  font-size: 12px;
+
+  @include font-s(400);
 }
 
 .conditions {

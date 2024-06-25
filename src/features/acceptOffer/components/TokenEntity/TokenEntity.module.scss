@@ -1,4 +1,5 @@
 @import '@common/breakpoints';
+@import '@common/typo.scss';
 
 .tokenWrapper {
   display: flex;
@@ -23,18 +24,17 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--xxs);
 }
 
 .tokenSum {
   color: var(--base-black);
-  font-size: 24px;
-  font-weight: 400;
+
+  @include font-3xl(400);
 }
 
 .tokenName {
   color: var(--base-black);
-  font-size: 14px;
-  font-weight: 400;
   opacity: 0.5;
+
+  @include font-m(400);
 }

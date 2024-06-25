@@ -1,5 +1,6 @@
 @import '@common/colors.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
@@ -19,13 +20,11 @@
 }
 
 .title {
-  font-weight: 400;
-
   @include mobile-down {
-    font-size: 18px;
+    @include font-xl(400);
   }
 
   @include mobile-up {
-    font-size: 24px;
+    @include font-3xl(400);
   }
 }

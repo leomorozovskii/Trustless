@@ -30,10 +30,10 @@
 }
 
 .terms {
+  @include font-s(400);
+
   color: var(--base-black);
   opacity: 0.5;
-  line-height: normal;
-  font-size: 12px;
 }
 
 .conditions {

@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
@@ -24,18 +24,16 @@
   color: var(--base-black);
 
   @include mobile-up {
-    font-size: 24px;
-    font-weight: 400;
+    @include font-3xl(400);
   }
 
   @include mobile-down {
-    font-size: 18px;
-    font-weight: 700;
+    @include font-xl(700);
   }
 }
 
 .gap {
-  gap: 16px;
+  gap: 14px;
 }
 
 .mb {
@@ -68,10 +66,9 @@
 }
 
 .amountText {
-  font-size: 14px;
   color: var(--base-black);
-  font-weight: 600;
-  line-height: normal;
+
+  @include font-m(600);
 }
 
 .amountButton {
@@ -79,12 +76,11 @@
   padding: var(--xxs) var(--s);
   justify-content: center;
   align-items: center;
-  font-size: 12px;
-  line-height: normal;
   gap: var(--s);
-
   border-radius: var(--s);
   background: var(--bg-gray);
+
+  @include font-s(600);
 
   &:disabled {
     cursor: not-allowed;
@@ -100,16 +96,15 @@
 }
 
 .balanceLabel {
-  font-size: 12px;
-  line-height: normal;
   color: var(--base-black);
-  font-weight: 600;
+
+  @include font-s(600);
 }
 
 .balanceValue {
   max-width: 115px;
   word-break: break-word;
-  font-size: 12px;
   color: var(--base-black);
-  font-weight: 400;
+
+  @include font-s(400);
 }

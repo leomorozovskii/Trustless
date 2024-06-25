@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
@@ -20,23 +20,21 @@
 
 .title {
   color: var(--base-black);
-  font-weight: 400;
 
   @include mobile-up {
-    @include font-4xl;
+    @include font-4xl(400);
   }
 
   @include mobile-down {
-    @include font-xl;
+    @include font-xl(400);
   }
 }
 
 .text {
   color: var(--base-black);
-  font-weight: 400;
   text-align: center;
 
-  @include font-m;
+  @include font-m(400);
 }
 
 .btn {

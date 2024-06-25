@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .wrapper {
   width: 100%;
   display: flex;
@@ -23,8 +25,8 @@
 
 .label {
   color: var(--base-black);
-  font-size: 24px;
-  font-weight: 400;
+
+  @include font-3xl(400);
 }
 
 .share {
@@ -39,8 +41,8 @@
 
 .shareLabel {
   color: var(--base-black);
-  font-size: 14px;
-  font-weight: 400;
+
+  @include font-m(400)
 }
 
 .button {
@@ -51,11 +53,9 @@
   padding: 0 var(--m);
   justify-content: center;
   align-items: center;
-
-  font-size: 14px;
-  color: var(--base-white);
-  font-weight: 600;
-
   border-radius: var(--xxs);
   background: var(--base-gray);
+  color: var(--base-white);
+
+  @include font-m(600);
 }

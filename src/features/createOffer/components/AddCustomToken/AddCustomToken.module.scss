@@ -1,7 +1,8 @@
+@import '@common/typo.scss';
+
 .label {
-  font-weight: 400;
-  font-size: 14px;
   color: var(--base-black);
   cursor: pointer;
   opacity: 0.5;
+  @include font-m(400);
 }

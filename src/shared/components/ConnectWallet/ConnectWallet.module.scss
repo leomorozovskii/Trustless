@@ -17,7 +17,7 @@
     background: var(--base-white);
     border: 1px solid var(--bg-gray);
 
-    @include font-l;
+    @include font-l(400);
   }
 
   @include mobile-down {
@@ -25,7 +25,7 @@
     padding: var(--xs) var(--m);
     background: var(--bg-gray);
 
-    @include font-m;
+    @include font-m(400);
   }
 }
 
@@ -67,9 +67,9 @@
 }
 
 .walletLabel {
-  font-weight: 400;
-  font-size: 14px;
   color: var(--base-black);
+
+  @include font-m(400);
 }
 
 .balance {

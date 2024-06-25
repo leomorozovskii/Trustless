@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints';
+@import '@common/typo.scss';
 
 .warnContainer {
   padding: var(--s);
@@ -48,9 +48,8 @@
 
 .warnText {
   color: var(--base-black);
-  font-weight: 400;
 
-  @include font-m;
+  @include font-m(400);
 
   @include mobile-down {
     grid-column: 2;
@@ -60,21 +59,19 @@
 
 .warnTokenSymbol {
   color: var(--base-black);
-  font-weight: 700;
 
-  @include font-m;
+  @include font-m(700);
 }
 
 .warnTokenName {
   color: var(--base-black);
-  font-weight: 700;
 
   @include mobile-up {
-    @include font-m;
+    @include font-m(700);
   }
 
   @include mobile-down {
-    @include font-xxs;
+    @include font-xxs(700);
   }
 }
 

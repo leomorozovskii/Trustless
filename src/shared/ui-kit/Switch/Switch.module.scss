@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .wrapper {
   display: flex;
   flex-direction: row;
@@ -6,11 +8,9 @@
 }
 
 .label {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: normal;
   color: var(--base-black);
-  font-style: normal;
+
+  @include font-m(400);
 }
 
 .root {

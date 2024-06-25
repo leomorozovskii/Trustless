@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   width: 100%;
@@ -23,14 +23,12 @@
 
 .text {
   color: var(--base-black);
-  font-weight: 400;
 
-  @include font-m;
+  @include font-m(400);
 }
 
 .bold {
   color: var(--base-black);
-  font-weight: 700;
 
-  @include font-m;
+  @include font-m(700);
 }

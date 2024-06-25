@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -15,10 +17,8 @@
 }
 
 .label {
-  line-height: normal;
-  font-size: 14px;
   color: var(--base-black);
-  font-weight: 400;
+  @include font-m(400);
 }
 
 .tooltip {

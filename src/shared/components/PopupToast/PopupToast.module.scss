@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   position: fixed;
@@ -58,15 +58,15 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
   color: var(--base-white);
+
+  @include font-m(700);
 }
 
 .text {
-  font-weight: 400;
-  font-size: 14px;
   color: var(--base-white);
+
+  @include font-m(400);
 }
 
 @keyframes slideDown {

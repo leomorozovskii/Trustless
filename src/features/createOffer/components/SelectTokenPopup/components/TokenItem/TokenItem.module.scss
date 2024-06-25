@@ -18,7 +18,7 @@
 }
 
 .title {
-  color: var(--base-black);
+  @include font-m(400);
 
-  @include font-m-flat;
+  color: var(--base-black);
 }

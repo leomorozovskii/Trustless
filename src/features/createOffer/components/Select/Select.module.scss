@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .wrapper {
   width: 100%;
 }
@@ -9,12 +11,12 @@
   width: 100%;
   height: var(--xxl);
   padding: 0 var(--m);
-  font-weight: 400;
-  font-size: 16px;
   background: var(--base-white);
   border: 1px solid var(--base-black);
   border-radius: var(--s);
   cursor: pointer;
+
+  @include font-l(400);
 }
 
 @mixin item-base {
@@ -37,8 +39,7 @@
 }
 
 .label {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: normal;
   color: var(--base-black);
+
+  @include font-l(400);
 }

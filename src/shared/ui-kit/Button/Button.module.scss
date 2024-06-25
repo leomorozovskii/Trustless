@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .button {
   display: flex;
   justify-content: center;
@@ -5,14 +7,12 @@
   width: 100%;
   height: 36px;
   padding: 10px var(--m);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: normal;
-  font-family: inherit;
   color: var(--base-white);
   border: none;
   border-radius: var(--xxs);
   cursor: pointer;
+
+  @include font-m(600);
 
   &[data-disabled='true'] {
     pointer-events: none;

@@ -1,10 +1,5 @@
 @import '@common/typo.scss';
 
-@mixin input-label {
-  font-weight: 600;
-  font-size: 14px;
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -15,13 +10,13 @@
 .label {
   color: var(--base-black);
 
-  @include input-label;
+  @include font-m(600);
 }
 
 .errorLabel {
   color: var(--additional-error);
 
-  @include input-label;
+  @include font-m(600);
 }
 
 .input {
@@ -30,14 +25,13 @@
   width: 100%;
   height: var(--xxl);
   padding: 0 var(--s);
-  font-weight: 400;
-  font-size: 24px;
-  line-height: var(--xxl);
   color: var(--additional-gray-dark);
   font-style: normal;
   border: 1px solid var(--base-gray);
   border-radius: var(--xxs);
   outline: none;
+
+  @include font-3xl(400);
 
   & svg {
     margin-right: var(--xs);
@@ -95,13 +89,13 @@
 .sm {
   height: var(--lg);
 
-  @include font-s-flat;
+  @include font-s(400);
 }
 
 .md {
   height: 36px;
 
-  @include font-m-flat;
+  @include font-m(400)
 }
 
 .lg {
@@ -109,5 +103,5 @@
   border: 1px solid var(--base-black);
   border-radius: var(--s) !important;
 
-  @include font-3xl;
+  @include font-3xl(400);
 }

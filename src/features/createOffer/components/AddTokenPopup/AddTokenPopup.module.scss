@@ -60,15 +60,16 @@
   color: var(--base-black);
 
   @include mobile-down {
-    font-size: 18px;
+    @include font-xl(400);
   }
 
   @include mobile-up {
-    font-size: 24px;
+    @include font-3xl(400);
   }
 }
 
 .warning {
+  display: flex;
   width: var(--xl);
 }
 
@@ -83,14 +84,12 @@
 }
 
 .addressInput {
-  line-height: normal;
-
   @include mobile-down {
-    font-size: 14px;
+    @include font-m(400);
   }
 
   @include mobile-up {
-    font-size: 18px;
+    @include font-xl(400);
   }
 }
 
@@ -100,8 +99,7 @@
 
 .warnText {
   color: var(--base-black);
-  font-size: 14px;
-  line-height: normal;
+  @include font-m(400);
 }
 
 .buttonContainer {
@@ -135,14 +133,13 @@
 .tokenTitle {
   font-weight: 400;
   color: var(--base-black);
-  font-size: 24px;
+  @include font-3xl(400);
 }
 
 .tokenBalance {
-  font-weight: 400;
-  font-size: 14px;
   color: var(--base-black);
   opacity: 0.5;
+  @include font-m(400);
 }
 
 .tokenLogo {

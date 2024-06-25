@@ -1,6 +1,6 @@
-@import '@common/typo.scss';
 @import '@common/mixins.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   @include popup-wrapper;
@@ -42,9 +42,9 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
   color: var(--base-black);
+
+  @include font-m(700);
 }
 
 .header {

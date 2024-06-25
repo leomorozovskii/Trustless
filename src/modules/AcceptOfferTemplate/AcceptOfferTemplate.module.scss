@@ -1,4 +1,5 @@
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   @include mobile-down {
@@ -50,7 +51,7 @@
 }
 
 .label {
-  font-weight: 600;
-  font-size: 14px;
   color: var(--base-black);
+
+  @include font-m(600);
 }

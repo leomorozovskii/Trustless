@@ -1,3 +1,5 @@
+@import '@common/typo.scss';
+
 .serviceContainer {
   display: flex;
   flex-direction: row;
@@ -8,8 +10,8 @@
 
 .feeLabel {
   color: var(--base-black);
-  line-height: normal;
-  font-size: 12px;
+
+  @include font-s(400);
 }
 
 .feeContainer {

@@ -1,5 +1,5 @@
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
@@ -24,7 +24,7 @@
   color: var(--base-black);
   opacity: 0.5;
 
-  @include font-s-flat;
+  @include font-s(400);
 }
 
 .conditions {
