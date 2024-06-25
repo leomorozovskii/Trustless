@@ -1,5 +1,3 @@
-@import '@common/variables.scss';
-
 .item {
   display: flex;
   justify-content: center;
@@ -13,7 +11,7 @@
   width: 80px;
   height: 36px;
   overflow: hidden;
-  border-radius: $xxs;
+  border-radius: var(--xxs);
   cursor: pointer;
 
   [data-theme='light'] & {

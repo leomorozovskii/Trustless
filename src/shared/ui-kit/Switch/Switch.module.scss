@@ -1,10 +1,8 @@
-@import '@common/variables.scss';
-
 .wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .label {
@@ -17,8 +15,8 @@
 
 .root {
   position: relative;
-  width: $xl;
-  height: $m;
+  width: var(--xl);
+  height: var(--m);
   background-color: var(--additional-gray-middle);
   border: none;
   border-radius: 50px;
@@ -29,8 +27,8 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 16px;
-    height: 16px;
+    width: var(--m);
+    height: var(--m);
     background-color: var(--additional-gray-pre-middle);
     border-radius: 999px;
     transform: translate(0, -50%);

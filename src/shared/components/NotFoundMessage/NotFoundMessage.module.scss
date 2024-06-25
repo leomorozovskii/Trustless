@@ -1,4 +1,3 @@
-@import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
@@ -8,14 +7,14 @@
   align-items: center;
   width: 100%;
   height: max-content;
-  gap: $lg;
+  gap: var(--lg);
 
   @include mobile-up {
-    padding: $xxl $lg;
+    padding: var(--xxl) var(--lg);
   }
 
   @include mobile-down {
-    padding: $lg $m;
+    padding: var(--lg) var(--m);
   }
 }
 

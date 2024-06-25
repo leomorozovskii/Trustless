@@ -1,5 +1,4 @@
 @import '@common/colors.scss';
-@import '@common/variables.scss';
 @import '@common/breakpoints.scss';
 
 .container {
@@ -8,10 +7,10 @@
   max-width: 760px;
   width: 100%;
   margin: 18px auto 0;
-  gap: $lg;
+  gap: var(--lg);
 
   @include mobile-down {
-    padding: $m;
+    padding: var(--m);
   }
 
   @include mobile-up {

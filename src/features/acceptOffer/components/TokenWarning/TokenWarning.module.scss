@@ -1,22 +1,21 @@
-@import '@common/variables';
 @import '@common/typo.scss';
 @import '@common/breakpoints';
 
 .warnContainer {
-  padding: $s;
-  border-radius: $s;
+  padding: var(--s);
+  border-radius: var(--s);
   background: var(--additional-warn);
 
   @include mobile-up {
     display: flex;
     align-items: center;
-    gap: $s;
+    gap: var(--s);
   }
 
   @include mobile-down {
     display: grid;
     grid-template-columns: max-content 1fr;
-    column-gap: $s;
+    column-gap: var(--s);
     row-gap: 10px;
   }
 }
@@ -35,7 +34,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: $m;
+    gap: var(--m);
   }
 
   @include mobile-down {
@@ -85,7 +84,7 @@
   align-items: center;
 
   @include mobile-up {
-    gap: $s;
+    gap: var(--s);
   }
 
   @include mobile-down {

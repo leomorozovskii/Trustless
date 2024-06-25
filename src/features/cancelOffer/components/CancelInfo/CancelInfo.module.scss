@@ -1,4 +1,3 @@
-@import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
@@ -12,13 +11,13 @@
   border-bottom: 2px solid #F5F5F5;
 
   @include mobile-up {
-    gap: $lg;
-    padding: $xxl $lg;
+    gap: var(--lg);
+    padding: var(--xxl) var(--lg);
   }
 
   @include mobile-down {
-    gap: $m;
-    padding: $m;
+    gap: var(--m);
+    padding: var(--m);
   }
 }
 

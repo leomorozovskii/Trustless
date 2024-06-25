@@ -1,4 +1,3 @@
-@import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
@@ -8,9 +7,9 @@
   align-items: flex-start;
   width: 100%;
   height: 100%;
-  padding: $lg $m;
+  padding: var(--lg) var(--m);
   background: var(--base-white);
-  gap: $lg;
+  gap: var(--lg);
 }
 
 .selectContainer {
@@ -18,7 +17,7 @@
   flex-direction: column;
   width: 100%;
   line-height: normal;
-  gap: $s;
+  gap: var(--s);
 }
 
 .selectLabel {
@@ -77,14 +76,14 @@
 
 .amountButton {
   display: flex;
-  padding: $xxs $s;
+  padding: var(--xxs) var(--s);
   justify-content: center;
   align-items: center;
   font-size: 12px;
   line-height: normal;
-  gap: $s;
+  gap: var(--s);
 
-  border-radius: $s;
+  border-radius: var(--s);
   background: var(--bg-gray);
 
   &:disabled {

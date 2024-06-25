@@ -1,5 +1,3 @@
-@import '@common/variables.scss';
-
 .asset {
   display: flex;
 }
@@ -37,13 +35,13 @@
 
   width: 100%;
   height: 36px;
-  padding: 0 $s;
+  padding: 0 var(--s);
   font-weight: 400;
-  gap: $xxs;
+  gap: var(--xxs);
   font-size: 14px;
   color: var(--base-black);
   border: 1px solid var(--base-gray);
-  border-radius: $xxs;
+  border-radius: var(--xxs);
 
   &:focus-within {
     padding: 0 7px;

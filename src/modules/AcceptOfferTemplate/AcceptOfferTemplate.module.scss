@@ -1,9 +1,8 @@
-@import '@common/variables.scss';
 @import '@common/breakpoints.scss';
 
 .wrapper {
   @include mobile-down {
-    padding: $m;
+    padding: var(--m);
   }
 }
 
@@ -16,7 +15,7 @@
   height: max-content;
   margin: 0 auto;
   background: var(--base-white);
-  border-radius: $s;
+  border-radius: var(--s);
   box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
 
   @include mobile-up {
@@ -26,11 +25,11 @@
 
 .heading {
   @include mobile-up {
-    padding: $m $lg;
+    padding: var(--m) var(--lg);
   }
 
   @include mobile-down {
-    padding: $sm $m;
+    padding: var(--sm) var(--m);
   }
 }
 

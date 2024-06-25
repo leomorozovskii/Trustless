@@ -1,4 +1,3 @@
-@import '@common/variables.scss';
 @import '@common/breakpoints.scss';
 @import '@common/typo.scss';
 
@@ -10,11 +9,11 @@
   display: flex;
   align-items: center;
   height: 36px;
-  border-radius: $xxs;
+  border-radius: var(--xxs);
 
   @include mobile-up {
-    padding: $xxs;
-    gap: $m;
+    padding: var(--xxs);
+    gap: var(--m);
     background: var(--base-white);
     border: 1px solid var(--bg-gray);
 
@@ -22,8 +21,8 @@
   }
 
   @include mobile-down {
-    gap: $sm;
-    padding: $xs $m;
+    gap: var(--sm);
+    padding: var(--xs) var(--m);
     background: var(--bg-gray);
 
     @include font-m;
@@ -35,7 +34,7 @@
   flex-direction: row;
   align-items: center;
   line-height: normal;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .accountIcon {
@@ -56,10 +55,10 @@
   line-height: normal;
 
   @include mobile-up {
-    padding: $xxs $s;
+    padding: var(--xxs) var(--s);
     background: var(--bg-gray);
-    border-radius: $xxs;
-    gap: $s;
+    border-radius: var(--xxs);
+    gap: var(--s);
   }
 }
 

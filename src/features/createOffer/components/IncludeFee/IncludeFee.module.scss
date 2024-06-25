@@ -1,10 +1,8 @@
-@import '@common/variables.scss';
-
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: $m;
-  gap: $m;
+  padding: var(--m);
+  gap: var(--m);
 
   background: var(--base-white);
 }
@@ -13,7 +11,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .label {

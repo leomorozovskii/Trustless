@@ -1,5 +1,3 @@
-@import '@common/colors';
-@import '@common/variables';
 @import '@common/breakpoints';
 
 .offerWrapper {
@@ -15,7 +13,7 @@
   @include mobile-down {
     flex-direction: column;
     justify-content: center;
-    gap: $m;
+    gap: var(--m);
   }
 }
 
@@ -24,5 +22,5 @@
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  gap: $m;
+  gap: var(--m);
 }

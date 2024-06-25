@@ -1,18 +1,16 @@
-@import '@common/variables.scss';
-
 .wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $s;
+  gap: var(--s);
 }
 
 .root {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: $m;
-  height: $m;
+  width: var(--m);
+  height: var(--m);
   background-color: var(--base-white);
   border: 2px solid var(--additional-gray);
   border-radius: 2px;

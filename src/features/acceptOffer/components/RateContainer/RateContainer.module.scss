@@ -1,9 +1,7 @@
-@import '@common/variables';
-
 .rateContainer {
   display: flex;
-  padding: $s;
-  gap: $xxs;
+  padding: var(--s);
+  gap: var(--xxs);
 
   flex-direction: column;
   justify-content: center;
@@ -11,7 +9,7 @@
 
   width: max-content;
 
-  border-radius: $s;
+  border-radius: var(--s);
   border: 2px solid var(--base-black);
 }
 

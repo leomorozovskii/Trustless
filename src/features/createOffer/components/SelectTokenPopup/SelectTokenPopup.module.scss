@@ -1,4 +1,3 @@
-@import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/mixins.scss';
 @import '@common/breakpoints.scss';
@@ -18,11 +17,11 @@
   max-width: 370px;
   background: var(--base-white);
   border: 1px solid var(--additional-gray-pre-middle);
-  border-radius: $xxs;
+  border-radius: var(--xxs);
   box-shadow: 0 0 25px 0 rgb(0 0 0 / 15%);
 
   @include mobile-down {
-    margin: $m;
+    margin: var(--m);
   }
 }
 
@@ -51,11 +50,11 @@
 .header {
   display: flex;
   flex-direction: column;
-  padding: $lg;
+  padding: var(--lg);
   background: var(--bg-gray);
-  border-top-left-radius: $xxs;
-  border-top-right-radius: $xxs;
-  gap: $m;
+  border-top-left-radius: var(--xxs);
+  border-top-right-radius: var(--xxs);
+  gap: var(--m);
 }
 
 .pinnedTokens {
@@ -64,11 +63,11 @@
   width: 100%;
 
   @include mobile-down {
-    gap: $m;
+    gap: var(--m);
   }
 
   @include mobile-up {
-    gap: $s;
+    gap: var(--s);
   }
 }
 
@@ -84,8 +83,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: $s $lg;
-  gap: $xxs;
+  padding: var(--s) var(--lg);
+  gap: var(--xxs);
   cursor: pointer;
   transition: all 100ms ease-in-out;
 
