@@ -50,7 +50,7 @@ export const useGetMinFee = ({
       const txPriceInWei = (gasPrice * contractGas) / BigInt(10 ** 9);
       const txPriceinEth = Number(txPriceInWei) / 1_000_000_000;
       if (ethUsdPrice.result.ethusd) {
-        setMinFee((Number(ethUsdPrice.result.ethusd) * txPriceinEth).toFixed(2));
+        setMinFee((Number(ethUsdPrice.result.ethusd) * txPriceinEth).toFixed(3));
       } else {
         throw new Error('Etherscan api error');
       }
