@@ -3,7 +3,7 @@
 .cell {
   display: inline-flex;
   align-items: center;
-  column-gap: 8px;
+  column-gap: var(--s);
 
   &_full {
     width: 100%;
@@ -18,21 +18,21 @@
   }
 
   &_small {
-    @include font-s-flat;
+    @include font-s;
   }
 
   &__secondaryText {
-    @include font-s-flat;
+    @include font-s;
   }
 }
 
 .token {
-  margin-left: 4px;
+  margin-left: var(--xxs);
 }
 
 .controls {
   display: inline-flex;
   align-items: center;
   margin-left: auto;
-  column-gap: 8px;
+  column-gap: var(--s);
 }

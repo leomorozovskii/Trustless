@@ -1,29 +1,27 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
 .container {
   display: grid;
   grid-template-rows: max-content;
-  padding-top: $sm;
+  padding-top: var(--sm);
 }
 
 .header {
   @include mobile-up {
-    padding: 0 $xl;
+    padding: 0 var(--xl);
   }
 
   @include mobile-down {
     display: grid;
-    gap: $sm;
-    padding: 0 $m;
-    border-bottom: 1px solid $additional-gray-pre-middle;
+    gap: var(--sm);
+    padding: 0 var(--m);
+    border-bottom: 1px solid var(--additional-gray-pre-middle);
   }
 }
 
 .title {
-  color: $base-black;
+  color: var(--base-black);
 
   @include mobile-up {
     @include font-3xl;
@@ -36,33 +34,33 @@
 
 .filters {
   @include mobile-up {
-    padding: $m 0;
+    padding: var(--m) 0;
   }
 
   @include mobile-down {
-    padding: $xs 0;
+    padding: var(--xs) 0;
   }
 }
 
 .actions {
   display: flex;
   justify-content: space-between;
-  column-gap: $m;
+  column-gap: var(--m);
 
   @include mobile-up {
     align-items: center;
-    padding: $m 0;
+    padding: var(--m) 0;
   }
 
   @include mobile-down {
     flex-direction: column;
-    padding: $sm 0 $m;
+    padding: var(--sm) 0 var(--m);
   }
 
   &__left {
     display: grid;
     align-items: center;
-    column-gap: $m;
+    column-gap: var(--m);
 
     @include mobile-up {
       grid-template-columns: max-content 210px;
@@ -70,7 +68,7 @@
 
     @include mobile-down {
       grid-template-columns: max-content 1fr;
-      padding: $xs 0;
+      padding: var(--xs) 0;
 
       > *:nth-child(2) {
         max-width: 210px;
