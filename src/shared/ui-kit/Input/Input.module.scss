@@ -30,6 +30,7 @@
   border: 1px solid var(--base-gray);
   border-radius: var(--xxs);
   outline: none;
+  transition: color 300ms ease-in-out, border 300ms ease-in-out;
 
   @include font-3xl(400);
 
@@ -45,6 +46,7 @@
     padding: 0 7px;
     color: var(--base-black);
     border: 2px solid var(--base-black);
+    transition: none;
   }
 
   &.disabledInput {
@@ -52,18 +54,19 @@
     background: var(--base-white);
     border: 1px solid var(--additional-gray-pre-middle);
     cursor: not-allowed;
+    transition: none;
   }
 
   &:not(.errorInput, :focus-within, .disabledInput):hover {
     color: var(--base-black);
     border: 1px solid var(--base-black);
-    transition: all 200ms ease-in-out;
   }
 
   &.errorInput {
     padding: 0 7px;
     color: var(--additional-error);
     border: 2px solid var(--additional-error);
+    transition: none;
   }
 }
 
