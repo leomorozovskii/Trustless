@@ -51,7 +51,7 @@
   @include mobile-down {
     flex-direction: column-reverse;
     gap: var(--sm);
-    padding: var(--sm) 0 var(--m);
+    padding: 0 0 var(--m);
   }
 
   &__left {
