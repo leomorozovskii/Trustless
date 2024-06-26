@@ -11,7 +11,7 @@
   border: none;
   border-radius: var(--xxs);
   cursor: pointer;
-  transition: all 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
 
   @include font-m(600);
 
@@ -68,7 +68,7 @@
 [data-theme='dark'] {
   .button {
     color: var(--base-black);
-    transition: all 200ms ease-in-out;
+    transition: background-color 200ms ease-in-out;
 
     &.primary {
       background-color: var(--bg-gray);
