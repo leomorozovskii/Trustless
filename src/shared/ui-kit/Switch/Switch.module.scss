@@ -1,26 +1,23 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .label {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: normal;
-  color: $base-black;
-  font-style: normal;
+  color: var(--base-black);
+
+  @include font-m(400);
 }
 
 .root {
   position: relative;
-  width: $xl;
-  height: $m;
-  background-color: $additional-gray-middle;
+  width: var(--xl);
+  height: var(--m);
+  background-color: var(--additional-gray-middle);
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -30,16 +27,16 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 16px;
-    height: 16px;
-    background-color: $additional-gray-pre-middle;
+    width: var(--m);
+    height: var(--m);
+    background-color: var(--additional-gray-pre-middle);
     border-radius: 999px;
     transform: translate(0, -50%);
     transition: transform 0.2s;
   }
 
   &[data-state='checked'] .thumb {
-    background-color: $additional-gray-dark;
+    background-color: var(--additional-gray-dark);
     transform: translate(15px, -50%);
   }
 }

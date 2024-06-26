@@ -1,7 +1,5 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   position: fixed;
@@ -15,17 +13,17 @@
   transition:
   top 0.5s ease,
   opacity 0.5s ease;
-  gap: $sm;
+  gap: var(--sm);
 
   @include mobile-up {
-    top: 32px;
+    top: var(--xl);
     max-width: 340px;
   }
 
   @include mobile-down {
     top: 113px;
     width: 100%;
-    padding: 0 $m; 
+    padding: 0 var(--m);
   }
 }
 
@@ -35,17 +33,17 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: $s;
-  border-radius: $xxs;
-  gap: $xxs;
+  padding: var(--s);
+  border-radius: var(--xxs);
+  gap: var(--xxs);
 }
 
 .success {
-  background: $additional-success;
+  background: var(--additional-success);
 }
 
 .error {
-  background: $additional-error;
+  background: var(--additional-error);
 }
 
 .pointer {
@@ -60,15 +58,15 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
-  color: $base-white;
+  color: var(--base-white);
+
+  @include font-m(700);
 }
 
 .text {
-  font-weight: 400;
-  font-size: 14px;
-  color: $base-white;
+  color: var(--base-white);
+
+  @include font-m(400);
 }
 
 @keyframes slideDown {

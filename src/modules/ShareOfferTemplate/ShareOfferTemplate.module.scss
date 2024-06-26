@@ -1,6 +1,5 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
@@ -8,10 +7,10 @@
   max-width: 760px;
   width: 100%;
   margin: 18px auto 0;
-  gap: $lg;
+  gap: var(--lg);
 
   @include mobile-down {
-    padding: $m;
+    padding: var(--m);
   }
 
   @include mobile-up {
@@ -20,13 +19,11 @@
 }
 
 .title {
-  font-weight: 400;
-
   @include mobile-down {
-    font-size: 18px;
+    @include font-xl(400);
   }
 
   @include mobile-up {
-    font-size: 24px;
+    @include font-3xl(400);
   }
 }

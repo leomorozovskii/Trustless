@@ -1,16 +1,15 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
   flex-direction: column;
   max-width: 724px;
   width: 100%;
-  gap: $lg;
+  gap: var(--lg);
 
   @include mobile-down {
-    padding: $m;
+    padding: var(--m);
   }
 
   @include mobile-up {
@@ -23,15 +22,12 @@
 }
 
 .title {
-  font-weight: 400;
-  line-height: normal;
-
   @include mobile-down {
-    font-size: 18px;
+    @include font-xl(400);
   }
 
   @include mobile-up {
-    font-size: 24px;
+    @include font-3xl(400);
   }
 }
 
@@ -50,12 +46,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .row {
   display: flex;
-  gap: $xxs;
+  gap: var(--xxs);
 
   @include mobile-down {
     flex-direction: column;

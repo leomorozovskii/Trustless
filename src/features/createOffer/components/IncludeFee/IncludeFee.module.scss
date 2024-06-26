@@ -1,27 +1,24 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: $m;
-  gap: $m;
+  padding: var(--m);
+  gap: var(--m);
 
-  background: $base-white;
+  background: var(--base-white);
 }
 
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .label {
-  line-height: normal;
-  font-size: 14px;
-  color: $base-black;
-  font-weight: 400;
+  color: var(--base-black);
+  @include font-m(400);
 }
 
 .tooltip {

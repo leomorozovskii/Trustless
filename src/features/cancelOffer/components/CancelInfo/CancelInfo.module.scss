@@ -1,7 +1,5 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   width: 100%;
@@ -13,26 +11,24 @@
   border-bottom: 2px solid #F5F5F5;
 
   @include mobile-up {
-    gap: $lg;
-    padding: $xxl $lg;
+    gap: var(--lg);
+    padding: var(--xxl) var(--lg);
   }
 
   @include mobile-down {
-    gap: $m;
-    padding: $m;
+    gap: var(--m);
+    padding: var(--m);
   }
 }
 
 .text {
-  color: $base-black;
-  font-weight: 400;
+  color: var(--base-black);
 
-  @include font-m;
+  @include font-m(400);
 }
 
 .bold {
-  color: $base-black;
-  font-weight: 700;
+  color: var(--base-black);
 
-  @include font-m;
+  @include font-m(700);
 }

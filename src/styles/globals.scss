@@ -54,5 +54,5 @@ table {
 
 .rt-TextFieldInput:where(:disabled, :read-only) {
   -webkit-text-fill-color: #BDBDBD;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }

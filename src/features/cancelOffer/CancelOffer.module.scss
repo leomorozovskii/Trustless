@@ -1,32 +1,30 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  background: $base-white;
-  gap: $m;
-  border-bottom-right-radius: $s;
-  border-bottom-left-radius: $s;
+  background: var(--base-white);
+  gap: var(--m);
+  border-bottom-right-radius: var(--s);
+  border-bottom-left-radius: var(--s);
 
   @include mobile-up {
-    padding: $m $lg;
+    padding: var(--m) var(--lg);
   }
 
   @include mobile-down {
-    padding: $m;
+    padding: var(--m);
   }
 }
 
 .terms {
-  color: $base-black;
+  color: var(--base-black);
   opacity: 0.5;
 
-  @include font-s-flat;
+  @include font-s(400);
 }
 
 .conditions {

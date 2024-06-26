@@ -1,10 +1,9 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   @include mobile-down {
-    padding: $m;
+    padding: var(--m);
   }
 }
 
@@ -16,8 +15,8 @@
   max-width: 600px;
   height: max-content;
   margin: 0 auto;
-  background: $base-white;
-  border-radius: $s;
+  background: var(--base-white);
+  border-radius: var(--s);
   box-shadow: 0 0 20px 0 rgb(0 0 0 / 5%);
 
   @include mobile-up {
@@ -27,11 +26,11 @@
 
 .heading {
   @include mobile-up {
-    padding: $m $lg;
+    padding: var(--m) var(--lg);
   }
 
   @include mobile-down {
-    padding: $sm $m;
+    padding: var(--sm) var(--m);
   }
 }
 
@@ -47,12 +46,12 @@
   cursor: pointer;
 
   path {
-    stroke: $base-black;
+    stroke: var(--base-black);
   }
 }
 
 .label {
-  font-weight: 600;
-  font-size: 14px;
-  color: $base-black;
+  color: var(--base-black);
+
+  @include font-m(600);
 }

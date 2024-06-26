@@ -1,7 +1,5 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: flex;
@@ -9,36 +7,34 @@
   align-items: center;
   width: 100%;
   height: max-content;
-  gap: $lg;
+  gap: var(--lg);
 
   @include mobile-up {
-    padding: $xxl $lg;
+    padding: var(--xxl) var(--lg);
   }
 
   @include mobile-down {
-    padding: $lg $m;
+    padding: var(--lg) var(--m);
   }
 }
 
 .title {
-  color: $base-black;
-  font-weight: 400;
+  color: var(--base-black);
 
   @include mobile-up {
-    @include font-4xl;
+    @include font-4xl(400);
   }
 
   @include mobile-down {
-    @include font-xl;
+    @include font-xl(400);
   }
 }
 
 .text {
-  color: $base-black;
-  font-weight: 400;
+  color: var(--base-black);
   text-align: center;
 
-  @include font-m;
+  @include font-m(400);
 }
 
 .btn {

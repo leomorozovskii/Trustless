@@ -1,28 +1,26 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
-@import '@common/typo.scss';
 @import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .container {
   display: grid;
   justify-items: center;
   height: max-content;
-  color: $base-black;
-  border-top: 1px solid $additional-gray-pre-middle;
+  color: var(--base-black);
+  border-top: 1px solid var(--additional-gray-pre-middle);
 
   @include mobile-up {
-    row-gap: $lg;
-    margin-top: 24px;
-    padding: $xxl $lg 0;
+    row-gap: var(--lg);
+    margin-top: var(--lg);
+    padding: var(--xxl) var(--lg) 0;
 
-    @include font-3xl;
+    @include font-3xl(400);
   }
 
   @include mobile-down {
-    padding: $m;
-    row-gap: $lg;
+    padding: var(--m);
+    row-gap: var(--lg);
 
-    @include font-xl;
+    @include font-xl(400);
   }
 }
 
