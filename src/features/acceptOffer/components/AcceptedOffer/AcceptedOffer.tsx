@@ -23,11 +23,11 @@ const AcceptedOffer: FC = () => {
       <SuccessAcceptIcon />
       <div className={s.labelContainer}>
         <h2 className={s.label}>
-          {tokenTo?.symbol} {formattedAmountTo}
+          {formattedAmountTo} {tokenTo?.symbol}
         </h2>
         <SmallArrow />
         <h2 className={s.label}>
-          {tokenFrom?.symbol} {formattedAmountFrom}
+          {formattedAmountFrom} {tokenFrom?.symbol}
         </h2>
         <h2 className={s.label}>
           {t('offer.accept.rate')} {rateToFrom}

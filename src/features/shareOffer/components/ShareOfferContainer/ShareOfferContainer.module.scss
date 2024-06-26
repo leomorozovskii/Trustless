@@ -1,31 +1,53 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
+@import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: $lg;
-  background: $base-white;
+  background: var(--base-white);
   border-radius: 10px;
-  gap: $s;
+  gap: var(--s);
+
+  @include mobile-down {
+    padding: var(--m);
+  }
+
+  @include mobile-up {
+    padding: var(--lg);
+  }
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
-  color: $base-black;
+  @include font-m(700);
+
+  color: var(--base-black);
 }
 
 .container {
   display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
+  gap: var(--s);
+
+  @include mobile-down {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  @include mobile-up {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .link {
-  font-weight: 400;
-  font-size: 24px;
-  color: $base-black;
+  color: var(--base-black);
+
+  @include mobile-down {
+    @include font-xl(400);
+  }
+
+  @include mobile-up {
+    @include font-3xl(400);
+  }
 }

@@ -1,0 +1,57 @@
+@import '@common/breakpoints.scss';
+
+.trigger {
+  @include mobile-up {
+    display: none;
+  }
+
+  @include mobile-down {
+    display: inline-grid;
+  }
+}
+
+.content {
+  @include mobile-up {
+    display: none;
+  }
+
+  @include mobile-down {
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: max-content;
+    height: 100vh;
+    width: 164px;
+    background: var(--bg-gray);
+    border-right: 1px solid var(--additional-gray-pre-middle);
+  }
+}
+
+.title {
+  display: none;
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: flex-end;
+  height: 90px;
+  padding: 52px 18px 18px;
+}
+
+.backdrop {
+  @include mobile-up {
+    display: none;
+  }
+
+  @include mobile-down {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}

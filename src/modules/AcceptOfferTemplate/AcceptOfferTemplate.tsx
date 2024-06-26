@@ -27,23 +27,25 @@ const AcceptOfferTemplate: FC<Props> = ({ id }) => {
   }, [activeAcceptStep, id]);
 
   return (
-    <div className={s.container}>
-      <div className={cn(s.heading, { [s.headingAccepted]: activeAcceptStep === OfferProgress.Created })}>
-        <h2 className={s.label}>{labelText}</h2>
-        {activeAcceptStep === OfferProgress.Created && (
-          <Link href="/">
-            <ClearCross className={s.cross} />
-          </Link>
+    <div className={s.wrapper}>
+      <div className={s.container}>
+        <div className={cn(s.heading, { [s.headingAccepted]: activeAcceptStep === OfferProgress.Created })}>
+          <h2 className={s.label}>{labelText}</h2>
+          {activeAcceptStep === OfferProgress.Created && (
+            <Link href="/">
+              <ClearCross className={s.cross} />
+            </Link>
+          )}
+        </div>
+        {activeAcceptStep === OfferProgress.Created ? (
+          <AcceptedOffer />
+        ) : (
+          <>
+            <AcceptOffer />
+            <AcceptOfferButtons />
+          </>
         )}
       </div>
-      {activeAcceptStep === OfferProgress.Created ? (
-        <AcceptedOffer />
-      ) : (
-        <>
-          <AcceptOffer />
-          <AcceptOfferButtons />
-        </>
-      )}
     </div>
   );
 };

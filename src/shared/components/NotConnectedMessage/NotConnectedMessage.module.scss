@@ -1,15 +1,35 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
+@import '@common/breakpoints.scss';
 @import '@common/typo.scss';
 
 .container {
   display: grid;
   justify-items: center;
-  row-gap: $lg;
-  margin-top: 24px;
-  padding: $xxl $lg 0;
-  color: $base-black;
-  border-top: 1px solid $additional-gray-pre-middle;
+  height: max-content;
+  color: var(--base-black);
+  border-top: 1px solid var(--additional-gray-pre-middle);
 
-  @include font-3xl;
+  @include mobile-up {
+    row-gap: var(--lg);
+    margin-top: var(--lg);
+    padding: var(--xxl) var(--lg) 0;
+
+    @include font-3xl(400);
+  }
+
+  @include mobile-down {
+    padding: var(--m);
+    row-gap: var(--lg);
+
+    @include font-xl(400);
+  }
+}
+
+.message {
+  text-align: center;
+}
+
+.connectWallet {
+  @include mobile-down {
+    display: none;
+  }
 }

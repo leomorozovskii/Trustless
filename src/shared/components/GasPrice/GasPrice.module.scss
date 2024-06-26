@@ -1,5 +1,4 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
+@import '@common/typo.scss';
 
 .serviceContainer {
   display: flex;
@@ -10,15 +9,15 @@
 }
 
 .feeLabel {
-  color: $base-black;
-  line-height: normal;
-  font-size: 12px;
+  color: var(--base-black);
+
+  @include font-s(400);
 }
 
 .feeContainer {
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: var(--xxs);
   align-items: center;
 }
 

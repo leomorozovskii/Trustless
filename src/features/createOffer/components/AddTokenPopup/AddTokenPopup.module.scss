@@ -1,29 +1,43 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
 @import '@common/typo.scss';
 @import '@common/mixins.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   @include popup-wrapper;
+
+  @include mobile-down {
+    z-index: 9998;
+  }
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   max-width: 540px;
   min-height: 548px;
-  background: $base-white;
-  padding: $m $lg;
+  background: var(--base-white);
+  padding: var(--m) var(--lg);
   border: none;
-  border-radius: $s;
+  border-radius: var(--s);
+
+  @include mobile-down {
+    margin: var(--m);
+    justify-content: initial;
+    gap: var(--lg);
+  }
+
+  @include mobile-up {
+    justify-content: space-between;
+    gap: 0;
+    margin: 0;
+  }
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: $lg;
+  gap: var(--lg);
 }
 
 .titleContainer {
@@ -39,31 +53,44 @@
 }
 
 .cross path {
-  stroke: $base-black;
+  stroke: var(--base-black);
 }
 
 .title {
-  color: $base-black;
+  color: var(--base-black);
 
-  @include font-3xl;
+  @include mobile-down {
+    @include font-xl(400);
+  }
+
+  @include mobile-up {
+    @include font-3xl(400);
+  }
 }
 
 .warning {
-  width: $xl;
+  display: flex;
+  width: var(--xl);
 }
 
 .warnContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: $m $s;
-  background: $additional-warn;
-  border-radius: $s;
-  gap: $s;
+  padding: var(--m) var(--s);
+  background: var(--additional-warn);
+  border-radius: var(--s);
+  gap: var(--s);
 }
 
 .addressInput {
-  font-size: 18px;
+  @include mobile-down {
+    @include font-m(400);
+  }
+
+  @include mobile-up {
+    @include font-xl(400);
+  }
 }
 
 .decimalWrapper {
@@ -71,16 +98,15 @@
 }
 
 .warnText {
-  color: $base-black;
-  font-size: 14px;
-  line-height: normal;
+  color: var(--base-black);
+  @include font-m(400);
 }
 
 .buttonContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $lg;
+  gap: var(--lg);
 }
 
 .tokenWrapper {
@@ -94,27 +120,25 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $s;
+  gap: var(--s);
 }
 
 .balanceContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .tokenTitle {
-  font-weight: 400;
-  font-size: 24px;
-  color: $base-black;
+  color: var(--base-black);
+  @include font-3xl(400);
 }
 
 .tokenBalance {
-  font-weight: 400;
-  font-size: 14px;
-  color: $base-black;
+  color: var(--base-black);
   opacity: 0.5;
+  @include font-m(400);
 }
 
 .tokenLogo {

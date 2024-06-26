@@ -2,11 +2,13 @@
 
 // eslint-disable-next-line import/no-unassigned-import
 import '../styles/globals.scss';
+import '@rainbow-me/rainbowkit/styles.css';
+import '@radix-ui/themes/styles.css';
 
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
-import '@rainbow-me/rainbowkit/styles.css';
-import '@radix-ui/themes/styles.css';
+
+import { ConnectionGuardLayout } from '@berezka-dao/layouts/ConnectionGuardLayout';
 
 import Providers from './providers';
 import { ThemeProvider } from '../shared/components/ThemeSwitcher';
@@ -26,7 +28,9 @@ const RootLayout = ({
     <html lang="en">
       <body className={inter.variable}>
         <ThemeProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            <ConnectionGuardLayout>{children}</ConnectionGuardLayout>
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

@@ -43,7 +43,7 @@ const Table = <TData,>({
                   </th>
                 )}
                 {headerGroup.headers.map((header) => (
-                  <TableHeadingCell key={header.id} header={header} />
+                  <TableHeadingCell enableRowSelection={enableRowSelection} key={header.id} header={header} />
                 ))}
               </TableHeadingRow>
             ))}

@@ -1,10 +1,13 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
-@import '@common/typo.scss';
 @import '@common/mixins.scss';
+@import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .wrapper {
   @include popup-wrapper;
+
+  @include mobile-down {
+    z-index: 9998;
+  }
 }
 
 .container {
@@ -12,10 +15,14 @@
   flex-direction: column;
   width: 100%;
   max-width: 370px;
-  background: $base-white;
-  border: 1px solid $additional-gray-pre-middle;
-  border-radius: $xxs;
+  background: var(--base-white);
+  border: 1px solid var(--additional-gray-pre-middle);
+  border-radius: var(--xxs);
   box-shadow: 0 0 25px 0 rgb(0 0 0 / 15%);
+
+  @include mobile-down {
+    margin: var(--m);
+  }
 }
 
 .titleContainer {
@@ -31,30 +38,37 @@
 }
 
 .cross path {
-  stroke: $base-black;
+  stroke: var(--base-black);
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
-  color: $base-black;
+  color: var(--base-black);
+
+  @include font-m(700);
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  padding: $lg;
-  background: $bg-gray;
-  border-top-left-radius: $xxs;
-  border-top-right-radius: $xxs;
-  gap: $m;
+  padding: var(--lg);
+  background: var(--bg-gray);
+  border-top-left-radius: var(--xxs);
+  border-top-right-radius: var(--xxs);
+  gap: var(--m);
 }
 
 .pinnedTokens {
   display: flex;
   flex-flow: row wrap;
   width: 100%;
-  gap: $s;
+
+  @include mobile-down {
+    gap: var(--m);
+  }
+
+  @include mobile-up {
+    gap: var(--s);
+  }
 }
 
 .body {
@@ -69,12 +83,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: $s $lg;
-  gap: $xxs;
+  padding: var(--s) var(--lg);
+  gap: var(--xxs);
   cursor: pointer;
   transition: all 100ms ease-in-out;
 
   &:hover {
-    background: $bg-gray;
+    background: var(--bg-gray);
   }
 }

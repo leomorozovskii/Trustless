@@ -1,28 +1,28 @@
-@import '@common/colors';
-@import '@common/variables';
+@import '@common/typo.scss';
 
 .rateContainer {
   display: flex;
-  padding: $s;
-  gap: $xxs;
+  padding: var(--s);
 
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
 
-  border-radius: $s;
-  border: 2px solid $base-black;
+  width: max-content;
+
+  border-radius: var(--s);
+  border: 2px solid var(--base-black);
 }
 
 .rate {
-  color: $base-black;
-  font-size: 24px;
-  font-weight: 400;
+  color: var(--base-black);
+
+  @include font-3xl(400);
 }
 
 .rateLabel {
-  color: $base-black;
-  font-size: 14px;
-  font-weight: 400;
+  color: var(--base-black);
   opacity: 0.5;
+
+  @include font-m(400);
 }

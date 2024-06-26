@@ -1,6 +1,5 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .container {
   position: relative;
@@ -18,45 +17,47 @@
   min-width: 178px;
   max-width: 178px;
   height: 100vh;
-  padding: 48px 0 16px;
-  background: $bg-gray;
-  border-right: 1px solid $additional-gray-pre-middle;
+  padding: var(--xxl) 0 var(--m);
+  background: var(--bg-gray);
+  border-right: 1px solid var(--additional-gray-pre-middle);
+
+  @include mobile-down {
+    display: none;
+  }
 }
 
 .navigation {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 48px;
+  gap: var(--xxl);
 }
 
 .buttonContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 16px;
+  gap: var(--s);
+  padding: 0 var(--m);
 }
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 48px;
-  max-width: 48px;
-  min-height: 48px;
-  background: $base-gray;
-  border-radius: $xxs;
-}
+  min-width: var(--xxl);
+  max-width: var(--xxl);
+  min-height: var(--xxl);
+  background: var(--base-gray);
+  border-radius: var(--xxs);
+  transition: background-color 200ms ease-in-out;
 
-.button,
-.buttonText,
-.menuItem {
-  @include font-m-flat;
+  @include font-m;
 }
 
 .buttonText {
-  font-weight: 500;
-  color: $base-white;
+  color: var(--base-white);
+
+  @include font-m(500);
 }
 
 .menu {
@@ -66,15 +67,15 @@
 }
 
 .menuItem {
-  font-weight: 400;
-  color: $base-black;
+  color: var(--base-black);
+
+  @include font-m;
 }
 
 .rightsLabel {
-  padding-left: 16px;
-  font-weight: 400;
+  padding-left: var(--m);
   font-size: 11px;
-  color: $additional-gray-medium;
+  color: var(--additional-gray-medium);
 }
 
 .content {
@@ -84,10 +85,10 @@
   min-height: 100vh;
 
   &_bg_default {
-    background: $additional-gray-light;
+    background: var(--additional-gray-light);
   }
 
   &_bg_contrast {
-    background: $base-white;
+    background: var(--base-white);
   }
 }

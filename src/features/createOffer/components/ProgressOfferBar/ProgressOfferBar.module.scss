@@ -1,6 +1,5 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
+@import '@common/breakpoints.scss';
 
 .wrapper {
   display: flex;
@@ -25,11 +24,13 @@
   bottom: 27%;
   width: 100%;
   height: 2px;
-  background-color: $additional-gray-pre-middle;
+  background-color: var(--additional-gray-pre-middle);
   transform: translateY(50%);
 }
 
 .step {
+  @include font-m(700);
+
   position: relative;
   z-index: 10;
   display: flex;
@@ -37,40 +38,40 @@
   align-items: center;
   width: 30px;
   height: 30px;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: normal;
-  color: $additional-gray-pre-middle;
-  background-color: $base-white;
-  border: 2px solid $additional-gray-pre-middle;
+  color: var(--additional-gray-pre-middle);
+  background-color: var(--base-white);
+  border: 2px solid var(--additional-gray-pre-middle);
   border-radius: 9999px;
 }
 
 .label {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: normal;
-  font-style: normal;
+  @include font-m(400);
 }
 
 .active .label,
 .complete .label {
-  font-weight: 600;
+  @include mobile-down {
+    font-weight: 700;
+  }
+
+  @include mobile-up {
+    font-weight: 600;
+  }
 }
 
 .active .step {
-  color: $base-white;
-  background-color: $base-black;
+  color: var(--base-white);
+  background-color: var(--base-black);
   border: none;
 }
 
 .active::before,
 .complete::before {
-  background-color: $base-gray;
+  background-color: var(--base-gray);
 }
 
 .complete .step {
-  color: $base-white;
-  background-color: $base-black;
+  color: var(--base-white);
+  background-color: var(--base-black);
   border: none;
 }

@@ -1,25 +1,45 @@
-@import '@common/colors';
-@import '@common/variables';
+@import '@common/breakpoints';
+@import '@common/typo.scss';
 
 .warnContainer {
-  display: flex;
-  padding: $s;
-  align-items: center;
-  gap: $s;
+  padding: var(--s);
+  border-radius: var(--s);
+  background: var(--additional-warn);
 
-  border-radius: $s;
-  background: $additional-warn;
+  @include mobile-up {
+    display: flex;
+    align-items: center;
+    gap: var(--s);
+  }
+
+  @include mobile-down {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: var(--s);
+    row-gap: 10px;
+  }
 }
 
 .warning {
   display: flex;
+
+  @include mobile-down {
+    grid-column: 1;
+    grid-row: 1;
+  }
 }
 
 .warnParagraph {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: $m;
+  @include mobile-up {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--m);
+  }
+
+  @include mobile-down {
+    display: contents;
+  }
 }
 
 .warn {
@@ -27,21 +47,46 @@
 }
 
 .warnText {
-  color: $base-black;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: normal;
+  color: var(--base-black);
+
+  @include font-m(400);
+
+  @include mobile-down {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+.warnTokenSymbol {
+  color: var(--base-black);
+
+  @include font-m(700);
 }
 
 .warnTokenName {
-  color: $base-black;
-  font-size: 14px;
-  font-weight: 700;
+  color: var(--base-black);
+
+  @include mobile-up {
+    @include font-m(700);
+  }
+
+  @include mobile-down {
+    @include font-xxs(700);
+  }
 }
 
 .warnShareAddress {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: $s;
+
+  @include mobile-up {
+    gap: var(--s);
+  }
+
+  @include mobile-down {
+    grid-column: 1/3;
+    grid-row: 2;
+    gap: 2px;
+  }
 }

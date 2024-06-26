@@ -4,6 +4,12 @@
     "myOffers": "My offers",
     "history": "History"
   },
+  "mobileMenu": {
+    "title": "Menu",
+    "createOffer": "Create offer",
+    "myOffers": "My offers",
+    "history": "History"
+  },
   "offers": {
     "title": {
       "myOffers": "My offers",
@@ -65,8 +71,11 @@
       "offer": "New offer",
       "addToken": "Add a custom token",
       "signText": "To create an offer, you will have to sign two transactions: Approve and Create",
+      "allowanceText": "You approved token allowance. Now you’re one click away from Create Trade",
       "acceptTerms": "By continuing, you accept",
       "termsConditions": "Terms & Conditions",
+      "tokenImported": "Token imported",
+      "successfullyImported": "You’ve successfully imported",
       "fee": "Service Fee"
     },
     "accept": {

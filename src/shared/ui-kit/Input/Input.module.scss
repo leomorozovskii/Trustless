@@ -1,86 +1,81 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
-
-@mixin input-label {
-  font-weight: 600;
-  font-size: 14px;
-}
 
 .wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: $s;
+  gap: var(--s);
 }
 
 .label {
-  color: $base-black;
+  color: var(--base-black);
 
-  @include input-label;
+  @include font-m(600);
 }
 
 .errorLabel {
-  color: $additional-error;
+  color: var(--additional-error);
 
-  @include input-label;
+  @include font-m(600);
 }
 
 .input {
   --text-field-border-width: 0px;
 
   width: 100%;
-  height: $xxl;
-  padding: 0 $s;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: $xxl;
-  color: $additional-gray-dark;
+  height: var(--xxl);
+  padding: 0 var(--s);
+  color: var(--additional-gray-dark);
   font-style: normal;
-  border: 1px solid $base-gray;
-  border-radius: $xxs;
+  border: 1px solid var(--base-gray);
+  border-radius: var(--xxs);
   outline: none;
+  transition: color 300ms ease-in-out, border 300ms ease-in-out;
+
+  @include font-3xl(400);
 
   & svg {
-    margin-right: 6px;
+    margin-right: var(--xs);
   }
 
   &::placeholder {
-    color: $additional-gray-dark;
+    color: var(--additional-gray-dark);
   }
 
   &:focus-within {
     padding: 0 7px;
-    color: $base-black;
-    border: 2px solid $base-black;
+    color: var(--base-black);
+    border: 2px solid var(--base-black);
+    transition: none;
   }
 
   &.disabledInput {
-    color: $additional-gray-pre-middle;
-    background: $base-white;
-    border: 1px solid $additional-gray-pre-middle;
+    color: var(--additional-gray-pre-middle);
+    background: var(--base-white);
+    border: 1px solid var(--additional-gray-pre-middle);
     cursor: not-allowed;
+    transition: none;
   }
 
   &:not(.errorInput, :focus-within, .disabledInput):hover {
-    color: $base-black;
-    border: 1px solid $base-black;
-    transition: all 200ms ease-in-out;
+    color: var(--base-black);
+    border: 1px solid var(--base-black);
   }
 
   &.errorInput {
     padding: 0 7px;
-    color: $additional-error;
-    border: 2px solid $additional-error;
+    color: var(--additional-error);
+    border: 2px solid var(--additional-error);
+    transition: none;
   }
 }
 
 [data-theme='dark'] {
   .input {
-    color: $base-white;
+    color: var(--base-white);
 
     &::placeholder {
-      color: $additional-gray-middle;
+      color: var(--additional-gray-middle);
     }
   }
 }
@@ -95,21 +90,21 @@
 }
 
 .sm {
-  height: 24px;
+  height: var(--lg);
 
-  @include font-s-flat;
+  @include font-s(400);
 }
 
 .md {
-  height: 36px;
+  height: var(--pxxl);
 
-  @include font-m-flat;
+  @include font-m(400)
 }
 
 .lg {
-  height: 48px;
-  border: 1px solid $base-black;
-  border-radius: $s !important;
+  height: var(--xxl);
+  border: 1px solid var(--base-black);
+  border-radius: var(--s) !important;
 
-  @include font-3xl;
+  @include font-3xl(400);
 }

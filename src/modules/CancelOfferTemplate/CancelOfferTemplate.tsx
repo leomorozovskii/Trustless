@@ -11,12 +11,14 @@ type Props = {
 
 const CancelOfferTemplate: FC<Props> = ({ id }) => {
   return (
-    <div className={s.container}>
-      <div className={s.heading}>
-        <h2 className={s.label}>Cancel offer #{id}</h2>
+    <div className={s.wrapper}>
+      <div className={s.container}>
+        <div className={s.heading}>
+          <h2 className={s.label}>Cancel offer #{id}</h2>
+        </div>
+        <CancelInfo cancelId={id} />
+        <CancelOffer cancelId={id} />
       </div>
-      <CancelInfo cancelId={id} />
-      <CancelOffer cancelId={id} />
     </div>
   );
 };

@@ -1,41 +1,49 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
+@import '@common/breakpoints.scss';
 @import '@common/typo.scss';
 
 .wrapper {
   position: fixed;
-  top: 32px;
   right: 0;
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 340px;
   margin: 0 auto;
-  z-index: 100;
+  z-index: 10001;
   transition:
   top 0.5s ease,
   opacity 0.5s ease;
-  gap: $sm;
+  gap: var(--sm);
+
+  @include mobile-up {
+    top: var(--xl);
+    max-width: 340px;
+  }
+
+  @include mobile-down {
+    top: 113px;
+    width: 100%;
+    padding: 0 var(--m);
+  }
 }
 
 .item {
-  z-index: 100;
+  z-index: 10001;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: $s;
-  border-radius: $xxs;
-  gap: $xxs;
+  padding: var(--s);
+  border-radius: var(--xxs);
+  gap: var(--xxs);
 }
 
 .success {
-  background: $additional-success;
+  background: var(--additional-success);
 }
 
 .error {
-  background: $additional-error;
+  background: var(--additional-error);
 }
 
 .pointer {
@@ -50,15 +58,15 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 14px;
-  color: $base-white;
+  color: var(--base-white);
+
+  @include font-m(700);
 }
 
 .text {
-  font-weight: 400;
-  font-size: 14px;
-  color: $base-white;
+  color: var(--base-white);
+
+  @include font-m(400);
 }
 
 @keyframes slideDown {

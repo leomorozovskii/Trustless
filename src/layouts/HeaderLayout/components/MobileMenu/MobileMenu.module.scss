@@ -1,0 +1,76 @@
+@import '@common/typo.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--xxl) 0 var(--m);
+  font-family: var(--font-family-base);
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--xxl);
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--s);
+  padding: 0 var(--m);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: var(--xxl);
+  max-width: var(--xxl);
+  min-height: var(--xxl);
+  background: var(--base-gray);
+  border-radius: var(--xxs);
+
+  @include font-m;
+}
+
+.buttonText {
+  color: var(--base-white);
+
+  @include font-m(500);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menuItem {
+  color: var(--base-black);
+
+  @include font-m;
+}
+
+.rightsLabel {
+  padding-left: var(--m);
+  font-size: 11px;
+  color: var(--additional-gray-medium);
+}
+
+.content {
+  display: grid;
+  grid-template-rows: max-content;
+  width: 100%;
+  min-height: 100vh;
+
+  &_bg_default {
+    background: var(--additional-gray-light);
+  }
+
+  &_bg_contrast {
+    background: var(--base-white);
+  }
+}

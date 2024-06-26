@@ -1,5 +1,5 @@
-@import '@common/colors.scss';
-@import '@common/variables.scss';
+@import '@common/breakpoints.scss';
+@import '@common/typo.scss';
 
 .button {
   max-width: 138px;
@@ -8,12 +8,25 @@
 .infoWrapper {
   display: flex;
   align-items: center;
-  height: 36px;
-  padding: $xxs;
-  background: $base-white;
-  border: 1px solid $bg-gray;
-  border-radius: $xxs;
-  gap: $m;
+  height: var(--pxxl);
+  border-radius: var(--xxs);
+
+  @include mobile-up {
+    padding: var(--xxs);
+    gap: var(--m);
+    background: var(--base-white);
+    border: 1px solid var(--bg-gray);
+
+    @include font-l(400);
+  }
+
+  @include mobile-down {
+    gap: var(--sm);
+    padding: var(--xs) var(--m);
+    background: var(--bg-gray);
+
+    @include font-m(400);
+  }
 }
 
 .infoContainer {
@@ -21,23 +34,32 @@
   flex-direction: row;
   align-items: center;
   line-height: normal;
-  gap: $xxs;
+  gap: var(--xxs);
 }
 
 .accountIcon {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
+  @include mobile-up {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+  }
+
+  @include mobile-down {
+    display: none;
+  }
 }
 
 .accountContainer {
   display: flex;
   align-items: center;
-  padding: $xxs $s;
   line-height: normal;
-  background: $bg-gray;
-  border-radius: $xxs;
-  gap: $s;
+
+  @include mobile-up {
+    padding: var(--xxs) var(--s);
+    background: var(--bg-gray);
+    border-radius: var(--xxs);
+    gap: var(--s);
+  }
 }
 
 .flex {
@@ -45,7 +67,13 @@
 }
 
 .walletLabel {
-  font-weight: 400;
-  font-size: 14px;
-  color: $base-black;
+  color: var(--base-black);
+
+  @include font-m(400);
+}
+
+.balance {
+  @include mobile-down {
+    display: none;
+  }
 }

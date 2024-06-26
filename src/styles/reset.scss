@@ -1,6 +1,3 @@
-/* styles/reset.scss */
-
-/* Удаление всех стилей для всех элементов */
 *,
 *::before,
 *::after {
@@ -13,7 +10,6 @@
   border: 0;
 }
 
-/* Обнуляем основной блок и HTML5 элементы */
 html,
 body,
 div,
@@ -103,7 +99,6 @@ video {
   border: 0;
 }
 
-/* Блоки отображаются как блоки */
 article,
 aside,
 details,
@@ -118,13 +113,11 @@ section {
   display: block;
 }
 
-/* Обнуление списка */
 ol,
 ul {
   list-style: none;
 }
 
-/* Сброс цитат */
 blockquote,
 q {
   quotes: none;
@@ -138,13 +131,11 @@ q::after {
   content: none;
 }
 
-/* Таблицы */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* Краевые эффекты браузеров */
 body {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
@@ -152,7 +143,6 @@ body {
   text-rendering: optimizelegibility;
 }
 
-/* Удаление рамок у ссылок и кнопок */
 a {
   color: inherit;
   text-decoration: none;

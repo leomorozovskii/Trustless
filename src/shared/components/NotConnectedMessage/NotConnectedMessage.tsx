@@ -12,8 +12,10 @@ const NotConnectedMessage: FC = () => {
   const { t } = useTranslation();
   return (
     <div className={s.container}>
-      <span>{t('shared.notConnectedMessage')}</span>
-      <ConnectWallet />
+      <span className={s.message}>{t('shared.notConnectedMessage')}</span>
+      <div className={s.connectWallet}>
+        <ConnectWallet />
+      </div>
       <Image src={pic_login} alt="login image" width={600} height={360} />
     </div>
   );

@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  grid-template-rows: max-content;
+  min-height: 100vh;
+
+  &_bg_default {
+    background-color: var(--base-white);
+  }
+
+  &_bg_gray {
+    background-color: var(--additional-gray-light);
+  }
+}

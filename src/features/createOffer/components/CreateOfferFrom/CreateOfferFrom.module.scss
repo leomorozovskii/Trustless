@@ -1,5 +1,4 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
+@import '@common/breakpoints.scss';
 @import '@common/typo.scss';
 
 .container {
@@ -8,9 +7,9 @@
   align-items: flex-start;
   width: 100%;
   height: 100%;
-  padding: $lg $m;
-  background: $base-white;
-  gap: $lg;
+  padding: var(--lg) var(--m);
+  background: var(--base-white);
+  gap: var(--lg);
 }
 
 .selectContainer {
@@ -18,29 +17,45 @@
   flex-direction: column;
   width: 100%;
   line-height: normal;
-  gap: $s;
+  gap: var(--s);
 }
 
 .selectLabel {
-  font-weight: 400;
-  font-size: 24px;
-  color: $base-black;
+  color: var(--base-black);
+
+  @include mobile-up {
+    @include font-3xl(400);
+  }
+
+  @include mobile-down {
+    @include font-xl(700);
+  }
 }
 
 .gap {
-  gap: 16px;
+  gap: 14px !important;
 }
 
 .mb {
-  margin-bottom: 22px;
+  @include mobile-up {
+    margin-bottom: 22px;
+  }
 }
 
 .inputWrapper {
-  max-width: 170px !important;
+  @include mobile-up {
+    max-width: 170px !important;
+  }
 }
 
 .receiverInput {
-  font-size: 18px !important;
+  @include mobile-up {
+    font-size: 18px !important;
+  }
+
+  @include mobile-down {
+    font-size: 11px !important;
+  }
 }
 
 .amountContainer {
@@ -51,21 +66,21 @@
 }
 
 .amountText {
-  font-size: 14px;
-  color: $base-black;
-  font-weight: 600;
-  line-height: normal;
+  color: var(--base-black);
+
+  @include font-m(600);
 }
 
 .amountButton {
   display: flex;
-  padding: $xxs $s;
+  padding: var(--xxs) var(--s);
   justify-content: center;
   align-items: center;
-  gap: $s;
+  gap: var(--s);
+  border-radius: var(--s);
+  background: var(--bg-gray);
 
-  border-radius: $s;
-  background: $bg-gray;
+  @include font-s(600);
 
   &:disabled {
     cursor: not-allowed;
@@ -81,16 +96,15 @@
 }
 
 .balanceLabel {
-  font-size: 12px;
-  line-height: normal;
-  color: $base-black;
-  font-weight: 600;
+  color: var(--base-black);
+
+  @include font-s(600);
 }
 
 .balanceValue {
   max-width: 115px;
   word-break: break-word;
-  font-size: 12px;
-  color: $base-black;
-  font-weight: 400;
+  color: var(--base-black);
+
+  @include font-s(400);
 }
