@@ -1,5 +1,3 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 
@@ -9,19 +7,19 @@
   justify-items: center;
 
   @include mobile-up {
-    row-gap: $lg;
-    margin: $xl 0 0;
-    padding: $xxl 0;
+    row-gap: var(--lg);
+    margin: var(--xl) 0 0;
+    padding: var(--xxl) 0;
   }
 
   @include mobile-down {
-    row-gap: $m;
-    padding: $m;
+    row-gap: var(--m);
+    padding: var(--m);
   }
 }
 
 .title {
-  color: $base-black;
+  color: var(--base-black);
 
   @include mobile-up {
     @include font-3xl;

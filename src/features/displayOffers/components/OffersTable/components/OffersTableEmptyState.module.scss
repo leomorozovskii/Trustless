@@ -1,14 +1,13 @@
 @import '@common/typo.scss';
-@import '@common/colors.scss';
 
 .container {
   display: flex;
   align-items: center;
-  column-gap: 24px;
+  column-gap: var(--lg);
 }
 
 .message {
-  color: $base-black;
+  color: var(--base-black);
 
   @include font-m;
 }

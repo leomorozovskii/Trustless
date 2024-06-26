@@ -1,11 +1,9 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 @import '@common/breakpoints.scss';
 @import '@common/mixins.scss';
 
 .tableContainer {
-  @include font-m-flat;
+  @include font-m;
 }
 
 .table {
@@ -23,10 +21,9 @@
   display: inline-block;
   grid-column: 1 / calc(var(--cols) + 1);
   grid-template-columns: subgrid;
-  padding: $m 0;
-  font-weight: 700;
+  padding: var(--m) 0;
 
-  @include font-m;
+  @include font-m(700);
 
   &.enableRowSelection {
     grid-column: 2 / calc(var(--cols) + 1);
@@ -39,7 +36,7 @@
 
 .sortingIcon {
   position: absolute;
-  left: calc(100% + 4px);
+  left: calc(100% + var(--xxs));
   width: 12px;
   height: 12px;
   opacity: 0.3;
@@ -64,14 +61,13 @@
 
 .headingCell {
   min-width: max-content;
-  padding: 8px 0 9px;
-  font-weight: 500;
+  padding: var(--s) 0;
   text-align: unset;
   text-transform: capitalize;
   cursor: pointer;
   user-select: none;
 
-  @include font-s-flat;
+  @include font-s(500);
 
   @include mobile-down {
     &_selectable {
@@ -89,7 +85,7 @@
 
   &_active {
     font-weight: 700;
-    color: $base-black;
+    color: var(--base-black);
   }
 
   &__content {
@@ -114,7 +110,7 @@
 }
 
 .cell {
-  padding: 14px 0;
+  height: var(--xxl);
 
   @include font-m;
 }
@@ -147,11 +143,11 @@
   grid-template-columns: subgrid;
 
   @include mobile-up {
-    padding: 0 32px;
+    padding: 0 var(--xl);
   }
 
   @include mobile-down {
-    padding: 0 16px;
+    padding: 0 var(--m);
   }
 }
 
@@ -172,7 +168,7 @@
 
   &_selected,
   &:hover {
-    background-color: $additional-gray-background;
+    background-color: var(--additional-gray-background);
 
     & .rowSelectionCell:not(.rowSelectionCell_disabled) {
       opacity: 1;
@@ -182,6 +178,6 @@
 
 .headingRow {
   @include mobile-up {
-    border-bottom: 1px solid $additional-gray-pre-middle;
+    border-bottom: 1px solid var(--additional-gray-pre-middle);
   }
 }

@@ -1,35 +1,32 @@
-@import '@common/variables.scss';
-@import '@common/colors.scss';
 @import '@common/typo.scss';
 
 .container {
   display: flex;
   align-items: center;
-  column-gap: $xs;
+  column-gap: var(--xs);
 }
 
 .button {
-  padding: 6px;
+  padding: var(--xs);
   cursor: pointer;
 
   path {
-    fill: $base-black;
+    fill: var(--base-black);
   }
 
   &:disabled {
     cursor: default;
 
     path {
-      fill: $additional-gray-medium;
+      fill: var(--additional-gray-medium);
     }
   }
 }
 
 .label {
-  font-weight: 500;
   font-family: var(--font-family-base);
   text-align: left;
-  color: $additional-gray-medium;
+  color: var(--additional-gray-medium);
 
-  @include font-m-flat;
+  @include font-m(500);
 }
