@@ -53,7 +53,7 @@
   }
 
   @include mobile-down {
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding: var(--sm) 0 var(--m);
   }
 
@@ -78,8 +78,8 @@
 
   &__right {
     @include mobile-down {
-      align-self: center;
-      margin: 0 auto;
+      align-self: flex-end;
+      padding: var(--xs) 0;
     }
   }
 }
