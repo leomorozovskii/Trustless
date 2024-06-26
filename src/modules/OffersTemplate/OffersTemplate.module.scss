@@ -36,10 +36,6 @@
   @include mobile-up {
     padding: var(--m) 0;
   }
-
-  @include mobile-down {
-    padding: var(--xs) 0;
-  }
 }
 
 .actions {
@@ -54,6 +50,7 @@
 
   @include mobile-down {
     flex-direction: column-reverse;
+    gap: var(--sm);
     padding: var(--sm) 0 var(--m);
   }
 
@@ -68,7 +65,6 @@
 
     @include mobile-down {
       grid-template-columns: max-content 1fr;
-      padding: var(--xs) 0;
 
       > *:nth-child(2) {
         max-width: 210px;
@@ -79,7 +75,6 @@
   &__right {
     @include mobile-down {
       align-self: flex-end;
-      padding: var(--xs) 0;
     }
   }
 }
