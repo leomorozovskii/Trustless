@@ -58,7 +58,7 @@
   border: 2px solid var(--additional-gray-pre-middle);
   border-radius: 9999px;
 
-  @include font-s;
+  @include font-s(400);
 }
 
 .active .step {

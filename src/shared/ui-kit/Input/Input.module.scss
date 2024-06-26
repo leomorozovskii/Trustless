@@ -93,7 +93,7 @@
 }
 
 .md {
-  height: 36px;
+  height: var(--pxxl);
 
   @include font-m(400)
 }

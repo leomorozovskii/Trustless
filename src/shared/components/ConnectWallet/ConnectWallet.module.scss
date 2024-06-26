@@ -8,7 +8,7 @@
 .infoWrapper {
   display: flex;
   align-items: center;
-  height: 36px;
+  height: var(--pxxl);
   border-radius: var(--xxs);
 
   @include mobile-up {

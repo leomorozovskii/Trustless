@@ -24,16 +24,15 @@
 
 .label {
   color: var(--base-black);
-  line-height: normal;
-  font-size: 14px;
-  font-weight: 400;
+
+  @include font-m(400);
 }
 
 .terms {
-  @include font-s(400);
-
   color: var(--base-black);
   opacity: 0.5;
+
+  @include font-s(400);
 }
 
 .conditions {
