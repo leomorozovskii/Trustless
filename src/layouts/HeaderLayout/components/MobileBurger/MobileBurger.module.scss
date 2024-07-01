@@ -11,6 +11,8 @@
 }
 
 .content {
+  outline: none;
+
   @include mobile-up {
     display: none;
   }
@@ -18,11 +20,11 @@
   @include mobile-down {
     position: fixed;
     z-index: 10000;
+    top: 0;
     left: 0;
     bottom: 0;
     display: grid;
     grid-template-rows: max-content;
-    height: 100vh;
     width: 164px;
     background: var(--bg-gray);
     border-right: 1px solid var(--additional-gray-pre-middle);
