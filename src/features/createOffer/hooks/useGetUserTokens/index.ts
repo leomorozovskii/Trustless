@@ -68,10 +68,14 @@ export const useGetUserTokens = () => {
     return data;
   };
 
-  const { data: rawTokens } = useQuery({
+  const { data: rawTokens, isLoading } = useQuery({
     queryKey: [RAW_TOKENS_KEY, address, pageKey],
     queryFn: fetchRawTokens,
   });
+
+  useEffect(() => {
+    setUserTokensLoading(isLoading);
+  }, [isLoading, setUserTokensLoading]);
 
   useEffect(() => {
     setPageKey(null);
