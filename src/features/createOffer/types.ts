@@ -18,8 +18,10 @@ type OfferCreateValues = {
   activeStep: OfferProgress;
   offerId: number | null;
   inputsDisabled: boolean;
-  userTokens: TokensReducer;
-  setUserTokens: Dispatch<Partial<TokensReducer>>;
+  userTokens: Token[] | null;
+  userTokensLoading: boolean;
+  setUserTokens: Dispatch<SetStateAction<Token[] | null>>;
+  setUserTokensLoading: Dispatch<SetStateAction<boolean>>;
   setInputsDisabled: Dispatch<SetStateAction<boolean>>;
   setOfferId: Dispatch<SetStateAction<number | null>>;
   setOfferFromState: Dispatch<Partial<OfferFrom>>;
@@ -38,14 +40,9 @@ type OfferFrom = {
   rate: string;
 };
 
-type TokensReducer = {
-  tokens: Token[] | null;
-  isLoading: boolean;
-};
-
 type OfferTo = Omit<OfferFrom, 'from' | 'rate' | 'isInfinite'> & {
   to?: Address;
   receiver?: string;
 };
 
-export type { OfferCreateValues, OfferFrom, OfferTo, TokensReducer, Token };
+export type { OfferCreateValues, OfferFrom, OfferTo, Token };

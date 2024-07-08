@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { formatUnits, fromHex, getAddress } from 'viem';
 import { useAccount, useConfig } from 'wagmi';
 import { readContracts } from 'wagmi/actions';
@@ -34,45 +35,67 @@ const getRawTokens = (responseTokens: ResponseToken[]) => {
   return contractTokens;
 };
 
+const RAW_TOKENS_KEY = 'RAW_TOKENS_KEY';
+
 export const useGetUserTokens = () => {
   const { address } = useAccount();
   const { handleAddItem } = useToastifyContext();
-  const { setUserTokens } = useOfferCreateContext();
+  const { setUserTokens, setUserTokensLoading } = useOfferCreateContext();
   const config = useConfig();
 
+  const [pageKey, setPageKey] = useState<string | null | undefined>(null);
+
+  const fetchRawTokens = async () => {
+    const requestBody = JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'alchemy_getTokenBalances',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: [address, 'erc20', { pageKey }],
+      id: 1,
+    });
+
+    const requestOptions: RequestInit = {
+      method: 'POST',
+      body: requestBody,
+      redirect: 'follow',
+    };
+
+    const response = await fetch(environment.apiUrl, requestOptions);
+    const data: ResponseAlchemy = await response.json();
+
+    return data;
+  };
+
+  const { data: rawTokens } = useQuery({
+    queryKey: [RAW_TOKENS_KEY, address, pageKey],
+    queryFn: fetchRawTokens,
+  });
+
   useEffect(() => {
-    if (!address) return;
+    setPageKey(null);
+    setUserTokens(null);
+  }, [address, setUserTokens]);
+
+  useEffect(() => {
+    if (!address || typeof pageKey === 'undefined') return;
 
     const fetchUserTokens = async () => {
-      setUserTokens({ isLoading: true });
+      if (!rawTokens) return;
 
-      const requestBody = JSON.stringify({
-        jsonrpc: '2.0',
-        method: 'alchemy_getTokenBalances',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        params: [address, 'erc20'],
-        id: 1,
-      });
-
-      const requestOptions: RequestInit = {
-        method: 'POST',
-        body: requestBody,
-        redirect: 'follow',
-      };
+      setUserTokensLoading(true);
 
       try {
-        const response = await fetch(environment.apiUrl, requestOptions);
-        const data: ResponseAlchemy = await response.json();
-
-        const filteredTokens = data.result.tokenBalances.filter((token) => fromHex(token.tokenBalance, 'number') > 0);
+        const filteredTokens = rawTokens.result.tokenBalances.filter(
+          (token) => fromHex(token.tokenBalance, 'number') > 0,
+        );
 
         const result = await readContracts(config, {
           contracts: getRawTokens(filteredTokens),
         });
 
-        const userTokens: Token[] = result
+        const newTokens: Token[] = result
           .map((_, idx) => {
             if (idx % 3 === 0) {
               if (
@@ -97,14 +120,20 @@ export const useGetUserTokens = () => {
             return Number(b.balance) - Number(a.balance);
           });
 
-        setUserTokens({ tokens: userTokens });
+        setUserTokens((prevState) => {
+          if (!prevState) {
+            return newTokens;
+          }
+          return [...prevState, ...newTokens];
+        });
+        setPageKey(rawTokens.result.pageKey);
       } catch {
         handleAddItem({ title: 'Tokens Error', text: 'Something went wrong', type: 'error' });
       } finally {
-        setUserTokens({ isLoading: false });
+        setUserTokensLoading(false);
       }
     };
 
     fetchUserTokens();
-  }, [address, config, handleAddItem, setUserTokens]);
+  }, [address, config, handleAddItem, pageKey, rawTokens, setUserTokens, setUserTokensLoading]);
 };
