@@ -3,7 +3,7 @@ import { useState, createContext, useContext, useMemo, useReducer } from 'react'
 
 import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
 
-import type { OfferFrom, OfferTo, OfferCreateValues, Token } from './types';
+import type { OfferFrom, OfferTo, OfferCreateValues } from './types';
 
 const OfferCreateContext = createContext<OfferCreateValues | null>(null);
 
@@ -39,8 +39,6 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   const [offerId, setOfferId] = useState<number | null>(null);
   const [activeStep, setActiveStep] = useState<OfferProgress>(OfferProgress.None);
   const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
-  const [userTokens, setUserTokens] = useState<Token[] | null>(null);
-  const [userTokensLoading, setUserTokensLoading] = useState<boolean>(false);
 
   const values: OfferCreateValues = useMemo(
     () => ({
@@ -50,10 +48,6 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
       activeStep,
       offerId,
       inputsDisabled,
-      userTokens,
-      userTokensLoading,
-      setUserTokens,
-      setUserTokensLoading,
       setInputsDisabled,
       setOfferId,
       setOfferFromState,
@@ -61,7 +55,7 @@ const OfferCreateProvider: FC<PropsWithChildren> = ({ children }) => {
       setActiveOfferStep,
       setActiveStep,
     }),
-    [activeOfferStep, activeStep, inputsDisabled, offerFromState, offerId, offerToState, userTokens, userTokensLoading],
+    [activeOfferStep, activeStep, inputsDisabled, offerFromState, offerId, offerToState],
   );
 
   return <OfferCreateContext.Provider value={values}>{children}</OfferCreateContext.Provider>;

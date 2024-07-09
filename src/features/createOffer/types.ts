@@ -18,10 +18,6 @@ type OfferCreateValues = {
   activeStep: OfferProgress;
   offerId: number | null;
   inputsDisabled: boolean;
-  userTokens: Token[] | null;
-  userTokensLoading: boolean;
-  setUserTokens: Dispatch<SetStateAction<Token[] | null>>;
-  setUserTokensLoading: Dispatch<SetStateAction<boolean>>;
   setInputsDisabled: Dispatch<SetStateAction<boolean>>;
   setOfferId: Dispatch<SetStateAction<number | null>>;
   setOfferFromState: Dispatch<Partial<OfferFrom>>;

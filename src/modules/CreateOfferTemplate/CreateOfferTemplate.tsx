@@ -10,7 +10,6 @@ import {
   OfferButtons,
   ParamsData,
   ProgressOfferBar,
-  useGetUserTokens,
 } from '@berezka-dao/features/createOffer';
 import { ShareOfferContainer } from '@berezka-dao/features/shareOffer';
 import { OfferProgress } from '@berezka-dao/shared/components/ProgressBar';
@@ -21,7 +20,6 @@ const CreateOfferTemplate = () => {
   const { t } = useTranslation();
   const steps = ['Approve', 'Create Trade', 'Publish & Share'];
   const { offerId, activeOfferStep, activeStep, setActiveOfferStep } = useOfferCreateContext();
-  useGetUserTokens();
 
   return (
     <div className={cn(s.container, { [s.created]: activeStep === OfferProgress.Created })}>

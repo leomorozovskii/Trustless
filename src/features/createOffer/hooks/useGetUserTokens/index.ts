@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { formatUnits, fromHex, getAddress } from 'viem';
 import { useAccount, useConfig } from 'wagmi';
 import { readContracts } from 'wagmi/actions';
@@ -8,20 +8,15 @@ import { useGetRawTokens } from '@berezka-dao/shared/retrieve-data/useGetRawToke
 import { notUndefined } from '@berezka-dao/shared/utils/notUndefined';
 
 import { getRawTokens } from './utils';
-import { useOfferCreateContext } from '../../store';
 import type { Token } from '../../types';
 
 export const useGetUserTokens = () => {
   const { address } = useAccount();
   const { handleAddItem } = useToastifyContext();
-  const { setUserTokens, setUserTokensLoading } = useOfferCreateContext();
   const config = useConfig();
 
   const { data: tokens, isLoading } = useGetRawTokens();
-
-  useEffect(() => {
-    setUserTokensLoading(isLoading);
-  }, [isLoading, setUserTokensLoading]);
+  const [userTokens, setUserTokens] = useState<Token[] | null>(null);
 
   useEffect(() => {
     setUserTokens(null);
@@ -75,5 +70,10 @@ export const useGetUserTokens = () => {
     };
 
     fetchUserTokens();
-  }, [address, config, handleAddItem, tokens, setUserTokens, setUserTokensLoading]);
+  }, [address, config, handleAddItem, tokens, setUserTokens]);
+
+  return {
+    userTokens,
+    isLoading,
+  };
 };

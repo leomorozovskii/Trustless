@@ -24,7 +24,7 @@ const useGetRawTokens = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          params: ['0xe5818d70a9b5aed2bfDe4E41FBcB07dD80f8fC84', 'erc20', { pageKey }],
+          params: [address, 'erc20', { pageKey }],
           id: 1,
         });
 

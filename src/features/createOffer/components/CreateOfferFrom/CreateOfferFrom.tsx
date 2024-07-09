@@ -1,19 +1,23 @@
 import { useEffect, useMemo } from 'react';
 import { getAddress } from 'viem';
 
+import { useTokenInfo } from '@berezka-dao/shared/hooks/useTokenInfo';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
 import s from './CreateOfferFrom.module.scss';
-import { useCalculateAmountValue } from '../../hooks';
+import { useCalculateAmountValue, useGetUserTokens } from '../../hooks';
 import { useOfferCreateContext } from '../../store';
 import { checkValidAmount } from '../../utils';
 import { AddCustomToken } from '../AddCustomToken';
 import { Select } from '../Select';
 
 const CreateOfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState, inputsDisabled, userTokens, userTokensLoading } =
-    useOfferCreateContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { calculateRateValue } = useCalculateAmountValue();
+  const { userTokens, isLoading } = useGetUserTokens();
+  const { tokenDisplayBalance } = useTokenInfo({
+    address: offerFromState.from,
+  });
 
   useEffect(() => {
     calculateRateValue();
@@ -32,9 +36,9 @@ const CreateOfferFrom = () => {
   const maxBalance = useMemo(() => {
     if (!offerFromState.from || !userTokens) return '0';
     const currentToken = userTokens.find((token) => token.address === offerFromState.from);
-    if (!currentToken) return '0';
+    if (!currentToken) return tokenDisplayBalance;
     return currentToken.balance;
-  }, [offerFromState.from, userTokens]);
+  }, [offerFromState.from, tokenDisplayBalance, userTokens]);
 
   const handleSetMaxBalance = () => {
     if (!offerFromState.from) return;
@@ -48,7 +52,7 @@ const CreateOfferFrom = () => {
         <h2 className={s.selectLabel}>From</h2>
         <Select
           tokens={userTokens}
-          isLoading={userTokensLoading}
+          isLoading={isLoading}
           placeholder="Select token"
           value={offerFromState.from}
           customTokenName={offerFromState.customTokenName}
