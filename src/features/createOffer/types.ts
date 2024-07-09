@@ -3,14 +3,6 @@ import type { Address } from 'viem';
 
 import type { OfferProgress } from '@berezka-dao/shared/components/ProgressBar/types';
 
-type Token = {
-  address: Address;
-  name: string;
-  symbol: string;
-  balance: string;
-  decimals: number;
-};
-
 type OfferCreateValues = {
   offerFromState: OfferFrom;
   offerToState: OfferTo;
@@ -41,4 +33,4 @@ type OfferTo = Omit<OfferFrom, 'from' | 'rate' | 'isInfinite'> & {
   receiver?: string;
 };
 
-export type { OfferCreateValues, OfferFrom, OfferTo, Token };
+export type { OfferCreateValues, OfferFrom, OfferTo };

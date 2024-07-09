@@ -10,7 +10,7 @@ import { getIsCreator, getIsReceiver, getIsTokenCustom, getRateToFrom } from './
 
 const GET_OFFER_DETAILS_QUERY_KEY = 'GET_OFFER_DETAILS';
 
-export const useGetOfferDetails = ({ id }: { id: string }) => {
+const useGetOfferDetails = ({ id }: { id: string }) => {
   const { address } = useAccount();
   const {
     data: details,
@@ -82,3 +82,5 @@ export const useGetOfferDetails = ({ id }: { id: string }) => {
     error,
   };
 };
+
+export { useGetOfferDetails, GET_OFFER_DETAILS_QUERY_KEY };

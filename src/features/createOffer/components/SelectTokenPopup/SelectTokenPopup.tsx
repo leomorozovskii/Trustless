@@ -7,13 +7,13 @@ import type { TokenData } from '@berezka-dao/core/types';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
 import { InputCross } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
+import type { Token } from '@berezka-dao/shared/types';
 import { Search } from '@berezka-dao/shared/ui-kit/Search';
 import { Skeleton } from '@berezka-dao/shared/ui-kit/Skeleton';
 
 import { TokenItem } from './components/TokenItem';
 import { useSearchToken } from './hooks/useSearchToken';
 import s from './SelectTokenPopup.module.scss';
-import type { Token } from '../../types';
 
 type Props = {
   tokens: Token[] | TokenData[] | undefined;

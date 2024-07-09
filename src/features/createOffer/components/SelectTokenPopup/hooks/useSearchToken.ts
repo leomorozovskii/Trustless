@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { TokenData } from '@berezka-dao/core/types';
-
-import type { Token } from '../../../types';
+import type { Token } from '@berezka-dao/shared/types';
 
 type Props = {
   query: string;
