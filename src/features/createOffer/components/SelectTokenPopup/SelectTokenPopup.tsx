@@ -16,7 +16,7 @@ import s from './SelectTokenPopup.module.scss';
 import type { Token } from '../../types';
 
 type Props = {
-  tokens: Token[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | undefined;
   isLoading?: boolean;
   onClose(): void;
   onSelect(tokenAddress: string, decimals: number): void;

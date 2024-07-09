@@ -15,7 +15,7 @@ import type { Token } from '../../types';
 import { SelectTokenPopup } from '../SelectTokenPopup';
 
 type Props = {
-  tokens: Token[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | undefined;
   placeholder: string;
   disabled?: boolean;
   isLoading?: boolean;

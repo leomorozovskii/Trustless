@@ -1,5 +1,5 @@
 import { customErc20Abi } from '@berezka-dao/core/abis/customErc20Abi';
-import type { ContractTokens, ResponseToken } from '@berezka-dao/shared/retrieve-data/useGetRawTokens/types';
+import type { ContractTokens, ResponseToken } from '@berezka-dao/shared/retrieve-data/useUserTokens/types';
 
 const getRawTokens = (responseTokens: ResponseToken[]) => {
   const contractTokens: ContractTokens[] = [];

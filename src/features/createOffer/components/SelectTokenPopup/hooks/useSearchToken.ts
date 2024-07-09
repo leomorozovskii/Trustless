@@ -6,7 +6,7 @@ import type { Token } from '../../../types';
 
 type Props = {
   query: string;
-  tokens: Token[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | undefined;
 };
 
 export const useSearchToken = ({ query, tokens }: Props) => {

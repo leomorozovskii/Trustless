@@ -2,10 +2,11 @@ import { useEffect, useMemo } from 'react';
 import { getAddress } from 'viem';
 
 import { useTokenInfo } from '@berezka-dao/shared/hooks/useTokenInfo';
+import { useUserTokens } from '@berezka-dao/shared/retrieve-data/useUserTokens';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
 import s from './CreateOfferFrom.module.scss';
-import { useCalculateAmountValue, useGetUserTokens } from '../../hooks';
+import { useCalculateAmountValue } from '../../hooks';
 import { useOfferCreateContext } from '../../store';
 import { checkValidAmount } from '../../utils';
 import { AddCustomToken } from '../AddCustomToken';
@@ -14,7 +15,7 @@ import { Select } from '../Select';
 const CreateOfferFrom = () => {
   const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { calculateRateValue } = useCalculateAmountValue();
-  const { userTokens, isLoading } = useGetUserTokens();
+  const { data: userTokens, isLoading } = useUserTokens();
   const { tokenDisplayBalance } = useTokenInfo({
     address: offerFromState.from,
   });
