@@ -9,13 +9,13 @@ import { TOKEN_MAP } from '@berezka-dao/core/constants';
 import type { TokenData } from '@berezka-dao/core/types';
 import { SelectIcon } from '@berezka-dao/shared/icons';
 import { UnknownIcon } from '@berezka-dao/shared/icons/tokens';
+import type { Token } from '@berezka-dao/shared/types';
 
 import s from './Select.module.scss';
-import type { Token } from '../../types';
 import { SelectTokenPopup } from '../SelectTokenPopup';
 
 type Props = {
-  tokens: Token[] | TokenData[] | null;
+  tokens: Token[] | TokenData[] | undefined;
   placeholder: string;
   disabled?: boolean;
   isLoading?: boolean;

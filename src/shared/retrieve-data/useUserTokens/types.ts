@@ -11,6 +11,7 @@ type ContractTokens = {
 type WalletTokens = {
   address: Address;
   tokenBalances: ResponseToken[];
+  pageKey?: string;
 };
 
 type ResponseAlchemy = {
