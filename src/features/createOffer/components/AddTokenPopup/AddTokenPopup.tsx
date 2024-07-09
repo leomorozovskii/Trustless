@@ -3,7 +3,6 @@ import { useEffect, useReducer, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAddress, isAddress } from 'viem';
 import type { Address } from 'viem';
-import { useAccount } from 'wagmi';
 
 import { useToastifyContext } from '@berezka-dao/shared/components/PopupToast';
 import { useClickOutside } from '@berezka-dao/shared/hooks/useClickOutside';
@@ -30,7 +29,6 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
   const { handleAddItem } = useToastifyContext();
   const [isInvalidAddress, setIsInvalidAddress] = useState<boolean>(false);
   const [localAddress, setLocalAddress] = useState<string>('');
-  const { address: userAddress } = useAccount();
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -47,7 +45,6 @@ const AddTokenPopup: FC<Props> = ({ onClose, onProceed }) => {
 
   const { TokenLogo, tokenName, tokenDecimals, tokenDisplayBalance } = useTokenInfo({
     address: tokenState.address,
-    userAddress,
   });
 
   useEffect(() => {

@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from 'react';
 import { getAddress } from 'viem';
 
+import { useTokenInfo } from '@berezka-dao/shared/hooks/useTokenInfo';
+import { useUserTokens } from '@berezka-dao/shared/retrieve-data/useUserTokens';
 import { Input } from '@berezka-dao/shared/ui-kit/Input';
 
 import s from './CreateOfferFrom.module.scss';
@@ -11,8 +13,12 @@ import { AddCustomToken } from '../AddCustomToken';
 import { Select } from '../Select';
 
 const CreateOfferFrom = () => {
-  const { setOfferFromState, offerFromState, offerToState, inputsDisabled, userTokens } = useOfferCreateContext();
+  const { setOfferFromState, offerFromState, offerToState, inputsDisabled } = useOfferCreateContext();
   const { calculateRateValue } = useCalculateAmountValue();
+  const { data: userTokens, isLoading } = useUserTokens();
+  const { tokenDisplayBalance } = useTokenInfo({
+    address: offerFromState.from,
+  });
 
   useEffect(() => {
     calculateRateValue();
@@ -29,11 +35,11 @@ const CreateOfferFrom = () => {
   }, [offerFromState.amount, offerFromState.amountError]);
 
   const maxBalance = useMemo(() => {
-    if (!offerFromState.from || !userTokens.tokens) return '0';
-    const currentToken = userTokens.tokens.find((token) => token.address === offerFromState.from);
-    if (!currentToken) return '0';
+    if (!offerFromState.from || !userTokens) return '0';
+    const currentToken = userTokens.find((token) => token.address === offerFromState.from);
+    if (!currentToken) return tokenDisplayBalance;
     return currentToken.balance;
-  }, [offerFromState.from, userTokens]);
+  }, [offerFromState.from, tokenDisplayBalance, userTokens]);
 
   const handleSetMaxBalance = () => {
     if (!offerFromState.from) return;
@@ -46,7 +52,8 @@ const CreateOfferFrom = () => {
       <div className={s.selectContainer}>
         <h2 className={s.selectLabel}>From</h2>
         <Select
-          tokens={userTokens.tokens}
+          tokens={userTokens}
+          isLoading={isLoading}
           placeholder="Select token"
           value={offerFromState.from}
           customTokenName={offerFromState.customTokenName}
